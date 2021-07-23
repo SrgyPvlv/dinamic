@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+<title>Отправка почты</title>
+</head>
+<body>
+<form th:action="@{/mailSend}" enctype="multipart/form-data" id="mailform" method="post">
+  <fieldset name="sender">
+   <legend> Отчет о выполнении </legend>
+   <p><label for="from">От: </label>
+      <input type="text" name="from" placeholder="Имя Фамилия" required></p>
+   <p><label for="to">Кому: </label>
+      <input type="text" name="to" value="Сергей Павлов" readonly></p>
+   <p><label for="to">Копия: </label>
+      <input type="text" name="copy" placeholder="E-mail (необязательно)" ></p>
+   <p><label for="file">Вложения: </label>
+      <input type="file" name="file" multiple></p>
+   <p>Сообщение (комментарии): </p>
+   <textarea form ="mailform" name="comment" id="comment" cols="100" rows="20" wrap="soft" placeholder="Введите сообщение" required></textarea>
+   </fieldset>
+   <br>
+   <p><input type="submit" value="Отправить" style="width: 100px; height: 40px; background-color: #98FB98; margin-left:70px; margin-right:30px">
+</form>
+</body>
+</html> 

@@ -1,0 +1,72 @@
+h3{
+    color:#4169E1;
+}
+h4{
+    color:#A52A2A;
+	font-style: italic;
+}
+h2{
+	color:#0000CD;
+	text-align: center;
+	
+}
+fieldset{
+    width: 400px; 
+    height: 140px; 
+	border-color:#FFEBCD;
+}
+legend{
+	color:#FF0000;
+	font-family:courier new;
+	font-size:20px;
+	font-weight:normal;
+}
+table { 
+		
+		border-collapse: collapse; 
+	}
+	tr:nth-of-type { 
+		background: #FFF0F5; 
+	}
+	th { 
+		background: #FFFF00; 
+		color: #000000; 
+		font-weight: bold; 
+	}
+	td, th { 
+		padding: 6px; 
+		border: 2px solid #696969; 
+		text-align: center; 
+	}
+	.right {
+                position: absolute;
+                left: 500px;
+                top: 15px;
+                width: 
+                height
+                background-color
+            }
+            .center{
+            position: absolute;
+                left: 470px;
+                top: 150px;
+                font-size:22px;
+            }
+.ymap p{
+
+text-align: center;
+
+}
+
+.ymap{
+position: absolute;
+                right: 20px;
+                top: 30px;
+max-width: 100px;
+
+}
+fieldset[name="sender"]{
+    width: 1000px; 
+    height: 550px; 
+	border-color:#FFEBCD;
+}
