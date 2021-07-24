@@ -29,7 +29,7 @@ public class EmailController {
             *Files.write(path, bytes);
             *String path1 = path.toString(); оставил для будущих проектов
             */
-            String path1=MainController.outputFileName;
+            String path1="classpath:songs.txt";
             this.emailService.sendEmailWithAttachment(textemail,path1,frommail,copyto);
             
         } catch (Exception e) {e.printStackTrace();}
