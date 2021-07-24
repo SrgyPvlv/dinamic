@@ -374,9 +374,8 @@ public String recordOrder(@RequestParam("ordernumber1") String orderNumber,@Requ
 		@RequestParam("start1") String dateStart,@RequestParam("end1") String dateEnd,//
 		@RequestParam("ordercalc1") String calc,@RequestParam("ordercalcnds1") String calcNds,Model model) {
 
-//String home = System.getProperty("user.home");
-//String outputFileName = home+"/Downloads/" +"dinamics.txt";
-String outputFileName = "C:/Users/Администратор/Desktop/qwer/dinamics.txt";//proba
+String home = System.getProperty("user.home");
+String outputFileName = home+"/Downloads/" +"dinamics.txt";
 MainController.outputFileName=outputFileName;
 	try(BufferedWriter writer = new BufferedWriter(new FileWriter(outputFileName,true));)
     {
