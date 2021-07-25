@@ -20,7 +20,7 @@ public class DefaultEmailService implements EmailService {
 
 
 	@Override
-	 public void sendSimpleEmail(String message,String frommail,String copyto) {
+	 public void sendSimpleEmail(String message,String textorder,String frommail,String copyto) {
 	  String from="dguaudit@gmail.com";
 	  String toAddress="spavlov@mts.ru";
 	  String subject=frommail+" Проверка заказов Динамикс завершена";
@@ -29,7 +29,7 @@ public class DefaultEmailService implements EmailService {
 	  simpleMailMessage.setTo(toAddress);
 	  simpleMailMessage.setCc(copyto);
 	  simpleMailMessage.setSubject(subject);
-	  simpleMailMessage.setText(message);
+	  simpleMailMessage.setText(message+"\n"+textorder);
 	  emailSender.send(simpleMailMessage);
 	 }
 

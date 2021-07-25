@@ -1,9 +1,5 @@
 package com.example.sbkafka;
 
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.ParseException;
@@ -15,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 @Controller
 public class MainController {
@@ -25,6 +23,7 @@ public class MainController {
 	String text;
 	Double transport,diffTimeHours,diffTimeDay,orderPrice,outGoPrice,kmPrice=12.09,jeepPrice=6500.70;
 	static String outputFileName;
+	public static ArrayList<String> orderArray = new ArrayList<String>();
 	
 	@GetMapping("/calcOrder")
     public String showOrder() {
@@ -374,8 +373,16 @@ public String recordOrder(@RequestParam("ordernumber1") String orderNumber,@Requ
 		@RequestParam("start1") String dateStart,@RequestParam("end1") String dateEnd,//
 		@RequestParam("ordercalc1") String calc,@RequestParam("ordercalcnds1") String calcNds,Model model) {
 
-String home = System.getProperty("user.home");
+String [] orderArrayMassiv= {orderNumber,bsNumber,dateStart,dateEnd,calc,calcNds};
+MainController.orderArray.addAll(new ArrayList<String>(Arrays.asList(orderArrayMassiv)));
+
+/*String home = System.getProperty("user.home");
 String outputFileName = home+"/Downloads/" +"dinamics.txt";
+	String resource=getClass().getClassLoader().getResource("dinamics.txt").getPath();
+	System.out.println(resource);
+	//String resourcePath=Paths.get(resource).toString();
+String outputFileName =resource;
+
 MainController.outputFileName=outputFileName;
 	try(BufferedWriter writer = new BufferedWriter(new FileWriter(outputFileName,true));)
     {
@@ -390,7 +397,7 @@ MainController.outputFileName=outputFileName;
 } catch (IOException e) {
     System.err.println("Проблема с записью в файл ");
     e.printStackTrace();
-}
+}*/
     return "order";
 }
 }

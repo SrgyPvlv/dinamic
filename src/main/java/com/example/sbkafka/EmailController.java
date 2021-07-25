@@ -20,6 +20,19 @@ public class EmailController {
 	}
 	
 	@PostMapping("/mailSend")
+	public String sendMail(@RequestParam(value="comment") String textemail,@RequestParam(value="from") String frommail,@RequestParam(value="copy") String copyto) {
+		
+		try {
+			
+            String textorder=MainController.orderArray.toString();
+            this.emailService.sendSimpleEmail(textemail,textorder,frommail,copyto);
+            
+        } catch (Exception e) {e.printStackTrace();}
+		
+	    return "oksend";
+	}
+	
+	@PostMapping("/mailSendWithAttech")
 	public String sendMailWithAttachment(@RequestParam(value="comment") String textemail,@RequestParam(value="file") MultipartFile file,@RequestParam(value="from") String frommail,@RequestParam(value="copy") String copyto) {
 		
 		try {
@@ -29,6 +42,7 @@ public class EmailController {
             *Files.write(path, bytes);
             *String path1 = path.toString(); оставил для будущих проектов
             */
+			
             String path1=MainController.outputFileName;
             this.emailService.sendEmailWithAttachment(textemail,path1,frommail,copyto);
             
