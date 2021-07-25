@@ -18,10 +18,11 @@
    <p><label for="file">Вложения: </label>
       <input type="file" name="file" multiple></p> -->
    <p>Сообщение (комментарии к Заказам): </p>
-   <textarea form ="mailform" name="comment" id="comment" cols="120" rows="30" wrap="soft" placeholder="Введите сообщение" required></textarea>
+   <textarea form ="mailform" name="comment" id="comment" cols="100" rows="20" wrap="soft" placeholder="Введите сообщение" required></textarea>
    </fieldset>
    <br>
-   <p><input type="submit" value="Отправить" style="width: 1030px; height: 40px; background-color: #98FB98; font-weight:600;">
+   <p><input type="submit" value="Отправить" style="width: 750px; height: 40px; background-color: #98FB98; font-weight:600;">
 </form>
+<p th:text="${textorder}"></p>
 </body>
 </html> 

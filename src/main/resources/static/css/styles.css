@@ -66,7 +66,7 @@ max-width: 100px;
 
 }
 fieldset[name="sender"]{
-    width: 1000px; 
-    height: 700px; 
+    width: 700px; 
+    height: 500px; 
 	border-color:#FFEBCD;
 }

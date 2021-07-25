@@ -2,6 +2,7 @@ package com.example.sbkafka;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,8 +15,10 @@ public class EmailController {
     public EmailService emailService;
 	
 	@GetMapping("/mailSend")
-	public String showMail() {
-		
+	public String showMail(Model model) {
+		String textorder=MainController.orderArray.toString().replace("[","").replace("]","").replace(",", " ").//
+	    replace(".", ",").replace("|","\n");
+		model.addAttribute("textorder", textorder);
 	    return "mailpage";
 	}
 	
@@ -24,7 +27,8 @@ public class EmailController {
 		
 		try {
 			
-            String textorder=MainController.orderArray.toString();
+            String textorder=MainController.orderArray.toString().replace("[","").replace("]","").replace(",", " ").//
+            replace(".", ",").replace("|","\n");
             this.emailService.sendSimpleEmail(textemail,textorder,frommail,copyto);
             
         } catch (Exception e) {e.printStackTrace();}
@@ -36,13 +40,7 @@ public class EmailController {
 	public String sendMailWithAttachment(@RequestParam(value="comment") String textemail,@RequestParam(value="file") MultipartFile file,@RequestParam(value="from") String frommail,@RequestParam(value="copy") String copyto) {
 		
 		try {
-			/*
-			*byte[] bytes = file.getBytes();
-	        *Path path = Paths.get(UPLOADED_fOLDER+file.getOriginalFilename());
-            *Files.write(path, bytes);
-            *String path1 = path.toString(); оставил для будущих проектов
-            */
-			
+						
             String path1=MainController.outputFileName;
             this.emailService.sendEmailWithAttachment(textemail,path1,frommail,copyto);
             
@@ -52,3 +50,10 @@ public class EmailController {
 	}
 	
 }
+
+/*
+*byte[] bytes = file.getBytes();
+*Path path = Paths.get(UPLOADED_fOLDER+file.getOriginalFilename());
+*Files.write(path, bytes);
+*String path1 = path.toString(); оставил для будущих проектов
+*/

@@ -373,9 +373,14 @@ public Double calcOrderDays(int dguType,String workType,double jeep,double tHour
 public String recordOrder(@RequestParam("ordernumber1") String orderNumber,@RequestParam("bsnumber1") String bsNumber,//
 		@RequestParam("start1") String dateStart,@RequestParam("end1") String dateEnd,//
 		@RequestParam("ordercalc1") String calc,@RequestParam("ordercalcnds1") String calcNds,Model model) {
-
-String [] orderArrayMassiv= {orderNumber,bsNumber,dateStart,dateEnd,calc,calcNds};
+ 	
+String [] orderArrayMassiv= {orderNumber,bsNumber,dateStart,dateEnd,calc,calcNds,"|"};
 MainController.orderArray.addAll(new ArrayList<String>(Arrays.asList(orderArrayMassiv)));
+
+
+    return "order";
+}
+}
 
 /*String home = System.getProperty("user.home");
 String outputFileName = home+"/Downloads/" +"dinamics.txt";
@@ -399,6 +404,3 @@ MainController.outputFileName=outputFileName;
     System.err.println("Проблема с записью в файл ");
     e.printStackTrace();
 }*/
-    return "order";
-}
-}
