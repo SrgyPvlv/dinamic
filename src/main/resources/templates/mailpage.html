@@ -8,20 +8,20 @@
 <body>
 <form th:action="@{/mailSend}" enctype="multipart/form-data" id="mailform" method="post">
   <fieldset name="sender">
-   <legend> Отчет о выполнении </legend>
    <p><label for="from">От: </label>
-      <input type="text" name="from" placeholder="Имя Фамилия" required></p>
+      <input type="text" name="from" placeholder="Имя Фамилия (проверяющего)" style="width: 200px; height: 18px;" required></p>
    <p><label for="to">Кому: </label>
-      <input type="text" name="to" value="Сергей Павлов" readonly></p>
+      <input type="text" name="to" value="Сергей Павлов" style="width: 200px; height: 18px; color:red;" readonly></p>
    <p><label for="to">Копия: </label>
-      <input type="text" name="copy" placeholder="E-mail (необязательно)" ></p>
+      <input type="text" name="copy" style="width: 200px; height: 18px;" placeholder="E-mail (необязательно)" ></p>
+   <!-- В данном варианте приложения вложение не используется
    <p><label for="file">Вложения: </label>
-      <input type="file" name="file" multiple></p>
-   <p>Сообщение (комментарии): </p>
-   <textarea form ="mailform" name="comment" id="comment" cols="100" rows="20" wrap="soft" placeholder="Введите сообщение" required></textarea>
+      <input type="file" name="file" multiple></p> -->
+   <p>Сообщение (комментарии к Заказам): </p>
+   <textarea form ="mailform" name="comment" id="comment" cols="120" rows="30" wrap="soft" placeholder="Введите сообщение" required></textarea>
    </fieldset>
    <br>
-   <p><input type="submit" value="Отправить" style="width: 100px; height: 40px; background-color: #98FB98; margin-left:70px; margin-right:30px">
+   <p><input type="submit" value="Отправить" style="width: 1030px; height: 40px; background-color: #98FB98; font-weight:600;">
 </form>
 </body>
 </html> 
