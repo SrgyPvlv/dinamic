@@ -29,7 +29,7 @@ public class DefaultEmailService implements EmailService {
 	  simpleMailMessage.setTo(toAddress);
 	  simpleMailMessage.setCc(copyto);
 	  simpleMailMessage.setSubject(subject);
-	  simpleMailMessage.setText(message+"\n"+"Данные расчетов по Заказам:"+"\n\n"+textorder);
+	  simpleMailMessage.setText(message+"\n\n"+"Данные расчетов по Заказам:"+"\n\n"+textorder);
 	  emailSender.send(simpleMailMessage);
 	 }
 

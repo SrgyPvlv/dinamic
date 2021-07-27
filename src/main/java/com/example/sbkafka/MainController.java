@@ -22,8 +22,12 @@ public class MainController {
 	Double calc,calcNds;
 	String text;
 	Double transport,diffTimeHours,diffTimeDay,orderPrice,outGoPrice,kmPrice=12.09,jeepPrice=6500.70;
+	
 	static String outputFileName;
 	public static ArrayList<String> orderArray = new ArrayList<String>();
+	
+	public static ArrayList<OrderForm> orderFormArray = new ArrayList<OrderForm>();
+	
 	
 	@GetMapping("/calcOrder")
     public String showOrder() {
@@ -377,6 +381,8 @@ public String recordOrder(@RequestParam("ordernumber1") String orderNumber,@Requ
 String [] orderArrayMassiv= {orderNumber,bsNumber,dateStart,dateEnd,calc,calcNds,"|"};
 MainController.orderArray.addAll(new ArrayList<String>(Arrays.asList(orderArrayMassiv)));
 
+OrderForm orderForm=new OrderForm(orderNumber,bsNumber,dateStart,dateEnd,calc,calcNds);
+MainController.orderFormArray.addAll(Arrays.asList(orderForm));
 
     return "order";
 }

@@ -1,5 +1,7 @@
 package com.example.sbkafka;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +18,9 @@ public class EmailController {
 	
 	@GetMapping("/mailSend")
 	public String showMail(Model model) {
-		String textorder=MainController.orderArray.toString().replace("[","").replace("]","").replace(",", " ").//
-	    replace(".", ",").replace("|","\n");
-		model.addAttribute("textorder", textorder);
+				
+		ArrayList<OrderForm> orderform=MainController.orderFormArray;
+		model.addAttribute("orderform", orderform);
 	    return "mailpage";
 	}
 	
@@ -27,7 +29,7 @@ public class EmailController {
 		
 		try {
 			
-            String textorder=MainController.orderArray.toString().replace("[","").replace("]","").replace(",", " ").//
+            String textorder=MainController.orderArray.toString().replace("["," ").replace("]","").replace(",", " ").//
             replace(".", ",").replace("|","\n");
             this.emailService.sendSimpleEmail(textemail,textorder,frommail,copyto);
             

@@ -23,6 +23,21 @@
    <br>
    <p><input type="submit" value="Отправить" style="width: 750px; height: 40px; background-color: #98FB98; font-weight:600;">
 </form>
-<p th:text="${textorder}"></p>
+
+<span th:each="word : ${words}" th:text="${word}"></span>
+ <table border="1">
+        <tr>
+          <th>№ п/п</th><th>№ Заказа</th> <th>№ БС</th> <th>Дата начала</th> 
+          <th>Дата окончания</th><th>Стоимость без НДС</th> <th>Стоимость с НДС</th>
+        </tr>
+         
+        <tr th:each="order, state : ${orderform}">
+          <td th:text="${state.count}">№ п/п</td><td th:text="${order.orderNumber}">№ Заказа</td> <td th:text="${order.bsNumber}">№ БС</td> <td th:text="${order.dateStart}">Дата начала</td> 
+                <td th:text="${order.dateEnd}">Дата окончания</td> <td th:text="${order.calc}">Стоимость без НДС</td> <td th:text="${order.calcNds}">Стоимость с НДС</td>     
+                     
+        </tr>
+             
+    </table>
+
 </body>
 </html> 

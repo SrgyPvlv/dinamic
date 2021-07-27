@@ -1,27 +1,29 @@
 package com.example.sbkafka;
 
 public class OrderForm {
-	private int orderNumber;
+	private String orderNumber;
 	private String bsNumber;
-	private String timeStart;
-	private String timeEnd;
-	private String orderDistance;
+	private String dateStart;
+	private String dateEnd;
+	private String calc;
+	private String calcNds;
 	
 	public OrderForm() {}
 	
-	public OrderForm(int orderNumber,String bsNumber,String timeStart,String timeEnd,String orderDistance) {
+	public OrderForm(String orderNumber,String bsNumber,String dateStart,String dateEnd,String calc,String calcNds) {
 		this.orderNumber=orderNumber;
 		this.bsNumber=bsNumber;
-		this.timeStart=timeStart;
-		this.timeEnd=timeEnd;
-		this.orderDistance=orderDistance;
+		this.dateStart=dateStart;
+		this.dateEnd=dateEnd;
+		this.calc=calc;
+		this.calcNds=calcNds;
 	}
 
-	public int getOrderNumber() {
+	public String getOrderNumber() {
         return orderNumber;
     }
  
-    public void setOrderNumber(int orderNumber) {
+    public void setOrderNumber(String orderNumber) {
     	this.orderNumber=orderNumber;
 }
     
@@ -32,25 +34,34 @@ public class OrderForm {
     public void setBsNumber(String bsNumber) {
     	this.bsNumber=bsNumber;
 }  
-    public String getTimeStart() {
-        return timeStart;
+    public String getDateStart() {
+        return dateStart;
     }
  
-    public void setTimeStart(String timeStart) {
-    	this.timeStart=timeStart;
+    public void setDateStart(String dateStart) {
+    	this.dateStart=dateStart;
 }  
-    public String getTimeEnd() {
-        return timeEnd;
+    public String getDateEnd() {
+        return dateEnd;
     }
  
-    public void setTimeEnd(String timeEnd) {
-    	this.timeEnd=timeEnd;   
+    public void setDateEndd(String dateEnd) {
+    	this.dateEnd=dateEnd;   
 }
-    public String getOrderDistance() {
-        return orderDistance;
+    public String getCalc() {
+        return calc;
     }
  
-    public void setOrderDistance(String orderDistance) {
-    	this.orderDistance=orderDistance;
+    public void setCalc(String calc) {
+    	calc.replace(".", ",");
+    	this.calc=calc;
+}
+    public String getCalcNds() {
+        return calcNds;
+    }
+ 
+    public void setCalcNds(String calcNds) {
+    	calcNds.replace(".", ",");
+    	this.calcNds=calcNds;
 }
 }
