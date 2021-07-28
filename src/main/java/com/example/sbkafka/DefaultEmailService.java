@@ -49,4 +49,21 @@ public class DefaultEmailService implements EmailService {
 	  messageHelper.addAttachment("Order Table", file);
 	  emailSender.send(mimeMessage);
 	 }
+	
+	@Override
+	 public void sendHtmlEmail(String message,String ordertable,String frommail,String copyto) throws MessagingException {
+	  String from="dguaudit@gmail.com";
+	  String toAddress="spavlov@mts.ru";
+	  String subject=frommail+" Проверка заказов Динамикс завершена";
+	  MimeMessage htmlmessage = emailSender.createMimeMessage();
+      boolean multipart = true;      
+      MimeMessageHelper helper = new MimeMessageHelper(htmlmessage,multipart,"UTF-8");
+      String htmlMsg ="<h3>"+message+"</h3>"+"<br>"+"<h3>Data of orders:</h3>"+"<br>"+ ordertable;
+      htmlmessage.setContent(htmlMsg, "text/html");
+      helper.setFrom(from);
+      helper.setTo(toAddress);
+      helper.setCc(copyto);
+      helper.setSubject(subject);
+	  emailSender.send(htmlmessage);
+	 }
 	}

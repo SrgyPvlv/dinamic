@@ -2,6 +2,8 @@ package com.example.sbkafka;
 
 import java.util.ArrayList;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +37,24 @@ public class EmailController {
             
         } catch (Exception e) {e.printStackTrace();}
 		
+	    return "oksend";
+	}
+	
+	@PostMapping("/mailSendHtml")
+	public String sendMailHtml(@RequestParam(value="comment") String textemail,@RequestParam(value="from") String frommail,@RequestParam(value="copy") String copyto) throws MessagingException {
+		
+		
+			
+			ArrayList<OrderForm> orderform=MainController.orderFormArray;
+			//for(OrderForm order : orderform) {
+				String ordertable="<h1>Hello</h1>";
+				//String ordertable="<td>order.orderNumber</td>"+"<td>order.bsNumber</td>"+"<td>order.dateStart</td>"+
+				//		"<td>order.dateEnd</td>"+"<td>order.calc</td>"+"<td>order.calcNds</td>"+"\n";
+				try {
+				this.emailService.sendHtmlEmail(textemail,ordertable,frommail,copyto);
+	          
+				} catch (Exception e) {e.printStackTrace();}  
+        
 	    return "oksend";
 	}
 	

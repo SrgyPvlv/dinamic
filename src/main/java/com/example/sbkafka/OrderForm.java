@@ -15,8 +15,8 @@ public class OrderForm {
 		this.bsNumber=bsNumber;
 		this.dateStart=dateStart;
 		this.dateEnd=dateEnd;
-		this.calc=calc;
-		this.calcNds=calcNds;
+		this.calc=calc.replace(".", ",");
+		this.calcNds=calcNds.replace(".", ",");
 	}
 
 	public String getOrderNumber() {
@@ -53,7 +53,6 @@ public class OrderForm {
     }
  
     public void setCalc(String calc) {
-    	calc.replace(".", ",");
     	this.calc=calc;
 }
     public String getCalcNds() {
@@ -61,7 +60,10 @@ public class OrderForm {
     }
  
     public void setCalcNds(String calcNds) {
-    	calcNds.replace(".", ",");
     	this.calcNds=calcNds;
 }
+    @Override
+    public String toString() {
+        return(orderNumber + " " + bsNumber + " " + dateStart + " " + dateEnd + " " + calc+ " " + calcNds);
+    }
 }

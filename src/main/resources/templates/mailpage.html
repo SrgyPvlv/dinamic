@@ -6,7 +6,7 @@
 <title>Отправка почты</title>
 </head>
 <body>
-<form th:action="@{/mailSend}" enctype="multipart/form-data" id="mailform" method="post">
+<form th:action="@{/mailSendHtml}" enctype="multipart/form-data" id="mailform" method="post">
   <fieldset name="sender">
    <p><label for="from">От: </label>
       <input type="text" name="from" placeholder="Имя Фамилия (проверяющего)" style="width: 200px; height: 18px;" required></p>

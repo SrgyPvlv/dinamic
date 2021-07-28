@@ -10,4 +10,6 @@ public interface EmailService {
 	void sendEmailWithAttachment(String message, String attachment,String frommail,String copyto)
 			throws MessagingException, FileNotFoundException;
 	
+	void sendHtmlEmail(String message,String textorder,String frommail,String copyto) throws MessagingException;
+	
 }
