@@ -29,12 +29,17 @@ public class EmailController {
 	@PostMapping("/mailSend")
 	public String sendMail(@RequestParam(value="comment") String textemail,@RequestParam(value="from") String frommail,@RequestParam(value="copy") String copyto) {
 		
-		try {
-			
-            String textorder=MainController.orderArray.toString().replace("["," ").replace("]","").replace(",", " ").//
-            replace(".", ",").replace("|","\n");
-            this.emailService.sendSimpleEmail(textemail,textorder,frommail,copyto);
-            
+		ArrayList<OrderForm> orderform=MainController.orderFormArray;
+		StringBuilder x=new StringBuilder();
+		for(OrderForm order : orderform) {	
+		x.append(order);		
+		}
+		String textorder=x.toString();
+		
+		/*String textorder=MainController.orderArray.toString().replace("["," ").replace("]","").replace(",", " ").//
+	             replace(".", ",").replace("|","\n");*/
+		try {     
+            this.emailService.sendSimpleEmail(textemail,textorder,frommail,copyto); 
         } catch (Exception e) {e.printStackTrace();}
 		
 	    return "oksend";
@@ -42,14 +47,13 @@ public class EmailController {
 	
 	@PostMapping("/mailSendHtml")
 	public String sendMailHtml(@RequestParam(value="comment") String textemail,@RequestParam(value="from") String frommail,@RequestParam(value="copy") String copyto) throws MessagingException {
-		
-		
+							
+			/*ArrayList<OrderForm> orderform=MainController.orderFormArray;
+			    for(OrderForm order : orderform) {
+				String ordertable="<td>order.orderNumber</td>"+"<td>order.bsNumber</td>"+"<td>order.dateStart</td>"+
+						"<td>order.dateEnd</td>"+"<td>order.calc</td>"+"<td>order.calcNds</td>"+"\n";*/
 			
-			ArrayList<OrderForm> orderform=MainController.orderFormArray;
-			//for(OrderForm order : orderform) {
-				String ordertable="<h1>Hello</h1>";
-				//String ordertable="<td>order.orderNumber</td>"+"<td>order.bsNumber</td>"+"<td>order.dateStart</td>"+
-				//		"<td>order.dateEnd</td>"+"<td>order.calc</td>"+"<td>order.calcNds</td>"+"\n";
+			String ordertable="<h1>Hello</h1>";//тест
 				try {
 				this.emailService.sendHtmlEmail(textemail,ordertable,frommail,copyto);
 	          

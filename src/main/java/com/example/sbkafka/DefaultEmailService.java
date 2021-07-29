@@ -58,8 +58,8 @@ public class DefaultEmailService implements EmailService {
 	  MimeMessage htmlmessage = emailSender.createMimeMessage();
       boolean multipart = true;      
       MimeMessageHelper helper = new MimeMessageHelper(htmlmessage,multipart,"UTF-8");
-      String htmlMsg ="<h3>"+message+"</h3>"+"<br>"+"<h3>Data of orders:</h3>"+"<br>"+ ordertable;
-      htmlmessage.setContent(htmlMsg, "text/html");
+      String htmlMsg ="<h4>"+message+"</h4>"+"<h3>Данные расчетов по Заказам:</h3>"+ ordertable;
+      htmlmessage.setContent(htmlMsg, "text/html; charset=UTF-8");
       helper.setFrom(from);
       helper.setTo(toAddress);
       helper.setCc(copyto);

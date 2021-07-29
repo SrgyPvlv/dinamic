@@ -64,6 +64,6 @@ public class OrderForm {
 }
     @Override
     public String toString() {
-        return(orderNumber + " " + bsNumber + " " + dateStart + " " + dateEnd + " " + calc+ " " + calcNds);
+        return(orderNumber + " " + bsNumber + " " + dateStart + " " + dateEnd + " " + calc+ " " + calcNds+"\n");
     }
 }
