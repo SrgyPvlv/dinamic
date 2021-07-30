@@ -64,13 +64,14 @@
 <table>
  <caption align="top"><h3>Результаты расчета</h3></caption>
             <tr>
-                <th>№ Заказа</th> <th>№ БС</th> <th>Дата начала</th> <th>Дата окончания</th> <th>Стоимость без НДС</th> <th>Стоимость с НДС</th>
+                <th>№ Заказа</th> <th>№ БС</th> <th>Дата начала</th> <th>Дата окончания</th> 
+                <th>Стоимость без НДС</th> <th>Стоимость с НДС</th>
             </tr>    
             <tr>
                 <td th:text="${orderNumber}"></td> <td th:text="${bsNumber}"></td> <td th:text="${timeStart}"></td> 
                 <td th:text="${timeEnd}"></td> <td th:text="${orderCalc}"></td> <td th:text="${orderCalcNds}"></td>
 				<td>
-				<form th:action="@{/recordOrder}" method="post">
+				<form id="orderform" th:action="@{/recordOrder}" method="post">
         <input type="hidden" name="ordernumber1" th:value="${orderNumber}" />
         <input type="hidden" name="bsnumber1" th:value="${bsNumber}" />
         <input type="hidden" name="start1" th:value="${timeStart}" />
@@ -82,7 +83,9 @@
 				</td>
             </tr>   
         </table>
-        
+    <p><label for="comm" style="font-weight:bold">Комментарий(замечания) к Заказу: </label>
+    <textarea form ="orderform" name="comm" id="comm" cols="100" rows="3" wrap="soft"
+     th:value="${orderComment}" placeholder="Если при проверке Заказа выявлены неточности и расхождения...Укажите их в этом поле."></textarea>    
         <br>
         <table>
 		<caption align="top"><h4>Оплата техники повышенной проходимости</h4></caption>

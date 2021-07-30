@@ -376,12 +376,13 @@ public Double calcOrderDays(int dguType,String workType,double jeep,double tHour
 @PostMapping("/recordOrder")
 public String recordOrder(@RequestParam("ordernumber1") String orderNumber,@RequestParam("bsnumber1") String bsNumber,//
 		@RequestParam("start1") String dateStart,@RequestParam("end1") String dateEnd,//
-		@RequestParam("ordercalc1") String calc,@RequestParam("ordercalcnds1") String calcNds,Model model) {
+		@RequestParam("ordercalc1") String calc,@RequestParam("ordercalcnds1") String calcNds,//
+		@RequestParam("comm") String comm,Model model) {
  	
 String [] orderArrayMassiv= {orderNumber,bsNumber,dateStart,dateEnd,calc,calcNds,"|"};
 MainController.orderArray.addAll(new ArrayList<String>(Arrays.asList(orderArrayMassiv)));
 
-OrderForm orderForm=new OrderForm(orderNumber,bsNumber,dateStart,dateEnd,calc,calcNds);
+OrderForm orderForm=new OrderForm(orderNumber,bsNumber,dateStart,dateEnd,calc,calcNds,comm);
 MainController.orderFormArray.addAll(Arrays.asList(orderForm));
 
     return "order";

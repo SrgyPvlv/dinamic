@@ -8,6 +8,7 @@
 <body>
 <form th:action="@{/mailSend}" enctype="multipart/form-data" id="mailform" method="post">
   <fieldset name="sender">
+  <legend> Информирование о завершении проверки </legend>
    <p><label for="from">От: </label>
       <input type="text" name="from" placeholder="Имя Фамилия (проверяющего)" style="width: 200px; height: 18px;" required></p>
    <p><label for="to">Кому: </label>
@@ -18,7 +19,7 @@
    <p><label for="file">Вложения: </label>
       <input type="file" name="file" multiple></p> -->
    <p>Сообщение (комментарии к Заказам): </p>
-   <textarea form ="mailform" name="comment" id="comment" cols="100" rows="20" wrap="soft" placeholder="Введите сообщение" required></textarea>
+   <textarea form ="mailform" name="comment" id="comment" cols="100" rows="10" wrap="soft" placeholder="Введите сообщение" required></textarea>
    </fieldset>
    <br>
    <p><input type="submit" value="Отправить" style="width: 750px; height: 40px; background-color: #98FB98; font-weight:600;">
@@ -27,12 +28,13 @@
  <table border="1">
         <tr>
           <th>№ Заказа</th> <th>№ БС</th> <th>Дата начала</th> 
-          <th>Дата окончания</th><th>Стоимость без НДС</th><th>Стоимость с НДС</th>
+          <th>Дата окончания</th><th>Стоимость без НДС</th><th>Стоимость с НДС</th><th>Комментарий</th>
         </tr>
          
         <tr th:each="order : ${orderform}">
            <td th:text="${order.orderNumber} ">№ Заказа</td><td th:text="${order.bsNumber} ">№ БС</td><td th:text="${order.dateStart} ">Дата начала</td> 
-           <td th:text="${order.dateEnd} ">Дата окончания</td><td th:text="${order.calc} ">Стоимость без НДС</td><td th:text="${order.calcNds} ">Стоимость с НДС</td>         
+           <td th:text="${order.dateEnd} ">Дата окончания</td><td th:text="${order.calc} ">Стоимость без НДС</td><td th:text="${order.calcNds} ">Стоимость с НДС</td>
+           <td th:text="${order.comm} ">Комментарий</td>         
         </tr>
              
     </table>

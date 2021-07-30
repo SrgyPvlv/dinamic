@@ -7,16 +7,18 @@ public class OrderForm {
 	private String dateEnd;
 	private String calc;
 	private String calcNds;
+	private String comm;
 	
 	public OrderForm() {}
 	
-	public OrderForm(String orderNumber,String bsNumber,String dateStart,String dateEnd,String calc,String calcNds) {
+	public OrderForm(String orderNumber,String bsNumber,String dateStart,String dateEnd,String calc,String calcNds,String comm) {
 		this.orderNumber=orderNumber;
 		this.bsNumber=bsNumber;
 		this.dateStart=dateStart;
 		this.dateEnd=dateEnd;
 		this.calc=calc.replace(".", ",");
 		this.calcNds=calcNds.replace(".", ",");
+		this.comm=comm;
 	}
 
 	public String getOrderNumber() {
@@ -62,8 +64,17 @@ public class OrderForm {
     public void setCalcNds(String calcNds) {
     	this.calcNds=calcNds;
 }
+    
+    public String getComm() {
+        return comm;
+    }
+ 
+    public void setComm(String comm) {
+    	this.comm=comm;
+}
+    
     @Override
     public String toString() {
-        return(orderNumber + " " + bsNumber + " " + dateStart + " " + dateEnd + " " + calc+ " " + calcNds+"\n");
+        return(orderNumber + " " + bsNumber + " " + dateStart + " " + dateEnd + " " + calc+ " " + calcNds+ " "+comm+"\n");
     }
 }

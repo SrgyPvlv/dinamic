@@ -40,10 +40,9 @@ public class EmailController {
 	             replace(".", ",").replace("|","\n");*/
 		try {     
             this.emailService.sendSimpleEmail(textemail,textorder,frommail,copyto);
-            return "oksend";
-        } catch (Exception e) {e.printStackTrace(); return "faultmailsend";}
+        } catch (Exception e) {e.printStackTrace();}
 		
-	    
+		return "oksend";
 	}
 	
 	@PostMapping("/mailSendHtml")
