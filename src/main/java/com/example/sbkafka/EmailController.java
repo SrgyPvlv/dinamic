@@ -39,10 +39,11 @@ public class EmailController {
 		/*String textorder=MainController.orderArray.toString().replace("["," ").replace("]","").replace(",", " ").//
 	             replace(".", ",").replace("|","\n");*/
 		try {     
-            this.emailService.sendSimpleEmail(textemail,textorder,frommail,copyto); 
-        } catch (Exception e) {e.printStackTrace();}
+            this.emailService.sendSimpleEmail(textemail,textorder,frommail,copyto);
+            return "oksend";
+        } catch (Exception e) {e.printStackTrace(); return "faultmailsend";}
 		
-	    return "oksend";
+	    
 	}
 	
 	@PostMapping("/mailSendHtml")
