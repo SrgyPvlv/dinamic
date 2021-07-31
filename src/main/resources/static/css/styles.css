@@ -83,3 +83,12 @@ fieldset[name="sender"]{
     height: 350px; 
 	border-color:#FFEBCD;
 }
+.footer{
+position: fixed; /* Фиксированное положение */
+    left: 0; bottom: 0; /* Левый нижний угол */
+    padding: 10px; /* Поля вокруг текста */
+    background: #778899; /* Цвет фона */
+    color: #fff; /* Цвет текста */
+    width: 100%; /* Ширина слоя */
+	text-align: center;
+}
