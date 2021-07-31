@@ -16,18 +16,11 @@ import java.util.Arrays;
 
 @Controller
 public class MainController {
-	String dateStart,dateEnd;
-	int orderNumber;
-	String bsNumber;
-	Double calc,calcNds;
-	String text;
-	Double transport,diffTimeHours,diffTimeDay,orderPrice,outGoPrice,kmPrice=12.09,jeepPrice=6500.70;
 	
+	Double transport,diffTimeHours,diffTimeDay,orderPrice,outGoPrice;
+	Double kmPrice=MyConstants.TRANSPORT_PRICE,jeepPrice=MyConstants.JEEP_PRICE;
 	static String outputFileName;
-	public static ArrayList<String> orderArray = new ArrayList<String>();
-	
 	public static ArrayList<OrderForm> orderFormArray = new ArrayList<OrderForm>();
-	
 	
 	@GetMapping("/calcOrder")
     public String showOrder() {
@@ -128,36 +121,36 @@ public Double calcOrder(int dguType,String workType,double jeep,double tHours,do
 	if(owener1.equals("po")) {
 	if (workType1.equals("emergency")){
 		if(tDays1<1.0) {
-			switch(dguType1) {case 3:timeHoursPrice=790.50;timeDayPrice=0;outgo=1674.00;break;
-			                  case 8:timeHoursPrice=930.00;timeDayPrice=0;outgo=1860.00;break;
-			                  case 16:timeHoursPrice=930.00;timeDayPrice=0;outgo=1860.00;break;}}
+			switch(dguType1) {case 3:timeHoursPrice=MyConstants.DGU3_CONTRACTOR_TIMEHOURES_WORKALARM;timeDayPrice=0;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
+			                  case 8:timeHoursPrice=MyConstants.DGU8_CONTRACTOR_TIMEHOURES_WORKALARM;timeDayPrice=0;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
+			                  case 16:timeHoursPrice=MyConstants.DGU16_CONTRACTOR_TIMEHOURES_WORKALARM;timeDayPrice=0;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
 				if(tDays1>=1.0&&tDays1<3) {
-					switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=18972.00;outgo=1674.00;break;
-					                  case 8:timeHoursPrice=0;timeDayPrice=19251.00;outgo=1860.00;break;
-					                  case 16:timeHoursPrice=0;timeDayPrice=19251.00;outgo=1860.00;break;}}
+					switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=MyConstants.DGU3_CONTRACTOR_TIMEDAYS1_WORKALARM;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
+					                  case 8:timeHoursPrice=0;timeDayPrice=MyConstants.DGU8_CONTRACTOR_TIMEDAYS1_WORKALARM;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
+					                  case 16:timeHoursPrice=0;timeDayPrice=MyConstants.DGU16_CONTRACTOR_TIMEDAYS1_WORKALARM;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
 				if(tDays1>=3) {
 					timeHoursPrice=0;timeDayPrice=0;outgo=0;transPrice1=0;
 					}
 	}
 	if (workType1.equals("plan")){
 		if(tDays1<1.0) {
-	switch(dguType1) {case 3:timeHoursPrice=744;timeDayPrice=0;outgo=1674.00;break;
-	                  case 8:timeHoursPrice=864.90;timeDayPrice=0;outgo=1860.00;break;
-	                  case 16:timeHoursPrice=864.90;timeDayPrice=0;outgo=1860.00;break;}}
+	switch(dguType1) {case 3:timeHoursPrice=MyConstants.DGU3_CONTRACTOR_TIMEHOURES_WORKPLAN;timeDayPrice=0;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
+	                  case 8:timeHoursPrice=MyConstants.DGU8_CONTRACTOR_TIMEHOURES_WORKPLAN;timeDayPrice=0;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
+	                  case 16:timeHoursPrice=MyConstants.DGU16_CONTRACTOR_TIMEHOURES_WORKPLAN;timeDayPrice=0;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
 		if(tDays1>=1.0&&tDays1<3) {
-			switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=18414;outgo=1674.00;break;
-			                  case 8:timeHoursPrice=0;timeDayPrice=18972;outgo=1860.00;break;
-			                  case 16:timeHoursPrice=0;timeDayPrice=18972;outgo=1860.00;break;}}
+			switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=MyConstants.DGU3_CONTRACTOR_TIMEDAYS1_WORKPLAN;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
+			                  case 8:timeHoursPrice=0;timeDayPrice=MyConstants.DGU8_CONTRACTOR_TIMEDAYS1_WORKPLAN;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
+			                  case 16:timeHoursPrice=0;timeDayPrice=MyConstants.DGU16_CONTRACTOR_TIMEDAYS1_WORKPLAN;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
 		if(tDays1>=3) {
-			switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=16740;outgo=1674.00;break;
-			                  case 8:timeHoursPrice=0;timeDayPrice=17350.08;outgo=1860.00;break;
-			                  case 16:timeHoursPrice=0;timeDayPrice=17350.08;outgo=1860.00;break;}}
+			switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=MyConstants.DGU3_CONTRACTOR_TIMEDAYS3_WORKPLAN;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
+			                  case 8:timeHoursPrice=0;timeDayPrice=MyConstants.DGU8_CONTRACTOR_TIMEDAYS3_WORKPLAN;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
+			                  case 16:timeHoursPrice=0;timeDayPrice=MyConstants.DGU16_CONTRACTOR_TIMEDAYS3_WORKPLAN;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
 	}
 
 	if (workType1.equals("false")){
-		switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=0;outgo=1860.00;break;
-                          case 8:timeHoursPrice=0;timeDayPrice=0;outgo=2157.60;break;
-                          case 16:timeHoursPrice=0;timeDayPrice=0;outgo=2157.60;break;}}
+		switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=0;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE_FALSE;break;
+                          case 8:timeHoursPrice=0;timeDayPrice=0;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE_FALSE;break;
+                          case 16:timeHoursPrice=0;timeDayPrice=0;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE_FALSE;break;}}
 	
 	outGoPrice=outgo;
 	orderPrice=timeHoursPrice*tHours1+timeDayPrice*tDays1+transPrice1+outgo+jeep1;
@@ -167,36 +160,36 @@ public Double calcOrder(int dguType,String workType,double jeep,double tHours,do
 	if(owener1.equals("mts")) {
 		if (workType1.equals("emergency")){
 			if(tDays1<1.0) {
-				switch(dguType1) {case 3:timeHoursPrice=762.60;timeDayPrice=0;outgo=1674.00;break;
-				                  case 8:timeHoursPrice=790.50;timeDayPrice=0;outgo=1860.00;break;
-				                  case 16:timeHoursPrice=790.50;timeDayPrice=0;outgo=1860.00;break;}}
+				switch(dguType1) {case 3:timeHoursPrice=MyConstants.DGU3_CLIENT_TIMEHOURES_WORKALARM;timeDayPrice=0;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
+				                  case 8:timeHoursPrice=MyConstants.DGU8_CLIENT_TIMEHOURES_WORKALARM;timeDayPrice=0;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
+				                  case 16:timeHoursPrice=MyConstants.DGU16_CLIENT_TIMEHOURES_WORKALARM;timeDayPrice=0;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
 					if(tDays1>=1.0&&tDays1<3) {
-						switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=16507.50;outgo=1674.00;break;
-						                  case 8:timeHoursPrice=0;timeDayPrice=17530.50;outgo=1860.00;break;
-						                  case 16:timeHoursPrice=0;timeDayPrice=18190.80;outgo=1860.00;break;}}
+						switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=MyConstants.DGU3_CLIENT_TIMEDAYS1_WORKALARM;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
+						                  case 8:timeHoursPrice=0;timeDayPrice=MyConstants.DGU8_CLIENT_TIMEDAYS1_WORKALARM;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
+						                  case 16:timeHoursPrice=0;timeDayPrice=MyConstants.DGU16_CLIENT_TIMEDAYS1_WORKALARM;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
 					if(tDays1>=3) {
 						timeHoursPrice=0;timeDayPrice=0;outgo=0;transPrice1=0;
 						}
 		}
 		if (workType1.equals("plan")){
 			if(tDays1<1.0) {
-		switch(dguType1) {case 3:timeHoursPrice=744;timeDayPrice=0;outgo=1674.00;break;
-		                  case 8:timeHoursPrice=744;timeDayPrice=0;outgo=1860.00;break;
-		                  case 16:timeHoursPrice=744;timeDayPrice=0;outgo=1860.00;break;}}
+		switch(dguType1) {case 3:timeHoursPrice=MyConstants.DGU3_CLIENT_TIMEHOURES_WORKPLAN;timeDayPrice=0;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
+		                  case 8:timeHoursPrice=MyConstants.DGU8_CLIENT_TIMEHOURES_WORKPLAN;timeDayPrice=0;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
+		                  case 16:timeHoursPrice=MyConstants.DGU16_CLIENT_TIMEHOURES_WORKPLAN;timeDayPrice=0;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
 			if(tDays1>=1.0&&tDays1<3) {
-				switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=16042.50;outgo=1674.00;break;
-				                  case 8:timeHoursPrice=0;timeDayPrice=17065.50;outgo=1860.00;break;
-				                  case 16:timeHoursPrice=0;timeDayPrice=17995.50;outgo=1860.00;break;}}
+				switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=MyConstants.DGU3_CLIENT_TIMEDAYS1_WORKPLAN;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
+				                  case 8:timeHoursPrice=0;timeDayPrice=MyConstants.DGU8_CLIENT_TIMEDAYS1_WORKPLAN;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
+				                  case 16:timeHoursPrice=0;timeDayPrice=MyConstants.DGU16_CLIENT_TIMEDAYS1_WORKPLAN;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
 			if(tDays1>=3) {
-				switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=15624.00;outgo=1674.00;break;
-				                  case 8:timeHoursPrice=0;timeDayPrice=16070.40;outgo=1860.00;break;
-				                  case 16:timeHoursPrice=0;timeDayPrice=16070.40;outgo=1860.00;break;}}
+				switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=MyConstants.DGU3_CLIENT_TIMEDAYS3_WORKPLAN;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
+				                  case 8:timeHoursPrice=0;timeDayPrice=MyConstants.DGU8_CLIENT_TIMEDAYS3_WORKPLAN;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
+				                  case 16:timeHoursPrice=0;timeDayPrice=MyConstants.DGU16_CLIENT_TIMEDAYS3_WORKPLAN;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
 		}
 
 		if (workType1.equals("false")){
-			switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=0;outgo=1860.00;break;
-	                          case 8:timeHoursPrice=0;timeDayPrice=0;outgo=2157.60;break;
-	                          case 16:timeHoursPrice=0;timeDayPrice=0;outgo=2157.60;break;}}
+			switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=0;outgo=MyConstants.DGU3_CLIENT_DEPARTURE_FALSE;break;
+	                          case 8:timeHoursPrice=0;timeDayPrice=0;outgo=MyConstants.DGU8_CLIENT_DEPARTURE_FALSE;break;
+	                          case 16:timeHoursPrice=0;timeDayPrice=0;outgo=MyConstants.DGU16_CLIENT_DEPARTURE_FALSE;break;}}
 		
 		outGoPrice=outgo;
 		orderPrice=timeHoursPrice*tHours1+timeDayPrice*tDays1+transPrice1+outgo+jeep1;
@@ -210,77 +203,77 @@ public Double calcOrderHours(int dguType,String workType,double jeep,double tHou
 	String workType1=workType,owener1=owener;
 	double timeHoursPrice = 0,tHours1=tHours,tDays1=tDays,orderPriceHours=0,outgo=0;
 	if(owener1.equals("po")) {
-		if (workType1.equals("emergency")){
-			if(tDays1<1.0) {
-				switch(dguType1) {case 3:timeHoursPrice=790.50;outgo=1674.00;break;
-				                  case 8:timeHoursPrice=930.00;outgo=1860.00;break;
-				                  case 16:timeHoursPrice=930.00;outgo=1860.00;break;}}
-					if(tDays1>=1.0&&tDays1<3) {
-						switch(dguType1) {case 3:timeHoursPrice=0;outgo=1674.00;break;
-						                  case 8:timeHoursPrice=0;outgo=1860.00;break;
-						                  case 16:timeHoursPrice=0;outgo=1860.00;break;}}
-					if(tDays1>=3) {
-						timeHoursPrice=0;outgo=0;
-						}
-		}
-		if (workType1.equals("plan")){
-			if(tDays1<1.0) {
-		switch(dguType1) {case 3:timeHoursPrice=744;outgo=1674.00;break;
-		                  case 8:timeHoursPrice=864.90;outgo=1860.00;break;
-		                  case 16:timeHoursPrice=864.90;outgo=1860.00;break;}}
-			if(tDays1>=1.0&&tDays1<3) {
-				switch(dguType1) {case 3:timeHoursPrice=0;outgo=1674.00;break;
-				                  case 8:timeHoursPrice=0;outgo=1860.00;break;
-				                  case 16:timeHoursPrice=0;outgo=1860.00;break;}}
-			if(tDays1>=3) {
-				switch(dguType1) {case 3:timeHoursPrice=0;outgo=1674.00;break;
-				                  case 8:timeHoursPrice=0;outgo=1860.00;break;
-				                  case 16:timeHoursPrice=0;outgo=1860.00;break;}}
-		}
+	if (workType1.equals("emergency")){
+		if(tDays1<1.0) {
+			switch(dguType1) {case 3:timeHoursPrice=MyConstants.DGU3_CONTRACTOR_TIMEHOURES_WORKALARM;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
+			                  case 8:timeHoursPrice=MyConstants.DGU8_CONTRACTOR_TIMEHOURES_WORKALARM;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
+			                  case 16:timeHoursPrice=MyConstants.DGU16_CONTRACTOR_TIMEHOURES_WORKALARM;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
+				if(tDays1>=1.0&&tDays1<3) {
+					switch(dguType1) {case 3:timeHoursPrice=0;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
+					                  case 8:timeHoursPrice=0;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
+					                  case 16:timeHoursPrice=0;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
+				if(tDays1>=3) {
+					timeHoursPrice=0;outgo=0;
+					}
+	}
+	if (workType1.equals("plan")){
+		if(tDays1<1.0) {
+	switch(dguType1) {case 3:timeHoursPrice=MyConstants.DGU3_CONTRACTOR_TIMEHOURES_WORKPLAN;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
+	                  case 8:timeHoursPrice=MyConstants.DGU8_CONTRACTOR_TIMEHOURES_WORKPLAN;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
+	                  case 16:timeHoursPrice=MyConstants.DGU16_CONTRACTOR_TIMEHOURES_WORKPLAN;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
+		if(tDays1>=1.0&&tDays1<3) {
+			switch(dguType1) {case 3:timeHoursPrice=0;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
+			                  case 8:timeHoursPrice=0;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
+			                  case 16:timeHoursPrice=0;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
+		if(tDays1>=3) {
+			switch(dguType1) {case 3:timeHoursPrice=0;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
+			                  case 8:timeHoursPrice=0;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
+			                  case 16:timeHoursPrice=0;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
+	}
 
-		if (workType1.equals("false")){
-			switch(dguType1) {case 3:timeHoursPrice=0;outgo=1860.00;break;
-	                          case 8:timeHoursPrice=0;outgo=2157.60;break;
-	                          case 16:timeHoursPrice=0;outgo=2157.60;break;}}
+	if (workType1.equals("false")){
+		switch(dguType1) {case 3:timeHoursPrice=0;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE_FALSE;break;
+                          case 8:timeHoursPrice=0;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE_FALSE;break;
+                          case 16:timeHoursPrice=0;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE_FALSE;break;}}
 		
 		outGoPrice=outgo;
 		orderPriceHours=timeHoursPrice*tHours1;
 		BigDecimal bd = new BigDecimal(orderPriceHours).setScale(2, RoundingMode.HALF_UP);
 		orderPriceHours = bd.doubleValue();}
 		
-		if(owener1.equals("mts")) {
-			if (workType1.equals("emergency")){
-				if(tDays1<1.0) {
-					switch(dguType1) {case 3:timeHoursPrice=762.60;outgo=1674.00;break;
-					                  case 8:timeHoursPrice=790.50;outgo=1860.00;break;
-					                  case 16:timeHoursPrice=790.50;outgo=1860.00;break;}}
-						if(tDays1>=1.0&&tDays1<3) {
-							switch(dguType1) {case 3:timeHoursPrice=0;outgo=1674.00;break;
-							                  case 8:timeHoursPrice=0;outgo=1860.00;break;
-							                  case 16:timeHoursPrice=0;outgo=1860.00;break;}}
-						if(tDays1>=3) {
-							timeHoursPrice=0;outgo=0;
-							}
-			}
-			if (workType1.equals("plan")){
-				if(tDays1<1.0) {
-			switch(dguType1) {case 3:timeHoursPrice=744;outgo=1674.00;break;
-			                  case 8:timeHoursPrice=744;outgo=1860.00;break;
-			                  case 16:timeHoursPrice=744;outgo=1860.00;break;}}
-				if(tDays1>=1.0&&tDays1<3) {
-					switch(dguType1) {case 3:timeHoursPrice=0;outgo=1674.00;break;
-					                  case 8:timeHoursPrice=0;outgo=1860.00;break;
-					                  case 16:timeHoursPrice=0;outgo=1860.00;break;}}
-				if(tDays1>=3) {
-					switch(dguType1) {case 3:timeHoursPrice=0;outgo=1674.00;break;
-					                  case 8:timeHoursPrice=0;outgo=1860.00;break;
-					                  case 16:timeHoursPrice=0;outgo=1860.00;break;}}
-			}
+	if(owener1.equals("mts")) {
+		if (workType1.equals("emergency")){
+			if(tDays1<1.0) {
+				switch(dguType1) {case 3:timeHoursPrice=MyConstants.DGU3_CLIENT_TIMEHOURES_WORKALARM;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
+				                  case 8:timeHoursPrice=MyConstants.DGU8_CLIENT_TIMEHOURES_WORKALARM;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
+				                  case 16:timeHoursPrice=MyConstants.DGU16_CLIENT_TIMEHOURES_WORKALARM;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
+					if(tDays1>=1.0&&tDays1<3) {
+						switch(dguType1) {case 3:timeHoursPrice=0;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
+						                  case 8:timeHoursPrice=0;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
+						                  case 16:timeHoursPrice=0;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
+					if(tDays1>=3) {
+						timeHoursPrice=0;outgo=0;
+						}
+		}
+		if (workType1.equals("plan")){
+			if(tDays1<1.0) {
+		switch(dguType1) {case 3:timeHoursPrice=MyConstants.DGU3_CLIENT_TIMEHOURES_WORKPLAN;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
+		                  case 8:timeHoursPrice=MyConstants.DGU8_CLIENT_TIMEHOURES_WORKPLAN;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
+		                  case 16:timeHoursPrice=MyConstants.DGU16_CLIENT_TIMEHOURES_WORKPLAN;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
+			if(tDays1>=1.0&&tDays1<3) {
+				switch(dguType1) {case 3:timeHoursPrice=0;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
+				                  case 8:timeHoursPrice=0;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
+				                  case 16:timeHoursPrice=0;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
+			if(tDays1>=3) {
+				switch(dguType1) {case 3:timeHoursPrice=0;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
+				                  case 8:timeHoursPrice=0;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
+				                  case 16:timeHoursPrice=0;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
+		}
 
-			if (workType1.equals("false")){
-				switch(dguType1) {case 3:timeHoursPrice=0;outgo=1860.00;break;
-		                          case 8:timeHoursPrice=0;outgo=2157.60;break;
-		                          case 16:timeHoursPrice=0;outgo=2157.60;break;}}
+		if (workType1.equals("false")){
+			switch(dguType1) {case 3:timeHoursPrice=0;outgo=MyConstants.DGU3_CLIENT_DEPARTURE_FALSE;break;
+	                          case 8:timeHoursPrice=0;outgo=MyConstants.DGU8_CLIENT_DEPARTURE_FALSE;break;
+	                          case 16:timeHoursPrice=0;outgo=MyConstants.DGU16_CLIENT_DEPARTURE_FALSE;break;}}
 	
 	outGoPrice=outgo;
 	orderPriceHours=timeHoursPrice*tHours1;
@@ -293,77 +286,77 @@ public Double calcOrderDays(int dguType,String workType,double jeep,double tHour
 	String workType1=workType,owener1=owener;
 	double timeDayPrice = 0,tDays1=tDays,orderPriceDays=0,outgo=0;
 	if(owener1.equals("po")) {
-		if (workType1.equals("emergency")){
-			if(tDays1<1.0) {
-				switch(dguType1) {case 3:timeDayPrice=0;outgo=1674.00;break;
-				                  case 8:timeDayPrice=0;outgo=1860.00;break;
-				                  case 16:timeDayPrice=0;outgo=1860.00;break;}}
-					if(tDays1>=1.0&&tDays1<3) {
-						switch(dguType1) {case 3:timeDayPrice=18972.00;outgo=1674.00;break;
-						                  case 8:timeDayPrice=19251.00;outgo=1860.00;break;
-						                  case 16:timeDayPrice=19251.00;outgo=1860.00;break;}}
-					if(tDays1>=3) {
-						timeDayPrice=0;outgo=0;
-						}
-		}
-		if (workType1.equals("plan")){
-			if(tDays1<1.0) {
-		switch(dguType1) {case 3:timeDayPrice=0;outgo=1674.00;break;
-		                  case 8:timeDayPrice=0;outgo=1860.00;break;
-		                  case 16:timeDayPrice=0;outgo=1860.00;break;}}
-			if(tDays1>=1.0&&tDays1<3) {
-				switch(dguType1) {case 3:timeDayPrice=18414;outgo=1674.00;break;
-				                  case 8:timeDayPrice=18972;outgo=1860.00;break;
-				                  case 16:timeDayPrice=18972;outgo=1860.00;break;}}
-			if(tDays1>=3) {
-				switch(dguType1) {case 3:timeDayPrice=16740;outgo=1674.00;break;
-				                  case 8:timeDayPrice=17350.08;outgo=1860.00;break;
-				                  case 16:timeDayPrice=17350.08;outgo=1860.00;break;}}
-		}
+	if (workType1.equals("emergency")){
+		if(tDays1<1.0) {
+			switch(dguType1) {case 3:timeDayPrice=0;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
+			                  case 8:timeDayPrice=0;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
+			                  case 16:timeDayPrice=0;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
+				if(tDays1>=1.0&&tDays1<3) {
+					switch(dguType1) {case 3:timeDayPrice=MyConstants.DGU3_CONTRACTOR_TIMEDAYS1_WORKALARM;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
+					                  case 8:timeDayPrice=MyConstants.DGU8_CONTRACTOR_TIMEDAYS1_WORKALARM;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
+					                  case 16:timeDayPrice=MyConstants.DGU16_CONTRACTOR_TIMEDAYS1_WORKALARM;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
+				if(tDays1>=3) {
+					timeDayPrice=0;outgo=0;
+					}
+	}
+	if (workType1.equals("plan")){
+		if(tDays1<1.0) {
+	switch(dguType1) {case 3:timeDayPrice=0;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
+	                  case 8:timeDayPrice=0;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
+	                  case 16:timeDayPrice=0;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
+		if(tDays1>=1.0&&tDays1<3) {
+			switch(dguType1) {case 3:timeDayPrice=MyConstants.DGU3_CONTRACTOR_TIMEDAYS1_WORKPLAN;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
+			                  case 8:timeDayPrice=MyConstants.DGU8_CONTRACTOR_TIMEDAYS1_WORKPLAN;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
+			                  case 16:timeDayPrice=MyConstants.DGU16_CONTRACTOR_TIMEDAYS1_WORKPLAN;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
+		if(tDays1>=3) {
+			switch(dguType1) {case 3:timeDayPrice=MyConstants.DGU3_CONTRACTOR_TIMEDAYS3_WORKPLAN;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
+			                  case 8:timeDayPrice=MyConstants.DGU8_CONTRACTOR_TIMEDAYS3_WORKPLAN;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
+			                  case 16:timeDayPrice=MyConstants.DGU16_CONTRACTOR_TIMEDAYS3_WORKPLAN;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
+	}
 
-		if (workType1.equals("false")){
-			switch(dguType1) {case 3:timeDayPrice=0;outgo=1860.00;break;
-	                          case 8:timeDayPrice=0;outgo=2157.60;break;
-	                          case 16:timeDayPrice=0;outgo=2157.60;break;}}
+	if (workType1.equals("false")){
+		switch(dguType1) {case 3:timeDayPrice=0;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE_FALSE;break;
+                          case 8:timeDayPrice=0;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE_FALSE;break;
+                          case 16:timeDayPrice=0;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE_FALSE;break;}}
 		outGoPrice=outgo;
 		orderPriceDays=timeDayPrice*tDays1;
 		BigDecimal bd = new BigDecimal(orderPriceDays).setScale(2, RoundingMode.HALF_UP);
 		orderPriceDays = bd.doubleValue();
 		}
 		
-		if(owener1.equals("mts")) {
-			if (workType1.equals("emergency")){
-				if(tDays1<1.0) {
-					switch(dguType1) {case 3:timeDayPrice=0;outgo=1674.00;break;
-					                  case 8:timeDayPrice=0;outgo=1860.00;break;
-					                  case 16:timeDayPrice=0;outgo=1860.00;break;}}
-						if(tDays1>=1.0&&tDays1<3) {
-							switch(dguType1) {case 3:timeDayPrice=16507.50;outgo=1674.00;break;
-							                  case 8:timeDayPrice=17530.50;outgo=1860.00;break;
-							                  case 16:timeDayPrice=18190.80;outgo=1860.00;break;}}
-						if(tDays1>=3) {
-							timeDayPrice=0;outgo=0;
-							}
-			}
-			if (workType1.equals("plan")){
-				if(tDays1<1.0) {
-			switch(dguType1) {case 3:timeDayPrice=0;outgo=1674.00;break;
-			                  case 8:timeDayPrice=0;outgo=1860.00;break;
-			                  case 16:timeDayPrice=0;outgo=1860.00;break;}}
-				if(tDays1>=1.0&&tDays1<3) {
-					switch(dguType1) {case 3:timeDayPrice=16042.50;outgo=1674.00;break;
-					                  case 8:timeDayPrice=17065.50;outgo=1860.00;break;
-					                  case 16:timeDayPrice=17995.50;outgo=1860.00;break;}}
-				if(tDays1>=3) {
-					switch(dguType1) {case 3:timeDayPrice=15624.00;outgo=1674.00;break;
-					                  case 8:timeDayPrice=16070.40;outgo=1860.00;break;
-					                  case 16:timeDayPrice=16070.40;outgo=1860.00;break;}}
-			}
+	if(owener1.equals("mts")) {
+		if (workType1.equals("emergency")){
+			if(tDays1<1.0) {
+				switch(dguType1) {case 3:timeDayPrice=0;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
+				                  case 8:timeDayPrice=0;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
+				                  case 16:timeDayPrice=0;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
+					if(tDays1>=1.0&&tDays1<3) {
+						switch(dguType1) {case 3:timeDayPrice=MyConstants.DGU3_CLIENT_TIMEDAYS1_WORKALARM;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
+						                  case 8:timeDayPrice=MyConstants.DGU8_CLIENT_TIMEDAYS1_WORKALARM;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
+						                  case 16:timeDayPrice=MyConstants.DGU16_CLIENT_TIMEDAYS1_WORKALARM;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
+					if(tDays1>=3) {
+						timeDayPrice=0;outgo=0;
+						}
+		}
+		if (workType1.equals("plan")){
+			if(tDays1<1.0) {
+		switch(dguType1) {case 3:timeDayPrice=0;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
+		                  case 8:timeDayPrice=0;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
+		                  case 16:timeDayPrice=0;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
+			if(tDays1>=1.0&&tDays1<3) {
+				switch(dguType1) {case 3:timeDayPrice=MyConstants.DGU3_CLIENT_TIMEDAYS1_WORKPLAN;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
+				                  case 8:timeDayPrice=MyConstants.DGU8_CLIENT_TIMEDAYS1_WORKPLAN;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
+				                  case 16:timeDayPrice=MyConstants.DGU16_CLIENT_TIMEDAYS1_WORKPLAN;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
+			if(tDays1>=3) {
+				switch(dguType1) {case 3:timeDayPrice=MyConstants.DGU3_CLIENT_TIMEDAYS3_WORKPLAN;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
+				                  case 8:timeDayPrice=MyConstants.DGU8_CLIENT_TIMEDAYS3_WORKPLAN;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
+				                  case 16:timeDayPrice=MyConstants.DGU16_CLIENT_TIMEDAYS3_WORKPLAN;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
+		}
 
-			if (workType1.equals("false")){
-				switch(dguType1) {case 3:timeDayPrice=0;outgo=1860.00;break;
-		                          case 8:timeDayPrice=0;outgo=2157.60;break;
-		                          case 16:timeDayPrice=0;outgo=2157.60;break;}}
+		if (workType1.equals("false")){
+			switch(dguType1) {case 3:timeDayPrice=0;outgo=MyConstants.DGU3_CLIENT_DEPARTURE_FALSE;break;
+	                          case 8:timeDayPrice=0;outgo=MyConstants.DGU8_CLIENT_DEPARTURE_FALSE;break;
+	                          case 16:timeDayPrice=0;outgo=MyConstants.DGU16_CLIENT_DEPARTURE_FALSE;break;}}
 			
 			outGoPrice=outgo;
 			orderPriceDays=timeDayPrice*tDays1;
@@ -378,9 +371,6 @@ public String recordOrder(@RequestParam("ordernumber1") String orderNumber,@Requ
 		@RequestParam("start1") String dateStart,@RequestParam("end1") String dateEnd,//
 		@RequestParam("ordercalc1") String calc,@RequestParam("ordercalcnds1") String calcNds,//
 		@RequestParam("comm") String comm,Model model) {
- 	
-String [] orderArrayMassiv= {orderNumber,bsNumber,dateStart,dateEnd,calc,calcNds,"|"};
-MainController.orderArray.addAll(new ArrayList<String>(Arrays.asList(orderArrayMassiv)));
 
 OrderForm orderForm=new OrderForm(orderNumber,bsNumber,dateStart,dateEnd,calc,calcNds,comm);
 MainController.orderFormArray.addAll(Arrays.asList(orderForm));

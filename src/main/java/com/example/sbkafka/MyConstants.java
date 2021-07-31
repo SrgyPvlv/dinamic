@@ -85,5 +85,10 @@ public class MyConstants {
 	public static final double DGU3_CLIENT_DEPARTURE_FALSE = 1860.00;
 	public static final double DGU8_CLIENT_DEPARTURE_FALSE = 2157.60;
 	public static final double DGU16_CLIENT_DEPARTURE_FALSE = 2157.60;
+
+// стоимость использования вездеходов/джипов и т.д.( выезд) и транспортировки ДГУ (км) 
+
+	public static final double JEEP_PRICE = 6500.70;
+	public static final double TRANSPORT_PRICE = 12.09;
 	
 }
