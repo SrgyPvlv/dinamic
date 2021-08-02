@@ -1,5 +1,7 @@
 package com.example.sbkafka;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,11 +18,11 @@ public class PricesController {
 	@GetMapping("/priceChanges")
 	public String showPrices(Model model) {
 		
-		priceService.findAll().forEach(it->System.out.println(it));
+		List<Price> prices=priceService.findAll();
 		
-		model.addAttribute("DGU3_CONTRACTOR_TIMEHOURES_WORKALARM", MyConstants.DGU3_CONTRACTOR_TIMEHOURES_WORKALARM);
+		model.addAttribute("prices",prices);
 		
-	    return "prices";
+	    return "test";
 	}
 	
 	@PostMapping("/priceChanges")
