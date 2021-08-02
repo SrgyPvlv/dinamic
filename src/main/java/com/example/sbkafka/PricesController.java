@@ -19,7 +19,6 @@ public class PricesController {
 	public String showPrices(Model model) {
 		
 		List<Price> prices=priceService.findAll();
-		
 		model.addAttribute("prices",prices);
 		
 	    return "test";

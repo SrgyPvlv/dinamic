@@ -11,16 +11,16 @@ public class Price {
 	private int id;
 	
 	@Column
-	private String pricesName;
+	private String pricesname;
 	
 	@Column
-	private Double pricesValue;
+	private Double pricesvalue;
 	
 	public Price() {}
 	
-	public Price(String pricesName,Double pricesValue) {
-		this.pricesName=pricesName;
-		this.pricesValue=pricesValue;
+	public Price(String pricesname,Double pricesvalue) {
+		this.pricesname=pricesname;
+		this.pricesvalue=pricesvalue;
 	}
 	
 	public int  getId() {
@@ -28,21 +28,21 @@ public class Price {
 	}
 	
 	public String getPricesName() {
-		return pricesName;
+		return pricesname;
 	}
-	public void setPricesName(String pricesName) {
-		this.pricesName=pricesName;
+	public void setPricesName(String pricesname) {
+		this.pricesname=pricesname;
 	}
 	
 	public double getPricesValue() {
-		return pricesValue;
+		return pricesvalue;
 	}
-	public void setPricesValue(double pricesValue) {
-		this.pricesValue=pricesValue;
+	public void setPricesValue(double pricesvalue) {
+		this.pricesvalue=pricesvalue;
 	}
 	
 	@Override
 	public String toString() {
-		return "Price { id="+id+", pricesName="+pricesName+", pricesValue="+pricesValue+"};";
+		return "Price { id="+id+", pricesName="+pricesname+", pricesValue="+pricesvalue+"};";
 	}
 }

@@ -18,10 +18,6 @@ public class PriceService {
 		return priceRepository.findAll();
 	}
 	
-	public Price findValueByName(String name) {
-		return priceRepository.findValueByName(name);
-	}
-	
 	public void savePrice(Price price) {
 		priceRepository.saveAndFlush(price);
 	}
