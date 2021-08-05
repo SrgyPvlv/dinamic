@@ -92,3 +92,10 @@ position: fixed; /* Фиксированное положение */
     width: 100%; /* Ширина слоя */
 	text-align: center;
 }
+
+.content input{
+	text-align: center;
+	font-size:16px;
+	border:none;
+	
+}

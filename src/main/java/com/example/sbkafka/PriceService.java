@@ -1,5 +1,6 @@
 package com.example.sbkafka;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,14 @@ public class PriceService {
 	
 	public void savePrice(Price price) {
 		priceRepository.saveAndFlush(price);
+	}
+	
+	public Price getById(int id) {
+		return priceRepository.getById(id);
+	}
+	
+	public void saveAllPrice(List<Price> prices) {
+		priceRepository.saveAllAndFlush(prices);
 	}
 	
 }

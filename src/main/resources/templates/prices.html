@@ -16,26 +16,74 @@
 <td>№ п/п</td><td>Наименование работ</td><td>Кол-во</td><td>Ед. изм.</td><td>До 3.5 кВт.вкл(переносной) (Партнер)</td><td>До 8 кВт.вкл(прицеп) (Партнер)</td><td>До 16 кВт.вкл(прицеп) (Партнер)</td><td>До 3.5 кВт.вкл(переносной) (Заказчик)</td><td>До 8 кВт.вкл(прицеп) (Заказчик)</td><td>До 16 кВт.вкл(прицеп) (Заказчик)</td><td>Примечание</td>
 </tr>
 <tr>
-<td>1</td><td>Обеспечение АЭС Объекта (АВАРИЙНОЕ)</td><td>1</td><td>час</td><td><input type="text" name="DGU3_CONTRACTOR_TIMEHOURES_WORKALARM" th:value="${DGU3_CONTRACTOR_TIMEHOURES_WORKALARM}"/></td><td></td><td></td><td></td><td></td><td></td><td>Расценка включает: стоимость ГСМ, ТО ДГУ, работу бригады, контроль отсутствия сетевого напряжения</td>
+<td>1</td><td>Обеспечение АЭС Объекта (АВАРИЙНОЕ)</td><td>1</td><td>час</td>
+<td><input type="text" th:name="${price2.pricesName}" th:value="${price2.pricesValue} "/></td>
+<td><input type="text" th:name="${price3.pricesName}" th:value="${price3.pricesValue} "/></td>
+<td><input type="text" th:name="${price4.pricesName}" th:value="${price4.pricesValue} "/></td>
+<td><input type="text" th:name="${price5.pricesName}" th:value="${price5.pricesValue} "/></td>
+<td><input type="text" th:name="${price6.pricesName}" th:value="${price6.pricesValue} "/></td>
+<td><input type="text" th:name="${price7.pricesName}" th:value="${price7.pricesValue} "/></td>
+<td>Расценка включает: стоимость ГСМ, ТО ДГУ, работу бригады, контроль отсутствия сетевого напряжения</td>
 </tr>
 <tr>
-<td>2</td><td>Обеспечение АЭС Объекта (ПЛАНОВОЕ)</td><td>1</td><td>час</td><td></td><td></td><td></td><td></td><td></td><td></td><td>Расценка включает: стоимость ГСМ, ТО ДГУ, работу бригады, контроль отсутствия сетевого напряжения</td>
+<td>2</td><td>Обеспечение АЭС Объекта (ПЛАНОВОЕ)</td><td>1</td><td>час</td>
+<td><input type="text" th:name="${price8.pricesName}" th:value="${price8.pricesValue} "/></td>
+<td><input type="text" th:name="${price9.pricesName}" th:value="${price9.pricesValue} "/></td>
+<td><input type="text" th:name="${price10.pricesName}" th:value="${price10.pricesValue} "/></td>
+<td><input type="text" th:name="${price11.pricesName}" th:value="${price11.pricesValue} "/></td>
+<td><input type="text" th:name="${price12.pricesName}" th:value="${price12.pricesValue} "/></td>
+<td><input type="text" th:name="${price13.pricesName}" th:value="${price13.pricesValue} "/></td>
+<td>Расценка включает: стоимость ГСМ, ТО ДГУ, работу бригады, контроль отсутствия сетевого напряжения</td>
 </tr>
 <tr>
-<td>3</td><td>Обеспечение АЭС Объекта от 1 до 3 суток (АВАРИЙНОЕ)</td><td>1</td><td>сутки</td><td></td><td></td><td></td><td></td><td></td><td></td><td>Расценка включает: стоимость ГСМ, ТО ДГУ, работу бригады, контроль отсутствия сетевого напряжения</td>
+<td>3</td><td>Обеспечение АЭС Объекта от 1 до 3 суток (АВАРИЙНОЕ)</td><td>1</td><td>сутки</td>
+<td><input type="text" th:name="${price14.pricesName}" th:value="${price14.pricesValue} "/></td>
+<td><input type="text" th:name="${price15.pricesName}" th:value="${price15.pricesValue} "/></td>
+<td><input type="text" th:name="${price16.pricesName}" th:value="${price16.pricesValue} "/></td>
+<td><input type="text" th:name="${price17.pricesName}" th:value="${price17.pricesValue} "/></td>
+<td><input type="text" th:name="${price18.pricesName}" th:value="${price18.pricesValue} "/></td>
+<td><input type="text" th:name="${price19.pricesName}" th:value="${price19.pricesValue} "/></td>
+<td>Расценка включает: стоимость ГСМ, ТО ДГУ, работу бригады, контроль отсутствия сетевого напряжения</td>
 </tr>
 <tr>
-<td>4</td><td>Обеспечение АЭС Объекта от 1 до 3 суток (ПЛАНОВОЕ)</td><td>1</td><td>сутки</td><td></td><td></td><td></td><td></td><td></td><td></td><td>Расценка включает: стоимость ГСМ, ТО ДГУ, работу бригады, контроль отсутствия сетевого напряжения</td>
+<td>4</td><td>Обеспечение АЭС Объекта от 1 до 3 суток (ПЛАНОВОЕ)</td><td>1</td><td>сутки</td>
+<td><input type="text" th:name="${price20.pricesName}" th:value="${price20.pricesValue} "/></td>
+<td><input type="text" th:name="${price21.pricesName}" th:value="${price21.pricesValue} "/></td>
+<td><input type="text" th:name="${price22.pricesName}" th:value="${price22.pricesValue} "/></td>
+<td><input type="text" th:name="${price23.pricesName}" th:value="${price23.pricesValue} "/></td>
+<td><input type="text" th:name="${price24.pricesName}" th:value="${price24.pricesValue} "/></td>
+<td><input type="text" th:name="${price25.pricesName}" th:value="${price25.pricesValue} "/></td>
+<td>Расценка включает: стоимость ГСМ, ТО ДГУ, работу бригады, контроль отсутствия сетевого напряжения</td>
 </tr>
 <tr>
-<td>5</td><td>Обеспечение АЭС Объект от 3 и более суток (ПЛАНОВОЕ)</td><td>1</td><td>сутки</td><td></td><td></td><td></td><td></td><td></td><td></td><td>Расценка включает: стоимость ГСМ, ТО ДГУ, работу бригады, контроль отсутствия сетевого напряжения</td>
+<td>5</td><td>Обеспечение АЭС Объект от 3 и более суток (ПЛАНОВОЕ)</td><td>1</td><td>сутки</td>
+<td><input type="text" th:name="${price26.pricesName}" th:value="${price26.pricesValue} "/></td>
+<td><input type="text" th:name="${price27.pricesName}" th:value="${price27.pricesValue} "/></td>
+<td><input type="text" th:name="${price28.pricesName}" th:value="${price28.pricesValue} "/></td>
+<td><input type="text" th:name="${price29.pricesName}" th:value="${price29.pricesValue} "/></td>
+<td><input type="text" th:name="${price30.pricesName}" th:value="${price30.pricesValue} "/></td>
+<td><input type="text" th:name="${price31.pricesName}" th:value="${price31.pricesValue} "/></td>
+<td>Расценка включает: стоимость ГСМ, ТО ДГУ, работу бригады, контроль отсутствия сетевого напряжения</td>
 </tr>
 <tr>
-<td>6</td><td>Выезд аварийной бригады, доставка и подготовка БГУ, ДГУ для обеспечения АЭС объекта МТС</td><td>1</td><td>выезд</td><td></td><td></td><td></td><td></td><td></td><td></td><td>В рамках одной Заявки позиция может быть использована не более одного раза. Расценка включает: стоимость ГСМ, контроль отсутствия сетевого напряжения.</td>
+<td>6</td><td>Выезд аварийной бригады, доставка и подготовка БГУ, ДГУ для обеспечения АЭС объекта МТС</td><td>1</td><td>выезд</td>
+<td><input type="text" th:name="${price32.pricesName}" th:value="${price32.pricesValue} "/></td>
+<td><input type="text" th:name="${price33.pricesName}" th:value="${price33.pricesValue} "/></td>
+<td><input type="text" th:name="${price34.pricesName}" th:value="${price34.pricesValue} "/></td>
+<td><input type="text" th:name="${price35.pricesName}" th:value="${price35.pricesValue} "/></td>
+<td><input type="text" th:name="${price36.pricesName}" th:value="${price36.pricesValue} "/></td>
+<td><input type="text" th:name="${price37.pricesName}" th:value="${price37.pricesValue} "/></td>
+<td>В рамках одной Заявки позиция может быть использована не более одного раза. Расценка включает: стоимость ГСМ, контроль отсутствия сетевого напряжения.</td>
 </tr>
 <tr>
-<td>7</td><td>Компенсация ложного выезда аварийной бригады для обеспечения АЭС</td><td>1</td><td>выезд</td><td></td><td></td><td></td><td></td><td></td><td></td><td>Позиция используется в случае, если к
-моменту прибытия аварийной бригады Партнера на Объект по Заявке МТС произошло самовосстановление штатного электропитания и работы по АЭС фактически не проводились. Позиция может быть использована в рамках одной Заявки не более одного раза.</td>
+<td>7</td><td>Компенсация ложного выезда аварийной бригады для обеспечения АЭС</td><td>1</td><td>выезд</td>
+<td><input type="text" th:name="${price38.pricesName}" th:value="${price38.pricesValue} "/></td>
+<td><input type="text" th:name="${price39.pricesName}" th:value="${price39.pricesValue} "/></td>
+<td><input type="text" th:name="${price40.pricesName}" th:value="${price40.pricesValue} "/></td>
+<td><input type="text" th:name="${price41.pricesName}" th:value="${price41.pricesValue} "/></td>
+<td><input type="text" th:name="${price42.pricesName}" th:value="${price42.pricesValue} "/></td>
+<td><input type="text" th:name="${price43.pricesName}" th:value="${price43.pricesValue} "/></td>
+<td>Позиция используется в случае, если к моменту прибытия аварийной бригады Партнера на Объект по Заявке МТС произошло самовосстановление штатного электропитания и работы по АЭС фактически не проводились. Позиция может быть использована в рамках одной Заявки не более одного раза.</td>
 </tr>
 </table>
 <br>
@@ -44,14 +92,18 @@
 <td>№ п/п</td><td>Наименование работ</td><td>Кол-во</td><td>Ед. изм.</td><td>Цена за ед.изм., руб. без НДС</td><td>Примечание</td>
 </tr>
 <tr>
-<td>1</td><td>Обеспечение АЭС Объекта (АВАРИЙНОЕ)</td><td>1</td><td>км</td><td></td><td>Позиция используется при проведении Работ (АЭС) на Объектах МТС, находящихся за пределами КАД. Оплата производится исходя из протяженности пути бригады Партнера от КАД до Объекта МТС и обратно. Маршрут до БС прокладывается по кратчайшей автодороге от адреса офиса МТС до адреса БС (км.) с использованием ресурса сети «Интернет» «сервиса Яндекс Карты» https://yandex.ru/maps</td>
+<td>1</td><td>Обеспечение АЭС Объекта (АВАРИЙНОЕ)</td><td>1</td><td>км</td>
+<td><input type="text" th:name="${price44.pricesName}" th:value="${price44.pricesValue} "/></td>
+<td>Позиция используется при проведении Работ (АЭС) на Объектах МТС, находящихся за пределами КАД. Оплата производится исходя из протяженности пути бригады Партнера от КАД до Объекта МТС и обратно. Маршрут до БС прокладывается по кратчайшей автодороге от адреса офиса МТС до адреса БС (км.) с использованием ресурса сети «Интернет» «сервиса Яндекс Карты» https://yandex.ru/maps</td>
 </tr>
 <tr>
-<td>2</td><td>Обеспечение АЭС Объекта (ПЛАНОВОЕ)</td><td>1</td><td>выезд</td><td></td><td>Позиция используется в случае невозможности проезда на Объект МТС на автомобиле класса «джип», «микроавтобус», «микро грузовик» (TOYOTA HIACE, MITSUBISHI L200, VOLKSWAGEN AMAROK или аналогичные). Позиция может быть использована в рамках одной Заявки не более одного раза для одного объекта</td>
+<td>2</td><td>Обеспечение АЭС Объекта (ПЛАНОВОЕ)</td><td>1</td><td>выезд</td>
+<td><input type="text" th:name="${price45.pricesName}" th:value="${price45.pricesValue} "/></td>
+<td>Позиция используется в случае невозможности проезда на Объект МТС на автомобиле класса «джип», «микроавтобус», «микро грузовик» (TOYOTA HIACE, MITSUBISHI L200, VOLKSWAGEN AMAROK или аналогичные). Позиция может быть использована в рамках одной Заявки не более одного раза для одного объекта</td>
 </tr>
 </table>
 <br>
-<p style="text-align:center;"><input type="submit" value="Сохранить изменения" style="width: 155px; height: 40px; background-color: #98FB98;" ></p>
+<p style="text-align:center;"><input type="submit" value="Сохранить изменения" style="width: 200px; height: 40px; background-color: #98FB98; border:solid 2px;" ></p>
 </form>
 </div>
 <br><br>
