@@ -3,6 +3,8 @@ package com.example.sbkafka;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.ParseException;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +20,11 @@ import java.util.Arrays;
 public class MainController {
 	
 	Double transport,diffTimeHours,diffTimeDay,orderPrice,outGoPrice;
-	Double kmPrice=MyConstants.TRANSPORT_PRICE,jeepPrice=MyConstants.JEEP_PRICE;
 	static String outputFileName;
 	public static ArrayList<OrderForm> orderFormArray = new ArrayList<OrderForm>();
+	
+	@Autowired
+	private PriceService priceService;
 	
 	@GetMapping("/calcOrder")
     public String showOrder() {
@@ -34,7 +38,10 @@ public class MainController {
     		@RequestParam(value="distance") String orderDistance,//
     		@RequestParam(value="dgutype") int dguType,@RequestParam(value="jeep") int jeepYesNo,//
     		@RequestParam(value="worktype") String workType,@RequestParam(value="owener") String owenerType,Model model) throws ParseException {
- 
+		
+		double TRANSPORT_PRICE = priceService.getById(44).getPricesValue();
+		double JEEP_PRICE = priceService.getById(45).getPricesValue();
+		Double kmPrice=TRANSPORT_PRICE,jeepPrice=JEEP_PRICE;
     	Double trans=calcTransport(orderDistance,kmPrice);
     	Double jeep=calcJeep(jeepYesNo,jeepPrice);
     	Double diffTime=calcDiffTimeHours(timeStart,timeEnd);
@@ -115,42 +122,99 @@ public Double calcDiffTimeDay(String timeStart, String timeEnd) {
 	return diffTimeDay;	
 }
 public Double calcOrder(int dguType,String workType,double jeep,double tHours,double tDays,double transPrice,String owener) {
+	
+	double DGU3_CONTRACTOR_TIMEHOURES_WORKALARM = priceService.getById(2).getPricesValue();
+	double DGU8_CONTRACTOR_TIMEHOURES_WORKALARM = priceService.getById(3).getPricesValue();
+	double DGU16_CONTRACTOR_TIMEHOURES_WORKALARM = priceService.getById(4).getPricesValue();
+
+	double DGU3_CLIENT_TIMEHOURES_WORKALARM = priceService.getById(5).getPricesValue();
+	double DGU8_CLIENT_TIMEHOURES_WORKALARM = priceService.getById(6).getPricesValue();
+	double DGU16_CLIENT_TIMEHOURES_WORKALARM = priceService.getById(7).getPricesValue();
+
+	double DGU3_CONTRACTOR_TIMEHOURES_WORKPLAN = priceService.getById(8).getPricesValue();
+	double DGU8_CONTRACTOR_TIMEHOURES_WORKPLAN = priceService.getById(9).getPricesValue();
+	double DGU16_CONTRACTOR_TIMEHOURES_WORKPLAN = priceService.getById(10).getPricesValue();
+
+	double DGU3_CLIENT_TIMEHOURES_WORKPLAN = priceService.getById(11).getPricesValue();
+	double DGU8_CLIENT_TIMEHOURES_WORKPLAN = priceService.getById(12).getPricesValue();
+	double DGU16_CLIENT_TIMEHOURES_WORKPLAN = priceService.getById(13).getPricesValue();
+
+	double DGU3_CONTRACTOR_TIMEDAYS1_WORKALARM = priceService.getById(14).getPricesValue();
+	double DGU8_CONTRACTOR_TIMEDAYS1_WORKALARM = priceService.getById(15).getPricesValue();
+	double DGU16_CONTRACTOR_TIMEDAYS1_WORKALARM = priceService.getById(16).getPricesValue();
+
+	double DGU3_CLIENT_TIMEDAYS1_WORKALARM = priceService.getById(17).getPricesValue();
+	double DGU8_CLIENT_TIMEDAYS1_WORKALARM = priceService.getById(18).getPricesValue();
+	double DGU16_CLIENT_TIMEDAYS1_WORKALARM = priceService.getById(19).getPricesValue();
+
+	double DGU3_CONTRACTOR_TIMEDAYS1_WORKPLAN = priceService.getById(20).getPricesValue();
+	double DGU8_CONTRACTOR_TIMEDAYS1_WORKPLAN = priceService.getById(21).getPricesValue();
+	double DGU16_CONTRACTOR_TIMEDAYS1_WORKPLAN = priceService.getById(22).getPricesValue();
+
+	double DGU3_CLIENT_TIMEDAYS1_WORKPLAN = priceService.getById(23).getPricesValue();
+	double DGU8_CLIENT_TIMEDAYS1_WORKPLAN = priceService.getById(24).getPricesValue();
+	double DGU16_CLIENT_TIMEDAYS1_WORKPLAN = priceService.getById(25).getPricesValue();
+
+	double DGU3_CONTRACTOR_TIMEDAYS3_WORKPLAN = priceService.getById(26).getPricesValue();
+	double DGU8_CONTRACTOR_TIMEDAYS3_WORKPLAN = priceService.getById(27).getPricesValue();
+	double DGU16_CONTRACTOR_TIMEDAYS3_WORKPLAN = priceService.getById(28).getPricesValue();
+
+	double DGU3_CLIENT_TIMEDAYS3_WORKPLAN = priceService.getById(29).getPricesValue();
+	double DGU8_CLIENT_TIMEDAYS3_WORKPLAN = priceService.getById(30).getPricesValue();
+	double DGU16_CLIENT_TIMEDAYS3_WORKPLAN = priceService.getById(31).getPricesValue();
+
+	double DGU3_CONTRACTOR_DEPARTURE = priceService.getById(32).getPricesValue();
+	double DGU8_CONTRACTOR_DEPARTURE = priceService.getById(33).getPricesValue();
+	double DGU16_CONTRACTOR_DEPARTURE = priceService.getById(34).getPricesValue();
+
+	double DGU3_CLIENT_DEPARTURE = priceService.getById(35).getPricesValue();
+	double DGU8_CLIENT_DEPARTURE = priceService.getById(36).getPricesValue();
+	double DGU16_CLIENT_DEPARTURE = priceService.getById(37).getPricesValue();
+
+	double DGU3_CONTRACTOR_DEPARTURE_FALSE = priceService.getById(38).getPricesValue();
+	double DGU8_CONTRACTOR_DEPARTURE_FALSE = priceService.getById(39).getPricesValue();
+	double DGU16_CONTRACTOR_DEPARTURE_FALSE = priceService.getById(40).getPricesValue();
+
+	double DGU3_CLIENT_DEPARTURE_FALSE = priceService.getById(41).getPricesValue();
+	double DGU8_CLIENT_DEPARTURE_FALSE = priceService.getById(42).getPricesValue();
+	double DGU16_CLIENT_DEPARTURE_FALSE = priceService.getById(43).getPricesValue();
+	
 	int dguType1=dguType;
 	String workType1=workType,owener1=owener;
 	double timeHoursPrice = 0,timeDayPrice = 0,tHours1=tHours,tDays1=tDays,orderPrice=0,transPrice1=transPrice,outgo=0,jeep1=jeep;
 	if(owener1.equals("po")) {
 	if (workType1.equals("emergency")){
 		if(tDays1<1.0) {
-			switch(dguType1) {case 3:timeHoursPrice=MyConstants.DGU3_CONTRACTOR_TIMEHOURES_WORKALARM;timeDayPrice=0;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
-			                  case 8:timeHoursPrice=MyConstants.DGU8_CONTRACTOR_TIMEHOURES_WORKALARM;timeDayPrice=0;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
-			                  case 16:timeHoursPrice=MyConstants.DGU16_CONTRACTOR_TIMEHOURES_WORKALARM;timeDayPrice=0;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
+			switch(dguType1) {case 3:timeHoursPrice=DGU3_CONTRACTOR_TIMEHOURES_WORKALARM;timeDayPrice=0;outgo=DGU3_CONTRACTOR_DEPARTURE;break;
+			                  case 8:timeHoursPrice=DGU8_CONTRACTOR_TIMEHOURES_WORKALARM;timeDayPrice=0;outgo=DGU8_CONTRACTOR_DEPARTURE;break;
+			                  case 16:timeHoursPrice=DGU16_CONTRACTOR_TIMEHOURES_WORKALARM;timeDayPrice=0;outgo=DGU16_CONTRACTOR_DEPARTURE;break;}}
 				if(tDays1>=1.0&&tDays1<3) {
-					switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=MyConstants.DGU3_CONTRACTOR_TIMEDAYS1_WORKALARM;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
-					                  case 8:timeHoursPrice=0;timeDayPrice=MyConstants.DGU8_CONTRACTOR_TIMEDAYS1_WORKALARM;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
-					                  case 16:timeHoursPrice=0;timeDayPrice=MyConstants.DGU16_CONTRACTOR_TIMEDAYS1_WORKALARM;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
+					switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=DGU3_CONTRACTOR_TIMEDAYS1_WORKALARM;outgo=DGU3_CONTRACTOR_DEPARTURE;break;
+					                  case 8:timeHoursPrice=0;timeDayPrice=DGU8_CONTRACTOR_TIMEDAYS1_WORKALARM;outgo=DGU8_CONTRACTOR_DEPARTURE;break;
+					                  case 16:timeHoursPrice=0;timeDayPrice=DGU16_CONTRACTOR_TIMEDAYS1_WORKALARM;outgo=DGU16_CONTRACTOR_DEPARTURE;break;}}
 				if(tDays1>=3) {
 					timeHoursPrice=0;timeDayPrice=0;outgo=0;transPrice1=0;
 					}
 	}
 	if (workType1.equals("plan")){
 		if(tDays1<1.0) {
-	switch(dguType1) {case 3:timeHoursPrice=MyConstants.DGU3_CONTRACTOR_TIMEHOURES_WORKPLAN;timeDayPrice=0;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
-	                  case 8:timeHoursPrice=MyConstants.DGU8_CONTRACTOR_TIMEHOURES_WORKPLAN;timeDayPrice=0;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
-	                  case 16:timeHoursPrice=MyConstants.DGU16_CONTRACTOR_TIMEHOURES_WORKPLAN;timeDayPrice=0;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
+	switch(dguType1) {case 3:timeHoursPrice=DGU3_CONTRACTOR_TIMEHOURES_WORKPLAN;timeDayPrice=0;outgo=DGU3_CONTRACTOR_DEPARTURE;break;
+	                  case 8:timeHoursPrice=DGU8_CONTRACTOR_TIMEHOURES_WORKPLAN;timeDayPrice=0;outgo=DGU8_CONTRACTOR_DEPARTURE;break;
+	                  case 16:timeHoursPrice=DGU16_CONTRACTOR_TIMEHOURES_WORKPLAN;timeDayPrice=0;outgo=DGU16_CONTRACTOR_DEPARTURE;break;}}
 		if(tDays1>=1.0&&tDays1<3) {
-			switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=MyConstants.DGU3_CONTRACTOR_TIMEDAYS1_WORKPLAN;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
-			                  case 8:timeHoursPrice=0;timeDayPrice=MyConstants.DGU8_CONTRACTOR_TIMEDAYS1_WORKPLAN;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
-			                  case 16:timeHoursPrice=0;timeDayPrice=MyConstants.DGU16_CONTRACTOR_TIMEDAYS1_WORKPLAN;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
+			switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=DGU3_CONTRACTOR_TIMEDAYS1_WORKPLAN;outgo=DGU3_CONTRACTOR_DEPARTURE;break;
+			                  case 8:timeHoursPrice=0;timeDayPrice=DGU8_CONTRACTOR_TIMEDAYS1_WORKPLAN;outgo=DGU8_CONTRACTOR_DEPARTURE;break;
+			                  case 16:timeHoursPrice=0;timeDayPrice=DGU16_CONTRACTOR_TIMEDAYS1_WORKPLAN;outgo=DGU16_CONTRACTOR_DEPARTURE;break;}}
 		if(tDays1>=3) {
-			switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=MyConstants.DGU3_CONTRACTOR_TIMEDAYS3_WORKPLAN;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
-			                  case 8:timeHoursPrice=0;timeDayPrice=MyConstants.DGU8_CONTRACTOR_TIMEDAYS3_WORKPLAN;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
-			                  case 16:timeHoursPrice=0;timeDayPrice=MyConstants.DGU16_CONTRACTOR_TIMEDAYS3_WORKPLAN;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
+			switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=DGU3_CONTRACTOR_TIMEDAYS3_WORKPLAN;outgo=DGU3_CONTRACTOR_DEPARTURE;break;
+			                  case 8:timeHoursPrice=0;timeDayPrice=DGU8_CONTRACTOR_TIMEDAYS3_WORKPLAN;outgo=DGU8_CONTRACTOR_DEPARTURE;break;
+			                  case 16:timeHoursPrice=0;timeDayPrice=DGU16_CONTRACTOR_TIMEDAYS3_WORKPLAN;outgo=DGU16_CONTRACTOR_DEPARTURE;break;}}
 	}
 
 	if (workType1.equals("false")){
-		switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=0;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE_FALSE;break;
-                          case 8:timeHoursPrice=0;timeDayPrice=0;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE_FALSE;break;
-                          case 16:timeHoursPrice=0;timeDayPrice=0;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE_FALSE;break;}}
+		switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=0;outgo=DGU3_CONTRACTOR_DEPARTURE_FALSE;break;
+                          case 8:timeHoursPrice=0;timeDayPrice=0;outgo=DGU8_CONTRACTOR_DEPARTURE_FALSE;break;
+                          case 16:timeHoursPrice=0;timeDayPrice=0;outgo=DGU16_CONTRACTOR_DEPARTURE_FALSE;break;}}
 	
 	outGoPrice=outgo;
 	orderPrice=timeHoursPrice*tHours1+timeDayPrice*tDays1+transPrice1+outgo+jeep1;
@@ -160,36 +224,36 @@ public Double calcOrder(int dguType,String workType,double jeep,double tHours,do
 	if(owener1.equals("mts")) {
 		if (workType1.equals("emergency")){
 			if(tDays1<1.0) {
-				switch(dguType1) {case 3:timeHoursPrice=MyConstants.DGU3_CLIENT_TIMEHOURES_WORKALARM;timeDayPrice=0;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
-				                  case 8:timeHoursPrice=MyConstants.DGU8_CLIENT_TIMEHOURES_WORKALARM;timeDayPrice=0;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
-				                  case 16:timeHoursPrice=MyConstants.DGU16_CLIENT_TIMEHOURES_WORKALARM;timeDayPrice=0;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
+				switch(dguType1) {case 3:timeHoursPrice=DGU3_CLIENT_TIMEHOURES_WORKALARM;timeDayPrice=0;outgo=DGU3_CLIENT_DEPARTURE;break;
+				                  case 8:timeHoursPrice=DGU8_CLIENT_TIMEHOURES_WORKALARM;timeDayPrice=0;outgo=DGU8_CLIENT_DEPARTURE;break;
+				                  case 16:timeHoursPrice=DGU16_CLIENT_TIMEHOURES_WORKALARM;timeDayPrice=0;outgo=DGU16_CLIENT_DEPARTURE;break;}}
 					if(tDays1>=1.0&&tDays1<3) {
-						switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=MyConstants.DGU3_CLIENT_TIMEDAYS1_WORKALARM;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
-						                  case 8:timeHoursPrice=0;timeDayPrice=MyConstants.DGU8_CLIENT_TIMEDAYS1_WORKALARM;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
-						                  case 16:timeHoursPrice=0;timeDayPrice=MyConstants.DGU16_CLIENT_TIMEDAYS1_WORKALARM;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
+						switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=DGU3_CLIENT_TIMEDAYS1_WORKALARM;outgo=DGU3_CLIENT_DEPARTURE;break;
+						                  case 8:timeHoursPrice=0;timeDayPrice=DGU8_CLIENT_TIMEDAYS1_WORKALARM;outgo=DGU8_CLIENT_DEPARTURE;break;
+						                  case 16:timeHoursPrice=0;timeDayPrice=DGU16_CLIENT_TIMEDAYS1_WORKALARM;outgo=DGU16_CLIENT_DEPARTURE;break;}}
 					if(tDays1>=3) {
 						timeHoursPrice=0;timeDayPrice=0;outgo=0;transPrice1=0;
 						}
 		}
 		if (workType1.equals("plan")){
 			if(tDays1<1.0) {
-		switch(dguType1) {case 3:timeHoursPrice=MyConstants.DGU3_CLIENT_TIMEHOURES_WORKPLAN;timeDayPrice=0;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
-		                  case 8:timeHoursPrice=MyConstants.DGU8_CLIENT_TIMEHOURES_WORKPLAN;timeDayPrice=0;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
-		                  case 16:timeHoursPrice=MyConstants.DGU16_CLIENT_TIMEHOURES_WORKPLAN;timeDayPrice=0;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
+		switch(dguType1) {case 3:timeHoursPrice=DGU3_CLIENT_TIMEHOURES_WORKPLAN;timeDayPrice=0;outgo=DGU3_CLIENT_DEPARTURE;break;
+		                  case 8:timeHoursPrice=DGU8_CLIENT_TIMEHOURES_WORKPLAN;timeDayPrice=0;outgo=DGU8_CLIENT_DEPARTURE;break;
+		                  case 16:timeHoursPrice=DGU16_CLIENT_TIMEHOURES_WORKPLAN;timeDayPrice=0;outgo=DGU16_CLIENT_DEPARTURE;break;}}
 			if(tDays1>=1.0&&tDays1<3) {
-				switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=MyConstants.DGU3_CLIENT_TIMEDAYS1_WORKPLAN;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
-				                  case 8:timeHoursPrice=0;timeDayPrice=MyConstants.DGU8_CLIENT_TIMEDAYS1_WORKPLAN;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
-				                  case 16:timeHoursPrice=0;timeDayPrice=MyConstants.DGU16_CLIENT_TIMEDAYS1_WORKPLAN;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
+				switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=DGU3_CLIENT_TIMEDAYS1_WORKPLAN;outgo=DGU3_CLIENT_DEPARTURE;break;
+				                  case 8:timeHoursPrice=0;timeDayPrice=DGU8_CLIENT_TIMEDAYS1_WORKPLAN;outgo=DGU8_CLIENT_DEPARTURE;break;
+				                  case 16:timeHoursPrice=0;timeDayPrice=DGU16_CLIENT_TIMEDAYS1_WORKPLAN;outgo=DGU16_CLIENT_DEPARTURE;break;}}
 			if(tDays1>=3) {
-				switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=MyConstants.DGU3_CLIENT_TIMEDAYS3_WORKPLAN;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
-				                  case 8:timeHoursPrice=0;timeDayPrice=MyConstants.DGU8_CLIENT_TIMEDAYS3_WORKPLAN;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
-				                  case 16:timeHoursPrice=0;timeDayPrice=MyConstants.DGU16_CLIENT_TIMEDAYS3_WORKPLAN;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
+				switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=DGU3_CLIENT_TIMEDAYS3_WORKPLAN;outgo=DGU3_CLIENT_DEPARTURE;break;
+				                  case 8:timeHoursPrice=0;timeDayPrice=DGU8_CLIENT_TIMEDAYS3_WORKPLAN;outgo=DGU8_CLIENT_DEPARTURE;break;
+				                  case 16:timeHoursPrice=0;timeDayPrice=DGU16_CLIENT_TIMEDAYS3_WORKPLAN;outgo=DGU16_CLIENT_DEPARTURE;break;}}
 		}
 
 		if (workType1.equals("false")){
-			switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=0;outgo=MyConstants.DGU3_CLIENT_DEPARTURE_FALSE;break;
-	                          case 8:timeHoursPrice=0;timeDayPrice=0;outgo=MyConstants.DGU8_CLIENT_DEPARTURE_FALSE;break;
-	                          case 16:timeHoursPrice=0;timeDayPrice=0;outgo=MyConstants.DGU16_CLIENT_DEPARTURE_FALSE;break;}}
+			switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=0;outgo=DGU3_CLIENT_DEPARTURE_FALSE;break;
+	                          case 8:timeHoursPrice=0;timeDayPrice=0;outgo=DGU8_CLIENT_DEPARTURE_FALSE;break;
+	                          case 16:timeHoursPrice=0;timeDayPrice=0;outgo=DGU16_CLIENT_DEPARTURE_FALSE;break;}}
 		
 		outGoPrice=outgo;
 		orderPrice=timeHoursPrice*tHours1+timeDayPrice*tDays1+transPrice1+outgo+jeep1;
@@ -199,42 +263,99 @@ public Double calcOrder(int dguType,String workType,double jeep,double tHours,do
 	return orderPrice;
 }
 public Double calcOrderHours(int dguType,String workType,double jeep,double tHours,double tDays,double transPrice,String owener) {
+	
+	double DGU3_CONTRACTOR_TIMEHOURES_WORKALARM = priceService.getById(2).getPricesValue();
+	double DGU8_CONTRACTOR_TIMEHOURES_WORKALARM = priceService.getById(3).getPricesValue();
+	double DGU16_CONTRACTOR_TIMEHOURES_WORKALARM = priceService.getById(4).getPricesValue();
+
+	double DGU3_CLIENT_TIMEHOURES_WORKALARM = priceService.getById(5).getPricesValue();
+	double DGU8_CLIENT_TIMEHOURES_WORKALARM = priceService.getById(6).getPricesValue();
+	double DGU16_CLIENT_TIMEHOURES_WORKALARM = priceService.getById(7).getPricesValue();
+
+	double DGU3_CONTRACTOR_TIMEHOURES_WORKPLAN = priceService.getById(8).getPricesValue();
+	double DGU8_CONTRACTOR_TIMEHOURES_WORKPLAN = priceService.getById(9).getPricesValue();
+	double DGU16_CONTRACTOR_TIMEHOURES_WORKPLAN = priceService.getById(10).getPricesValue();
+
+	double DGU3_CLIENT_TIMEHOURES_WORKPLAN = priceService.getById(11).getPricesValue();
+	double DGU8_CLIENT_TIMEHOURES_WORKPLAN = priceService.getById(12).getPricesValue();
+	double DGU16_CLIENT_TIMEHOURES_WORKPLAN = priceService.getById(13).getPricesValue();
+
+	double DGU3_CONTRACTOR_TIMEDAYS1_WORKALARM = priceService.getById(14).getPricesValue();
+	double DGU8_CONTRACTOR_TIMEDAYS1_WORKALARM = priceService.getById(15).getPricesValue();
+	double DGU16_CONTRACTOR_TIMEDAYS1_WORKALARM = priceService.getById(16).getPricesValue();
+
+	double DGU3_CLIENT_TIMEDAYS1_WORKALARM = priceService.getById(17).getPricesValue();
+	double DGU8_CLIENT_TIMEDAYS1_WORKALARM = priceService.getById(18).getPricesValue();
+	double DGU16_CLIENT_TIMEDAYS1_WORKALARM = priceService.getById(19).getPricesValue();
+
+	double DGU3_CONTRACTOR_TIMEDAYS1_WORKPLAN = priceService.getById(20).getPricesValue();
+	double DGU8_CONTRACTOR_TIMEDAYS1_WORKPLAN = priceService.getById(21).getPricesValue();
+	double DGU16_CONTRACTOR_TIMEDAYS1_WORKPLAN = priceService.getById(22).getPricesValue();
+
+	double DGU3_CLIENT_TIMEDAYS1_WORKPLAN = priceService.getById(23).getPricesValue();
+	double DGU8_CLIENT_TIMEDAYS1_WORKPLAN = priceService.getById(24).getPricesValue();
+	double DGU16_CLIENT_TIMEDAYS1_WORKPLAN = priceService.getById(25).getPricesValue();
+
+	double DGU3_CONTRACTOR_TIMEDAYS3_WORKPLAN = priceService.getById(26).getPricesValue();
+	double DGU8_CONTRACTOR_TIMEDAYS3_WORKPLAN = priceService.getById(27).getPricesValue();
+	double DGU16_CONTRACTOR_TIMEDAYS3_WORKPLAN = priceService.getById(28).getPricesValue();
+
+	double DGU3_CLIENT_TIMEDAYS3_WORKPLAN = priceService.getById(29).getPricesValue();
+	double DGU8_CLIENT_TIMEDAYS3_WORKPLAN = priceService.getById(30).getPricesValue();
+	double DGU16_CLIENT_TIMEDAYS3_WORKPLAN = priceService.getById(31).getPricesValue();
+
+	double DGU3_CONTRACTOR_DEPARTURE = priceService.getById(32).getPricesValue();
+	double DGU8_CONTRACTOR_DEPARTURE = priceService.getById(33).getPricesValue();
+	double DGU16_CONTRACTOR_DEPARTURE = priceService.getById(34).getPricesValue();
+
+	double DGU3_CLIENT_DEPARTURE = priceService.getById(35).getPricesValue();
+	double DGU8_CLIENT_DEPARTURE = priceService.getById(36).getPricesValue();
+	double DGU16_CLIENT_DEPARTURE = priceService.getById(37).getPricesValue();
+
+	double DGU3_CONTRACTOR_DEPARTURE_FALSE = priceService.getById(38).getPricesValue();
+	double DGU8_CONTRACTOR_DEPARTURE_FALSE = priceService.getById(39).getPricesValue();
+	double DGU16_CONTRACTOR_DEPARTURE_FALSE = priceService.getById(40).getPricesValue();
+
+	double DGU3_CLIENT_DEPARTURE_FALSE = priceService.getById(41).getPricesValue();
+	double DGU8_CLIENT_DEPARTURE_FALSE = priceService.getById(42).getPricesValue();
+	double DGU16_CLIENT_DEPARTURE_FALSE = priceService.getById(43).getPricesValue();
+	
 	int dguType1=dguType;
 	String workType1=workType,owener1=owener;
 	double timeHoursPrice = 0,tHours1=tHours,tDays1=tDays,orderPriceHours=0,outgo=0;
 	if(owener1.equals("po")) {
 	if (workType1.equals("emergency")){
 		if(tDays1<1.0) {
-			switch(dguType1) {case 3:timeHoursPrice=MyConstants.DGU3_CONTRACTOR_TIMEHOURES_WORKALARM;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
-			                  case 8:timeHoursPrice=MyConstants.DGU8_CONTRACTOR_TIMEHOURES_WORKALARM;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
-			                  case 16:timeHoursPrice=MyConstants.DGU16_CONTRACTOR_TIMEHOURES_WORKALARM;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
+			switch(dguType1) {case 3:timeHoursPrice=DGU3_CONTRACTOR_TIMEHOURES_WORKALARM;outgo=DGU3_CONTRACTOR_DEPARTURE;break;
+			                  case 8:timeHoursPrice=DGU8_CONTRACTOR_TIMEHOURES_WORKALARM;outgo=DGU8_CONTRACTOR_DEPARTURE;break;
+			                  case 16:timeHoursPrice=DGU16_CONTRACTOR_TIMEHOURES_WORKALARM;outgo=DGU16_CONTRACTOR_DEPARTURE;break;}}
 				if(tDays1>=1.0&&tDays1<3) {
-					switch(dguType1) {case 3:timeHoursPrice=0;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
-					                  case 8:timeHoursPrice=0;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
-					                  case 16:timeHoursPrice=0;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
+					switch(dguType1) {case 3:timeHoursPrice=0;outgo=DGU3_CONTRACTOR_DEPARTURE;break;
+					                  case 8:timeHoursPrice=0;outgo=DGU8_CONTRACTOR_DEPARTURE;break;
+					                  case 16:timeHoursPrice=0;outgo=DGU16_CONTRACTOR_DEPARTURE;break;}}
 				if(tDays1>=3) {
 					timeHoursPrice=0;outgo=0;
 					}
 	}
 	if (workType1.equals("plan")){
 		if(tDays1<1.0) {
-	switch(dguType1) {case 3:timeHoursPrice=MyConstants.DGU3_CONTRACTOR_TIMEHOURES_WORKPLAN;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
-	                  case 8:timeHoursPrice=MyConstants.DGU8_CONTRACTOR_TIMEHOURES_WORKPLAN;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
-	                  case 16:timeHoursPrice=MyConstants.DGU16_CONTRACTOR_TIMEHOURES_WORKPLAN;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
+	switch(dguType1) {case 3:timeHoursPrice=DGU3_CONTRACTOR_TIMEHOURES_WORKPLAN;outgo=DGU3_CONTRACTOR_DEPARTURE;break;
+	                  case 8:timeHoursPrice=DGU8_CONTRACTOR_TIMEHOURES_WORKPLAN;outgo=DGU8_CONTRACTOR_DEPARTURE;break;
+	                  case 16:timeHoursPrice=DGU16_CONTRACTOR_TIMEHOURES_WORKPLAN;outgo=DGU16_CONTRACTOR_DEPARTURE;break;}}
 		if(tDays1>=1.0&&tDays1<3) {
-			switch(dguType1) {case 3:timeHoursPrice=0;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
-			                  case 8:timeHoursPrice=0;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
-			                  case 16:timeHoursPrice=0;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
+			switch(dguType1) {case 3:timeHoursPrice=0;outgo=DGU3_CONTRACTOR_DEPARTURE;break;
+			                  case 8:timeHoursPrice=0;outgo=DGU8_CONTRACTOR_DEPARTURE;break;
+			                  case 16:timeHoursPrice=0;outgo=DGU16_CONTRACTOR_DEPARTURE;break;}}
 		if(tDays1>=3) {
-			switch(dguType1) {case 3:timeHoursPrice=0;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
-			                  case 8:timeHoursPrice=0;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
-			                  case 16:timeHoursPrice=0;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
+			switch(dguType1) {case 3:timeHoursPrice=0;outgo=DGU3_CONTRACTOR_DEPARTURE;break;
+			                  case 8:timeHoursPrice=0;outgo=DGU8_CONTRACTOR_DEPARTURE;break;
+			                  case 16:timeHoursPrice=0;outgo=DGU16_CONTRACTOR_DEPARTURE;break;}}
 	}
 
 	if (workType1.equals("false")){
-		switch(dguType1) {case 3:timeHoursPrice=0;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE_FALSE;break;
-                          case 8:timeHoursPrice=0;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE_FALSE;break;
-                          case 16:timeHoursPrice=0;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE_FALSE;break;}}
+		switch(dguType1) {case 3:timeHoursPrice=0;outgo=DGU3_CONTRACTOR_DEPARTURE_FALSE;break;
+                          case 8:timeHoursPrice=0;outgo=DGU8_CONTRACTOR_DEPARTURE_FALSE;break;
+                          case 16:timeHoursPrice=0;outgo=DGU16_CONTRACTOR_DEPARTURE_FALSE;break;}}
 		
 		outGoPrice=outgo;
 		orderPriceHours=timeHoursPrice*tHours1;
@@ -244,36 +365,36 @@ public Double calcOrderHours(int dguType,String workType,double jeep,double tHou
 	if(owener1.equals("mts")) {
 		if (workType1.equals("emergency")){
 			if(tDays1<1.0) {
-				switch(dguType1) {case 3:timeHoursPrice=MyConstants.DGU3_CLIENT_TIMEHOURES_WORKALARM;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
-				                  case 8:timeHoursPrice=MyConstants.DGU8_CLIENT_TIMEHOURES_WORKALARM;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
-				                  case 16:timeHoursPrice=MyConstants.DGU16_CLIENT_TIMEHOURES_WORKALARM;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
+				switch(dguType1) {case 3:timeHoursPrice=DGU3_CLIENT_TIMEHOURES_WORKALARM;outgo=DGU3_CLIENT_DEPARTURE;break;
+				                  case 8:timeHoursPrice=DGU8_CLIENT_TIMEHOURES_WORKALARM;outgo=DGU8_CLIENT_DEPARTURE;break;
+				                  case 16:timeHoursPrice=DGU16_CLIENT_TIMEHOURES_WORKALARM;outgo=DGU16_CLIENT_DEPARTURE;break;}}
 					if(tDays1>=1.0&&tDays1<3) {
-						switch(dguType1) {case 3:timeHoursPrice=0;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
-						                  case 8:timeHoursPrice=0;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
-						                  case 16:timeHoursPrice=0;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
+						switch(dguType1) {case 3:timeHoursPrice=0;outgo=DGU3_CLIENT_DEPARTURE;break;
+						                  case 8:timeHoursPrice=0;outgo=DGU8_CLIENT_DEPARTURE;break;
+						                  case 16:timeHoursPrice=0;outgo=DGU16_CLIENT_DEPARTURE;break;}}
 					if(tDays1>=3) {
 						timeHoursPrice=0;outgo=0;
 						}
 		}
 		if (workType1.equals("plan")){
 			if(tDays1<1.0) {
-		switch(dguType1) {case 3:timeHoursPrice=MyConstants.DGU3_CLIENT_TIMEHOURES_WORKPLAN;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
-		                  case 8:timeHoursPrice=MyConstants.DGU8_CLIENT_TIMEHOURES_WORKPLAN;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
-		                  case 16:timeHoursPrice=MyConstants.DGU16_CLIENT_TIMEHOURES_WORKPLAN;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
+		switch(dguType1) {case 3:timeHoursPrice=DGU3_CLIENT_TIMEHOURES_WORKPLAN;outgo=DGU3_CLIENT_DEPARTURE;break;
+		                  case 8:timeHoursPrice=DGU8_CLIENT_TIMEHOURES_WORKPLAN;outgo=DGU8_CLIENT_DEPARTURE;break;
+		                  case 16:timeHoursPrice=DGU16_CLIENT_TIMEHOURES_WORKPLAN;outgo=DGU16_CLIENT_DEPARTURE;break;}}
 			if(tDays1>=1.0&&tDays1<3) {
-				switch(dguType1) {case 3:timeHoursPrice=0;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
-				                  case 8:timeHoursPrice=0;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
-				                  case 16:timeHoursPrice=0;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
+				switch(dguType1) {case 3:timeHoursPrice=0;outgo=DGU3_CLIENT_DEPARTURE;break;
+				                  case 8:timeHoursPrice=0;outgo=DGU8_CLIENT_DEPARTURE;break;
+				                  case 16:timeHoursPrice=0;outgo=DGU16_CLIENT_DEPARTURE;break;}}
 			if(tDays1>=3) {
-				switch(dguType1) {case 3:timeHoursPrice=0;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
-				                  case 8:timeHoursPrice=0;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
-				                  case 16:timeHoursPrice=0;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
+				switch(dguType1) {case 3:timeHoursPrice=0;outgo=DGU3_CLIENT_DEPARTURE;break;
+				                  case 8:timeHoursPrice=0;outgo=DGU8_CLIENT_DEPARTURE;break;
+				                  case 16:timeHoursPrice=0;outgo=DGU16_CLIENT_DEPARTURE;break;}}
 		}
 
 		if (workType1.equals("false")){
-			switch(dguType1) {case 3:timeHoursPrice=0;outgo=MyConstants.DGU3_CLIENT_DEPARTURE_FALSE;break;
-	                          case 8:timeHoursPrice=0;outgo=MyConstants.DGU8_CLIENT_DEPARTURE_FALSE;break;
-	                          case 16:timeHoursPrice=0;outgo=MyConstants.DGU16_CLIENT_DEPARTURE_FALSE;break;}}
+			switch(dguType1) {case 3:timeHoursPrice=0;outgo=DGU3_CLIENT_DEPARTURE_FALSE;break;
+	                          case 8:timeHoursPrice=0;outgo=DGU8_CLIENT_DEPARTURE_FALSE;break;
+	                          case 16:timeHoursPrice=0;outgo=DGU16_CLIENT_DEPARTURE_FALSE;break;}}
 	
 	outGoPrice=outgo;
 	orderPriceHours=timeHoursPrice*tHours1;
@@ -282,42 +403,99 @@ public Double calcOrderHours(int dguType,String workType,double jeep,double tHou
 	return orderPriceHours;
 }
 public Double calcOrderDays(int dguType,String workType,double jeep,double tHours,double tDays,double transPrice,String owener) {
+	
+	double DGU3_CONTRACTOR_TIMEHOURES_WORKALARM = priceService.getById(2).getPricesValue();
+	double DGU8_CONTRACTOR_TIMEHOURES_WORKALARM = priceService.getById(3).getPricesValue();
+	double DGU16_CONTRACTOR_TIMEHOURES_WORKALARM = priceService.getById(4).getPricesValue();
+
+	double DGU3_CLIENT_TIMEHOURES_WORKALARM = priceService.getById(5).getPricesValue();
+	double DGU8_CLIENT_TIMEHOURES_WORKALARM = priceService.getById(6).getPricesValue();
+	double DGU16_CLIENT_TIMEHOURES_WORKALARM = priceService.getById(7).getPricesValue();
+
+	double DGU3_CONTRACTOR_TIMEHOURES_WORKPLAN = priceService.getById(8).getPricesValue();
+	double DGU8_CONTRACTOR_TIMEHOURES_WORKPLAN = priceService.getById(9).getPricesValue();
+	double DGU16_CONTRACTOR_TIMEHOURES_WORKPLAN = priceService.getById(10).getPricesValue();
+
+	double DGU3_CLIENT_TIMEHOURES_WORKPLAN = priceService.getById(11).getPricesValue();
+	double DGU8_CLIENT_TIMEHOURES_WORKPLAN = priceService.getById(12).getPricesValue();
+	double DGU16_CLIENT_TIMEHOURES_WORKPLAN = priceService.getById(13).getPricesValue();
+
+	double DGU3_CONTRACTOR_TIMEDAYS1_WORKALARM = priceService.getById(14).getPricesValue();
+	double DGU8_CONTRACTOR_TIMEDAYS1_WORKALARM = priceService.getById(15).getPricesValue();
+	double DGU16_CONTRACTOR_TIMEDAYS1_WORKALARM = priceService.getById(16).getPricesValue();
+
+	double DGU3_CLIENT_TIMEDAYS1_WORKALARM = priceService.getById(17).getPricesValue();
+	double DGU8_CLIENT_TIMEDAYS1_WORKALARM = priceService.getById(18).getPricesValue();
+	double DGU16_CLIENT_TIMEDAYS1_WORKALARM = priceService.getById(19).getPricesValue();
+
+	double DGU3_CONTRACTOR_TIMEDAYS1_WORKPLAN = priceService.getById(20).getPricesValue();
+	double DGU8_CONTRACTOR_TIMEDAYS1_WORKPLAN = priceService.getById(21).getPricesValue();
+	double DGU16_CONTRACTOR_TIMEDAYS1_WORKPLAN = priceService.getById(22).getPricesValue();
+
+	double DGU3_CLIENT_TIMEDAYS1_WORKPLAN = priceService.getById(23).getPricesValue();
+	double DGU8_CLIENT_TIMEDAYS1_WORKPLAN = priceService.getById(24).getPricesValue();
+	double DGU16_CLIENT_TIMEDAYS1_WORKPLAN = priceService.getById(25).getPricesValue();
+
+	double DGU3_CONTRACTOR_TIMEDAYS3_WORKPLAN = priceService.getById(26).getPricesValue();
+	double DGU8_CONTRACTOR_TIMEDAYS3_WORKPLAN = priceService.getById(27).getPricesValue();
+	double DGU16_CONTRACTOR_TIMEDAYS3_WORKPLAN = priceService.getById(28).getPricesValue();
+
+	double DGU3_CLIENT_TIMEDAYS3_WORKPLAN = priceService.getById(29).getPricesValue();
+	double DGU8_CLIENT_TIMEDAYS3_WORKPLAN = priceService.getById(30).getPricesValue();
+	double DGU16_CLIENT_TIMEDAYS3_WORKPLAN = priceService.getById(31).getPricesValue();
+
+	double DGU3_CONTRACTOR_DEPARTURE = priceService.getById(32).getPricesValue();
+	double DGU8_CONTRACTOR_DEPARTURE = priceService.getById(33).getPricesValue();
+	double DGU16_CONTRACTOR_DEPARTURE = priceService.getById(34).getPricesValue();
+
+	double DGU3_CLIENT_DEPARTURE = priceService.getById(35).getPricesValue();
+	double DGU8_CLIENT_DEPARTURE = priceService.getById(36).getPricesValue();
+	double DGU16_CLIENT_DEPARTURE = priceService.getById(37).getPricesValue();
+
+	double DGU3_CONTRACTOR_DEPARTURE_FALSE = priceService.getById(38).getPricesValue();
+	double DGU8_CONTRACTOR_DEPARTURE_FALSE = priceService.getById(39).getPricesValue();
+	double DGU16_CONTRACTOR_DEPARTURE_FALSE = priceService.getById(40).getPricesValue();
+
+	double DGU3_CLIENT_DEPARTURE_FALSE = priceService.getById(41).getPricesValue();
+	double DGU8_CLIENT_DEPARTURE_FALSE = priceService.getById(42).getPricesValue();
+	double DGU16_CLIENT_DEPARTURE_FALSE = priceService.getById(43).getPricesValue();
+	
 	int dguType1=dguType;
 	String workType1=workType,owener1=owener;
 	double timeDayPrice = 0,tDays1=tDays,orderPriceDays=0,outgo=0;
 	if(owener1.equals("po")) {
 	if (workType1.equals("emergency")){
 		if(tDays1<1.0) {
-			switch(dguType1) {case 3:timeDayPrice=0;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
-			                  case 8:timeDayPrice=0;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
-			                  case 16:timeDayPrice=0;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
+			switch(dguType1) {case 3:timeDayPrice=0;outgo=DGU3_CONTRACTOR_DEPARTURE;break;
+			                  case 8:timeDayPrice=0;outgo=DGU8_CONTRACTOR_DEPARTURE;break;
+			                  case 16:timeDayPrice=0;outgo=DGU16_CONTRACTOR_DEPARTURE;break;}}
 				if(tDays1>=1.0&&tDays1<3) {
-					switch(dguType1) {case 3:timeDayPrice=MyConstants.DGU3_CONTRACTOR_TIMEDAYS1_WORKALARM;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
-					                  case 8:timeDayPrice=MyConstants.DGU8_CONTRACTOR_TIMEDAYS1_WORKALARM;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
-					                  case 16:timeDayPrice=MyConstants.DGU16_CONTRACTOR_TIMEDAYS1_WORKALARM;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
+					switch(dguType1) {case 3:timeDayPrice=DGU3_CONTRACTOR_TIMEDAYS1_WORKALARM;outgo=DGU3_CONTRACTOR_DEPARTURE;break;
+					                  case 8:timeDayPrice=DGU8_CONTRACTOR_TIMEDAYS1_WORKALARM;outgo=DGU8_CONTRACTOR_DEPARTURE;break;
+					                  case 16:timeDayPrice=DGU16_CONTRACTOR_TIMEDAYS1_WORKALARM;outgo=DGU16_CONTRACTOR_DEPARTURE;break;}}
 				if(tDays1>=3) {
 					timeDayPrice=0;outgo=0;
 					}
 	}
 	if (workType1.equals("plan")){
 		if(tDays1<1.0) {
-	switch(dguType1) {case 3:timeDayPrice=0;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
-	                  case 8:timeDayPrice=0;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
-	                  case 16:timeDayPrice=0;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
+	switch(dguType1) {case 3:timeDayPrice=0;outgo=DGU3_CONTRACTOR_DEPARTURE;break;
+	                  case 8:timeDayPrice=0;outgo=DGU8_CONTRACTOR_DEPARTURE;break;
+	                  case 16:timeDayPrice=0;outgo=DGU16_CONTRACTOR_DEPARTURE;break;}}
 		if(tDays1>=1.0&&tDays1<3) {
-			switch(dguType1) {case 3:timeDayPrice=MyConstants.DGU3_CONTRACTOR_TIMEDAYS1_WORKPLAN;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
-			                  case 8:timeDayPrice=MyConstants.DGU8_CONTRACTOR_TIMEDAYS1_WORKPLAN;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
-			                  case 16:timeDayPrice=MyConstants.DGU16_CONTRACTOR_TIMEDAYS1_WORKPLAN;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
+			switch(dguType1) {case 3:timeDayPrice=DGU3_CONTRACTOR_TIMEDAYS1_WORKPLAN;outgo=DGU3_CONTRACTOR_DEPARTURE;break;
+			                  case 8:timeDayPrice=DGU8_CONTRACTOR_TIMEDAYS1_WORKPLAN;outgo=DGU8_CONTRACTOR_DEPARTURE;break;
+			                  case 16:timeDayPrice=DGU16_CONTRACTOR_TIMEDAYS1_WORKPLAN;outgo=DGU16_CONTRACTOR_DEPARTURE;break;}}
 		if(tDays1>=3) {
-			switch(dguType1) {case 3:timeDayPrice=MyConstants.DGU3_CONTRACTOR_TIMEDAYS3_WORKPLAN;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE;break;
-			                  case 8:timeDayPrice=MyConstants.DGU8_CONTRACTOR_TIMEDAYS3_WORKPLAN;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE;break;
-			                  case 16:timeDayPrice=MyConstants.DGU16_CONTRACTOR_TIMEDAYS3_WORKPLAN;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE;break;}}
+			switch(dguType1) {case 3:timeDayPrice=DGU3_CONTRACTOR_TIMEDAYS3_WORKPLAN;outgo=DGU3_CONTRACTOR_DEPARTURE;break;
+			                  case 8:timeDayPrice=DGU8_CONTRACTOR_TIMEDAYS3_WORKPLAN;outgo=DGU8_CONTRACTOR_DEPARTURE;break;
+			                  case 16:timeDayPrice=DGU16_CONTRACTOR_TIMEDAYS3_WORKPLAN;outgo=DGU16_CONTRACTOR_DEPARTURE;break;}}
 	}
 
 	if (workType1.equals("false")){
-		switch(dguType1) {case 3:timeDayPrice=0;outgo=MyConstants.DGU3_CONTRACTOR_DEPARTURE_FALSE;break;
-                          case 8:timeDayPrice=0;outgo=MyConstants.DGU8_CONTRACTOR_DEPARTURE_FALSE;break;
-                          case 16:timeDayPrice=0;outgo=MyConstants.DGU16_CONTRACTOR_DEPARTURE_FALSE;break;}}
+		switch(dguType1) {case 3:timeDayPrice=0;outgo=DGU3_CONTRACTOR_DEPARTURE_FALSE;break;
+                          case 8:timeDayPrice=0;outgo=DGU8_CONTRACTOR_DEPARTURE_FALSE;break;
+                          case 16:timeDayPrice=0;outgo=DGU16_CONTRACTOR_DEPARTURE_FALSE;break;}}
 		outGoPrice=outgo;
 		orderPriceDays=timeDayPrice*tDays1;
 		BigDecimal bd = new BigDecimal(orderPriceDays).setScale(2, RoundingMode.HALF_UP);
@@ -327,36 +505,36 @@ public Double calcOrderDays(int dguType,String workType,double jeep,double tHour
 	if(owener1.equals("mts")) {
 		if (workType1.equals("emergency")){
 			if(tDays1<1.0) {
-				switch(dguType1) {case 3:timeDayPrice=0;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
-				                  case 8:timeDayPrice=0;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
-				                  case 16:timeDayPrice=0;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
+				switch(dguType1) {case 3:timeDayPrice=0;outgo=DGU3_CLIENT_DEPARTURE;break;
+				                  case 8:timeDayPrice=0;outgo=DGU8_CLIENT_DEPARTURE;break;
+				                  case 16:timeDayPrice=0;outgo=DGU16_CLIENT_DEPARTURE;break;}}
 					if(tDays1>=1.0&&tDays1<3) {
-						switch(dguType1) {case 3:timeDayPrice=MyConstants.DGU3_CLIENT_TIMEDAYS1_WORKALARM;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
-						                  case 8:timeDayPrice=MyConstants.DGU8_CLIENT_TIMEDAYS1_WORKALARM;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
-						                  case 16:timeDayPrice=MyConstants.DGU16_CLIENT_TIMEDAYS1_WORKALARM;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
+						switch(dguType1) {case 3:timeDayPrice=DGU3_CLIENT_TIMEDAYS1_WORKALARM;outgo=DGU3_CLIENT_DEPARTURE;break;
+						                  case 8:timeDayPrice=DGU8_CLIENT_TIMEDAYS1_WORKALARM;outgo=DGU8_CLIENT_DEPARTURE;break;
+						                  case 16:timeDayPrice=DGU16_CLIENT_TIMEDAYS1_WORKALARM;outgo=DGU16_CLIENT_DEPARTURE;break;}}
 					if(tDays1>=3) {
 						timeDayPrice=0;outgo=0;
 						}
 		}
 		if (workType1.equals("plan")){
 			if(tDays1<1.0) {
-		switch(dguType1) {case 3:timeDayPrice=0;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
-		                  case 8:timeDayPrice=0;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
-		                  case 16:timeDayPrice=0;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
+		switch(dguType1) {case 3:timeDayPrice=0;outgo=DGU3_CLIENT_DEPARTURE;break;
+		                  case 8:timeDayPrice=0;outgo=DGU8_CLIENT_DEPARTURE;break;
+		                  case 16:timeDayPrice=0;outgo=DGU16_CLIENT_DEPARTURE;break;}}
 			if(tDays1>=1.0&&tDays1<3) {
-				switch(dguType1) {case 3:timeDayPrice=MyConstants.DGU3_CLIENT_TIMEDAYS1_WORKPLAN;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
-				                  case 8:timeDayPrice=MyConstants.DGU8_CLIENT_TIMEDAYS1_WORKPLAN;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
-				                  case 16:timeDayPrice=MyConstants.DGU16_CLIENT_TIMEDAYS1_WORKPLAN;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
+				switch(dguType1) {case 3:timeDayPrice=DGU3_CLIENT_TIMEDAYS1_WORKPLAN;outgo=DGU3_CLIENT_DEPARTURE;break;
+				                  case 8:timeDayPrice=DGU8_CLIENT_TIMEDAYS1_WORKPLAN;outgo=DGU8_CLIENT_DEPARTURE;break;
+				                  case 16:timeDayPrice=DGU16_CLIENT_TIMEDAYS1_WORKPLAN;outgo=DGU16_CLIENT_DEPARTURE;break;}}
 			if(tDays1>=3) {
-				switch(dguType1) {case 3:timeDayPrice=MyConstants.DGU3_CLIENT_TIMEDAYS3_WORKPLAN;outgo=MyConstants.DGU3_CLIENT_DEPARTURE;break;
-				                  case 8:timeDayPrice=MyConstants.DGU8_CLIENT_TIMEDAYS3_WORKPLAN;outgo=MyConstants.DGU8_CLIENT_DEPARTURE;break;
-				                  case 16:timeDayPrice=MyConstants.DGU16_CLIENT_TIMEDAYS3_WORKPLAN;outgo=MyConstants.DGU16_CLIENT_DEPARTURE;break;}}
+				switch(dguType1) {case 3:timeDayPrice=DGU3_CLIENT_TIMEDAYS3_WORKPLAN;outgo=DGU3_CLIENT_DEPARTURE;break;
+				                  case 8:timeDayPrice=DGU8_CLIENT_TIMEDAYS3_WORKPLAN;outgo=DGU8_CLIENT_DEPARTURE;break;
+				                  case 16:timeDayPrice=DGU16_CLIENT_TIMEDAYS3_WORKPLAN;outgo=DGU16_CLIENT_DEPARTURE;break;}}
 		}
 
 		if (workType1.equals("false")){
-			switch(dguType1) {case 3:timeDayPrice=0;outgo=MyConstants.DGU3_CLIENT_DEPARTURE_FALSE;break;
-	                          case 8:timeDayPrice=0;outgo=MyConstants.DGU8_CLIENT_DEPARTURE_FALSE;break;
-	                          case 16:timeDayPrice=0;outgo=MyConstants.DGU16_CLIENT_DEPARTURE_FALSE;break;}}
+			switch(dguType1) {case 3:timeDayPrice=0;outgo=DGU3_CLIENT_DEPARTURE_FALSE;break;
+	                          case 8:timeDayPrice=0;outgo=DGU8_CLIENT_DEPARTURE_FALSE;break;
+	                          case 16:timeDayPrice=0;outgo=DGU16_CLIENT_DEPARTURE_FALSE;break;}}
 			
 			outGoPrice=outgo;
 			orderPriceDays=timeDayPrice*tDays1;
