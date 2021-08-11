@@ -18,7 +18,7 @@ public class PricesController {
 	@Autowired
 	private PriceService priceService;
 	
-	@GetMapping("/priceChanges")
+	@GetMapping("/priceShow")
 	public String showPrices(Model model) {
 		
 		Price[] price=new Price[46];
@@ -32,7 +32,7 @@ public class PricesController {
 	
 	
 	@PostMapping("/priceChanges")
-	public String sendMail(@RequestParam Map<String,String> allParam,Model model) {
+	public String savePrices(@RequestParam Map<String,String> allParam,Model model) {
 		
 		List<String> list = new ArrayList<String>(allParam.values());
 		list.add(0, null);list.add(1, null);
