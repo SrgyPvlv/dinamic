@@ -11,10 +11,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+	
+	@Autowired
+    private AccessDeniedHandler accessDeniedHandler;
 
 	@Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -45,8 +49,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .csrf().disable()
         .authorizeRequests()
         .antMatchers("/priceShow","/priceChanges").hasRole( "ADMIN")
-        .antMatchers("/", "/calcOrder","/mailSend").hasAnyRole("USER", "ADMIN")
-        .and().formLogin();
+        .antMatchers("/calcOrder","/mailSend").hasAnyRole("USER", "ADMIN")
+        .antMatchers("/").permitAll()
+        .and().formLogin()
+        .loginPage("/login")
+        .permitAll()
+        .and()
+        .logout()
+        .permitAll()
+        .and()
+        .exceptionHandling().accessDeniedHandler(accessDeniedHandler);;
         
         
    }

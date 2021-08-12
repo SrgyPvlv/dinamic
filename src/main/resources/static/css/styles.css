@@ -1,3 +1,7 @@
+h1{
+    color: #4a2bff;
+}
+
 h2{
 	color:#0000CD;
 	text-align: center;
@@ -12,11 +16,18 @@ h4{
 	font-style: italic;
 }
 
-fieldset{
+fieldset[name="order"]{
     width: 400px; 
     height: 140px; 
 	border-color:#FFEBCD;
 }
+
+fieldset[name="sender"]{
+    width: 700px; 
+    height: 350px; 
+	border-color:#FFEBCD;
+}
+
 legend{
 	color:#FF0000;
 	font-family:courier new;
@@ -78,11 +89,7 @@ position: absolute;
 max-width: 100px;
 
 }
-fieldset[name="sender"]{
-    width: 700px; 
-    height: 350px; 
-	border-color:#FFEBCD;
-}
+
 .footer{
 position: fixed; /* Фиксированное положение */
     left: 0; bottom: 0; /* Левый нижний угол */
@@ -91,6 +98,17 @@ position: fixed; /* Фиксированное положение */
     color: #fff; /* Цвет текста */
     width: 100%; /* Ширина слоя */
 	text-align: center;
+}
+
+.header{
+position: fixed; /* Фиксированное положение */
+    left: 0; top: 0; /* Левый нижний угол */
+    padding-right: 10px; /* Поля вокруг текста */
+	padding-top: 5px;
+    background: #FFFFF0; /* Цвет фона */
+    color: #000000; /* Цвет текста */
+    width: 100%; /* Ширина слоя */
+	text-align: right;
 }
 
 .content input{

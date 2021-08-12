@@ -8,40 +8,40 @@
  <body>
  <h3> Форма для расчета оплаты Аварийного Электроснабжения</h3>
   <form th:action="@{/calcOrder}" th:object="${orderForm}" method="post">
-  <fieldset>
+  <fieldset name="order">
    <legend> № Заказа и БС </legend>
    <p><label for="ordernumber">№ Заказа: </label>
       <input type="number" name="ordernumber" min="1" required></p>
    <p><label for="bsnumber">№ Базовой стации: </label>
       <input type="text" name="bsnumber" placeholder="78-XXXXX " required></p>
    </fieldset>
-   <fieldset>
+   <fieldset name="order">
    <legend> Тип работ </legend>
     <p><input name="worktype" type="radio" value="emergency" checked> Аварийное (Если >= 3 суток,то обязательно Плановое)</p>
     <p><input name="worktype" type="radio" value="plan"> Плановое</p>
     <p><input name="worktype" type="radio" value="false"> Ложный выезд</p>
     </fieldset>	
    <br>
-   <fieldset>
+   <fieldset name="order">
    <legend> Мощность ДГУ </legend>
     <p><input name="dgutype" type="radio" value="3"> 3.5 кВт </p>
     <p><input name="dgutype" type="radio" value="8" checked> 8 кВт</p>
     <p><input name="dgutype" type="radio" value="16"> 16 кВт</p>
     </fieldset>	
    <br>
-   <fieldset>
+   <fieldset name="order">
    <legend> Чей ДГУ используется? </legend>
     <p><input name="owener" type="radio" value="po" checked> Подрядчика </p>
     <p><input name="owener" type="radio" value="mts" > Заказчика </p>
     </fieldset>	
    <br>
-   <fieldset>
+   <fieldset name="order">
    <legend> Использование техники повышенной проходимости (ГАЗ-66,ЗИЛ-131,Урал и т.д.) </legend>
     <p><input name="jeep" type="radio" value="1"> Да </p>
     <p><input name="jeep" type="radio" value="0" checked> Нет </p>
     </fieldset>	
    <br>
-   <fieldset>
+   <fieldset name="order">
    <legend> Время работ </legend>
    <p><label for="start">Начало : </label>
       <input type="datetime-local" name="start" required></p>
@@ -49,7 +49,7 @@
       <input type="datetime-local" name="end" required></p>
    </fieldset>
    <br>
-   <fieldset>
+   <fieldset name="order">
    <legend>Расстояние до БС от КАД</legend>
     <p style="color:#0000FF; font-size:18px">Если БС внутри КАД, то оставляем "ноль"!</p>
 	<p><label for="distance">Расстояние, км : </label>
