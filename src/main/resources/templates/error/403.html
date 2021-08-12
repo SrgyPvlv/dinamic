@@ -6,20 +6,19 @@
 </head>
 <body>
  
-
+<div class="parent">
  
-<div class="container">
- 
-    <div class="starter-template">
-        <h1>403 - Access is denied</h1>
-        <div th:inline="text">Hello '[[${#httpServletRequest.remoteUser}]]',
-                you do not have permission to access this page.</div>
+    <div class="starter-template" style="text-align:center">
+        <h1 style="color:red">Ошибка 403 - В доступе отказано!</h1>
+        <div th:inline="text"> <h3 style="color:black">Приветствую Вас, '[[${#httpServletRequest.remoteUser}]]'!
+                У Вас нет разрешения на доступ к данной странице! Нужны права администратора.</h3></div>
     </div>
  
 </div>
 <!-- /.container -->
- 
+<br><br>
 
- 
+<div th:replace="footer :: footer"></div>
+
 </body>
 </html>

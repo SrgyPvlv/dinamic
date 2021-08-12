@@ -6,23 +6,16 @@
 <title>Приветствие</title>
 </head>
 <body>
-<div class=header>
-<span sec:authorize="isAuthenticated()">
-<a th:href="@{/}">Home</a> |
-Logged user: <span sec:authentication="name"></span> |
-Roles: <span sec:authentication="principal.authorities"></span> | LogOut<a th:href="@{/logout}"><img src = "logout.jpg" alt="logout" width="25" height="25" style="border: none"></a>      
-</span>
-</div>
+
 <div class="parent" >
 <div class="center" >
 <h2 style="color:red">Добро пожаловать!</h2>
 <br><br>
-<a href="/calcOrder">Перейдите на страницу расчета стоимости заказов</a>
+<a href="/calcOrder">Расчет стоимости заказов Аварийного Электроснабжения (АЭС)</a>
 </div>
 </div>
-<div class=footer>
-Автор: Сергей Павлов #SrgyPvlv.&nbsp Написать автору:      
-<a href="mailto:s.a.pavlov@mail.ru?subject=Вопрос по Приложению:Расчет Заказов аварийного электроснабжения." style="color:#000000;font-weight:bold;">@e-mail </a>
-</div>	
+
+<div th:replace="footer :: footer"></div>
+
 </body>
 </html>

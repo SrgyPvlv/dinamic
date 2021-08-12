@@ -6,7 +6,11 @@
 <title>Изменение ТЦП</title>
 </head>
 <body>
-<div class="header">
+
+<div th:replace="header :: header"></div>
+
+<br><br>
+<div>
 <h3 style="text-align:center;">ТЦП на оказание услуг аварийного электроснабжения объектов</h3>
 </div>
 <div class="content">
@@ -107,9 +111,8 @@
 </form>
 </div>
 <br><br>
-<div class=footer>
-Автор: Сергей Павлов #SrgyPvlv.&nbsp Написать автору:      
-<a href="mailto:s.a.pavlov@mail.ru?subject=Вопрос по Приложению:Расчет Заказов аварийного электроснабжения." style="color:#000000;font-weight:bold;">@e-mail </a>
-</div>
+
+<div th:replace="footer :: footer"></div>
+
 </body>
 </html>

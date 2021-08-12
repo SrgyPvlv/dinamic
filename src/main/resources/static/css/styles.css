@@ -54,7 +54,7 @@ table {
 .right {
      position: absolute;
      left: 500px;
-     top: 15px;
+     top: 40px;
         }
             
  .parent {
@@ -85,12 +85,12 @@ text-align: center;
 .ymap{
 position: absolute;
                 right: 20px;
-                top: 30px;
+                top: 50px;
 max-width: 100px;
 
 }
 
-.footer{
+.footercss{
 position: fixed; /* Фиксированное положение */
     left: 0; bottom: 0; /* Левый нижний угол */
     padding: 10px; /* Поля вокруг текста */
@@ -100,9 +100,9 @@ position: fixed; /* Фиксированное положение */
 	text-align: center;
 }
 
-.header{
+.headercss{
 position: fixed; /* Фиксированное положение */
-    left: 0; top: 0; /* Левый нижний угол */
+    left: 0; top: 0; /* Левый верхний угол */
     padding-right: 10px; /* Поля вокруг текста */
 	padding-top: 5px;
     background: #FFFFF0; /* Цвет фона */

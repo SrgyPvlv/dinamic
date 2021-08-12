@@ -6,6 +6,10 @@
   <title>Расчет Заказа</title>
  </head>
  <body>
+ 
+ <div th:replace="header :: header"></div>
+ 
+ <br><br>
  <h3> Форма для расчета оплаты Аварийного Электроснабжения</h3>
   <form th:action="@{/calcOrder}" th:object="${orderForm}" method="post">
   <fieldset name="order">
@@ -154,9 +158,9 @@
 		<input type="image" src="/images/fit.jpg" alt="fit" width="50" height="50" style="border: none">
 		</form>
 </div>
-<div class=footer>
-Автор: Сергей Павлов #SrgyPvlv.&nbsp Написать автору:      
-<a href="mailto:s.a.pavlov@mail.ru?subject=Вопрос по Приложению:Расчет Заказов аварийного электроснабжения." style="color:#000000;font-weight:bold;">@e-mail </a>
-</div>			
+<br>
+
+<div th:replace="footer :: footer"></div>
+
 </body>
 </html>
