@@ -10,9 +10,7 @@
 <div th:replace="header :: header"></div>
 
 <br><br>
-<div class="parent">
- 
-    <div class="row" style="margin-top:20px">
+    <div class="row">
         <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
             <form th:action="@{/login}" method="post">
                 <fieldset>
@@ -24,12 +22,12 @@
  
                     <div th:if="${param.error}">
                         <div class="alert alert-danger" style="text-align:center">
-                            <p style="color:red; font-size:18px;">Неверный логин или пароль.</p>
+                            <p style="color:red; font-size:20px;">Неверный логин или пароль.</p>
                         </div>
                     </div>
                     <div th:if="${param.logout}">
                         <div class="alert alert-info" style="text-align:center">
-                            <p style="color:red; font-size:18px;">Вы вышли. Войти заново.</p>
+                            <p style="color:red; font-size:20px;">Вы вышли. Войти заново.</p>
                         </div>
                     </div>
  
@@ -52,11 +50,8 @@
                     </div>
                 </fieldset>
             </form>
-        </div>
-      <br><br>  
+        </div> 
     </div>
- 
-</div>
 <br><br>
 
 <div th:replace="footer :: footer"></div>

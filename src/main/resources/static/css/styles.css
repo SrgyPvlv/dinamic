@@ -65,6 +65,7 @@ table {
     top: 0;
     left: 0;
     display: flex;
+    flex-direction:column;
     align-items: center;
     align-content: center;
     justify-content: center;
@@ -109,6 +110,7 @@ position: fixed; /* Фиксированное положение */
     color: #000000; /* Цвет текста */
     width: 100%; /* Ширина слоя */
 	text-align: right;
+	font-size:20px;
 }
 
 .content input{

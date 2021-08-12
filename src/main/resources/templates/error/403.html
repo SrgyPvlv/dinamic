@@ -13,7 +13,10 @@
         <div th:inline="text"> <h3 style="color:black">Приветствую Вас, '[[${#httpServletRequest.remoteUser}]]'!
                 У Вас нет разрешения на доступ к данной странице! Нужны права администратора.</h3></div>
     </div>
- 
+    <br><br>
+    <div>
+        <a href="javascript:history.back();"><img src="images/back.jpg" alt="Картинка" width="100" height="50" style="border: none"></a> <span style="font-size:30px; color:green;"> Вернуться </span>
+    </div>
 </div>
 <!-- /.container -->
 <br><br>
