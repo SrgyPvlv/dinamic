@@ -26,6 +26,9 @@ public class MainController {
 	@Autowired
 	private PriceService priceService;
 	
+	@Autowired
+	private OrderFormService orderformservice;
+	
 	@GetMapping("/login")
     public String login() {
         return "login";
@@ -515,13 +518,15 @@ public Double calcOrderDays(int dguType,String workType,double jeep,double tHour
 	return orderPriceDays;
 }
 @PostMapping("/recordOrder")
-public String recordOrder(@RequestParam("ordernumber1") String orderNumber,@RequestParam("bsnumber1") String bsNumber,//
-		@RequestParam("start1") String dateStart,@RequestParam("end1") String dateEnd,//
-		@RequestParam("ordercalc1") String calc,@RequestParam("ordercalcnds1") String calcNds,//
+public String recordOrder(@RequestParam("ordernumber1") String ordernumber,@RequestParam("bsnumber1") String bsnumber,//
+		@RequestParam("start1") String datestart,@RequestParam("end1") String dateend,//
+		@RequestParam("ordercalc1") String calc,@RequestParam("ordercalcnds1") String calcnds,//
 		@RequestParam("comm") String comm,Model model) {
 
-OrderForm orderForm=new OrderForm(orderNumber,bsNumber,dateStart,dateEnd,calc,calcNds,comm);
+OrderForm orderForm=new OrderForm(ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm);
 MainController.orderFormArray.addAll(Arrays.asList(orderForm));
+
+orderformservice.saveOrderForm(orderForm);
 
     return "order";
 }

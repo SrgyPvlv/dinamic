@@ -1,54 +1,80 @@
 package com.example.sbkafka;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="orderform")
 public class OrderForm {
-	private String orderNumber;
-	private String bsNumber;
-	private String dateStart;
-	private String dateEnd;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	
+	@Column
+	private String ordernumber;
+	
+	@Column
+	private String bsnumber;
+	
+	@Column
+	private String datestart;
+	
+	@Column
+	private String dateend;
+	
+	@Column
 	private String calc;
-	private String calcNds;
+	
+	@Column
+	private String calcnds;
+	
+	@Column
 	private String comm;
 	
 	public OrderForm() {}
 	
-	public OrderForm(String orderNumber,String bsNumber,String dateStart,String dateEnd,String calc,String calcNds,String comm) {
-		this.orderNumber=orderNumber;
-		this.bsNumber=bsNumber;
-		this.dateStart=dateStart;
-		this.dateEnd=dateEnd;
+	public OrderForm(String ordernumber,String bsnumber,String datestart,String dateend,String calc,String calcnds,String comm) {
+		this.ordernumber=ordernumber;
+		this.bsnumber=bsnumber;
+		this.datestart=datestart;
+		this.dateend=dateend;
 		this.calc=calc.replace(".", ",");
-		this.calcNds=calcNds.replace(".", ",");
+		this.calcnds=calcnds.replace(".", ",");
 		this.comm=comm;
+	}
+	
+	public int  getId() {
+		return id;
 	}
 
 	public String getOrderNumber() {
-        return orderNumber;
+        return ordernumber;
     }
  
-    public void setOrderNumber(String orderNumber) {
-    	this.orderNumber=orderNumber;
+    public void setOrderNumber(String ordernumber) {
+    	this.ordernumber=ordernumber;
 }
     
     public String getBsNumber() {
-        return bsNumber;
+        return bsnumber;
     }
  
-    public void setBsNumber(String bsNumber) {
-    	this.bsNumber=bsNumber;
+    public void setBsNumber(String bsnumber) {
+    	this.bsnumber=bsnumber;
 }  
     public String getDateStart() {
-        return dateStart;
+        return datestart;
     }
  
-    public void setDateStart(String dateStart) {
-    	this.dateStart=dateStart;
+    public void setDateStart(String datestart) {
+    	this.datestart=datestart;
 }  
     public String getDateEnd() {
-        return dateEnd;
+        return dateend;
     }
  
-    public void setDateEndd(String dateEnd) {
-    	this.dateEnd=dateEnd;   
+    public void setDateEnd(String dateend) {
+    	this.dateend=dateend;   
 }
     public String getCalc() {
         return calc;
@@ -58,11 +84,11 @@ public class OrderForm {
     	this.calc=calc;
 }
     public String getCalcNds() {
-        return calcNds;
+        return calcnds;
     }
  
-    public void setCalcNds(String calcNds) {
-    	this.calcNds=calcNds;
+    public void setCalcNds(String calcnds) {
+    	this.calcnds=calcnds;
 }
     
     public String getComm() {
@@ -75,6 +101,6 @@ public class OrderForm {
     
     @Override
     public String toString() {
-        return(orderNumber + " " + bsNumber + " " + dateStart + " " + dateEnd + " " + calc+ " " + calcNds+ " "+comm+"\n");
+        return(ordernumber + " " + bsnumber + " " + datestart + " " + dateend + " " + calc+ " " + calcnds+ " "+comm+"\n");
     }
 }
