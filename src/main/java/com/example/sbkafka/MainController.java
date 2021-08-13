@@ -290,30 +290,6 @@ public Double calcOrderHours(int dguType,String workType,double jeep,double tHou
 	double DGU8_CLIENT_TIMEHOURES_WORKPLAN = priceService.getById(12).getPricesValue();
 	double DGU16_CLIENT_TIMEHOURES_WORKPLAN = priceService.getById(13).getPricesValue();
 
-	double DGU3_CONTRACTOR_TIMEDAYS1_WORKALARM = priceService.getById(14).getPricesValue();
-	double DGU8_CONTRACTOR_TIMEDAYS1_WORKALARM = priceService.getById(15).getPricesValue();
-	double DGU16_CONTRACTOR_TIMEDAYS1_WORKALARM = priceService.getById(16).getPricesValue();
-
-	double DGU3_CLIENT_TIMEDAYS1_WORKALARM = priceService.getById(17).getPricesValue();
-	double DGU8_CLIENT_TIMEDAYS1_WORKALARM = priceService.getById(18).getPricesValue();
-	double DGU16_CLIENT_TIMEDAYS1_WORKALARM = priceService.getById(19).getPricesValue();
-
-	double DGU3_CONTRACTOR_TIMEDAYS1_WORKPLAN = priceService.getById(20).getPricesValue();
-	double DGU8_CONTRACTOR_TIMEDAYS1_WORKPLAN = priceService.getById(21).getPricesValue();
-	double DGU16_CONTRACTOR_TIMEDAYS1_WORKPLAN = priceService.getById(22).getPricesValue();
-
-	double DGU3_CLIENT_TIMEDAYS1_WORKPLAN = priceService.getById(23).getPricesValue();
-	double DGU8_CLIENT_TIMEDAYS1_WORKPLAN = priceService.getById(24).getPricesValue();
-	double DGU16_CLIENT_TIMEDAYS1_WORKPLAN = priceService.getById(25).getPricesValue();
-
-	double DGU3_CONTRACTOR_TIMEDAYS3_WORKPLAN = priceService.getById(26).getPricesValue();
-	double DGU8_CONTRACTOR_TIMEDAYS3_WORKPLAN = priceService.getById(27).getPricesValue();
-	double DGU16_CONTRACTOR_TIMEDAYS3_WORKPLAN = priceService.getById(28).getPricesValue();
-
-	double DGU3_CLIENT_TIMEDAYS3_WORKPLAN = priceService.getById(29).getPricesValue();
-	double DGU8_CLIENT_TIMEDAYS3_WORKPLAN = priceService.getById(30).getPricesValue();
-	double DGU16_CLIENT_TIMEDAYS3_WORKPLAN = priceService.getById(31).getPricesValue();
-
 	double DGU3_CONTRACTOR_DEPARTURE = priceService.getById(32).getPricesValue();
 	double DGU8_CONTRACTOR_DEPARTURE = priceService.getById(33).getPricesValue();
 	double DGU16_CONTRACTOR_DEPARTURE = priceService.getById(34).getPricesValue();
@@ -414,22 +390,6 @@ public Double calcOrderHours(int dguType,String workType,double jeep,double tHou
 }
 public Double calcOrderDays(int dguType,String workType,double jeep,double tHours,double tDays,double transPrice,String owener) {
 	
-	double DGU3_CONTRACTOR_TIMEHOURES_WORKALARM = priceService.getById(2).getPricesValue();
-	double DGU8_CONTRACTOR_TIMEHOURES_WORKALARM = priceService.getById(3).getPricesValue();
-	double DGU16_CONTRACTOR_TIMEHOURES_WORKALARM = priceService.getById(4).getPricesValue();
-
-	double DGU3_CLIENT_TIMEHOURES_WORKALARM = priceService.getById(5).getPricesValue();
-	double DGU8_CLIENT_TIMEHOURES_WORKALARM = priceService.getById(6).getPricesValue();
-	double DGU16_CLIENT_TIMEHOURES_WORKALARM = priceService.getById(7).getPricesValue();
-
-	double DGU3_CONTRACTOR_TIMEHOURES_WORKPLAN = priceService.getById(8).getPricesValue();
-	double DGU8_CONTRACTOR_TIMEHOURES_WORKPLAN = priceService.getById(9).getPricesValue();
-	double DGU16_CONTRACTOR_TIMEHOURES_WORKPLAN = priceService.getById(10).getPricesValue();
-
-	double DGU3_CLIENT_TIMEHOURES_WORKPLAN = priceService.getById(11).getPricesValue();
-	double DGU8_CLIENT_TIMEHOURES_WORKPLAN = priceService.getById(12).getPricesValue();
-	double DGU16_CLIENT_TIMEHOURES_WORKPLAN = priceService.getById(13).getPricesValue();
-
 	double DGU3_CONTRACTOR_TIMEDAYS1_WORKALARM = priceService.getById(14).getPricesValue();
 	double DGU8_CONTRACTOR_TIMEDAYS1_WORKALARM = priceService.getById(15).getPricesValue();
 	double DGU16_CONTRACTOR_TIMEDAYS1_WORKALARM = priceService.getById(16).getPricesValue();
