@@ -9,12 +9,12 @@
 
 <div th:replace="header :: header"></div>
 <br><br>
-        <p><label for="priceedit"> Редактирование ТЦП </label>
+        <p><label for="priceedit" style="font-size:20px;"> Редактирование ТЦП </label></p>
         <form th:action="@{/admin/priceShow}" method="get">
 		<input type="image" name="priceedit" src="/images/fit.jpg" alt="fit" width="50" height="50" style="border: none">
 		</form>
 		<br><br>
-		<p><label for="bdedit"> Редактирование перечня Заказов </label>
+		<p><label for="bdedit" style="font-size:20px;"> Редактирование перечня Заказов </label></p>
 		<form th:action="@{/admin/bdEdit}" method="get">
 		<input type="image" name="bdedit" src="/images/bd.png" alt="fit" width="50" height="50" style="border: none">
 		</form>
