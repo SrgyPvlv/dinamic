@@ -18,7 +18,7 @@ public class PricesController {
 	@Autowired
 	private PriceService priceService;
 	
-	@GetMapping("/priceShow")
+	@GetMapping("/admin/priceShow")
 	public String showPrices(Model model) {
 		
 		Price[] price=new Price[46];
@@ -31,7 +31,7 @@ public class PricesController {
 	}
 	
 	
-	@PostMapping("/priceChanges")
+	@PostMapping("/admin/priceChanges")
 	public String savePrices(@RequestParam Map<String,String> allParam,Model model) {
 		
 		List<String> list = new ArrayList<String>(allParam.values());

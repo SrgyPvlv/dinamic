@@ -60,7 +60,7 @@
 	<input type="number" size="7" name="distance" id="distance" step="0.01" min="0" value="0"></p>
     </fieldset>
    <br>
-   <p><input type="submit" value="Рассчитать" style="width: 100px; height: 40px; background-color: #98FB98; margin-left:70px; margin-right:30px">
+   <p><input type="submit" value="Рассчитать" autofocus style="width: 100px; height: 40px; background-color: #98FB98; margin-left:70px; margin-right:30px">
       <input type="reset" value="Очистить" style="width: 100px; height: 40px; background-color: #FFC0CB;"></p>
   </form>
 <br><br>
@@ -154,7 +154,7 @@
 		<br><br>
 		<a href="/documents/prices.pdf" target="_blank"> <img src = "/images/prices.png" alt="prices" width="50" height="50" style="border: none"></a>
 		<br><br>
-		<form th:action="@{/priceShow}" method="get">
+		<form th:action="@{/admin}" method="get">
 		<input type="image" src="/images/fit.jpg" alt="fit" width="50" height="50" style="border: none">
 		</form>
 		<br><br>

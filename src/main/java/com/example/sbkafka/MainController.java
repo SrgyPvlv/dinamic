@@ -34,6 +34,11 @@ public class MainController {
         return "login";
     }
 	
+	@GetMapping("/admin")
+    public String admin() {
+        return "admin";
+    }
+	
 	@GetMapping("/403")
     public String error403() {
         return "/error/403";
