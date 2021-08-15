@@ -31,4 +31,18 @@ public class OrderFormService {
 		orderformrepository.deleteById(id);
 	}
 	
+	public void editOrderForm(int id,String ordernumber,String bsnumber,String datestart,String dateend,//
+			String calc,String calcnds,String comm) {
+		OrderForm edited=orderformrepository.getById(id);
+		edited.setOrderNumber(ordernumber);
+		edited.setBsNumber(bsnumber);
+		edited.setDateStart(datestart);
+		edited.setDateEnd(dateend);
+		edited.setCalc(calc);
+		edited.setCalcNds(calcnds);
+		edited.setComm(comm);
+		orderformrepository.saveAndFlush(edited);
+		
+	}
+	
 }

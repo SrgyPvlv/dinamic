@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ <head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+<title>Редактирование Заказа</title>
+</head>
+<body>
+
+<div th:replace="header :: header"></div>
+ 
+ <br><br>
+ <div class="parent">
+ 
+ <div>
+ <h3> Форма редактирования информации о Заказе</h3>
+ <fieldset style="border-color:#FFEBCD;text-align: center">
+  <form id="orderedit" th:action="@{/orderEdit}" method="post">
+        <input type="hidden" name="id2" th:value="${order.id}" />
+        <label>№ Заказа</label><br>
+        <input type="text" name="ordernumber2" th:value="${order.orderNumber}" style="text-align: center" />
+        <br><br>
+        <label>№ БС</label><br>
+        <input type="text" name="bsnumber2" th:value="${order.bsNumber}" style="text-align: center" />
+        <br><br>
+        <label>Дата начала</label><br>
+        <input type="text" name="start2" th:value="${order.dateStart}" style="text-align: center" />
+        <br><br>
+        <label>Дата окончания</label><br>
+        <input type="text" name="end2" th:value="${order.dateEnd}" style="text-align: center" />
+        <br><br>
+        <label>Стоимость без НДС</label><br>
+        <input type="text" name="ordercalc2" th:value="${order.calc}" style="text-align: center" />
+        <br><br>
+        <label>Стоимость с НДС</label><br>
+        <input type="text" name="ordercalcnds2" th:value="${order.calcNds}" style="text-align: center" />
+        <br><br>
+        <label>Комментарий</label><br>
+        <input type="text" name="comm2" th:value="${order.comm}" style="text-align: center" />
+        <br><br>
+	    <input type="submit" value="Сохранить" autofocus style="width: 100px; height: 40px; background-color: #98FB98;">
+ </form>
+ </fieldset>
+ </div>
+ 
+ </div>
+ <br><br>
+ 
+<div th:replace="footer :: footer"></div>
+
+</body>
+</html>
