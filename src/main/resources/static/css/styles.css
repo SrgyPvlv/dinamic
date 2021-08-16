@@ -123,3 +123,11 @@ position: fixed; /* Фиксированное положение */
 	border:none;
 	
 }
+
+.ordertable{
+    width: 100%; /* Ширина таблицы */
+}
+
+.col7{
+	width: 25%;
+}
