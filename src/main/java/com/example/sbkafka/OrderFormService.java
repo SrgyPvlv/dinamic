@@ -1,7 +1,6 @@
 package com.example.sbkafka;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,10 +9,12 @@ public class OrderFormService {
 
 	@Autowired OrderFormRepository orderformrepository;
 	
+	
 	public OrderFormService(OrderFormRepository orderformrepository) {
 		
 		this.orderformrepository=orderformrepository;
 	}
+	
 	
 	public void saveOrderForm(OrderForm orderform) {
 		orderformrepository.saveAndFlush(orderform);
@@ -21,6 +22,12 @@ public class OrderFormService {
 	
 	public List<OrderForm> findAll() {
 		return orderformrepository.findAll();
+		
+	}
+	
+	public List<OrderForm> findAllByOrderOrderNumberAsc() {
+		return orderformrepository.findAllByOrderOrderNumberAsc();	
+		
 	}
 	
 	public OrderForm getById(int id) {

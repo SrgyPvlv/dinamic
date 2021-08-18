@@ -17,14 +17,14 @@ public class BdController {
 	
 	@GetMapping("/bdShow") //получение инфо из бд заказов
 	public String bdShow(Model model){
-		List<OrderForm> orderlist=orderformservice.findAll();
+		List<OrderForm> orderlist=orderformservice.findAllByOrderOrderNumberAsc();
 		model.addAttribute("orderlist", orderlist);
 		return "orderbd";
 	}
 	
 	@GetMapping("admin/bdEdit") //получение инфо из бд заказов с возможностью перехода к редактированию
 	public String bdEdit(Model model){
-		List<OrderForm> orderlist=orderformservice.findAll();
+		List<OrderForm> orderlist=orderformservice.findAllByOrderOrderNumberAsc();
 		model.addAttribute("orderlist", orderlist);
 		
 		
