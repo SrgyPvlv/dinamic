@@ -10,4 +10,7 @@ public interface OrderFormRepository extends JpaRepository<OrderForm,Integer> {
 	@Query("select f from OrderForm f order by ordernumber") //выборка из таблицы по увеличению номера заказа
 	public List<OrderForm> findAllByOrderOrderNumberAsc();
 
+	@Query("select sum(calc) from OrderForm")
+	public double sumOfOrders();
+
 }

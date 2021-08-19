@@ -1,5 +1,7 @@
 package com.example.sbkafka;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class BdController {
-
+	double sumorders;
 	@Autowired
 	private OrderFormService orderformservice;
 	
@@ -19,6 +21,17 @@ public class BdController {
 	public String bdShow(Model model){
 		List<OrderForm> orderlist=orderformservice.findAllByOrderOrderNumberAsc();
 		model.addAttribute("orderlist", orderlist);
+		
+		for(OrderForm everyorder:orderlist) {
+			String a=everyorder.getCalc();
+			a = a.replaceAll(",", ".").replaceAll(" ", "");
+			double b=Double.parseDouble(a);
+			sumorders=sumorders+b;
+			
+		}
+		BigDecimal bd = new BigDecimal(sumorders).setScale(2, RoundingMode.HALF_UP);
+		sumorders = bd.doubleValue();
+		System.out.println("Сумма заказов="+sumorders);
 		return "orderbd";
 	}
 	

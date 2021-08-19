@@ -25,11 +25,11 @@
            <td class="col8">
                <form th:action="@{/bdEdit}" method="post" style="display:inline;">
                  <input type="hidden" name="id" th:value="${order.id}">
-                 <input type="submit" value="Редактировать">
+                 <input type="submit" value="Редактировать" style="background:#98FB98;">
                </form> | 
                <form th:action="@{/bdDelete}" method="post" style="display:inline;">
                  <input type="hidden" name="id" th:value="${order.id}">
-                 <input type="submit" value="Удалить">
+                 <input type="submit" value="Удалить" style="background:#FF0000; color:white;">
                </form>
            </td>        
         </tr>

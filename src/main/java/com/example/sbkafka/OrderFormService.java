@@ -52,4 +52,11 @@ public class OrderFormService {
 		
 	}
 	
+	public double sumOfOrders() {
+		
+	double sumorders=orderformrepository.sumOfOrders();
+	
+	return sumorders;
+		
+	}
 }
