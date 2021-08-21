@@ -131,3 +131,38 @@ position: fixed; /* Фиксированное положение */
 .col7{
 	width: 25%;
 }
+
+#orderstat{
+	border-collapse: separate;
+	border-spacing: 10px;
+}
+
+#orderstat th{
+	border: 1px solid #FFFFFF;
+	border-bottom: 1px solid;
+	padding: 3px;
+	text-align: center;
+	font-size:20px;
+	font-weight: normal;
+	background: #FFFFFF;
+	
+}
+#orderstat td{
+	border: 1px solid #FFFFFF ;
+	padding: 3px;
+	text-align: center;
+	font-size:20px;
+}
+#th1{color:#FF00FF;}
+#th2{color:#FFD700;}
+#th3{color:#00FF00;}
+#th4{color:red;}
+
+.stat{
+	width: 100%;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    overflow: auto;  
+}

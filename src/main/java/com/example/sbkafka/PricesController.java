@@ -21,8 +21,8 @@ public class PricesController {
 	@GetMapping("/admin/priceShow")
 	public String showPrices(Model model) {
 		
-		Price[] price=new Price[46];
-		for (int i=2;i<46;i++) {
+		Price[] price=new Price[47];
+		for (int i=2;i<47;i++) {
 	     
 		price[i]=priceService.getById(i);
 		model.addAttribute("price"+i,price[i]);}
@@ -37,8 +37,8 @@ public class PricesController {
 		List<String> list = new ArrayList<String>(allParam.values());
 		list.add(0, null);list.add(1, null);
 		String[] paramMassiv=list.toArray(new String[0]);
-		Price[] price=new Price[46];
-		for (int i=2;i<46;i++) { 
+		Price[] price=new Price[47];
+		for (int i=2;i<47;i++) { 
 		price[i]=priceService.getById(i);
 		price[i].setPricesValue(Double.parseDouble(paramMassiv[i]));
 		priceService.savePrice(price[i]);

@@ -10,9 +10,24 @@
 <div th:replace="header :: header"></div>
 
 <br><br>
+<div class="stat">
+<table id="orderstat" >
+<tr>
+<th id="th1">Заказов</th><th id="th2">Лимит</th><th id="th3">Потрачено</th><th id="th4">Осталось</th>
+</tr>
+<tr>
+<td><span th:text="${countoforders}"></span></td>
+<td><span th:text="${orderslimitdF}"></span> руб.</td>
+<td><span th:text="${sumordersdF}"></span> руб.</td>
+<td><span th:text="${freedF}"></span> руб.</td>
+</tr>
+</table>
+</div>
+
+<br>
 <div>
  <table class="ordertable" border="1">
- <caption align="top"><h3>Перечень Заказов</h3></caption>
+ <caption align="top"><h3>Список Заказов</h3></caption>
         <tr>
           <th>№ Заказа</th> <th>№ БС</th> <th>Дата начала</th> 
           <th>Дата окончания</th><th>Стоимость без НДС</th><th>Стоимость с НДС</th><th class="col7">Комментарий</th>

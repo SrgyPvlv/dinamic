@@ -11,7 +11,7 @@ public class OrderForm {
 	private int id;
 	
 	@Column
-	private String ordernumber;
+	private int ordernumber;
 	
 	@Column
 	private String bsnumber;
@@ -33,7 +33,7 @@ public class OrderForm {
 	
 	public OrderForm() {}
 	
-	public OrderForm(String ordernumber,String bsnumber,String datestart,String dateend,String calc,String calcnds,String comm) {
+	public OrderForm(int ordernumber,String bsnumber,String datestart,String dateend,String calc,String calcnds,String comm) {
 		this.ordernumber=ordernumber;
 		this.bsnumber=bsnumber;
 		this.datestart=datestart;
@@ -47,11 +47,11 @@ public class OrderForm {
 		return id;
 	}
 
-	public String getOrderNumber() {
+	public int getOrderNumber() {
         return ordernumber;
     }
  
-    public void setOrderNumber(String ordernumber) {
+    public void setOrderNumber(int ordernumber) {
     	this.ordernumber=ordernumber;
 }
     

@@ -523,7 +523,7 @@ public Double calcOrderDays(int dguType,String workType,double jeep,double tHour
 	return orderPriceDays;
 }
 @PostMapping("/recordOrder")
-public String recordOrder(@RequestParam("ordernumber1") String ordernumber,@RequestParam("bsnumber1") String bsnumber,//
+public String recordOrder(@RequestParam("ordernumber1") int ordernumber,@RequestParam("bsnumber1") String bsnumber,//
 		@RequestParam("start1") String datestart,@RequestParam("end1") String dateend,//
 		@RequestParam("ordercalc1") String calc,@RequestParam("ordercalcnds1") String calcnds,//
 		@RequestParam("comm") String comm,Model model) {
