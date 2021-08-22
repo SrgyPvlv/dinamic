@@ -10,6 +10,7 @@
 <div th:replace="header :: header"></div>
 
 <br><br>
+<div class="parent2">
 <div class="stat">
 <table id="orderstat" >
 <tr>
@@ -23,7 +24,18 @@
 </tr>
 </table>
 </div>
-
+<div>
+<table id="statistic" >
+<tr><td>Минимальная стоимость заказа: </td><td th:text="${minorderdF}"></td><td>руб.</td></tr>
+<tr><td>Максимальная стоимость заказа: </td><td th:text="${maxorderdF}"></td><td>руб.</td></tr>
+<tr><td>Средняя стоимость заказа: </td><td th:text="${avgorderdF}"></td><td>руб.</td></tr>
+<tr><td>Количество ложных выезды до КАД: </td><td th:text="${countfalse}"></td><td>выезд.</td></tr>
+<tr><td>Затраты на ложные выезды до КАД: </td><td th:text="${sumfalsedF}"></td><td>руб.</td></tr>
+<tr><td>Количество заказов ДФС(учтены в общем кол-ве): </td><td th:text="${countdfs}"></td><td>шт.</td></tr>
+<tr><td>Затраты на заказы ДФС: </td><td th:text="${sumdfsdF}"></td><td>руб.</td></tr>
+</table>
+</div>
+</div>
 <br>
 <div>
  <table class="ordertable" border="1">

@@ -159,10 +159,29 @@ position: fixed; /* Фиксированное положение */
 #th4{color:red;}
 
 .stat{
-	width: 100%;
+	
     display: flex;
     align-items: center;
     align-content: center;
     justify-content: center;
     overflow: auto;  
+}
+
+.parent2{
+	width: 100%;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-end;
+    overflow: auto;  
+}
+
+#statistic{
+	border-collapse: collapse;
+}
+#statistic td{
+	border: 1px solid #FFFFFF ;
+	padding: 1px;
+	text-align: left;
+	font-size:16px;
 }

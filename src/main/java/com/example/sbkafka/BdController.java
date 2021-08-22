@@ -25,17 +25,39 @@ public class BdController {
 		
 		DecimalFormat dF = new DecimalFormat( "###,###.00" );
 		    
-		double sumorders=orderformservice.sumOfOrders(); String sumordersdF=dF.format(sumorders);
-		int countoforders=orderformservice.countOfOrders();
-		double orderslimit=priceService.getById(46).getPricesValue(); String orderslimitdF=dF.format(orderslimit);
-		double free=orderslimit-sumorders; String freedF=dF.format(free);
+		double sumorders=orderformservice.sumOfOrders(); String sumordersdF=dF.format(sumorders);//сумма заказов
+		int countoforders=orderformservice.countOfOrders();//кол-во заказов
+		double orderslimit=priceService.getById(46).getPricesValue(); String orderslimitdF=dF.format(orderslimit);//лимит по деньгам
+		double free=orderslimit-sumorders; String freedF=dF.format(free);//остаток денег
 		
+		//получение цен (6 шт.)ложных вызовов из таблицы price
+		double f1=priceService.getById(38).getPricesValue();
+		double f2=priceService.getById(39).getPricesValue();
+		double f3=priceService.getById(40).getPricesValue();
+		double f4=priceService.getById(41).getPricesValue();
+		double f5=priceService.getById(42).getPricesValue();
+		double f6=priceService.getById(43).getPricesValue();
+		
+		double minorder=orderformservice.minOfOrder(); String minorderdF=dF.format(minorder);//минимальный заказ
+		double maxorder=orderformservice.maxOfOrder(); String maxorderdF=dF.format(maxorder);//максимальный заказ
+		double avgorder=orderformservice.avgOfOrder(); String avgorderdF=dF.format(avgorder);//средняя сумма заказа
+		int countfalse=orderformservice.countOfFalseOut(f1, f2, f3, f4, f5, f6);//кол-во ложных выездов до КАД
+		double sumfalse=orderformservice.sumOfFalseOut(f1, f2, f3, f4, f5, f6); String sumfalsedF=dF.format(sumfalse);//затраты на ложные выезды до КАД
+		int countdfs=orderformservice.countDfs();//кол-во заказов ДФС
+		double sumdfs=orderformservice.sumDfs(); String sumdfsdF=dF.format(sumdfs);//затраты на заказы ДФС
 		
 		model.addAttribute("orderlist", orderlist);
 		model.addAttribute("sumordersdF", sumordersdF);
 		model.addAttribute("countoforders", countoforders);
 		model.addAttribute("orderslimitdF", orderslimitdF);
 		model.addAttribute("freedF", freedF);
+		model.addAttribute("minorderdF", minorderdF);
+		model.addAttribute("maxorderdF", maxorderdF);
+		model.addAttribute("avgorderdF", avgorderdF);
+		model.addAttribute("countfalse", countfalse);
+		model.addAttribute("sumfalsedF", sumfalsedF);
+		model.addAttribute("countdfs", countdfs);
+		model.addAttribute("sumdfsdF", sumdfsdF);
 		
 		return "orderbd";
 		

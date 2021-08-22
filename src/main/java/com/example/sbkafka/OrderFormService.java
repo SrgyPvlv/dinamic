@@ -61,4 +61,33 @@ public class OrderFormService {
 		double sumorders=orderformrepository.sumOfOrders();
 		return sumorders;
 	}
+	
+	public double minOfOrder() {
+		double minorder=orderformrepository.minOfOrder();
+		return minorder;
+	}
+	public double maxOfOrder() {
+		double maxorder=orderformrepository.maxOfOrder();
+		return maxorder;
+	}
+	public double avgOfOrder() {
+		double avgorder=orderformrepository.avgOfOrder();
+		return avgorder;
+	}
+	public int countOfFalseOut(double f1,double f2,double f3,double f4,double f5,double f6) {	
+	    int countfalse=orderformrepository.countOfFalseOut(f1, f2, f3, f4, f5, f6);
+	    return countfalse;
+	}
+	public double sumOfFalseOut(double f1,double f2,double f3,double f4,double f5,double f6) {
+		double sumfalse=orderformrepository.sumOfFalseOut(f1, f2, f3, f4, f5, f6);
+		return sumfalse;
+	}
+	public int countDfs() {	
+	    int countdfs=orderformrepository.countDfs();
+	    return countdfs;
+	}
+	public double sumDfs() {
+		double sumdfs=orderformrepository.sumDfs();
+		return sumdfs;
+	}
 }
