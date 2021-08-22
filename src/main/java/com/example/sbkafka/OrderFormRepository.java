@@ -12,5 +12,8 @@ public interface OrderFormRepository extends JpaRepository<OrderForm,Integer> {
 
 	@Query("select count(f) from OrderForm f")
 	public int countOfOrders();
+	
+	@Query("select sum(calc) from OrderForm f")
+	public double sumOfOrders();
 
 }

@@ -525,7 +525,7 @@ public Double calcOrderDays(int dguType,String workType,double jeep,double tHour
 @PostMapping("/recordOrder")
 public String recordOrder(@RequestParam("ordernumber1") int ordernumber,@RequestParam("bsnumber1") String bsnumber,//
 		@RequestParam("start1") String datestart,@RequestParam("end1") String dateend,//
-		@RequestParam("ordercalc1") String calc,@RequestParam("ordercalcnds1") String calcnds,//
+		@RequestParam("ordercalc1") double calc,@RequestParam("ordercalcnds1") double calcnds,//
 		@RequestParam("comm") String comm,Model model) {
 
 OrderForm orderForm=new OrderForm(ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm);

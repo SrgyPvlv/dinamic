@@ -23,23 +23,23 @@ public class OrderForm {
 	private String dateend;
 	
 	@Column
-	private String calc;
+	private double calc;
 	
 	@Column
-	private String calcnds;
+	private double calcnds;
 	
 	@Column
 	private String comm;
 	
 	public OrderForm() {}
 	
-	public OrderForm(int ordernumber,String bsnumber,String datestart,String dateend,String calc,String calcnds,String comm) {
+	public OrderForm(int ordernumber,String bsnumber,String datestart,String dateend,double calc,double calcnds,String comm) {
 		this.ordernumber=ordernumber;
 		this.bsnumber=bsnumber;
 		this.datestart=datestart;
 		this.dateend=dateend;
-		this.calc=calc.replace(".", ",");
-		this.calcnds=calcnds.replace(".", ",");
+		this.calc=calc;
+		this.calcnds=calcnds;
 		this.comm=comm;
 	}
 	
@@ -76,18 +76,18 @@ public class OrderForm {
     public void setDateEnd(String dateend) {
     	this.dateend=dateend;   
 }
-    public String getCalc() {
+    public double getCalc() {
         return calc;
     }
  
-    public void setCalc(String calc) {
+    public void setCalc(double calc) {
     	this.calc=calc;
 }
-    public String getCalcNds() {
+    public double getCalcNds() {
         return calcnds;
     }
  
-    public void setCalcNds(String calcnds) {
+    public void setCalcNds(double calcnds) {
     	this.calcnds=calcnds;
 }
     

@@ -39,7 +39,7 @@ public class OrderFormService {
 	}
 	
 	public void editOrderForm(int id,int ordernumber,String bsnumber,String datestart,String dateend,//
-			String calc,String calcnds,String comm) {
+			double calc,double calcnds,String comm) {
 		OrderForm edited=orderformrepository.getById(id);
 		edited.setOrderNumber(ordernumber);
 		edited.setBsNumber(bsnumber);
@@ -57,4 +57,8 @@ public class OrderFormService {
 	    return countorders;
 	}
 
+	public double sumOfOrders() {
+		double sumorders=orderformrepository.sumOfOrders();
+		return sumorders;
+	}
 }
