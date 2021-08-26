@@ -1,5 +1,6 @@
 package com.example.sbkafka;
 
+import java.io.ByteArrayInputStream;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -89,5 +90,11 @@ public class OrderFormService {
 	public double sumDfs() {
 		double sumdfs=orderformrepository.sumDfs();
 		return sumdfs;
+	}
+	
+	public ByteArrayInputStream load() {
+		List<OrderForm> orders=orderformrepository.findAllByOrderOrderNumberAsc();
+		ByteArrayInputStream in=ExelHelper.orderFormToExcel(orders);
+		return in;
 	}
 }
