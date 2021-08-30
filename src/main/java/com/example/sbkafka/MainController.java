@@ -73,7 +73,7 @@ public class MainController {
     	
     	LocalDateTime t1=LocalDateTime.parse(timeStart);
 		LocalDateTime t2=LocalDateTime.parse(timeEnd);
-		DateTimeFormatter formatter=DateTimeFormatter.ofPattern("dd-MM-yyyy-HH:mm");
+		DateTimeFormatter formatter=DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
     	String dateStart=formatter.format(t1);
     	String dateEnd=formatter.format(t2);
     	

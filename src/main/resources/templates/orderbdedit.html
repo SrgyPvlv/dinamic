@@ -31,7 +31,14 @@
                  <input type="hidden" name="id" th:value="${order.id}">
                  <input type="submit" value="Удалить" style="background:#FF0000; color:white;">
                </form>
-           </td>        
+           </td> 
+           <td>
+           <form id="fileload" enctype="multipart/form-data" th:action="@{/fileLoad}" method="post" style="display:inline;">
+                 <input type="file" name="file" />
+                 <input type="hidden" name="id" th:value="${order.id}">
+                 <input type="submit" value="Загрузить файл">
+               </form>
+           </td>       
         </tr>
              
     </table>

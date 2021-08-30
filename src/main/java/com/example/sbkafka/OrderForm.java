@@ -31,6 +31,9 @@ public class OrderForm {
 	@Column
 	private String comm;
 	
+	@OneToOne(mappedBy = "orderform", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private FileDB fileDB;
+
 	public OrderForm() {}
 	
 	public OrderForm(int ordernumber,String bsnumber,String datestart,String dateend,double calc,double calcnds,String comm) {
@@ -41,6 +44,17 @@ public class OrderForm {
 		this.calc=calc;
 		this.calcnds=calcnds;
 		this.comm=comm;
+	}
+	
+	public OrderForm(int ordernumber,String bsnumber,String datestart,String dateend,double calc,double calcnds,String comm,FileDB fileDB) {
+		this.ordernumber=ordernumber;
+		this.bsnumber=bsnumber;
+		this.datestart=datestart;
+		this.dateend=dateend;
+		this.calc=calc;
+		this.calcnds=calcnds;
+		this.comm=comm;
+		this.fileDB=fileDB;
 	}
 	
 	public int  getId() {
@@ -98,7 +112,14 @@ public class OrderForm {
     public void setComm(String comm) {
     	this.comm=comm;
 }
-    
+    public FileDB getFileDB() {
+        return fileDB;
+    }
+
+    public void setFileDB(FileDB fileDB) {
+    	fileDB.setOrderForm(this);
+        this.fileDB = fileDB;
+    } 
     @Override
     public String toString() {
         return(ordernumber + " " + bsnumber + " " + datestart + " " + dateend + " " + calc+ " " + calcnds+ " "+comm+"\n");

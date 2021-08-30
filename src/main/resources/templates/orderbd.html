@@ -53,7 +53,13 @@
         <tr th:each="order : ${orderlist}">
            <td th:text="${order.orderNumber} ">№ Заказа</td><td th:text="${order.bsNumber} ">№ БС</td><td th:text="${order.dateStart} ">Дата начала</td> 
            <td th:text="${order.dateEnd} ">Дата окончания</td><td th:text="${order.calc} ">Стоимость без НДС</td><td th:text="${order.calcNds} ">Стоимость с НДС</td>
-           <td th:text="${order.comm} " class="col7">Комментарий</td>         
+           <td th:text="${order.comm} " class="col7">Комментарий</td>
+           <td>
+           <form th:action="@{/fileDownload}" method="post" style="display:inline;">
+                 <input type="hidden" name="id" th:value="${order.id}">
+                 <input type="submit" value="Скачать">
+               </form>
+           </td>         
         </tr>
              
     </table>
