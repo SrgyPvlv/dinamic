@@ -1,42 +1,22 @@
 package com.example.sbkafka;
 
-import javax.persistence.*;
 
-@Entity
-@Table(name="orderform")
-public class OrderForm {
+public class Order {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column
 	private int ordernumber;
-	
-	@Column
 	private String bsnumber;
-	
-	@Column
 	private String datestart;
-	
-	@Column
 	private String dateend;
-	
-	@Column
 	private double calc;
-	
-	@Column
 	private double calcnds;
-	
-	@Column
-	private String comm;
-	
-	@OneToOne(mappedBy = "orderform", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval=true)
-    private FileDB fileDB;
+	private String comm;	
+    private String nameFileDB;
 
-	public OrderForm() {}
+	public Order() {}
 	
-	public OrderForm(int ordernumber,String bsnumber,String datestart,String dateend,double calc,double calcnds,String comm) {
+	public Order(int id,int ordernumber,String bsnumber,String datestart,String dateend,double calc,double calcnds,String comm,String nameFileDB) {
+		this.id=id;
 		this.ordernumber=ordernumber;
 		this.bsnumber=bsnumber;
 		this.datestart=datestart;
@@ -44,12 +24,15 @@ public class OrderForm {
 		this.calc=calc;
 		this.calcnds=calcnds;
 		this.comm=comm;
+		this.nameFileDB=nameFileDB;
 	}
 
-	
 	public int  getId() {
 		return id;
 	}
+	public void setId(int id) {
+    	this.id=id;
+}
 
 	public int getOrderNumber() {
         return ordernumber;
@@ -102,19 +85,12 @@ public class OrderForm {
     public void setComm(String comm) {
     	this.comm=comm;
 }
-    public FileDB getFileDB() {
-        return fileDB;
+    public String getNameFileDB() {
+        return nameFileDB;
     }
-
-    public void setFileDB(FileDB fileDB) {
-    	if(fileDB==null) {
-    		if(this.fileDB!=null) {this.fileDB.setOrderForm(null);}}
-    	
-    	else {fileDB.setOrderForm(this);}
-        this.fileDB = fileDB;}
+ 
+    public void setNameFileDB(String nameFileDB) {
+    	this.nameFileDB=nameFileDB;
+}
     
-    @Override
-    public String toString() {
-        return(ordernumber + " " + bsnumber + " " + datestart + " " + dateend + " " + calc+ " " + calcnds+ " "+comm+"\n");
-    }
 }

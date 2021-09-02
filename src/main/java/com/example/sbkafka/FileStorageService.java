@@ -13,7 +13,18 @@ public class FileStorageService {
 	
 	@Autowired FileDBRepository fileDBRepository;
 	
-	public FileDB store(MultipartFile file,int orderform_id) throws IOException{
+	public FileDB load(MultipartFile file,int orderform_id) throws IOException{
+		String fileName=StringUtils.cleanPath(file.getOriginalFilename());
+		FileDB fileDB=new FileDB(fileName,file.getContentType(),file.getBytes(),orderform_id);
+		return fileDB;
+	}
+	
+	public void deleteFileDBById(int id) {
+		fileDBRepository.deleteById(id);
+	}
+}
+	//сохранил для будущих проектов
+	/* public FileDB store(MultipartFile file,int orderform_id) throws IOException{
 		String fileName=StringUtils.cleanPath(file.getOriginalFilename());
 		FileDB fileDB=new FileDB(fileName,file.getContentType(),file.getBytes(), orderform_id);
 		
@@ -24,12 +35,5 @@ public class FileStorageService {
 	}
 	public Stream<FileDB> getAllFiles(){
 		return fileDBRepository.findAll().stream();
-	}
-	public FileDB load(MultipartFile file,int orderform_id) throws IOException{
-		String fileName=StringUtils.cleanPath(file.getOriginalFilename());
-		FileDB fileDB=new FileDB(fileName,file.getContentType(),file.getBytes(),orderform_id);
-		
-		return fileDB;
-	}
+	} */
 
-}

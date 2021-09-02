@@ -22,6 +22,10 @@ public class BdController {
 	@GetMapping("/bdShow") //получение инфо из бд заказов
 	public String bdShow(Model model){
 		List<OrderForm> orderlist=orderformservice.findAllByOrderOrderNumberAsc();
+		/*List<Order> orderlistFile;
+		for(OrderForm order:orderlist,Order order2:orderlistFile) {
+			order.getFileDB().getName()
+		}*/
 		
 		DecimalFormat dF = new DecimalFormat( "###,###.00" );
 		    
