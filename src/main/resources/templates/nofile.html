@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+ 
+<div class="parent">
+ 
+    <div class="starter-template" style="text-align:center">
+        <h1 style="color:red">Ошибка  - Не был выбран файл для загрузки!</h1>
+        
+    </div>
+    <br><br>
+    <div>
+        <a href="javascript:history.back();"><img src="images/back.jpg" alt="Картинка" width="100" height="50" style="border: none"></a> <span style="font-size:30px; color:green;"> Вернуться </span>
+    </div>
+</div>
+<!-- /.container -->
+<br><br>
+
+<div th:replace="footer :: footer"></div>
+
+</body>
+</html>

@@ -1,8 +1,16 @@
 package com.example.sbkafka;
 
-import java.io.FileOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +30,8 @@ public class FileController {
 	  // Загрузка файла заказа в базу данных
 	@PostMapping("/fileLoad")
 	public String load(@RequestParam("id") int id, @RequestParam("file") MultipartFile file) throws IOException{
-		
+		boolean isempty=file.isEmpty();
+		if (isempty==true) {return "nofile";} else {
 		try {
 		OrderForm order=orderformservice.getById(id);
 		FileDB isDBYes=order.getFileDB();
@@ -33,13 +42,24 @@ public class FileController {
 		return "okloadfile";}
 		else {return"stopupload";}
 		} catch (Exception e) 
-		{return"exception";}	   	   
+		{return"exception";}	}   	   
   }
 	// Скачивание файла заказа из базы данных
 	@PostMapping("/fileDownload")
-	public String filedown(@RequestParam("id") int id) throws IOException{
+	public ResponseEntity<Resource> filedown(@RequestParam("id") int id) throws IOException{
 		
-		try {
+		OrderForm order=orderformservice.getById(id);
+		FileDB fileDB=order.getFileDB();
+		String filename=order.getOrderNumber()+" PL_"+order.getBsNumber()+".docx";	
+		byte[] bodytext=fileDB.getData();
+		InputStreamResource file=new InputStreamResource(new ByteArrayInputStream(bodytext));
+			
+			return ResponseEntity.ok()
+					.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + filename + "\"")
+			        .contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.wordprocessingml.document"))
+			        .body(file);}
+		
+		/*try {
 		OrderForm order=orderformservice.getById(id);
 		FileDB fileDB=order.getFileDB();
 		String filename=fileDB.getName();
@@ -49,10 +69,8 @@ public class FileController {
       fos.write(bodytext, 0, bodytext.length);
       fos.close();
 		   
-		   return "okdownload";
-		} catch (Exception e)
-		{return"exception";}
-}
+		   return "okdownload";*/
+
 
 	// Удаление файла из базы данных
 	@PostMapping("/fileDelete")
@@ -61,10 +79,12 @@ public class FileController {
 		
 		try {
 		OrderForm order=orderformservice.getById(id);
+		FileDB fileDB=order.getFileDB();
+		if (fileDB==null) {return"nofilebd";} else {
 		order.setFileDB(null);
 		orderformservice.saveOrderForm(order);
 		   
-		   return "okfiledelete";
+		   return "okfiledelete";}
 		} catch (Exception e)
 		{return"exception";}
 }
