@@ -1,6 +1,8 @@
 package com.example.sbkafka;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class BdController {
+	ArrayList<Order> orderlistFile=new ArrayList<Order>();
 	
 	@Autowired
 	private OrderFormService orderformservice;
@@ -22,10 +25,18 @@ public class BdController {
 	@GetMapping("/bdShow") //получение инфо из бд заказов
 	public String bdShow(Model model){
 		List<OrderForm> orderlist=orderformservice.findAllByOrderOrderNumberAsc();
-		/*List<Order> orderlistFile;
-		for(OrderForm order:orderlist,Order order2:orderlistFile) {
-			order.getFileDB().getName()
-		}*/
+		
+		for(OrderForm order:orderlist) {
+			
+            int id=order.getId();int ordernumber=order.getOrderNumber();String bsnumber=order.getBsNumber();
+            String datestart=order.getDateStart();String dateend=order.getDateEnd();
+            double calc=order.getCalc();double calcnds=order.getCalcNds();String comm=order.getComm();
+            FileDB fileDB=order.getFileDB();
+            String fileYesNo;
+			if (fileDB==null){fileYesNo="Нет";}else {fileYesNo="Есть";}
+            Order orderlistarray=new Order(id,ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm,fileYesNo);
+            orderlistFile.addAll(Arrays.asList(orderlistarray));
+         }
 		
 		DecimalFormat dF = new DecimalFormat( "###,###.00" );
 		    
@@ -50,7 +61,7 @@ public class BdController {
 		int countdfs=orderformservice.countDfs();//кол-во заказов ДФС
 		double sumdfs=orderformservice.sumDfs(); String sumdfsdF=dF.format(sumdfs);//затраты на заказы ДФС
 		
-		model.addAttribute("orderlist", orderlist);
+		model.addAttribute("orderlist", orderlistFile);
 		model.addAttribute("sumordersdF", sumordersdF);
 		model.addAttribute("countoforders", countoforders);
 		model.addAttribute("orderslimitdF", orderslimitdF);

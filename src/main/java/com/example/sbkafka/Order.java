@@ -11,11 +11,11 @@ public class Order {
 	private double calc;
 	private double calcnds;
 	private String comm;	
-    private String nameFileDB;
+    private String fileYesNo;
 
 	public Order() {}
 	
-	public Order(int id,int ordernumber,String bsnumber,String datestart,String dateend,double calc,double calcnds,String comm,String nameFileDB) {
+	public Order(int id,int ordernumber,String bsnumber,String datestart,String dateend,double calc,double calcnds,String comm,String fileYesNo) {
 		this.id=id;
 		this.ordernumber=ordernumber;
 		this.bsnumber=bsnumber;
@@ -24,7 +24,7 @@ public class Order {
 		this.calc=calc;
 		this.calcnds=calcnds;
 		this.comm=comm;
-		this.nameFileDB=nameFileDB;
+		this.fileYesNo=fileYesNo;
 	}
 
 	public int  getId() {
@@ -85,12 +85,12 @@ public class Order {
     public void setComm(String comm) {
     	this.comm=comm;
 }
-    public String getNameFileDB() {
-        return nameFileDB;
+    public String getFileYesNo() {
+        return fileYesNo;
     }
  
-    public void setNameFileDB(String nameFileDB) {
-    	this.nameFileDB=nameFileDB;
+    public void setFileYesNo(String fileYesNo) {
+    	this.fileYesNo=fileYesNo;
 }
     
 }
