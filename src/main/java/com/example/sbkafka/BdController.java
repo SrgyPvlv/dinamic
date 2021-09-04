@@ -24,6 +24,7 @@ public class BdController {
 	
 	@GetMapping("/bdShow") //получение инфо из бд заказов
 	public String bdShow(Model model){
+		orderlistFile.clear();
 		List<OrderForm> orderlist=orderformservice.findAllByOrderOrderNumberAsc();
 		
 		for(OrderForm order:orderlist) {
