@@ -21,17 +21,3 @@ public class FileStorageService {
 		fileDBRepository.deleteById(id);
 	}
 }
-	//сохранил для будущих проектов
-	/* public FileDB store(MultipartFile file,int orderform_id) throws IOException{
-		String fileName=StringUtils.cleanPath(file.getOriginalFilename());
-		FileDB fileDB=new FileDB(fileName,file.getContentType(),file.getBytes(), orderform_id);
-		
-		return fileDBRepository.save(fileDB);
-	}
-	public FileDB getFile(int id) {
-		return fileDBRepository.findById(id).get();
-	}
-	public Stream<FileDB> getAllFiles(){
-		return fileDBRepository.findAll().stream();
-	} */
-

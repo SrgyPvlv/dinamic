@@ -536,26 +536,3 @@ orderformservice.saveOrderForm(orderForm);
     return "order";
 }
 }
-
-/*String home = System.getProperty("user.home");
-String outputFileName = home+"/Downloads/" +"dinamics.txt";
-	String resource=getClass().getClassLoader().getResource("dinamics.txt").getPath();
-	System.out.println(resource);
-	//String resourcePath=Paths.get(resource).toString();
-String outputFileName =resource;
-
-MainController.outputFileName=outputFileName;
-	try(BufferedWriter writer = new BufferedWriter(new FileWriter(outputFileName,true));)
-    {
-        writer.write(orderNumber+" ");writer.write(bsNumber+" ");writer.write(dateStart+" ");//
-        writer.write(dateEnd+" ");writer.write(calc+" ");writer.write(calcNds+" ");
-        writer.newLine();
-        writer.close();
-}
- catch (FileNotFoundException e) {
-    System.err.println("не удалось создать файл ");
-    e.printStackTrace();
-} catch (IOException e) {
-    System.err.println("Проблема с записью в файл ");
-    e.printStackTrace();
-}*/
