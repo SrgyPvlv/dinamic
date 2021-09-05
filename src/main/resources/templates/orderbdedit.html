@@ -11,6 +11,14 @@
 
 <br><br>
 <div>
+<form th:action="@{/admin/bdEdit}" method="get">
+<label for="str" style="font-size:20px;"> Cтр. </label>
+<input type="number" size="5" name="str" id="str" step="1" min="0" th:value="${str}" style="width:40px;height:20px;font-size:16px;text-align:center;">
+&nbsp|&nbsp
+<label for="numstr" style="font-size:20px;"> Кол-во заказов на стр. </label>
+<input type="number" size="5" name="numstr" id="numstr" step="5" min="10" th:value="${numstr}" style="width:40px;height:20px;font-size:16px;text-align:center;">
+<input type="submit" value="Применить" style="height:25px;font-size:16px;">
+</form>
  <table class="ordertable" border="1">
  <caption align="top"><h3>Список Заказов</h3></caption>
         <tr>

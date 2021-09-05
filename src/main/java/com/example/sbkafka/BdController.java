@@ -3,8 +3,6 @@ package com.example.sbkafka;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -25,7 +23,7 @@ public class BdController {
 	@Autowired
 	private PriceService priceService;
 	
-	@PostMapping("/bdShow") //получение инфо из бд заказов
+	@GetMapping("/bdShow") //получение инфо из бд заказов
 	public String bdShow(@RequestParam(value="str",defaultValue = "0") int str,@RequestParam(value="numstr",defaultValue = "20") int numstr,Model model){
 		orderlistFile.clear();
 		//List<OrderForm> orderlist=orderformservice.findAllByOrderOrderNumberAsc();
@@ -89,10 +87,15 @@ public class BdController {
 	}
 	
 	@GetMapping("admin/bdEdit") //получение инфо из бд заказов с возможностью перехода к редактированию
-	public String bdEdit(Model model){
-		List<OrderForm> orderlist=orderformservice.findAllByOrderOrderNumberAsc();
+	public String bdEdit(@RequestParam(value="str",defaultValue = "0") int str,@RequestParam(value="numstr",defaultValue = "20") int numstr,Model model){
+				
+		//List<OrderForm> orderlist=orderformservice.findAllByOrderOrderNumberAsc();
+		this.str=str;
+		this.numstr=numstr;
+		Page<OrderForm> orderlist=orderformservice.findAllWithPageAsc(this.str,this.numstr);
 		model.addAttribute("orderlist", orderlist);
-		
+		model.addAttribute("str", this.str);
+		model.addAttribute("numstr", this.numstr);
 		
 		return "orderbdedit";
 	}
