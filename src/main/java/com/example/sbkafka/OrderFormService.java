@@ -3,6 +3,10 @@ package com.example.sbkafka;
 import java.io.ByteArrayInputStream;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,6 +33,11 @@ public class OrderFormService {
 	public List<OrderForm> findAllByOrderOrderNumberAsc() {
 		return orderformrepository.findAllByOrderOrderNumberAsc();	
 		
+	}
+	
+	public Page<OrderForm> findAllWithPageAsc(int str,int numstr){
+		Pageable pageable=PageRequest.of(str,numstr,Sort.by("ordernumber").ascending());
+		return orderformrepository.findAll(pageable);
 	}
 	
 	public OrderForm getById(int id) {

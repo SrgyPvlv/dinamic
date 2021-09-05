@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class BdController {
+	
+	int str;int numstr;
 	ArrayList<Order> orderlistFile=new ArrayList<Order>();
 	
 	@Autowired
@@ -22,10 +25,13 @@ public class BdController {
 	@Autowired
 	private PriceService priceService;
 	
-	@GetMapping("/bdShow") //получение инфо из бд заказов
-	public String bdShow(Model model){
+	@PostMapping("/bdShow") //получение инфо из бд заказов
+	public String bdShow(@RequestParam(value="str",defaultValue = "0") int str,@RequestParam(value="numstr",defaultValue = "20") int numstr,Model model){
 		orderlistFile.clear();
-		List<OrderForm> orderlist=orderformservice.findAllByOrderOrderNumberAsc();
+		//List<OrderForm> orderlist=orderformservice.findAllByOrderOrderNumberAsc();
+		this.str=str;
+		this.numstr=numstr;
+		Page<OrderForm> orderlist=orderformservice.findAllWithPageAsc(this.str,this.numstr);
 		
 		for(OrderForm order:orderlist) {
 			
@@ -74,6 +80,9 @@ public class BdController {
 		model.addAttribute("sumfalsedF", sumfalsedF);
 		model.addAttribute("countdfs", countdfs);
 		model.addAttribute("sumdfsdF", sumdfsdF);
+		model.addAttribute("str", this.str);
+		model.addAttribute("numstr", this.numstr);
+		
 		
 		return "orderbd";
 		

@@ -38,7 +38,14 @@
 </div>
 <br>
 <div>
-
+<form th:action="@{/bdShow}" method="post">
+<label for="str"> стр. </label>
+<input type="number" size="5" name="str" id="str" step="1" min="0" th:value="${str}" style="width:45px;text-align:center;">
+&nbsp|&nbsp
+<label for="numstr"> Кол-во заказов на стр. </label>
+<input type="number" size="5" name="numstr" id="numstr" step="5" min="10" th:value="${numstr}" style="width:45px;text-align:center;">
+<input type="submit" value="Применить">
+</form>
  <table class="ordertable" border="1">
  <caption align="top"><h3>Список Заказов &nbsp&nbsp&nbsp&nbsp
  <form th:action="@{/downloadexel}" method="get" style="display:inline;">
