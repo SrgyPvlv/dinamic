@@ -47,18 +47,18 @@ public class FileController {
 		{return"exception";}	}   	   
   }
 	// Скачивание файла заказа из базы данных
-	@PostMapping("/fileDownload")
+	@GetMapping("/fileDownload")
 	public ResponseEntity<Resource> filedown(@RequestParam("id") int id, HttpServletResponse response,HttpServletRequest request) throws IOException{
 		try {
 		OrderForm order=orderformservice.getById(id);
 		FileDB fileDB=order.getFileDB();
-		String filename=order.getOrderNumber()+" PL_"+order.getBsNumber()+".docx";
+		String filename=order.getOrderNumber()+" PL_"+order.getBsNumber()+".doc";
 		byte[] bodytext=fileDB.getData();
 		InputStreamResource file=new InputStreamResource(new ByteArrayInputStream(bodytext));
 			
 			return ResponseEntity.ok()
 					.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + filename + "\"")
-			        .contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.wordprocessingml.document"))
+			        .contentType(MediaType.parseMediaType("application/msword"))
 			        .body(file);}
 	catch(Exception e) {response.sendRedirect("/errorDownload");}
 		return null;

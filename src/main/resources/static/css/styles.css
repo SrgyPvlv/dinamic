@@ -129,7 +129,11 @@ position: fixed; /* Фиксированное положение */
 }
 
 .col7{
-	width: 25%;
+	width: 23%;
+}
+
+.col8{
+	width: 23%;
 }
 
 #orderstat{

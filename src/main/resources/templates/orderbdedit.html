@@ -31,7 +31,7 @@
            <td th:text="${order.dateEnd} ">Дата окончания</td><td th:text="${order.calc} ">Стоимость без НДС</td><td th:text="${order.calcNds} ">Стоимость с НДС</td>
            <td th:text="${order.comm} " class="col7">Комментарий</td>
            <td class="col8" style="text-align:left;">
-               <form th:action="@{/bdEdit}" method="post" style="display:inline;">
+               <form th:action="@{/bdEdit}" method="get" style="display:inline;">
                  <input type="hidden" name="id" th:value="${order.id}">
                  <input type="submit" value="Редактировать" style="background:#98FB98;">
                </form> | 

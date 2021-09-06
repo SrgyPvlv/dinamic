@@ -100,7 +100,7 @@ public class BdController {
 		return "orderbdedit";
 	}
 	
-	@PostMapping("/bdEdit") // переход на форму редактирования заказа
+	@GetMapping("/bdEdit") // переход на форму редактирования заказа
 	public String edit(@RequestParam("id") int id, Model model) {
 	
 	OrderForm order=orderformservice.getById(id);
