@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+<title>Список Пользователей</title>
+</head>
+<body>
+
+<div th:replace="header :: header"></div>
+
+<br><br>
+<div>
+
+ <table class="ordertable" border="1">
+ <caption align="top"><h3>Список Пользователей </h3></caption>
+        <tr>
+          <th> Логин </th> <th>Пароль</th> <th>Права</th> 
+        </tr>
+         
+        <tr th:each="user : ${users}">
+           <td th:text="${user.getLogin} ">Логин</td><td th:text="${user.getPassword} ">Пароль</td><td th:text="${user.getRole} ">Права</td>
+           <td>
+           <form th:action="@{/usersEdit}" method="get" style="display:inline;">
+                 <input type="hidden" name="id" th:value="${user.id}">
+                 <input type="submit" value="Редактировать" style="background:#98FB98;">
+               </form> | 
+               <form th:action="@{/usersDelete}" method="post" style="display:inline;">
+                 <input type="hidden" name="id" th:value="${user.id}">
+                 <input type="submit" value="Удалить" style="background:#FF0000; color:white;">
+               </form>
+               </td>        
+        </tr>
+             
+    </table>
+</div>
+<br><br>
+    
+<div th:replace="footer :: footer"></div>
+</body>
+</html>

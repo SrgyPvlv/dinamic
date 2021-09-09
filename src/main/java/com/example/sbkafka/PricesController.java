@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 @Controller
 public class PricesController {
 	
 	@Autowired
 	private PriceService priceService;
+	
+	@Autowired
+	private UsersService usersService;
 	
 	@GetMapping("/admin/priceShow")
 	public String showPrices(Model model) {
@@ -45,6 +47,13 @@ public class PricesController {
 		}
 		
 		return "oksave";
+	}
+	
+	@GetMapping("/admin/usersShow")
+	public String showUsers(Model model) {
+		List<Users> users=usersService.findAllUsers();
+		model.addAttribute("users", users);
+		return "users";
 	}
 	
 }
