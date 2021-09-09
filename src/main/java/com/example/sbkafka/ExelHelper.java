@@ -12,7 +12,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
-
+//создание exel листа
 public class ExelHelper {
 	public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 	  static String[] HEADERs = { "№ Заказа", "№ БС", "Дата начала", "Дата окончания", "Стоимость без НДС", "Стоимость с НДС", "Комментарий"};

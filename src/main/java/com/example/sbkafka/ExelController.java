@@ -14,7 +14,7 @@ public class ExelController {
 	
 	@Autowired OrderFormService orderformservice;
 	
-	//загрузка бд в exel
+	//загрузка бд в exel файл
 	@GetMapping("/downloadexel")
 		
 		ResponseEntity<Resource> getFile(){

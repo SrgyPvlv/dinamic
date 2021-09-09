@@ -18,6 +18,11 @@
 		<form th:action="@{/admin/bdEdit}" method="get">
 		<input type="image" name="bdedit" src="/images/bd.png" alt="fit" width="50" height="50" style="border: none">
 		</form>
+		<br><br>
+		<p><label for="bdedit" style="font-size:20px;"> Редактирование/Создание пользователей </label></p>
+		<form th:action="@{/admin/usersEdit}" method="get">
+		<input type="image" name="usersedit" src="/images/login.png" alt="fit" width="50" height="50" style="border: none">
+		</form>
 
 <br><br>
 <div th:replace="footer :: footer"></div>

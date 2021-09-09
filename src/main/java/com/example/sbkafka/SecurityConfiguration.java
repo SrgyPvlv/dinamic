@@ -18,12 +18,20 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
-    private AccessDeniedHandler accessDeniedHandler;
-
+	CustomUserDetailsService userDetailsService;
+	
 	@Bean
     public BCryptPasswordEncoder passwordEncoder() {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         return bCryptPasswordEncoder;}
+	
+	@Autowired
+    private AccessDeniedHandler accessDeniedHandler;
+	
+	/*@Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+      auth.userDetailsService(userDetailsService);
+    } */
 	
 	@Autowired      // here is configuration related to spring boot basic authentication
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -43,6 +51,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         mngConfig.withUser(u1);
         mngConfig.withUser(u2);
     }
+	
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
