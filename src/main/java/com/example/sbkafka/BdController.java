@@ -117,7 +117,7 @@ public class BdController {
 	
 	orderformservice.editOrderForm(id, ordernumber, bsnumber, datestart, dateend, calc, calcnds, comm);
 	   
-	   return "okedit";
+	   return "okEdit";
 	}
 	
 	@PostMapping("/bdDelete") // удаление заказа
@@ -125,7 +125,7 @@ public class BdController {
 	
 	orderformservice.deleteById(id);
 	   
-	   return "redirect:/admin/bdEdit";
+	   return "okDelete";
 	}
 	
 }
