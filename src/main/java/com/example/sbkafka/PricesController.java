@@ -71,8 +71,10 @@ public class PricesController {
 	}
 	
 	@GetMapping("/admin/usersEdit") // переход на форму редактирования пользователя
-	public String editUserForm() {	   
-	   
+	public String editUserForm(@RequestParam("id") int id, Model model) {	   
+		Users user=usersService.findUsersById(id);
+		model.addAttribute("user", user);
+		
 		return "editUserForm";
 	}
 	
