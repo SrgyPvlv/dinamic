@@ -9,14 +9,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+//сохранение базы заказов в exel
+
 @Controller
 public class ExelController {
 	
 	@Autowired OrderFormService orderformservice;
 	
-	//загрузка бд в exel файл
-	@GetMapping("/downloadexel")
-		
+	@GetMapping("/downLoadExel")
 		ResponseEntity<Resource> getFile(){
 			String filename="dinamic_orders.xlsx";
 			InputStreamResource file=new InputStreamResource(orderformservice.load());

@@ -82,7 +82,7 @@ public class BdController {
 		model.addAttribute("numstr", this.numstr);
 		
 		
-		return "orderbd";
+		return "orderBD";
 		
 	}
 	
@@ -97,7 +97,7 @@ public class BdController {
 		model.addAttribute("str", this.str);
 		model.addAttribute("numstr", this.numstr);
 		
-		return "orderbdedit";
+		return "orderBdEdit";
 	}
 	
 	@GetMapping("/bdEdit") // переход на форму редактирования заказа
@@ -106,7 +106,7 @@ public class BdController {
 	OrderForm order=orderformservice.getById(id);
 	model.addAttribute("order", order);
 	   
-	   return "editform";
+	   return "editForm";
 	}
 	
 	@PostMapping("/orderEdit") // редактирование заказа

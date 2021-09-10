@@ -19,6 +19,14 @@ public class Users {
 	@Column
 	private String role;
 	
+	public Users() {}
+	
+	public Users(String login,String password,String role) {
+		this.login=login;
+		this.password=password;
+		this.role=role;
+	}
+	
 	public int getId() {
 		return id;
 	}

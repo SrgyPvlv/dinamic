@@ -17,7 +17,19 @@ public class UsersService {
 	
 	public List<Users> findAllUsers(){
 		return usersrepository.findAll();
-
+	}
+	
+	public void saveUsers(Users users) {
+		usersrepository.saveAndFlush(users);
+	}
+	
+	public Users findUsersById(int id) {
+		return usersrepository.getById(id);
+	
+	}
+	
+	public void deleteUserById(int id) {
+		usersrepository.deleteById(id);
 	}
 	
 }

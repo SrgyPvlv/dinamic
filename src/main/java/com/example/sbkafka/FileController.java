@@ -41,14 +41,14 @@ public class FileController {
 		FileDB fileDB=storageService.load(file,id);
 		order.setFileDB(fileDB);
 		orderformservice.saveOrderForm(order);
-		return "okloadfile";}
-		else {return"stopupload";}
+		return "okLoadFile";}
+		else {return"stopUpLoad";}
 		} catch (Exception e) 
 		{return"exception";}	}   	   
   }
 	// Скачивание файла заказа из базы данных
 	@GetMapping("/fileDownload")
-	public ResponseEntity<Resource> filedown(@RequestParam("id") int id, HttpServletResponse response,HttpServletRequest request) throws IOException{
+	public ResponseEntity<Resource> fileDown(@RequestParam("id") int id, HttpServletResponse response,HttpServletRequest request) throws IOException{
 		try {
 		OrderForm order=orderformservice.getById(id);
 		FileDB fileDB=order.getFileDB();
@@ -67,16 +67,16 @@ public class FileController {
 	// Удаление файла из базы данных 
 	@PostMapping("/fileDelete")
 	@Transactional
-	public String filedelete(@RequestParam("id") int id) throws IOException{
+	public String fileDelete(@RequestParam("id") int id) throws IOException{
 		
 		try {
 		OrderForm order=orderformservice.getById(id);
 		FileDB fileDB=order.getFileDB();
-		if (fileDB==null) {return"nofilebd";} else {
+		if (fileDB==null) {return"noFileBD";} else {
 		order.setFileDB(null);
 		orderformservice.saveOrderForm(order);
 		   
-		   return "okfiledelete";}
+		   return "okFileDelete";}
 		} catch (Exception e)
 		{return"exception";}
 }
@@ -84,7 +84,7 @@ public class FileController {
 	@GetMapping("/errorDownload")
 	public String errorDownload() {
 		
-	   return "nofilebd";
+	   return "noFileBD";
 	}
 }
 	  

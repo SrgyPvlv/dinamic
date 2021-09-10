@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ <head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+<title>Редактирование пользователя</title>
+</head>
+<body>
+
+<div th:replace="header :: header"></div>
+ 
+ <br><br>
+ <div class="parent">
+ 
+ <div>
+ <h3> Форма редактирования пользователя</h3>
+ <fieldset style="border-color:#FFEBCD;text-align: center">
+  <form id="useredit" th:action="@{/admin/usersEdit}" method="post">
+        <input type="hidden" name="id" th:value="${user.id}">
+        <label>Логин</label><br>
+        <input type="text" name="login" th:value="${user.login}" style="text-align: center"/>
+        <br><br>
+        <label>Пароль</label><br>
+        <input type="text" name="password" th:value="${user.password}" style="text-align: center"/>
+        <br><br>
+        <label>Роль</label><br>
+        <input type="text" name="role" th:value="${user.role}" style="text-align: center"/>
+        <br><br>
+	    <input type="submit" value="Сохранить" autofocus style="width: 100px; height: 40px; background-color: #98FB98;">
+ </form>
+ </fieldset>
+ </div>
+ 
+ </div>
+ <br><br>
+ 
+<div th:replace="footer :: footer"></div>
+
+</body>
+</html>

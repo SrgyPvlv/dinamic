@@ -11,9 +11,12 @@
 
 <br><br>
 <div>
-
  <table class="ordertable" border="1">
- <caption align="top"><h3>Список Пользователей </h3></caption>
+ <caption align="top"><h3>Список Пользователей &nbsp&nbsp&nbsp&nbsp
+   <form th:action="@{/admin/usersCreate}" method="get" style="display:inline;">
+   <input type="submit" value="Добавить пользователя">
+   </form></h3>
+ </caption>
         <tr>
           <th> Логин </th> <th>Пароль</th> <th>Права</th> 
         </tr>
@@ -21,17 +24,16 @@
         <tr th:each="user : ${users}">
            <td th:text="${user.getLogin} ">Логин</td><td th:text="${user.getPassword} ">Пароль</td><td th:text="${user.getRole} ">Права</td>
            <td>
-           <form th:action="@{/usersEdit}" method="get" style="display:inline;">
+           <form th:action="@{/admin/usersEdit}" method="get" style="display:inline;">
                  <input type="hidden" name="id" th:value="${user.id}">
                  <input type="submit" value="Редактировать" style="background:#98FB98;">
-               </form> | 
-               <form th:action="@{/usersDelete}" method="post" style="display:inline;">
+           </form> | 
+           <form th:action="@{/admin/usersDelete}" method="get" style="display:inline;">
                  <input type="hidden" name="id" th:value="${user.id}">
                  <input type="submit" value="Удалить" style="background:#FF0000; color:white;">
-               </form>
-               </td>        
-        </tr>
-             
+            </form>
+            </td>        
+        </tr>          
     </table>
 </div>
 <br><br>

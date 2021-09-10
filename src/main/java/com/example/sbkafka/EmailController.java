@@ -15,7 +15,7 @@ public class EmailController {
     @Autowired
     public EmailService emailService;
 	
-	@GetMapping("/mailSend")
+	@GetMapping("/mailSend") //переход на страницу отправки почты с отображением заказов
 	public String showMail(Model model) {
 				
 		ArrayList<OrderForm> orderform=MainController.orderFormArray;
@@ -23,7 +23,7 @@ public class EmailController {
 	    return "mailpage";
 	}
 	
-	@PostMapping("/mailSend")
+	@PostMapping("/mailSend") // отправка почты с заказами
 	public String sendMail(@RequestParam(value="comment") String textemail,@RequestParam(value="from") String frommail,@RequestParam(value="copy") String copyto) {
 		
 		ArrayList<OrderForm> orderform=MainController.orderFormArray;
