@@ -1,16 +1,9 @@
 package com.example.sbkafka;
 
-import java.io.FileNotFoundException;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
 
 @Service
 public class DefaultEmailService implements EmailService {
@@ -33,37 +26,4 @@ public class DefaultEmailService implements EmailService {
 	  emailSender.send(simpleMailMessage);
 	 }
 
-	@Override
-	 public void sendEmailWithAttachment(String message, String attachment,String frommail,String copyto) throws MessagingException, FileNotFoundException {
-		String from="dguaudit@gmail.com";
-		String toAddress="spavlov@mts.ru";
-		  String subject=frommail+". Проверка заказов Динамикс завершена";
-	  MimeMessage mimeMessage = emailSender.createMimeMessage();
-	  MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
-	  messageHelper.setFrom(from);
-	  messageHelper.setTo(toAddress);
-	  messageHelper.setCc(copyto);
-	  messageHelper.setSubject(subject);
-	  messageHelper.setText(message);
-	  FileSystemResource file = new FileSystemResource(ResourceUtils.getFile(attachment));
-	  messageHelper.addAttachment("Order Table", file);
-	  emailSender.send(mimeMessage);
-	 }
-	
-	@Override
-	 public void sendHtmlEmail(String message,String ordertable,String frommail,String copyto) throws MessagingException {
-	  String from="dguaudit@gmail.com";
-	  String toAddress="spavlov@mts.ru";
-	  String subject=frommail+" Проверка заказов Динамикс завершена";
-	  MimeMessage htmlmessage = emailSender.createMimeMessage();
-      boolean multipart = true;      
-      MimeMessageHelper helper = new MimeMessageHelper(htmlmessage,multipart,"UTF-8");
-      String htmlMsg ="<h4>"+message+"</h4>"+"<h3>Данные расчетов по Заказам:</h3>"+ ordertable;
-      htmlmessage.setContent(htmlMsg, "text/html; charset=UTF-8");
-      helper.setFrom(from);
-      helper.setTo(toAddress);
-      helper.setCc(copyto);
-      helper.setSubject(subject);
-	  emailSender.send(htmlmessage);
-	 }
 	}

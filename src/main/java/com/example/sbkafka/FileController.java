@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,9 +32,12 @@ public class FileController {
 	
 	  // Загрузка файла заказа в базу данных
 	@PostMapping("/fileLoad")
-	public String load(@RequestParam("id") int id, @RequestParam("file") MultipartFile file) throws IOException{
+	public String load(@RequestParam("id") int id, @RequestParam("file") MultipartFile file,Model model) throws IOException{
 		boolean isempty=file.isEmpty();
-		if (isempty==true) {return "nofile";} else {
+		if (isempty==true) { 
+			String note="Ошибка  - Не выбран файл для загрузки!";
+		    model.addAttribute("note", note);
+		    return "noDone";} else {
 		try {
 		OrderForm order=orderformservice.getById(id);
 		FileDB isDBYes=order.getFileDB();
@@ -41,10 +45,16 @@ public class FileController {
 		FileDB fileDB=storageService.load(file,id);
 		order.setFileDB(fileDB);
 		orderformservice.saveOrderForm(order);
-		return "okLoadFile";}
+		String title="Сохранение файла Заказа";
+		String note="Файл Заказа сохранен в базе данных!";
+		model.addAttribute("title", title);
+		model.addAttribute("note", note);
+		return "okDone";}
 		else {return"stopUpLoad";}
 		} catch (Exception e) 
-		{return"exception";}	}   	   
+		{ String note="Ошибка  - Что-то пошло не так!";
+	      model.addAttribute("note", note);
+		  return"noDone";}	}   	   
   }
 	// Скачивание файла заказа из базы данных
 	@GetMapping("/fileDownload")
@@ -67,7 +77,7 @@ public class FileController {
 	// Удаление файла из базы данных 
 	@PostMapping("/fileDelete")
 	@Transactional
-	public String fileDelete(@RequestParam("id") int id) throws IOException{
+	public String fileDelete(@RequestParam("id") int id,Model model) throws IOException{
 		
 		try {
 		OrderForm order=orderformservice.getById(id);
@@ -75,16 +85,23 @@ public class FileController {
 		if (fileDB==null) {return"noFileBD";} else {
 		order.setFileDB(null);
 		orderformservice.saveOrderForm(order);
-		   
-		   return "okFileDelete";}
+		String title="Удаление файла Заказа";
+		String note="Файл Заказа удален!";
+		model.addAttribute("title", title);
+		model.addAttribute("note", note);
+		   return "okDone";}
 		} catch (Exception e)
-		{return"exception";}
+		{String note="Ошибка  - Что-то пошло не так!";
+	      model.addAttribute("note", note);
+		  return"noDone";}
 }
 	//редирект на страницу ошибки
 	@GetMapping("/errorDownload")
-	public String errorDownload() {
+	public String errorDownload(Model model) {
 		
-	   return "noFileBD";
+		  String note="Ошибка  - В базе нет файла для этого Заказа!";
+	      model.addAttribute("note", note);
+		  return"noDone";
 	}
 }
 	  

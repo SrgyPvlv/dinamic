@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
-<title>Удаление Заказа</title>
+<title th:text="${title}"></title>
 </head>
 <body>
 
 <div class="parent" >
 
 <div class="center" >
-<h2 style="color:red">Заказ удален!</h2>
+<h2 th:text="${note}" style="color:red"></h2>
 </div>
 <br><br>
 <div class="ok">

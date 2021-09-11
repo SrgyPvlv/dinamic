@@ -20,7 +20,7 @@ public class EmailController {
 				
 		ArrayList<OrderForm> orderform=MainController.orderFormArray;
 		model.addAttribute("orderform", orderform);
-	    return "mailpage";
+	    return "mailPage";
 	}
 	
 	@PostMapping("/mailSend") // отправка почты с заказами

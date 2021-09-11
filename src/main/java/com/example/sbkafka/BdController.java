@@ -121,11 +121,16 @@ public class BdController {
 	}
 	
 	@PostMapping("/bdDelete") // удаление заказа
-	public String delete(@RequestParam("id") int id) {
+	public String delete(@RequestParam("id") int id,Model model) {
 	
 	orderformservice.deleteById(id);
-	   
-	   return "okDelete";
+	
+	String title="Удаление Заказа";
+	String note="Заказ удален!";
+	model.addAttribute("title", title);
+	model.addAttribute("note", note);
+	
+	   return "okDone";
 	}
 	
 }
