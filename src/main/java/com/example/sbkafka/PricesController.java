@@ -47,7 +47,7 @@ public class PricesController {
 		priceService.savePrice(price[i]);
 		}
 		
-		return "oksave";
+		return "redirect:/admin/priceShow";
 	}
 	
 	@GetMapping("/admin/usersShow") //список всех пользователей

@@ -37,7 +37,7 @@ public class EmailController {
             this.emailService.sendSimpleEmail(textemail,textorder,frommail,copyto);
         } catch (Exception e) {e.printStackTrace();}
 		
-		return "oksend";
+		return "okSend";
 	}
 	
 }

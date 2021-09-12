@@ -50,7 +50,10 @@ public class FileController {
 		model.addAttribute("title", title);
 		model.addAttribute("note", note);
 		return "okDone";}
-		else {return"stopUpLoad";}
+		else {
+			  String note="Ошибка  - Файл Заказа уже существует в базе! (Удалите его перед загрузкой новой версии.)";
+		      model.addAttribute("note", note);
+			  return"noDone";}
 		} catch (Exception e) 
 		{ String note="Ошибка  - Что-то пошло не так!";
 	      model.addAttribute("note", note);
@@ -82,7 +85,10 @@ public class FileController {
 		try {
 		OrderForm order=orderformservice.getById(id);
 		FileDB fileDB=order.getFileDB();
-		if (fileDB==null) {return"noFileBD";} else {
+		if (fileDB==null) {
+			String note="Ошибка  - В базе нет файла для этого Заказа!";
+		      model.addAttribute("note", note);
+			  return"noDone";} else {
 		order.setFileDB(null);
 		orderformservice.saveOrderForm(order);
 		String title="Удаление файла Заказа";

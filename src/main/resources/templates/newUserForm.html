@@ -24,7 +24,11 @@
         <input type="text" name="password" style="text-align: center" required/>
         <br><br>
         <label>Роль</label><br>
-        <input type="text" name="role" style="text-align: center" placeholder="ADMIN или USER" required/>
+        <select id="role" name="role">
+        <option value="USER" selected>USER</option>
+        <option value="ADMIN">ADMIN</option>
+        <option value="CONTRACTOR">CONTRACTOR</option>
+        </select>
         <br><br>
 	    <input type="submit" value="Создать" autofocus style="width: 100px; height: 40px; background-color: #98FB98;">
  </form>
