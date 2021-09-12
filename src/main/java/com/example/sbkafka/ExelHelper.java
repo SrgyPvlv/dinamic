@@ -3,8 +3,6 @@ package com.example.sbkafka;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.List;
-
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -18,7 +16,7 @@ public class ExelHelper {
 	  static String[] HEADERs = { "№ Заказа", "№ БС", "Дата начала", "Дата окончания", "Стоимость без НДС", "Стоимость с НДС", "Комментарий"};
 	  static String SHEET = "Заказы";
 
-	  public static ByteArrayInputStream orderFormToExcel(List<OrderForm> orders) {
+	  public static ByteArrayInputStream orderFormToExcel(Iterable<OrderForm> orders) {
 
 	    try (Workbook workbook = new XSSFWorkbook(); ByteArrayOutputStream out = new ByteArrayOutputStream();) {
 	      Sheet sheet = workbook.createSheet(SHEET);

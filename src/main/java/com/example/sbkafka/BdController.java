@@ -26,7 +26,6 @@ public class BdController {
 	@GetMapping("/bdShow") //получение инфо из бд заказов
 	public String bdShow(@RequestParam(value="str",defaultValue = "0") int str,@RequestParam(value="numstr",defaultValue = "20") int numstr,Model model){
 		orderlistFile.clear();
-		//List<OrderForm> orderlist=orderformservice.findAllByOrderOrderNumberAsc();
 		this.str=str;
 		this.numstr=numstr;
 		Page<OrderForm> orderlist=orderformservice.findAllWithPageAsc(this.str,this.numstr);
