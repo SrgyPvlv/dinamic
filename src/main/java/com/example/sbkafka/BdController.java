@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class BdController {
 	
 	int str;int numstr;
-	//ArrayList<Order> orderlistFile=new ArrayList<Order>();
+	ArrayList<Order> orderlistFile=new ArrayList<Order>();
 	
 	@Autowired
 	private OrderFormService orderformservice;
@@ -25,12 +25,12 @@ public class BdController {
 	
 	@GetMapping("/bdShow") //получение инфо из бд заказов
 	public String bdShow(@RequestParam(value="str",defaultValue = "0") int str,@RequestParam(value="numstr",defaultValue = "20") int numstr,Model model){
-		//orderlistFile.clear();
+		orderlistFile.clear();
 		this.str=str;
 		this.numstr=numstr;
 		Page<OrderForm> orderlist=orderformservice.findAllWithPageAsc(this.str,this.numstr);
 		
-		/*for(OrderForm order:orderlist) {
+		for(OrderForm order:orderlist) {
 			
             int id=order.getId();int ordernumber=order.getOrderNumber();String bsnumber=order.getBsNumber();
             String datestart=order.getDateStart();String dateend=order.getDateEnd();
@@ -40,7 +40,7 @@ public class BdController {
 			if (fileDB==null){fileYesNo="Нет";}else {fileYesNo="Есть";}
             Order orderlistarray=new Order(id,ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm,fileYesNo);
             orderlistFile.addAll(Arrays.asList(orderlistarray));
-         } */
+         }
 		
 		DecimalFormat dF = new DecimalFormat( "###,###.00" );
 		    
@@ -65,7 +65,7 @@ public class BdController {
 		int countdfs=orderformservice.countDfs();//кол-во заказов ДФС
 		double sumdfs=orderformservice.sumDfs(); String sumdfsdF=dF.format(sumdfs);//затраты на заказы ДФС
 		
-		model.addAttribute("orderlist", orderlist);
+		model.addAttribute("orderlist", orderlistFile);
 		model.addAttribute("sumordersdF", sumordersdF);
 		model.addAttribute("countoforders", countoforders);
 		model.addAttribute("orderslimitdF", orderslimitdF);

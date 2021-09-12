@@ -102,9 +102,8 @@ public class OrderFormService {
 	}
 	
 	public ByteArrayInputStream load() {
-		//Sort sort = Sort.by("ordernumber").ascending();
-		//Iterable<OrderForm> orders=orderformrepository.findAll(sort);
-		List<OrderForm> orders=orderformrepository.findAll();
+		Sort sort = Sort.by("ordernumber").ascending();
+		Iterable<OrderForm> orders=orderformrepository.findAll(sort);
 		ByteArrayInputStream in=ExelHelper.orderFormToExcel(orders);
 		return in;
 	}
