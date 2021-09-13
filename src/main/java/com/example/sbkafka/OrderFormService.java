@@ -1,6 +1,8 @@
 package com.example.sbkafka;
 
 import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -104,7 +106,15 @@ public class OrderFormService {
 	public ByteArrayInputStream load() {
 		Sort sort = Sort.by("ordernumber").ascending();
 		Iterable<OrderForm> orders=orderformrepository.findAll(sort);
-		ByteArrayInputStream in=ExelHelper.orderFormToExcel(orders);
+		ArrayList<OrderForm> orderlistFile=new ArrayList<OrderForm>();
+            for(OrderForm order:orders) {	
+            int ordernumber=order.getOrderNumber();String bsnumber=order.getBsNumber();
+            String datestart=order.getDateStart();String dateend=order.getDateEnd();
+            double calc=order.getCalc();double calcnds=order.getCalcNds();String comm=order.getComm();
+            OrderForm orderlistarray=new OrderForm(ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm);
+            orderlistFile.addAll(Arrays.asList(orderlistarray));
+         }
+		ByteArrayInputStream in=ExelHelper.orderFormToExcel(orderlistFile);
 		return in;
 	}
 }

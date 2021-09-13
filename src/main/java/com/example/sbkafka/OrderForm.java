@@ -45,7 +45,6 @@ public class OrderForm {
 		this.calcnds=calcnds;
 		this.comm=comm;
 	}
-
 	
 	public int  getId() {
 		return id;
