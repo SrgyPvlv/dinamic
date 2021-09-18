@@ -47,7 +47,7 @@ public class ExelController {
 		return "redirect:/bdShow";
 	}
 	
-	public static void copyToFile() //(Connection connection, String filePath, String tableOrQuery) &
+	public static void copyToFile() //(Connection connection, String filePath, String tableOrQuery)
 	          throws SQLException, IOException {  
 	      
 		  String urls = new String("jdbc:postgresql://ec2-54-155-254-112.eu-west-1.compute.amazonaws.com:5432/d747lpck3drmh3?sslmode=require"); //URL of the database
