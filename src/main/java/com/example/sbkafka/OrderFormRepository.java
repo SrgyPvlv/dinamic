@@ -40,5 +40,9 @@ public interface OrderFormRepository extends JpaRepository<OrderForm,Integer> {
 	@Query("select sum(calc) from OrderForm f where comm in('Fix')")//сумма заказов ДФС
 	public int sumDfs();
 	
-
+	@Query(value="copy (select ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm from orderform) to STDOUT WITH (FORMAT CSV, HEADER)",nativeQuery=true)
+	public void saveToCsv();
+	
+	//COPY products_273 TO STDOUT WITH (FORMAT CSV, HEADER);
+//\\copy (select ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm from orderform) to 'C:/My/orders.csv' DELIMITER ',' CSV HEADER",nativeQuery=true)
 }

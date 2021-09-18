@@ -50,10 +50,18 @@
 	<version>4.1.2</version>
 </dependency>
 <dependency>
-    <groupId>org.postgresql</groupId>
-    <artifactId>postgresql</artifactId>
-    <scope>runtime</scope>
-    </dependency>
+	<groupId>org.postgresql</groupId>
+	<artifactId>postgresql</artifactId>
+	<version>42.2.5</version><!--$NO-MVN-MAN-VER$-->
+</dependency>
+<!-- Thanks for using https://jar-download.com -->
+<dependency>
+	<groupId>org.postgresql</groupId>
+	<artifactId>postgresql</artifactId>
+	<version>42.2.9.jre6</version><!--$NO-MVN-MAN-VER$-->
+</dependency>
+<!-- Thanks for using https://jar-download.com -->
+
     <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>

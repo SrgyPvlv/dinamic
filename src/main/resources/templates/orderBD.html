@@ -49,8 +49,10 @@
  <table class="ordertable" border="1">
  <caption align="top"><h3>Список Заказов &nbsp&nbsp&nbsp&nbsp
  <form th:action="@{/downLoadExel}" method="get" style="display:inline;">
-<input type="submit" value="Импорт в Exel">
-</form></h3>
+<input type="submit" value="Импорт в Exel"> 
+</form>&nbsp&nbsp&nbsp&nbsp
+<form th:action="@{/copyToCsv}" method="get" style="display:inline;">
+<input type="submit" value="Сохранить в CSV"> </h3>
 </caption>
         <tr>
           <th>№ Заказа</th> <th>№ БС</th> <th>Дата начала</th> 
