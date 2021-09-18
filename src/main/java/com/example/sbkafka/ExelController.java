@@ -56,13 +56,15 @@ public class ExelController {
 	      Connection conn = null;
 	      FileOutputStream fileOutputStream = null;  
 	      String mytableOrQuery="(select ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm from orderform order by ordernumber)";
-	      String myfilePath="C:/My/orders.csv";
+	      String home = System.getProperty("user.home");
+	      String myfilePath=home+"/Downloads/"+"orders.csv";
+	      //String myfilePath="C:/My/orders.csv";
 	      
 	      try {  
 	    	  conn = DriverManager.getConnection(urls, username, password);
 	          CopyManager copyManager = new CopyManager((BaseConnection) conn);  
 	          fileOutputStream = new FileOutputStream(myfilePath);  
-	          copyManager.copyOut("COPY " + mytableOrQuery + "TO STDOUT", fileOutputStream);  
+	          copyManager.copyOut("COPY " + mytableOrQuery + "TO STDOUT WITH (FORMAT CSV, HEADER)", fileOutputStream);  
 	      } finally {  
 	          if (fileOutputStream != null) {  
 	              try {  
@@ -71,7 +73,11 @@ public class ExelController {
 	                  e.printStackTrace();  
 	              }  
 	          }  
-	
+	          if (conn != null) {
+	              try {
+	                  conn.close();
+	              } catch (SQLException e) { e.printStackTrace();}
+	          }
 	}
 	}
 }
