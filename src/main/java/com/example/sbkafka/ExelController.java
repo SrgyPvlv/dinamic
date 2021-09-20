@@ -24,12 +24,12 @@ public class ExelController {
 	
 	@GetMapping("/copyToCsv")
 	ResponseEntity<Resource> getFileCsv() throws SQLException, IOException{
-		String filename="dinamic_orders.xlsx";
+		String filename="dinamic_orders.csv";
 		InputStreamResource file=copyToFile();
 		
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
-		        .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
+		        .contentType(MediaType.parseMediaType("text/csv"))
 		        .body(file);
 	}
 	
