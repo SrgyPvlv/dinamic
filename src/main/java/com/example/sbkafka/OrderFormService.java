@@ -99,4 +99,10 @@ public class OrderFormService {
 		double sumdfs=orderformrepository.sumDfs();
 		return sumdfs;
 	}
+	public List<OrderForm> findByOrderNumber(int ordernum){
+		return orderformrepository.findByOrderNumber(ordernum);
+	}
+	public List<OrderForm> findByBsName(String bsnum){
+		return orderformrepository.findByBsName(bsnum);
+	}
 }

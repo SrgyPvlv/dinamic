@@ -193,3 +193,7 @@ position: fixed; /* Фиксированное положение */
 	text-align: left;
 	font-size:16px;
 }
+.search{
+	border:2px solid red;
+	padding: 9px;
+}

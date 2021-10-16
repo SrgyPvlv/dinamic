@@ -37,6 +37,20 @@
 </div>
 </div>
 <br>
+<div class="search">         
+   <form th:action="@{/findByOrderNumber}" th:method="get" >
+     <label>Поиск по № Заказа  </label> &nbsp&nbsp
+       <input type="number" name="orderNumberSearch" min="0" required>
+       <input type="submit" value="Найти" >
+       </form>
+       <br>
+       <form th:action="@{/findByBsName}" th:method="get" >
+       <label>Поиск по № БС</label> &nbsp&nbsp
+       <input type="text" name="bsNumberSearch" placeholder="Код '78-' указывать необязательно" style="width:220px" required>
+       <input type="submit" value="Найти" >  
+   </form>            
+</div>
+<br><br>
 <div>
 <form th:action="@{/bdShow}" method="get">
 <label for="str" style="font-size:20px;"> Cтр. </label>
@@ -46,6 +60,7 @@
 <input type="number" size="5" name="numstr" id="numstr" step="5" min="10" th:value="${numstr}" style="width:40px;height:20px;font-size:16px;text-align:center;">
 <input type="submit" value="Применить" style="height:25px;font-size:16px;">
 </form>
+
  <table class="ordertable" border="1">
  <caption align="top"><h3>Список Заказов &nbsp&nbsp&nbsp&nbsp
 <form th:action="@{/copyToCsv}" method="get" style="display:inline;">

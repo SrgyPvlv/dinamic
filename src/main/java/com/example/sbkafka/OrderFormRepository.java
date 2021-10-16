@@ -39,5 +39,11 @@ public interface OrderFormRepository extends JpaRepository<OrderForm,Integer> {
 	
 	@Query("select sum(calc) from OrderForm f where comm in('Fix')")//сумма заказов ДФС
 	public int sumDfs();
+	
+	@Query(value="select * from orderform where ordernumber in(:ordernum)",nativeQuery=true)//поиск по номеру заказа
+	public List<OrderForm> findByOrderNumber(@Param("ordernum") int ordernum);
+
+	@Query(value="select * from orderform where lower(bsnumber) like concat('%',:bsnum,'%')",nativeQuery=true)//поиск по номеру БС
+	public List<OrderForm> findByBsName(@Param("bsnum") String bsnum);
 
 }
