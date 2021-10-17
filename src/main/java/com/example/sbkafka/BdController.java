@@ -196,7 +196,7 @@ for(OrderForm order:orderlist) {
 		return "orderBD";
 	}
 	
-	@GetMapping("/findByBsName")//поиск по номеру БС
+	@GetMapping("/findByBsName")//поиск по № БС
 	public String findByName(@RequestParam("bsNumberSearch") String bsNumberSearch, Model model)throws IOException{
 		ArrayList<Order> orderlistFile=new ArrayList<Order>();
 		List<OrderForm> orderlist=orderformservice.findByBsName(bsNumberSearch);
