@@ -9,6 +9,21 @@
 
 <div th:replace="header :: header"></div>
 
+<br><br><br>
+
+<div class="search">         
+   <form th:action="@{/admin/findByOrderNumber}" th:method="get" >
+     <label>Поиск по № Заказа  </label> &nbsp&nbsp
+       <input type="number" name="orderNumberSearch" min="0" required>
+       <input type="submit" value="Найти" >
+       </form>
+       <br>
+       <form th:action="@{/admin/findByBsName}" th:method="get" >
+       <label>Поиск по № БС</label> &nbsp&nbsp
+       <input type="text" name="bsNumberSearch" placeholder="Код '78-' указывать необязательно" style="width:220px" required>
+       <input type="submit" value="Найти" >  
+   </form>            
+</div>
 <br><br>
 <div>
 <form th:action="@{/admin/bdEdit}" method="get">

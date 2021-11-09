@@ -254,4 +254,29 @@ for(OrderForm order:orderlist) {
 		
 		return "orderBD";
 	}
+	
+	@GetMapping("admin/findByOrderNumber") // поиск по № Заказа на странице админа
+	public String findByOrderNumberAdmin(@RequestParam("orderNumberSearch") int orderNumberSearch, Model model)throws IOException{
+		
+		List<OrderForm> orderlist=orderformservice.findByOrderNumber(orderNumberSearch);
+		
+		model.addAttribute("orderlist", orderlist);
+		model.addAttribute("str", this.str);
+		model.addAttribute("numstr", this.numstr);
+				
+		return "orderBdEdit";
+		
+	}
+	
+	@GetMapping("admin/findByBsName") // поиск по № БС на странице админа
+	public String findByNameAdmin(@RequestParam("bsNumberSearch") String bsNumberSearch, Model model)throws IOException{
+		
+		List<OrderForm> orderlist=orderformservice.findByBsName(bsNumberSearch);
+		
+		model.addAttribute("orderlist", orderlist);
+		model.addAttribute("str", this.str);
+		model.addAttribute("numstr", this.numstr);
+				
+		return "orderBdEdit";
+	}
 }
