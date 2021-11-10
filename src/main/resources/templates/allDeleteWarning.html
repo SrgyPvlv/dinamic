@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ <head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+<title>Удаление Всех Заказов</title>
+</head>
+<body>
+
+<div th:replace="headerAdmin :: headerAdmin"></div>
+
+<br><br>
+<h2>Внимание!!! Вы хотите удалить все заказы из базы данных!!! Восстановить будет невозможно!!!<br>
+Еще раз подумайте прежде чем нажать кнопку "Удалить ВСЕ Заказы"!!!</h2>
+<br><br>
+<form id="ordersdelete" th:action="@{/admin/allOrdersDelete}" method="post">
+        
+	    <input type="submit" value="Удалить ВСЕ Заказы" style="width: 150px; height: 40px; background:#FF0000;color:white; ">
+</form>
+
+</body>
+</html>

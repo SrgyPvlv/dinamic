@@ -22,7 +22,19 @@ public class PricesController {
 	@Autowired
 	private UsersService usersService;
 	
-	@GetMapping("/admin/priceShow") // показать таблицу ТЦП
+	@GetMapping("/priceShow") // показать таблицу ТЦП на странице Форма расчетов
+	public String showPricesOrder(Model model) {
+		
+		Price[] price=new Price[47];
+		for (int i=2;i<47;i++) {
+	     
+		price[i]=priceService.getById(i);
+		model.addAttribute("price"+i,price[i]);}
+		
+	    return "pricesOrder";
+	}
+	
+	@GetMapping("/admin/priceShow") // показать таблицу ТЦП на странице админа
 	public String showPrices(Model model) {
 		
 		Price[] price=new Price[47];

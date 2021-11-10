@@ -151,8 +151,10 @@
 		<form th:action="@{/mailSend}" method="get">
 		<input type="image" src="/images/envelope.jpg" alt="mail" title="Отправка отчета" width="50" height="50" style="border: none">
 		</form>
-		<br><br>
-		<a href="/documents/prices.pdf" target="_blank"> <img src = "/images/prices.png" alt="prices" title="ТЦП из договора"  width="50" height="50" style="border: none"></a>
+		<br><br>	
+		<form th:action="@{/priceShow}" method="get" target="_blank">
+		<input type="image" src="/images/prices.png" alt="bd" title="ТЦП из договора" width="50" height="50" style="border: none">
+		</form>
 		<br><br>
 		<form th:action="@{/bdShow}" method="get">
 		<input type="image" src="/images/bd.png" alt="bd" title="База Данных заказов" width="50" height="50" style="border: none">

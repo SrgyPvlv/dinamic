@@ -279,4 +279,9 @@ for(OrderForm order:orderlist) {
 				
 		return "orderBdEdit";
 	}
+	@GetMapping("/admin/allOrdersDeleteShow") // переход на страницу предупреждения об удалении всех Заказов
+	public String allOrdersDeleteShow() {
+	   
+	   return "allDeleteWarning";
+	}
 }
