@@ -28,9 +28,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
         .csrf().disable()
         .authorizeRequests()
-        .antMatchers("/admin","/admin/*","/bdDelete","/bdEdit", "/orderEdit", "/fileLoad","/fileDelete").hasRole( "ADMIN")
-        .antMatchers("/recordOrder","/mailSend","/bdShow","/priceShow","/downloadexel","/fileDownload","/findByBsName","/findByOrderNumber").hasAnyRole("USER", "ADMIN")
-        .antMatchers("/calcOrder").hasAnyRole("USER", "ADMIN","CONTRACTOR")
+        .antMatchers("/superadmin/*").hasRole("SUPERADMIN")
+        .antMatchers("/admin","/admin/*","/bdDelete","/bdEdit", "/orderEdit", "/fileLoad","/fileDelete").hasAnyRole( "ADMIN", "SUPERADMIN")
+        .antMatchers("/recordOrder","/mailSend","/bdShow","/priceShow","/downloadexel","/fileDownload","/findByBsName","/findByOrderNumber").hasAnyRole("USER", "ADMIN", "SUPERADMIN")
+        .antMatchers("/calcOrder").hasAnyRole("USER", "CONTRACTOR", "ADMIN", "SUPERADMIN")
         .antMatchers("/").permitAll()
         .and().formLogin()
         .loginPage("/login")

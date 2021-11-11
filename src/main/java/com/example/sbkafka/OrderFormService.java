@@ -47,6 +47,10 @@ public class OrderFormService {
 		orderformrepository.deleteById(id);
 	}
 	
+	public void deleteAll() {
+		orderformrepository.deleteAll();
+	}
+	
 	public void editOrderForm(int id,int ordernumber,String bsnumber,String datestart,String dateend,//
 			double calc,double calcnds,String comm) {
 		OrderForm edited=orderformrepository.getById(id);

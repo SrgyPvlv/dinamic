@@ -284,4 +284,12 @@ for(OrderForm order:orderlist) {
 	   
 	   return "allDeleteWarning";
 	}
+	
+	@PostMapping("/superadmin/allOrdersDelete") // Осторожно! Удаление всех заказов из БД.
+	public String allOrdersDelete() {
+		
+	    orderformservice.deleteAll();
+		
+		return "redirect:/admin/bdEdit";
+	}
 }

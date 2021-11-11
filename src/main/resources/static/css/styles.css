@@ -197,3 +197,6 @@ position: fixed; /* Фиксированное положение */
 	border:2px solid red;
 	padding: 9px;
 }
+.alldelete{
+	text-align:center;
+}

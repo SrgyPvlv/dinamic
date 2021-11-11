@@ -9,14 +9,22 @@
 
 <div th:replace="headerAdmin :: headerAdmin"></div>
 
+
 <br><br>
+<div class="alldelete">
 <h2>Внимание!!! Вы хотите удалить все заказы из базы данных!!! Восстановить будет невозможно!!!<br>
-Еще раз подумайте прежде чем нажать кнопку "Удалить ВСЕ Заказы"!!!</h2>
-<br><br>
-<form id="ordersdelete" th:action="@{/admin/allOrdersDelete}" method="post">
+Еще раз подумайте прежде чем нажать кнопку "Удалить ВСЕ Заказы"!!!<br>
+Скорее всего Вам не надо этого делать!!! Вам также понадобятся права "superadmin"!<br>
+Лучше вернитесь на страницу "Администратор".</h2>
+<br><br><br>
+<form id="ordersdelete" th:action="@{/superadmin/allOrdersDelete}" method="post">
         
 	    <input type="submit" value="Удалить ВСЕ Заказы" style="width: 150px; height: 40px; background:#FF0000;color:white; ">
 </form>
+</div>
+
+<br><br>
+<div th:replace="footer :: footer"></div>
 
 </body>
 </html>
