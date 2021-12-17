@@ -1,4 +1,4 @@
-package com.example.sbkafka;
+package com.example.sbkafka.Controller;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

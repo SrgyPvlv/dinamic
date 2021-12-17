@@ -1,4 +1,4 @@
-package com.example.sbkafka;
+package com.example.sbkafka.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -8,6 +8,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.example.sbkafka.Model.Users;
+import com.example.sbkafka.Repository.UsersRepository;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {

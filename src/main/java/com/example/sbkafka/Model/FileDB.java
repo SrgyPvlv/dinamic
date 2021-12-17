@@ -1,4 +1,4 @@
-package com.example.sbkafka;
+package com.example.sbkafka.Model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,4 +1,4 @@
-package com.example.sbkafka;
+package com.example.sbkafka.Controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.sbkafka.Model.Price;
+import com.example.sbkafka.Model.Users;
+import com.example.sbkafka.Service.PriceService;
+import com.example.sbkafka.Service.UsersService;
 
 // здесь контроллер для редактирования ТЦП договора и Пользователей приложения
 

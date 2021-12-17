@@ -1,4 +1,4 @@
-package com.example.sbkafka;
+package com.example.sbkafka.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;

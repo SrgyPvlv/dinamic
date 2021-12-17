@@ -1,4 +1,4 @@
-package com.example.sbkafka;
+package com.example.sbkafka.Service;
 
 public interface EmailService {
 

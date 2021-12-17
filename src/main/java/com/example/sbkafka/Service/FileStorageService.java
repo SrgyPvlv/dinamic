@@ -1,10 +1,13 @@
-package com.example.sbkafka;
+package com.example.sbkafka.Service;
 
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.example.sbkafka.Model.FileDB;
+import com.example.sbkafka.Repository.FileDBRepository;
 
 @Service
 public class FileStorageService {
