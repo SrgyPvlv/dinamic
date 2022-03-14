@@ -58,16 +58,11 @@ table {
         }
             
  .parent {
-
+    height:100%;
     width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
     display: flex;
     flex-direction:column;
     align-items: center;
-    align-content: center;
     justify-content: center;
     overflow: auto;  
 }
@@ -104,17 +99,44 @@ position: fixed; /* Фиксированное положение */
 .headercss{
 position: fixed; /* Фиксированное положение */
     left: 0; top: 0; /* Левый верхний угол */
-    padding-right: 10px; /* Поля вокруг текста */
-	padding-top: 5px;
+	padding: 10px;
     background: #FFFFF0; /* Цвет фона */
     color: #000000; /* Цвет текста */
     width: 100%; /* Ширина слоя */
-	text-align: right;
-	font-size:20px;
+	margin-right:20px;
+	font-size:16px;
+	border-bottom: 1px solid #000000;
+	z-index: 1;
+}
+.test {
+  position:fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  padding: 10px;
+  z-index: 1;
+}
+.headercss a:link{
+	color:black; text-decoration:none;
+}
+.headercss a:visited {
+	color:black; text-decoration:none;
+}
+.headercss a:hover {
+	color:blue; text-decoration:underline;
 }
 
 .ok{
 	font-size:27px;
+}
+.ok a:link{
+	text-decoration:none;
+}
+.ok a:visited {
+	text-decoration:none;
+}
+.ok a:hover {
+	text-decoration:underline;
 }
 
 .content input{
@@ -194,9 +216,30 @@ position: fixed; /* Фиксированное положение */
 	font-size:16px;
 }
 .search{
+	margin: 20px auto 0 auto;
+    width: 100%;
 	border:2px solid red;
 	padding: 9px;
 }
 .alldelete{
 	text-align:center;
+}
+input[type="submit"]{
+	transition: transform .2s;
+}
+input[type="submit"]:hover{
+	transform: scale(1.2);
+}
+.parentOkNo {
+	width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    overflow: auto;
 }

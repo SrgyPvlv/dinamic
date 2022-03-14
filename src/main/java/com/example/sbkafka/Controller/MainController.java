@@ -51,7 +51,7 @@ public class MainController {
 	@GetMapping("/calcOrder")
     public String showOrder() {
 		
-        return "order";
+        return "index";
     }
 
 	@PostMapping("/calcOrder")
@@ -98,7 +98,7 @@ public class MainController {
     	model.addAttribute("orderKmPrice", kmPrice);
     	model.addAttribute("orderOutGoPrice", outGoPrice);
     	model.addAttribute("jeepPrice", jeep);
-            return "order";
+            return "index";
         }
 	public Double calcTransport(String orderdistance,double km) {
 		
@@ -537,6 +537,6 @@ MainController.orderFormArray.addAll(Arrays.asList(orderForm));
 
 orderformservice.saveOrderForm(orderForm);
 
-    return "order";
+    return "index";
 }
 }

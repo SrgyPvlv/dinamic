@@ -6,17 +6,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div th:fragment="headerAdmin">
-<div class="headercss">
-<header>
+<div th:fragment="headerAdmin" class="headercss">
 
-<a th:href="@{/}">На главную</a> |  
-<a th:href="@{/calcOrder}">Форма расчетов</a> |  
-<a th:href="@{/admin}">Администратор</a> |
-LogOut <a th:href="@{/logout}"><img th:src = "@{/images/logout.jpg}" alt="logout" title="Выход" width="25" height="25" style="border: none"></a>      
+<a th:href="@{/calcOrder}">Форма расчетов</a> &nbsp | &nbsp  
+<a th:href="@{/admin}">Администратор</a> &nbsp | &nbsp
+<a th:href="@{/logout}">Выход</a>      
 
-</header>
-</div>
 </div>
 </body>
 </html>
