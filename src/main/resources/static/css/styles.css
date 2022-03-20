@@ -22,6 +22,12 @@ fieldset[name="order"]{
 	border-color:#FFEBCD;
 }
 
+fieldset[name="order_1"]{
+    width: 400px; 
+    height: 190px; 
+	border-color:#FFEBCD;
+}
+
 fieldset[name="sender"]{
     width: 700px; 
     height: 350px; 
@@ -224,10 +230,11 @@ position: fixed; /* Фиксированное положение */
 .alldelete{
 	text-align:center;
 }
-input[type="submit"]{
+input[type="submit"],input[type="reset"]{
 	transition: transform .2s;
+	cursor: pointer;
 }
-input[type="submit"]:hover{
+input[type="submit"]:hover,input[type="reset"]:hover{
 	transform: scale(1.2);
 }
 .parentOkNo {
@@ -242,4 +249,14 @@ input[type="submit"]:hover{
     align-content: center;
     justify-content: center;
     overflow: auto;
+}
+input#bsnumber:invalid+i:after{
+	content: '\2718';
+    color:red;
+    padding-left: 5px;
+}
+input#bsnumber:valid+i:after{
+	content: '\2714';
+    color:#32CD32;
+    padding-left: 5px;
 }
