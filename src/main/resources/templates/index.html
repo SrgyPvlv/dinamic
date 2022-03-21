@@ -90,60 +90,33 @@
         </table>
     <p><label for="comm" style="font-weight:bold">Комментарий(замечания) к Заказу: </label>
     <textarea form ="orderform" name="comm" id="comm" cols="70" rows="4" wrap="soft"
-     th:value="${orderComment}" placeholder="Если при проверке Заказа выявлены неточности и расхождения...Укажите их в этом поле."></textarea>    
-        <br>
-        <table>
-		<caption align="top"><h4>Оплата техники повышенной проходимости</h4></caption>
-        <tr>
-        <td>Стоимость выезда техники (ГАЗ-66,ЗИЛ-131,Урал и т.д.)</td> <td th:text="${jeepPrice}"></td></td><td>руб.</td>
-        </tr>
-        </table>
+     th:value="${orderComment}" placeholder="Если при проверке Заказа выявлены неточности и расхождения...Укажите их в этом поле."></textarea>
         
-		<table>
-		<caption align="top"><h4>Оплата выезда / ложного выезда бригады</h4></caption>
-        <tr>
-        <td>Стоимость выезда / ложного выезда</td> <td th:text="${orderOutGoPrice}"></td></td><td>руб.</td>
-        </tr>
-        </table>
-        
-		<table>
-		<caption align="top"><h4>Оплата времени поддержания от ДГУ</h4></caption>
-        <tr>
-        <td>Длительность работы ДГУ</td> <td th:text="${orderDiffTime}"></td><td>час</td><td th:text="${orderDiffDay}"></td><td>сутки</td>
-        </tr>
-		<tr>
-        <td>Стоимость работ при почасовой оплате</td><td th:text="${orderCalcHPrice}"></td><td>руб.</td>
-        </tr>
-		<tr>
-        <td>Стоимость работ при посуточной оплате</td><td th:text="${orderCalcDPrice}"></td><td>руб.</td>
-        </tr>
-		</table> 
-        
-        <table>
-		<caption align="top"><h4>Оплата транспортировки ДГУ</h4></caption>
-        <tr>
-        <td>Транспортировка ДГУ</td><td th:text="${orderDistance}"></td><td>км</td>
-        </tr>
-		<tr>
-        <td>Цена за км</td><td th:text="${orderKmPrice}"></td><td>руб.</td>
-        </tr>
-        <tr>
-        <td>Стоимость транспортировки ДГУ</td><td th:text="${orderTransport}"></td><td>руб.</td>
-        </tr>
-		</table>
-		
-		<table>
-		<caption align="top"><h4>Общая стоимость работ (заказа)</h4></caption>
-		<tr>
-        <td>Стоимость без НДС</td><td th:text="${orderCalc}"></td><td>руб.</td>
-        </tr>
-		<tr>
-        <td>НДС 20%</td><td th:text="${orderNds}"></td><td>руб.</td>
-        </tr>
-		<tr>
-        <td>Стоимость с НДС</td><td th:text="${orderCalcNds}"></td><td>руб.</td>
-        </tr>
-        </table>
+<table class="act">
+<tr>
+<th>Наименование работ</th> <th>Ед. изм.</th> <th>Кол-во</th> <th>Стоимость, руб. без НДС</th>
+</tr>
+
+<tr th:if="${jeepPrice}!=0">
+<td>Стоимость техники повышенной проходимости (ГАЗ-66, ЗИЛ-131, Урал, Камаз и т.д.)</td> <td>выезд</td> <td th:text="${jeepYesNo}"></td> <td th:text="${jeepPrice}"></td>
+</tr>
+<tr th:if="${orderOutGoPrice}!=0">
+<td>Стоимость выезда / ложного выезда</td> <td>выезд</td> <td th:text="${orderOutGoPrice !=null ? '1' : '0'}"></td> <td th:text="${orderOutGoPrice}"></td>
+</tr>
+<tr th:if="${orderCalcHPrice}!=0">
+<td>Стоимость времени поддержания от ДГУ</td> <td>час</td> <td th:text="${orderDiffTime}"></td> <td th:text="${orderCalcHPrice}"></td>
+</tr>
+<tr th:if="${orderCalcDPrice}!=0">
+<td>Стоимость времени поддержания от ДГУ</td> <td>сутки</td> <td th:text="${orderDiffDay}"></td> <td th:text="${orderCalcDPrice}"></td>
+</tr>
+<tr th:if="${orderTransport}!=0">
+<td>Стоимость транспортировки ДГУ</td> <td>км</td> <td th:text="${orderDistance}"></td> <td th:text="${orderTransport}"></td>
+</tr>
+
+<tr><td colspan="3" style="text-align:right">Итого по Заказу без НДС 20%, руб.</td><td th:text="${orderCalc}"></td></tr>
+<tr><td colspan="3" style="text-align:right">НДС 20%, руб.</td><td th:text="${orderNds}"></td></tr>
+<tr><td colspan="3" style="text-align:right">Итого с НДС 20%, руб.</td><td th:text="${orderCalcNds}"></td></tr>
+</table>
 </div>
 
 <div class = "ymap">

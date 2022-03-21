@@ -100,6 +100,7 @@ public class MainController {
     	model.addAttribute("orderKmPrice", kmPrice);
     	model.addAttribute("orderOutGoPrice", outGoPrice);
     	model.addAttribute("jeepPrice", jeep);
+    	model.addAttribute("jeepYesNo", jeepYesNo);
             return "index";
         }
 	public Double calcTransport(String orderdistance,double km) {

@@ -260,3 +260,9 @@ input#bsnumber:valid+i:after{
     color:#32CD32;
     padding-left: 5px;
 }
+.act th{
+	background: #FFFFFF;
+}
+.act{
+	margin-top: 30px;
+}
