@@ -26,6 +26,9 @@ import java.util.Arrays;
 public class MainController {
 	
 	Double transport,diffTimeHours,diffTimeDay,orderPrice,outGoPrice;
+	double timeHoursPrice;
+	double timeDayPrice;
+	double transPrice1;
 	static String outputFileName;
 	public static ArrayList<OrderForm> orderFormArray = new ArrayList<OrderForm>();
 	
@@ -89,7 +92,7 @@ public class MainController {
     	model.addAttribute("timeStart", dateStart);
     	model.addAttribute("timeEnd", dateEnd);
     	model.addAttribute("orderDistance", orderDistance);
-    	model.addAttribute("orderTransport", trans);
+    	model.addAttribute("orderTransport", transPrice1);
     	model.addAttribute("orderDiffTime", diffTime);
     	model.addAttribute("orderDiffDay", diffDay);
     	model.addAttribute("orderCalcHPrice", calcHPrice);
@@ -101,6 +104,10 @@ public class MainController {
     	model.addAttribute("orderOutGoPrice", outGoPrice);
     	model.addAttribute("jeepPrice", jeep);
     	model.addAttribute("jeepYesNo", jeepYesNo);
+    	model.addAttribute("jeepOnePrice", jeepPrice);
+    	model.addAttribute("kmPrice", kmPrice);
+    	model.addAttribute("timeHoursPrice", timeHoursPrice);
+    	model.addAttribute("timeDayPrice", timeDayPrice);
             return "index";
         }
 	public Double calcTransport(String orderdistance,double km) {
@@ -206,7 +213,8 @@ public Double calcOrder(int dguType,String workType,double jeep,double tHours,do
 	
 	int dguType1=dguType;
 	String workType1=workType,owener1=owener;
-	double timeHoursPrice = 0,timeDayPrice = 0,tHours1=tHours,tDays1=tDays,orderPrice=0,transPrice1=transPrice,outgo=0,jeep1=jeep;
+	double tHours1=tHours,tDays1=tDays,orderPrice=0,outgo=0,jeep1=jeep;
+	transPrice1=transPrice;
 	if(owener1.equals("po")) {
 	if (workType1.equals("emergency")){
 		if(tDays1<1.0) {
@@ -354,7 +362,7 @@ public Double calcOrderHours(int dguType,String workType,double jeep,double tHou
 	
 	int dguType1=dguType;
 	String workType1=workType,owener1=owener;
-	double timeHoursPrice = 0,tHours1=tHours,tDays1=tDays,orderPriceHours=0,outgo=0;
+	double tHours1=tHours,tDays1=tDays,orderPriceHours=0,outgo=0;
 	if(owener1.equals("po")) {
 	if (workType1.equals("emergency")){
 		if(tDays1<1.0) {
@@ -508,7 +516,7 @@ public Double calcOrderDays(int dguType,String workType,double jeep,double tHour
 	
 	int dguType1=dguType;
 	String workType1=workType,owener1=owener;
-	double timeDayPrice = 0,tDays1=tDays,orderPriceDays=0,outgo=0;
+	double tDays1=tDays,orderPriceDays=0,outgo=0;
 	if(owener1.equals("po")) {
 	if (workType1.equals("emergency")){
 		if(tDays1<1.0) {

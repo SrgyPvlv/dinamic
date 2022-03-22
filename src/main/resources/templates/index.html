@@ -9,7 +9,7 @@
  
  <div th:replace="header :: header"></div>
  
- <br><br>
+ <div class="left">
  <h3> Форма для расчета оплаты Аварийного Электроснабжения</h3>
   <form th:action="@{/calcOrder}" th:object="${orderForm}" method="post">
   <fieldset name="order">
@@ -64,7 +64,28 @@
    <p><input type="submit" value="Рассчитать" style="width: 100px; height: 40px; background-color: #98FB98; margin-left:70px; margin-right:30px">
       <input type="reset" value="Очистить" style="width: 100px; height: 40px; background-color: #FFC0CB;"></p>
   </form>
-<br><br>
+</div>
+
+<div class="ymap">
+        <a href="https://yandex.ru/maps" target="_blank"> <img src = "/images/map_mini1.png" alt="map" title="Яндекс карты" width="50" height="50" style="border: none"></a>
+        <br><br>
+		<form th:action="@{/mailSend}" method="get">
+		<input type="image" src="/images/envelope.jpg" alt="mail" title="Отправка отчета" width="50" height="50" style="border: none">
+		</form>
+		<br><br>	
+		<form th:action="@{/priceShow}" method="get" target="_blank">
+		<input type="image" src="/images/prices.png" alt="bd" title="ТЦП из договора" width="50" height="50" style="border: none">
+		</form>
+		<br><br>
+		<form th:action="@{/bdShow}" method="get">
+		<input type="image" src="/images/bd.png" alt="bd" title="База Данных заказов" width="50" height="50" style="border: none">
+		</form>
+		<br><br>
+		<form th:action="@{/admin}" method="get">
+		<input type="image" src="/images/fit.jpg" alt="fit" title="Администрирование" width="50" height="50" style="border: none">
+		</form>
+</div>
+
 <div class="right">
 <table>
  <caption align="top"><h3>Результаты расчета</h3></caption>
@@ -84,61 +105,39 @@
         <input type="hidden" name="ordercalc1" th:value="${orderCalc}" />
         <input type="hidden" name="ordercalcnds1" th:value="${orderCalcNds}" />
 	    <input type="submit" value="Сохранить">
- </form>
+                </form>
 				</td>
             </tr>   
         </table>
-    <p><label for="comm" style="font-weight:bold">Комментарий(замечания) к Заказу: </label>
+    <p><label for="comm" style="font-weight:bold;color:#8B0000;">Комментарий(замечания) к Заказу: </label>
     <textarea form ="orderform" name="comm" id="comm" cols="70" rows="4" wrap="soft"
      th:value="${orderComment}" placeholder="Если при проверке Заказа выявлены неточности и расхождения...Укажите их в этом поле."></textarea>
         
 <table class="act">
 <tr>
-<th>Наименование работ</th> <th>Ед. изм.</th> <th>Кол-во</th> <th>Стоимость, руб. без НДС</th>
+<th>Наименование работ</th> <th>Ед. изм.</th> <th>Кол-во</th> <th>Цена за ед., руб. без НДС</th> <th>Стоимость, руб. без НДС</th>
 </tr>
-
 <tr th:if="${jeepPrice}!=0">
-<td>Стоимость техники повышенной проходимости (ГАЗ-66, ЗИЛ-131, Урал, Камаз и т.д.)</td> <td>выезд</td> <td th:text="${jeepYesNo}"></td> <td th:text="${jeepPrice}"></td>
+<td>Стоимость техники повышенной проходимости (ГАЗ-66, ЗИЛ-131, Урал, Камаз и т.д.)</td> <td>выезд</td> <td th:text="${jeepYesNo}"></td> <td th:text="${jeepOnePrice}"></td> <td th:text="${jeepPrice}"></td>
 </tr>
 <tr th:if="${orderOutGoPrice}!=0">
-<td>Стоимость выезда / ложного выезда</td> <td>выезд</td> <td th:text="${orderOutGoPrice !=null ? '1' : '0'}"></td> <td th:text="${orderOutGoPrice}"></td>
+<td>Выезд аварийной бригады / Компенсация ложного выезда</td> <td>выезд</td> <td th:text="${orderOutGoPrice !=null ? '1' : ''}"></td> <td th:text="${orderOutGoPrice}"> <td th:text="${orderOutGoPrice}"></td>
 </tr>
 <tr th:if="${orderCalcHPrice}!=0">
-<td>Стоимость времени поддержания от ДГУ</td> <td>час</td> <td th:text="${orderDiffTime}"></td> <td th:text="${orderCalcHPrice}"></td>
+<td>Поддержание электроснабжения оборудования базовой станции (БС) от дизель-генераторной установки (ДГУ)</td> <td>час</td> <td th:text="${orderDiffTime}"></td> <td th:text="${timeHoursPrice}"></td> <td th:text="${orderCalcHPrice}"></td>
 </tr>
 <tr th:if="${orderCalcDPrice}!=0">
-<td>Стоимость времени поддержания от ДГУ</td> <td>сутки</td> <td th:text="${orderDiffDay}"></td> <td th:text="${orderCalcDPrice}"></td>
+<td>Поддержание электроснабжения оборудования базовой станции (БС) от дизель-генераторной установки (ДГУ)</td> <td>сутки</td> <td th:text="${orderDiffDay}"></td> <td th:text="${timeDayPrice}"></td> <td th:text="${orderCalcDPrice}"></td>
 </tr>
 <tr th:if="${orderTransport}!=0">
-<td>Стоимость транспортировки ДГУ</td> <td>км</td> <td th:text="${orderDistance}"></td> <td th:text="${orderTransport}"></td>
+<td>Транспортировка дизель-генераторной установки (ДГУ)</td> <td>км</td> <td th:text="${orderDistance}"></td> <td th:text="${kmPrice}"></td> <td th:text="${orderTransport}"></td>
 </tr>
 
-<tr><td colspan="3" style="text-align:right">Итого по Заказу без НДС 20%, руб.</td><td th:text="${orderCalc}"></td></tr>
-<tr><td colspan="3" style="text-align:right">НДС 20%, руб.</td><td th:text="${orderNds}"></td></tr>
-<tr><td colspan="3" style="text-align:right">Итого с НДС 20%, руб.</td><td th:text="${orderCalcNds}"></td></tr>
+<tr><td colspan="4" style="text-align:right">Итого по Заказу без НДС 20%, руб.</td><td th:text="${orderCalc}"></td></tr>
+<tr><td colspan="4" style="text-align:right">НДС 20%, руб.</td><td th:text="${orderNds}"></td></tr>
+<tr><td colspan="4" style="text-align:right">Итого с НДС 20%, руб.</td><td th:text="${orderCalcNds}"></td></tr>
 </table>
 </div>
-
-<div class = "ymap">
-        <a href="https://yandex.ru/maps" target="_blank"> <img src = "/images/map_mini1.png" alt="map" title="Яндекс карты" width="50" height="50" style="border: none"></a>
-        <br><br>
-		<form th:action="@{/mailSend}" method="get">
-		<input type="image" src="/images/envelope.jpg" alt="mail" title="Отправка отчета" width="50" height="50" style="border: none">
-		</form>
-		<br><br>	
-		<form th:action="@{/priceShow}" method="get" target="_blank">
-		<input type="image" src="/images/prices.png" alt="bd" title="ТЦП из договора" width="50" height="50" style="border: none">
-		</form>
-		<br><br>
-		<form th:action="@{/bdShow}" method="get">
-		<input type="image" src="/images/bd.png" alt="bd" title="База Данных заказов" width="50" height="50" style="border: none">
-		</form>
-		<br><br>
-		<form th:action="@{/admin}" method="get">
-		<input type="image" src="/images/fit.jpg" alt="fit" title="Администрирование" width="50" height="50" style="border: none">
-		</form>
-</div>
-<br>
 
 <div th:replace="footer :: footer"></div>
 

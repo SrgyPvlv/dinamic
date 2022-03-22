@@ -41,7 +41,6 @@ legend{
 	font-weight:normal;
 }
 table { 
-		
 		border-collapse: collapse; 
 	}
 	tr:nth-of-type { 
@@ -57,13 +56,29 @@ table {
 		border: 2px solid #696969; 
 		text-align: center; 
 	}
+.left{
+	float: left;
+	width: 560px;
+	margin-top: 20px;
+	padding: 10px;
+	margin-bottom: 30px;
+}
+.ymap{
+	float:right;
+	width:70px;
+	margin-top: 20px;
+	padding: 10px;
+	margin-bottom: 30px;
+	text-align: right;
+}	
 .right {
-     position: absolute;
-     left: 500px;
-     top: 40px;
-        }
-            
- .parent {
+     margin-left: 580px;
+     margin-right: 90px;
+     margin-top: 20px;
+     padding: 10px;
+     margin-bottom: 30px;
+}                  
+.parent {
     height:100%;
     width: 100%;
     display: flex;
@@ -71,26 +86,10 @@ table {
     align-items: center;
     justify-content: center;
     overflow: auto;  
-}
-                                          
+}                                         
 .center{      
-
 font-size:22px;
-}
-            
-.ymap p{
-
-text-align: center;
-
-}
-
-.ymap{
-position: absolute;
-                right: 20px;
-                top: 50px;
-max-width: 100px;
-
-}
+}           
 
 .footercss{
 position: fixed; /* Фиксированное положение */
@@ -101,7 +100,6 @@ position: fixed; /* Фиксированное положение */
     width: 100%; /* Ширина слоя */
 	text-align: center;
 }
-
 .headercss{
 position: fixed; /* Фиксированное положение */
     left: 0; top: 0; /* Левый верхний угол */
