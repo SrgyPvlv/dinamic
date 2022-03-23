@@ -56,9 +56,9 @@
    <br>
    <fieldset name="order">
    <legend>Расстояние до БС от КАД</legend>
-    <p style="color:#0000FF; font-size:18px">Оставляем "ноль", если БС внутри КАД или дизеление Плановое (продолжение Аварийного) !</p>
+    <p style="color:#0000FF;font-size:18px;font-style:italic;">Оставляем "ноль", если БС внутри КАД или дизеление Плановое (продолжение Аварийного) !</p>
 	<p><label for="distance">Расстояние, км : </label>
-	<input type="number" size="7" name="distance" id="distance" step="0.01" min="0" value="0"></p>
+	<input type="number" size="7" name="distance" id="distance" step="0.01" min="0" value="0" required></p>
     </fieldset>
    <br>
    <p><input type="submit" value="Рассчитать" style="width: 100px; height: 40px; background-color: #98FB98; margin-left:70px; margin-right:30px">
@@ -115,22 +115,25 @@
         
 <table class="act">
 <tr>
-<th>Наименование работ</th> <th>Ед. изм.</th> <th>Кол-во</th> <th>Цена за ед., руб. без НДС</th> <th>Стоимость, руб. без НДС</th>
+<th>Перечень работ, услуг</th> <th>Ед. изм.</th> <th>Кол-во</th> <th>Цена за ед., руб. без НДС</th> <th>Стоимость, руб. без НДС</th>
 </tr>
 <tr th:if="${jeepPrice}!=0">
-<td>Стоимость техники повышенной проходимости (ГАЗ-66, ЗИЛ-131, Урал, Камаз и т.д.)</td> <td>выезд</td> <td th:text="${jeepYesNo}"></td> <td th:text="${jeepOnePrice}"></td> <td th:text="${jeepPrice}"></td>
+<td>Использование автомобильной техники повышенной проходимости (ГАЗ-66, ЗИЛ-131, Урал, Камаз и т.д.)</td> <td>выезд</td> <td th:text="${jeepYesNo}"></td> <td th:text="${jeepOnePrice}"></td> <td th:text="${jeepPrice}"></td>
 </tr>
 <tr th:if="${orderOutGoPrice}!=0">
-<td>Выезд аварийной бригады / Компенсация ложного выезда</td> <td>выезд</td> <td th:text="${orderOutGoPrice !=null ? '1' : ''}"></td> <td th:text="${orderOutGoPrice}"> <td th:text="${orderOutGoPrice}"></td>
+<td>Выезд аварийной бригады / Компенсация ложного выезда аварийной бригады для обеспечения АЭС Объекта Заказчика</td> <td>выезд</td> <td th:text="${orderOutGoPrice !=null ? '1' : ''}"></td> <td th:text="${orderOutGoPrice}"> <td th:text="${orderOutGoPrice}"></td>
 </tr>
 <tr th:if="${orderCalcHPrice}!=0">
-<td>Поддержание электроснабжения оборудования базовой станции (БС) от дизель-генераторной установки (ДГУ)</td> <td>час</td> <td th:text="${orderDiffTime}"></td> <td th:text="${timeHoursPrice}"></td> <td th:text="${orderCalcHPrice}"></td>
+<td th:text="'Поддержание электроснабжения оборудования базовой станции (БС) от дизель-генераторной установки (ДГУ) '+${owenerType==null ? '?':(owenerType=='po'?'Исполнителя':'Заказчика')}+' '+${dguType==null? '?':(dguType==3?'3.5':dguType)}+' kW ('+${workType==null?'?':(workType=='emergency'?'Аварийное':'Плановое')}+')'"></td> 
+<td>час</td> <td th:text="${orderDiffTime}"></td> <td th:text="${timeHoursPrice}"></td> <td th:text="${orderCalcHPrice}"></td>
 </tr>
 <tr th:if="${orderCalcDPrice}!=0">
-<td>Поддержание электроснабжения оборудования базовой станции (БС) от дизель-генераторной установки (ДГУ)</td> <td>сутки</td> <td th:text="${orderDiffDay}"></td> <td th:text="${timeDayPrice}"></td> <td th:text="${orderCalcDPrice}"></td>
+<td th:text="'Поддержание электроснабжения оборудования базовой станции (БС) от дизель-генераторной установки (ДГУ) '+${owenerType==null ? '?':(owenerType=='po'?'Исполнителя':'Заказчика')}+' '+${dguType==null? '?':(dguType==3?'3.5':dguType)}+' kW ('+${workType==null?'?':(workType=='emergency'?'Аварийное':'Плановое')}+')'"></td> 
+<td>сутки</td> <td th:text="${orderDiffDay}"></td> <td th:text="${timeDayPrice}"></td> <td th:text="${orderCalcDPrice}"></td>
 </tr>
 <tr th:if="${orderTransport}!=0">
-<td>Транспортировка дизель-генераторной установки (ДГУ)</td> <td>км</td> <td th:text="${orderDistance}"></td> <td th:text="${kmPrice}"></td> <td th:text="${orderTransport}"></td>
+<td th:text="'Транспортировка дизель-генераторной установки (ДГУ) '+${owenerType==null ? '?':(owenerType=='po'?'Исполнителя':'Заказчика')}+' для  базовой станции (БС) за  пределами КАД ('+${dguType==null? '?':(dguType==3?'3.5':dguType)}+' kW)'"></td> 
+<td>км</td> <td th:text="${orderDistance}"></td> <td th:text="${kmPrice}"></td> <td th:text="${orderTransport}"></td>
 </tr>
 
 <tr><td colspan="4" style="text-align:right">Итого по Заказу без НДС 20%, руб.</td><td th:text="${orderCalc}"></td></tr>

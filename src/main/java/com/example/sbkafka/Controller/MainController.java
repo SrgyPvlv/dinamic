@@ -108,9 +108,12 @@ public class MainController {
     	model.addAttribute("kmPrice", kmPrice);
     	model.addAttribute("timeHoursPrice", timeHoursPrice);
     	model.addAttribute("timeDayPrice", timeDayPrice);
-            return "index";
+    	model.addAttribute("dguType", dguType);
+    	model.addAttribute("workType", workType);
+    	model.addAttribute("owenerType", owenerType);
+        return "index";
         }
-	public Double calcTransport(String orderdistance,double km) {
+public Double calcTransport(String orderdistance,double km) {
 		
 		double dist=Double.parseDouble(orderdistance);
 		double transport=dist*km;
@@ -118,15 +121,13 @@ public class MainController {
 		transport = bd.doubleValue();
 		
 		return transport;
-	}
-	
+	}	
 public Double calcJeep(int jeepYesNo,double jeepPrice) {
 	
 		double jeep=jeepYesNo*jeepPrice;
 		
 		return jeep;
-	}
-	
+	}	
 public Double calcDiffTimeHours(String timeStart, String timeEnd) {
 		
 		LocalDateTime t1=LocalDateTime.parse(timeStart);
