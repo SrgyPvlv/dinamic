@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.sbkafka.Model.OrderForm;
 import com.example.sbkafka.Service.EmailService;
 
+//отправка почтового сообщения о результатах проверки
+
 @Controller
 public class EmailController {
 

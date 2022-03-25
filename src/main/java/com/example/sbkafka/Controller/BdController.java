@@ -20,12 +20,13 @@ import com.example.sbkafka.Model.OrderForm;
 import com.example.sbkafka.Service.OrderFormService;
 import com.example.sbkafka.Service.PriceService;
 
+//работа с БД заказов
+
 @Controller
 public class BdController {
 	
 	int str;int numstr;
-	
-	
+		
 	@Autowired
 	private OrderFormService orderformservice;
 	

@@ -25,6 +25,8 @@ import com.example.sbkafka.Model.OrderForm;
 import com.example.sbkafka.Service.FileStorageService;
 import com.example.sbkafka.Service.OrderFormService;
 
+//работа с файлом заказа (загрузка, скачивание и т.д.)
+
 @Controller
 public class FileController {
 
@@ -32,6 +34,7 @@ public class FileController {
 	
 	@Autowired 
 	private FileStorageService storageService;
+	
 	@Autowired
 	private OrderFormService orderformservice;
 	

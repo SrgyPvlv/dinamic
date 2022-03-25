@@ -21,6 +21,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+//расчет заказа (сметный расчет)
+
 @Controller
 @SessionScope
 public class MainController {
@@ -29,6 +31,7 @@ public class MainController {
 	double timeHoursPrice;
 	double timeDayPrice;
 	double transPrice1;
+	double jeep1;
 	static String outputFileName;
 	public static ArrayList<OrderForm> orderFormArray = new ArrayList<OrderForm>();
 	
@@ -37,21 +40,6 @@ public class MainController {
 	
 	@Autowired
 	private OrderFormService orderformservice;
-	
-	@GetMapping("/login")
-    public String login() {
-        return "login";
-    }
-	
-	@GetMapping("/admin")
-    public String admin() {
-        return "admin";
-    }
-	
-	@GetMapping("/403")
-    public String error403() {
-        return "/error/403";
-    }
 	
 	@GetMapping("/calcOrder")
     public String showOrder() {
@@ -102,7 +90,7 @@ public class MainController {
     	model.addAttribute("orderNds", nds);
     	model.addAttribute("orderKmPrice", kmPrice);
     	model.addAttribute("orderOutGoPrice", outGoPrice);
-    	model.addAttribute("jeepPrice", jeep);
+    	model.addAttribute("jeepPrice", jeep1);
     	model.addAttribute("jeepYesNo", jeepYesNo);
     	model.addAttribute("jeepOnePrice", jeepPrice);
     	model.addAttribute("kmPrice", kmPrice);
@@ -214,7 +202,8 @@ public Double calcOrder(int dguType,String workType,double jeep,double tHours,do
 	
 	int dguType1=dguType;
 	String workType1=workType,owener1=owener;
-	double tHours1=tHours,tDays1=tDays,orderPrice=0,outgo=0,jeep1=jeep;
+	double tHours1=tHours,tDays1=tDays,orderPrice=0,outgo=0;
+	jeep1=jeep;
 	transPrice1=transPrice;
 	if(owener1.equals("po")) {
 	if (workType1.equals("emergency")){
@@ -227,7 +216,7 @@ public Double calcOrder(int dguType,String workType,double jeep,double tHours,do
 					                  case 8:timeHoursPrice=0;timeDayPrice=DGU8_CONTRACTOR_TIMEDAYS1_WORKALARM;outgo=DGU8_CONTRACTOR_DEPARTURE;break;
 					                  case 16:timeHoursPrice=0;timeDayPrice=DGU16_CONTRACTOR_TIMEDAYS1_WORKALARM;outgo=DGU16_CONTRACTOR_DEPARTURE;break;}}
 				if(tDays1>3) {
-					timeHoursPrice=0;timeDayPrice=0;outgo=0;transPrice1=0;
+					timeHoursPrice=0;timeDayPrice=0;outgo=0;transPrice1=0;jeep1=0;
 					}
 	}
 	
@@ -282,7 +271,7 @@ public Double calcOrder(int dguType,String workType,double jeep,double tHours,do
 						                  case 8:timeHoursPrice=0;timeDayPrice=DGU8_CLIENT_TIMEDAYS1_WORKALARM;outgo=DGU8_CLIENT_DEPARTURE;break;
 						                  case 16:timeHoursPrice=0;timeDayPrice=DGU16_CLIENT_TIMEDAYS1_WORKALARM;outgo=DGU16_CLIENT_DEPARTURE;break;}}
 					if(tDays1>3) {
-						timeHoursPrice=0;timeDayPrice=0;outgo=0;transPrice1=0;
+						timeHoursPrice=0;timeDayPrice=0;outgo=0;transPrice1=0;jeep1=0;
 						}
 		}
 		if (workType1.equals("plan")){
