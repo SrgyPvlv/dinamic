@@ -24,6 +24,11 @@
 		<input type="image" name="usersedit" src="/images/logedit.jpg" alt="users" title="Редактирование пользователей" width="67" height="75" style="border: none">
 		</form>
 		<br><br>
+		<p><label for="bsedit" style="font-size:20px;"> Редактирование базовых станций </label></p>
+		<form th:action="@{/admin/findBsByBsName}" method="get">
+		<input type="image" name="bsedit" src="/images/bs.jpg" alt="bs" title="Редактирование БС" width="67" height="75" style="border: none">
+		</form>
+		<br><br>
 		<p><label for="ordersdelete" style="font-size:20px;color:red;"> Осторожно!!! Удаление всех Заказов из БД!!! </label></p>
 		<form th:action="@{/admin/allOrdersDeleteShow}" method="get">
 		<input type="image" name="ordersdelete" src="/images/delete.png" alt="ordersdelete" title="Удаление Всех Заказов"  width="67" height="75" style="border: none">

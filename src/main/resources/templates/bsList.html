@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+<title>Адреса БС</title>
+</head>
+<body>
+
+<div th:replace="headerAdmin :: headerAdmin"></div>
+
+<div class="find1">
+  <div id="bslist1">
+  <form th:action="@{/admin/findBsByBsName}" th:method="get" style="display:inline;">
+       <label>Поиск по № БС</label> &nbsp&nbsp
+       <input type="text" name="bsNumberSearch" placeholder="Код '78-' указывать необязательно" style="width:220px">
+       <input type="submit" value="Найти" >  
+  </form> &nbsp&nbsp&nbsp | &nbsp&nbsp&nbsp
+  <a th:href="@{/admin/bsCreate}" style="display:inline;">Добавить новую БС</a>  &nbsp&nbsp&nbsp | &nbsp&nbsp&nbsp   
+  </div>
+    
+     <div id="bslist2">
+      <form enctype="multipart/form-data" th:action="@{/admin/csvBsListToDateBase}" th:method="post">
+      <label style="color:#800000">Загрузка списка новых БС в БД</label> &nbsp&nbsp
+      <input type="file" name="file" required>
+      <input type="submit" value="Загрузить" >
+      </form>
+      <br>
+      <form  th:action="@{/bsListToCSV}" th:method="get" >
+      <label style="color:#800000">Скачать все БС из БД в файл .csv</label> &nbsp&nbsp
+      <input type="submit" value="Скачать" >
+      </form>
+     </div>
+</div>      
+<div>
+ <table class="bslisttable" border="1">
+        <tr>
+          <th class="col211"> № БС </th> <th class="col212">Адрес БС</th><th class="col213">Редактирование(admin)/Удаление(superadmin)</th>
+        </tr>
+         
+        <tr th:each="bs : ${bss}">
+           <td th:text="${bs.getBsNumber} "> № БС </td><td th:text="${bs.getBsAddress} "> Адрес БС </td>
+           <td>
+           <form th:action="@{/admin/bsEdit}" method="get" style="display:inline;">
+                 <input type="hidden" name="id" th:value="${bs.getId}">
+                 <input type="submit" value="Редактировать" style="background:#98FB98;">
+           </form> | 
+           <form th:action="@{/superadmin/bsDelete}" method="get" style="display:inline;">
+                 <input type="hidden" name="id" th:value="${bs.getId}">
+                 <input type="submit" value="Удалить" style="background:#FF0000; color:white;">
+            </form>
+            </td>        
+        </tr>          
+    </table>
+</div>
+<br><br>
+    
+<div th:replace="footer :: footer"></div>
+</body>
+</html>

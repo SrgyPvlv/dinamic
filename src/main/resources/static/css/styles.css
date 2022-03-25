@@ -161,9 +161,14 @@ position: fixed; /* Фиксированное положение */
 .col7{
 	width: 23%;
 }
-
 .col8{
 	width: 23%;
+}
+.col211 {
+	width: 10%;
+}
+.col213 {
+	width: 30%;
 }
 
 #orderstat{
@@ -200,7 +205,15 @@ position: fixed; /* Фиксированное положение */
     justify-content: center;
     overflow: auto;  
 }
-
+.parent1 {
+    width: 100%;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    overflow: auto;  
+}
 .parent2{
 	width: 100%;
     display: flex;
@@ -267,4 +280,21 @@ input#bsnumber:valid+i:after{
 .btn{
 	width: 250px;
 	font-size:18px;
+}
+.find1{
+	margin-top:40px;
+	margin-bottom:10px;
+	border:2px solid red;
+	padding: 9px;
+}
+.bslisttable {
+	border-collapse: collapse;
+}
+#bslist1 {
+	float: left;
+	width: 650px;
+}
+#bslist2 {
+	margin-left: 655px;
+	text-align:left;
 }

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ <head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+<title>Создание новой БС</title>
+</head>
+<body>
+
+<div th:replace="header :: header"></div>
+ 
+ <br>
+ <div class="parent1">
+ 
+ <div>
+ <h3 style="text-align: center"> Форма создания новой БС</h3>
+ <fieldset style="border-color:#FFEBCD;text-align: center">
+  <form id="orderedit" th:action="@{/admin/bsCreate}" method="post">
+        
+        <label>№ БС</label><br>
+        <input type="text" name="bsnumber" placeholder="78-XXXXX " pattern="78-\d{5}" style="text-align: center" required/>
+        <br><br>
+        <label>Адрес БС</label><br>
+        <input type="text" name="bsaddress" style="text-align: center;width: 700px;" required/>
+        <br><br>
+	    <input type="submit" value="Создать" style="width: 100px; height: 40px; background-color: #98FB98;">
+ </form>
+ </fieldset>
+ </div>
+ 
+ </div>
+ <br><br>
+ 
+<div th:replace="footer :: footer"></div>
+
+</body>
+</html>

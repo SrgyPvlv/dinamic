@@ -17,6 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.example.sbkafka.MyDbConnection;
+
 //сохранение базы заказов в exel
 
 @Controller
@@ -35,9 +37,9 @@ public class ExelController {
 	
 	public static InputStreamResource copyToFile() throws SQLException, IOException {  
 	      
-		  String urls = new String("jdbc:postgresql://ec2-54-155-254-112.eu-west-1.compute.amazonaws.com:5432/d747lpck3drmh3?sslmode=require");
-	      String username = new String("ecwnrxyfpgybjl");
-	      String password = new String("834cddf4fd794b36ec9d57ba6fe2e7812022aa521f39ddc899ea959680229c79");
+		  String urls = MyDbConnection.urls;
+	      String username = MyDbConnection.username;
+	      String password = MyDbConnection.password;
 	      Connection conn = null;
 	      String myQuery="(select ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm from orderform order by ordernumber)";
 	      InputStreamResource file;
