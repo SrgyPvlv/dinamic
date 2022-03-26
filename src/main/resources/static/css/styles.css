@@ -271,18 +271,25 @@ input#bsnumber:valid+i:after{
     color:#32CD32;
     padding-left: 5px;
 }
+.red{
+    color:red;
+    padding-left: 5px;
+}
+.green{
+    color:#32CD32;
+    padding-left: 5px;
+}
+
 .act th{
 	background: #FFFFFF;
 }
-.act{
-	margin-top: 30px;
-}
+
 .btn{
 	width: 250px;
 	font-size:18px;
 }
 .find1{
-	margin-top:40px;
+	margin-top:55px;
 	margin-bottom:10px;
 	border:2px solid red;
 	padding: 9px;
@@ -297,4 +304,7 @@ input#bsnumber:valid+i:after{
 #bslist2 {
 	margin-left: 655px;
 	text-align:left;
+}
+.th_table{
+	font-weight:bold;
 }

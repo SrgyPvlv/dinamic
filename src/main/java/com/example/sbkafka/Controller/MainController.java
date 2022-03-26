@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.annotation.SessionScope;
 
 import com.example.sbkafka.Model.OrderForm;
+import com.example.sbkafka.Service.BsListService;
 import com.example.sbkafka.Service.OrderFormService;
 import com.example.sbkafka.Service.PriceService;
 
@@ -40,6 +41,9 @@ public class MainController {
 	
 	@Autowired
 	private OrderFormService orderformservice;
+	
+	@Autowired
+	private BsListService bsListService;
 	
 	@GetMapping("/calcOrder")
     public String showOrder() {
@@ -74,6 +78,7 @@ public class MainController {
     	String dateStart=formatter.format(t1);
     	String dateEnd=formatter.format(t2);
     	
+    	String bsAddress=bsListService.findBsAddress(bsNumber);
     	    	    	
     	model.addAttribute("orderNumber", orderNumber);
     	model.addAttribute("bsNumber", bsNumber);
@@ -93,12 +98,12 @@ public class MainController {
     	model.addAttribute("jeepPrice", jeep1);
     	model.addAttribute("jeepYesNo", jeepYesNo);
     	model.addAttribute("jeepOnePrice", jeepPrice);
-    	model.addAttribute("kmPrice", kmPrice);
     	model.addAttribute("timeHoursPrice", timeHoursPrice);
     	model.addAttribute("timeDayPrice", timeDayPrice);
     	model.addAttribute("dguType", dguType);
     	model.addAttribute("workType", workType);
     	model.addAttribute("owenerType", owenerType);
+    	model.addAttribute("bsAddress", bsAddress);
         return "index";
         }
 public Double calcTransport(String orderdistance,double km) {

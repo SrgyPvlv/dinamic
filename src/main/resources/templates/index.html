@@ -26,26 +26,22 @@
     <p><input name="worktype" type="radio" value="false"> Ложный выезд</p>
     <p><input name="worktype" type="radio" value="planinitial"> Плановое</p>
     </fieldset>	
-   <br>
    <fieldset name="order">
    <legend> Мощность ДГУ </legend>
     <p><input name="dgutype" type="radio" value="3"> 3.5 кВт </p>
     <p><input name="dgutype" type="radio" value="8" checked> 8 кВт</p>
     <p><input name="dgutype" type="radio" value="16"> 16 кВт</p>
     </fieldset>	
-   <br>
    <fieldset name="order">
    <legend> Чей ДГУ используется? </legend>
     <p><input name="owener" type="radio" value="po" checked> Подрядчика </p>
     <p><input name="owener" type="radio" value="mts" > Заказчика </p>
     </fieldset>	
-   <br>
    <fieldset name="order">
    <legend> Использование техники повышенной проходимости (ГАЗ-66,ЗИЛ-131,Урал и т.д.) </legend>
     <p><input name="jeep" type="radio" value="1"> Да </p>
     <p><input name="jeep" type="radio" value="0" checked> Нет </p>
     </fieldset>	
-   <br>
    <fieldset name="order">
    <legend> Время работ </legend>
    <p><label for="start">Начало : </label>
@@ -53,7 +49,6 @@
    <p><label for="end">Окончание : </label>
       <input type="datetime-local" name="end" required></p>
    </fieldset>
-   <br>
    <fieldset name="order">
    <legend>Расстояние до БС от КАД</legend>
     <p style="color:#0000FF;font-size:18px;font-style:italic;">Оставляем "ноль", если БС внутри КАД или дизеление Плановое (продолжение Аварийного) !</p>
@@ -87,35 +82,18 @@
 </div>
 
 <div class="right">
-<table>
- <caption align="top"><h3>Результаты расчета</h3></caption>
-            <tr>
-                <th>№ Заказа</th> <th>№ БС</th> <th>Дата начала</th> <th>Дата окончания</th> 
-                <th>Стоимость без НДС</th> <th>Стоимость с НДС</th>
-            </tr>    
-            <tr>
-                <td th:text="${orderNumber}"></td> <td th:text="${bsNumber}"></td> <td th:text="${timeStart}"></td> 
-                <td th:text="${timeEnd}"></td> <td th:text="${orderCalc}"></td> <td th:text="${orderCalcNds}"></td>
-				<td>
-				<form id="orderform" th:action="@{/recordOrder}" method="post">
-        <input type="hidden" name="ordernumber1" th:value="${orderNumber}" />
-        <input type="hidden" name="bsnumber1" th:value="${bsNumber}" />
-        <input type="hidden" name="start1" th:value="${timeStart}" />
-        <input type="hidden" name="end1" th:value="${timeEnd}" />
-        <input type="hidden" name="ordercalc1" th:value="${orderCalc}" />
-        <input type="hidden" name="ordercalcnds1" th:value="${orderCalcNds}" />
-	    <input type="submit" value="Сохранить">
-                </form>
-				</td>
-            </tr>   
-        </table>
-    <p><label for="comm" style="font-weight:bold;color:#8B0000;">Комментарий(замечания) к Заказу: </label>
-    <textarea form ="orderform" name="comm" id="comm" cols="70" rows="4" wrap="soft"
-     th:value="${orderComment}" placeholder="Если при проверке Заказа выявлены неточности и расхождения...Укажите их в этом поле."></textarea>
-        
 <table class="act">
+ <caption align="top"><h3>Результаты расчета</h3></caption>
+            <tr><td>№ Заказа</td><td th:text="${orderNumber}" colspan="4"></td></tr>
+            <tr><td>Наименование Объекта </td><td th:text="${bsNumber}" colspan="4"></td></tr>
+            <tr><td>Адрес Объекта </td><td th:text="${bsAddress}" colspan="4"></td></tr>
+            <tr><td>Начальный срок выполнения Работ</td><td th:text="${timeStart}" colspan="4"></td></tr>
+            <tr><td>Конечный срок выполнения Работ</td><td th:text="${timeEnd}" colspan="4"></td></tr>
+            <tr><td>Общая стоимость Работ</td><td th:text="${orderCalcNds}" colspan="4"></td></tr>
+            <tr><td colspan="5" style="border:none">
 <tr>
-<th>Перечень работ, услуг</th> <th>Ед. изм.</th> <th>Кол-во</th> <th>Цена за ед., руб. без НДС</th> <th>Стоимость, руб. без НДС</th>
+<td class="th_table">Перечень работ, услуг</td> <td class="th_table">Ед. изм.</td> <td class="th_table">Кол-во</td> 
+<td class="th_table">Цена за ед., руб. без НДС</td> <td class="th_table">Стоимость, руб. без НДС</td>
 </tr>
 <tr th:if="${jeepPrice}!=0">
 <td>Использование автомобильной техники повышенной проходимости (ГАЗ-66, ЗИЛ-131, Урал, Камаз и т.д.)</td> <td>выезд</td> <td th:text="${jeepYesNo}"></td> <td th:text="${jeepOnePrice}"></td> <td th:text="${jeepPrice}"></td>
@@ -133,12 +111,30 @@
 </tr>
 <tr th:if="${orderTransport}!=0">
 <td th:text="'Транспортировка дизель-генераторной установки (ДГУ) '+${owenerType==null ? '?':(owenerType=='po'?'Исполнителя':'Заказчика')}+' для  базовой станции (БС) за  пределами КАД ('+${dguType==null? '?':(dguType==3?'3.5':dguType)}+' kW)'"></td> 
-<td>км</td> <td th:text="${orderDistance}"></td> <td th:text="${kmPrice}"></td> <td th:text="${orderTransport}"></td>
+<td>км</td> <td th:text="${orderDistance}"></td> <td th:text="${orderKmPrice}"></td> <td th:text="${orderTransport}"></td>
 </tr>
 
 <tr><td colspan="4" style="text-align:right">Итого по Заказу без НДС 20%, руб.</td><td th:text="${orderCalc}"></td></tr>
 <tr><td colspan="4" style="text-align:right">НДС 20%, руб.</td><td th:text="${orderNds}"></td></tr>
 <tr><td colspan="4" style="text-align:right">Итого с НДС 20%, руб.</td><td th:text="${orderCalcNds}"></td></tr>
+<tr><td colspan="5" style="border:none"></td></tr>
+<tr><td colspan="5" style="border:none">
+<p><label for="comm" style="font-weight:bold;color:#8B0000;">Комментарий(замечания) к Заказу: </label>
+    <textarea form ="orderform" name="comm" id="comm" cols="70" rows="4" wrap="soft"
+     th:value="${orderComment}" placeholder="Если при проверке Заказа выявлены неточности и расхождения...Укажите их в этом поле."></textarea>
+</td></tr>
+<tr><td colspan="5" style="border:none"></td></tr>
+<tr><td colspan="5" style="background:#98FB98">
+    <form id="orderform" th:action="@{/recordOrder}" method="post">
+        <input type="hidden" name="ordernumber1" th:value="${orderNumber}" />
+        <input type="hidden" name="bsnumber1" th:value="${bsNumber}" />
+        <input type="hidden" name="start1" th:value="${timeStart}" />
+        <input type="hidden" name="end1" th:value="${timeEnd}" />
+        <input type="hidden" name="ordercalc1" th:value="${orderCalc}" />
+        <input type="hidden" name="ordercalcnds1" th:value="${orderCalcNds}" />
+	    <input type="submit" value="Сохранить" style="background:#98FB98;border:none;width:500px">
+     </form>
+</td></tr>
 </table>
 </div>
 
