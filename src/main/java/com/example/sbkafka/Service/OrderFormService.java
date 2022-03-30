@@ -16,13 +16,6 @@ public class OrderFormService {
 
 	@Autowired OrderFormRepository orderformrepository;
 	
-	
-	public OrderFormService(OrderFormRepository orderformrepository) {
-		
-		this.orderformrepository=orderformrepository;
-	}
-	
-	
 	public void saveOrderForm(OrderForm orderform) {
 		orderformrepository.saveAndFlush(orderform);
 	}

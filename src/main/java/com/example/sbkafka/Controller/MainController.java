@@ -19,8 +19,6 @@ import com.example.sbkafka.Service.PriceService;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 //расчет заказа (сметный расчет)
 
@@ -34,8 +32,7 @@ public class MainController {
 	double transPrice1;
 	double jeep1;
 	static String outputFileName;
-	public static ArrayList<OrderForm> orderFormArray = new ArrayList<OrderForm>();
-	
+		
 	@Autowired
 	private PriceService priceService;
 	
@@ -630,7 +627,6 @@ public String recordOrder(@RequestParam("ordernumber1") int ordernumber,@Request
 		@RequestParam("comm") String comm,Model model) {
 
 OrderForm orderForm=new OrderForm(ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm);
-MainController.orderFormArray.addAll(Arrays.asList(orderForm));
 
 orderformservice.saveOrderForm(orderForm);
 
