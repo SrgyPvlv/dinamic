@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ <head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+  <link rel="shortcut icon" type="image/x-icon" th:href="@{/images/acdc.ico}">
+  <title>Расчет Заказа</title>
+ </head>
+ <body>
+ 
+ <div th:replace="header :: header"></div>
+ 
+<div class="right">
+<table class="act">
+ <caption align="top"><h3>Результаты расчета</h3></caption>
+            <tr><td>№ Заказа</td><td th:text="${orderNumber}" colspan="4"></td></tr>
+            <tr><td>Наименование Объекта </td><td th:text="${bsNumber}" colspan="4"></td></tr>
+            <tr><td>Адрес Объекта </td><td th:text="${bsAddress}" colspan="4"></td></tr>
+            <tr><td>Начальный срок выполнения Работ</td><td th:text="${timeStart}" colspan="4"></td></tr>
+            <tr><td>Конечный срок выполнения Работ</td><td th:text="${timeEnd}" colspan="4"></td></tr>
+            <tr><td>Общая стоимость Работ</td><td th:text="${orderCalcNds}" colspan="4"></td></tr>
+            <tr><td colspan="5" style="border:none">
+<tr>
+<td class="th_table">Перечень работ, услуг</td> <td class="th_table">Ед. изм.</td> <td class="th_table">Кол-во</td> 
+<td class="th_table">Цена за ед., руб. без НДС</td> <td class="th_table">Стоимость, руб. без НДС</td>
+</tr>
+<tr th:if="${jeepPrice}!=0">
+<td>Использование автомобильной техники повышенной проходимости (ГАЗ-66, ЗИЛ-131, Урал, Камаз и т.д.)</td> <td>выезд</td> <td th:text="${jeepYesNo}"></td> <td th:text="${jeepOnePrice}"></td> <td th:text="${jeepPrice}"></td>
+</tr>
+<tr th:if="${orderOutGoPrice}!=0">
+<td>Выезд аварийной бригады / Компенсация ложного выезда аварийной бригады для обеспечения АЭС Объекта Заказчика</td> <td>выезд</td> <td th:text="${orderOutGoPrice !=null ? '1' : ''}"></td> <td th:text="${orderOutGoPrice}"> <td th:text="${orderOutGoPrice}"></td>
+</tr>
+<tr th:if="${orderCalcHPrice}!=0">
+<td th:text="'Поддержание электроснабжения оборудования базовой станции (БС) от дизель-генераторной установки (ДГУ) '+${owenerType==null ? '?':(owenerType=='po'?'Исполнителя':'Заказчика')}+' '+${dguType==null? '?':(dguType==3?'3.5':dguType)}+' kW ('+${workType==null?'?':(workType=='emergency'?'Аварийное':'Плановое')}+')'"></td> 
+<td>час</td> <td th:text="${orderDiffTime}"></td> <td th:text="${timeHoursPrice}"></td> <td th:text="${orderCalcHPrice}"></td>
+</tr>
+<tr th:if="${orderCalcDPrice}!=0">
+<td th:text="'Поддержание электроснабжения оборудования базовой станции (БС) от дизель-генераторной установки (ДГУ) '+${owenerType==null ? '?':(owenerType=='po'?'Исполнителя':'Заказчика')}+' '+${dguType==null? '?':(dguType==3?'3.5':dguType)}+' kW ('+${workType==null?'?':(workType=='emergency'?'Аварийное':'Плановое')}+')'"></td> 
+<td>сутки</td> <td th:text="${orderDiffDay}"></td> <td th:text="${timeDayPrice}"></td> <td th:text="${orderCalcDPrice}"></td>
+</tr>
+<tr th:if="${orderTransport}!=0">
+<td th:text="'Транспортировка дизель-генераторной установки (ДГУ) '+${owenerType==null ? '?':(owenerType=='po'?'Исполнителя':'Заказчика')}+' для  базовой станции (БС) за  пределами КАД ('+${dguType==null? '?':(dguType==3?'3.5':dguType)}+' kW)'"></td> 
+<td>км</td> <td th:text="${orderDistance}"></td> <td th:text="${orderKmPrice}"></td> <td th:text="${orderTransport}"></td>
+</tr>
+
+<tr><td colspan="4" style="text-align:right">Итого по Заказу без НДС 20%, руб.</td><td th:text="${orderCalc}"></td></tr>
+<tr><td colspan="4" style="text-align:right">НДС 20%, руб.</td><td th:text="${orderNds}"></td></tr>
+<tr><td colspan="4" style="text-align:right">Итого с НДС 20%, руб.</td><td th:text="${orderCalcNds}"></td></tr>
+<tr><td colspan="5" style="border:none"></td></tr>
+<tr><td colspan="5" style="border:none">
+<p><label for="comm" style="font-weight:bold;color:#8B0000;">Комментарий(замечания) к Заказу: </label>
+    <textarea form ="orderform" name="comm" id="comm" cols="70" rows="4" wrap="soft"
+     th:value="${orderComment}" placeholder="Неточности и расхождения выявленные при проверке Заказа."></textarea>
+</td></tr>
+</table>
+</div>
+
+<div th:replace="footer :: footer"></div>
+
+</body>
+</html>
