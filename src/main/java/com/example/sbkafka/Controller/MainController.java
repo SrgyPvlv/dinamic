@@ -621,12 +621,23 @@ public Double calcOrderDays(int dguType,String workType,double jeep,double tHour
 	return orderPriceDays;
 }
 @PostMapping("/recordOrder")
-public String recordOrder(@RequestParam("ordernumber1") int ordernumber,@RequestParam("bsnumber1") String bsnumber,//
-		@RequestParam("start1") String datestart,@RequestParam("end1") String dateend,//
-		@RequestParam("ordercalc1") double calc,@RequestParam("ordercalcnds1") double calcnds,//
-		@RequestParam("comm") String comm,Model model) {
+public String recordOrder(@RequestParam("ordernumber1") int ordernumber,@RequestParam("bsnumber1") String bsnumber,
+		@RequestParam("start1") String datestart,@RequestParam("end1") String dateend,
+		@RequestParam("ordercalc1") double calc,@RequestParam("ordercalcnds1") double calcnds,
+		@RequestParam("comm") String comm,
+		@RequestParam("jeepPrice") double jeepPrice,@RequestParam("jeepYesNo") int jeepYesNo,
+		@RequestParam("jeepOnePrice") double jeepOnePrice,@RequestParam("orderOutGoPrice") double orderOutGoPrice,
+		@RequestParam("orderCalcHPrice") double orderCalcHPrice,@RequestParam("orderDiffTime") double orderDiffTime,
+		@RequestParam("timeHoursPrice") double timeHoursPrice,@RequestParam("owenerType") String owenerType,
+		@RequestParam("dguType") int dguType,@RequestParam("workType") String workType,
+		@RequestParam("orderCalcDPrice") double orderCalcDPrice,@RequestParam("orderDiffDay") double orderDiffDay,
+		@RequestParam("timeDayPrice") double timeDayPrice,@RequestParam("orderTransport") double orderTransport,
+		@RequestParam("orderDistance") String orderDistance,@RequestParam("orderKmPrice") double orderKmPrice,
+		@RequestParam("orderNds") double orderNds,Model model) {
 
-OrderForm orderForm=new OrderForm(ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm);
+OrderForm orderForm=new OrderForm(ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm,jeepPrice,jeepYesNo,jeepOnePrice,
+		orderOutGoPrice,orderCalcHPrice,orderDiffTime,timeHoursPrice,owenerType,dguType,workType,orderCalcDPrice,
+		orderDiffDay,timeDayPrice,orderTransport,orderDistance,orderKmPrice,orderNds);
 
 orderformservice.saveOrderForm(orderForm);
 

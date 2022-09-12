@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.sbkafka.Model.FileDB;
 import com.example.sbkafka.Model.Order;
 import com.example.sbkafka.Model.OrderForm;
 import com.example.sbkafka.Service.OrderFormService;
@@ -43,13 +42,11 @@ public class BdController {
 		
 		for(OrderForm order:orderlist) {
 			
-            int id=order.getId();int ordernumber=order.getOrderNumber();String bsnumber=order.getBsNumber();
-            String datestart=order.getDateStart();String dateend=order.getDateEnd();
-            double calc=order.getCalc();double calcnds=order.getCalcNds();String comm=order.getComm();
-            FileDB fileDB=order.getFileDB();
-            String fileYesNo;
-			if (fileDB==null){fileYesNo="Нет";}else {fileYesNo="Есть";}
-            Order orderlistarray=new Order(id,ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm,fileYesNo);
+            int id=order.getId();int ordernumber=order.getOrdernumber();String bsnumber=order.getBsnumber();
+            String datestart=order.getDatestart();String dateend=order.getDateend();
+            double calc=order.getCalc();double calcnds=order.getCalcnds();String comm=order.getComm();
+            
+            Order orderlistarray=new Order(id,ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm);
             orderlistFile.addAll(Arrays.asList(orderlistarray));
          }
 		
@@ -120,12 +117,23 @@ public class BdController {
 	}
 	
 	@PostMapping("/orderEdit") // редактирование заказа
-	public String orderEdit(@RequestParam("id2") int id, @RequestParam("ordernumber2") int ordernumber,@RequestParam("bsnumber2") String bsnumber,//
-	@RequestParam("start2") String datestart,@RequestParam("end2") String dateend,//
-	@RequestParam("ordercalc2") double calc,@RequestParam("ordercalcnds2") double calcnds,//
-	@RequestParam("comm2") String comm) {
+	public String orderEdit(@RequestParam("id2") int id, @RequestParam("ordernumber2") int ordernumber,@RequestParam("bsnumber2") String bsnumber,
+	@RequestParam("start2") String datestart,@RequestParam("end2") String dateend,
+	@RequestParam("ordercalc2") double calc,@RequestParam("ordercalcnds2") double calcnds,
+	@RequestParam("comm2") String comm,
+	@RequestParam("jeepPrice") double jeepPrice,@RequestParam("jeepYesNo") int jeepYesNo,
+	@RequestParam("jeepOnePrice") double jeepOnePrice,@RequestParam("orderOutGoPrice") double orderOutGoPrice,
+	@RequestParam("orderCalcHPrice") double orderCalcHPrice,@RequestParam("orderDiffTime") double orderDiffTime,
+	@RequestParam("timeHoursPrice") double timeHoursPrice,@RequestParam("owenerType") String owenerType,
+	@RequestParam("dguType") int dguType,@RequestParam("workType") String workType,
+	@RequestParam("orderCalcDPrice") double orderCalcDPrice,@RequestParam("orderDiffDay") double orderDiffDay,
+	@RequestParam("timeDayPrice") double timeDayPrice,@RequestParam("orderTransport") double orderTransport,
+	@RequestParam("orderDistance") String orderDistance,@RequestParam("orderKmPrice") double orderKmPrice,
+	@RequestParam("orderNds") double orderNds) {
 	
-	orderformservice.editOrderForm(id, ordernumber, bsnumber, datestart, dateend, calc, calcnds, comm);
+	orderformservice.editOrderForm(id, ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm,jeepPrice,jeepYesNo,jeepOnePrice,
+			orderOutGoPrice,orderCalcHPrice,orderDiffTime,timeHoursPrice,owenerType,dguType,workType,orderCalcDPrice,
+			orderDiffDay,timeDayPrice,orderTransport,orderDistance,orderKmPrice,orderNds);
 	   
 	   return "okEdit";
 	}
@@ -151,13 +159,11 @@ public class BdController {
 		
 for(OrderForm order:orderlist) {
 			
-            int id=order.getId();int ordernumber=order.getOrderNumber();String bsnumber=order.getBsNumber();
-            String datestart=order.getDateStart();String dateend=order.getDateEnd();
-            double calc=order.getCalc();double calcnds=order.getCalcNds();String comm=order.getComm();
-            FileDB fileDB=order.getFileDB();
-            String fileYesNo;
-			if (fileDB==null){fileYesNo="Нет";}else {fileYesNo="Есть";}
-            Order orderlistarray=new Order(id,ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm,fileYesNo);
+            int id=order.getId();int ordernumber=order.getOrdernumber();String bsnumber=order.getBsnumber();
+            String datestart=order.getDatestart();String dateend=order.getDateend();
+            double calc=order.getCalc();double calcnds=order.getCalcnds();String comm=order.getComm();
+            
+            Order orderlistarray=new Order(id,ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm);
             orderlistFile.addAll(Arrays.asList(orderlistarray));
          }
 		
@@ -210,13 +216,11 @@ for(OrderForm order:orderlist) {
 		
 for(OrderForm order:orderlist) {
 			
-            int id=order.getId();int ordernumber=order.getOrderNumber();String bsnumber=order.getBsNumber();
-            String datestart=order.getDateStart();String dateend=order.getDateEnd();
-            double calc=order.getCalc();double calcnds=order.getCalcNds();String comm=order.getComm();
-            FileDB fileDB=order.getFileDB();
-            String fileYesNo;
-			if (fileDB==null){fileYesNo="Нет";}else {fileYesNo="Есть";}
-            Order orderlistarray=new Order(id,ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm,fileYesNo);
+            int id=order.getId();int ordernumber=order.getOrdernumber();String bsnumber=order.getBsnumber();
+            String datestart=order.getDatestart();String dateend=order.getDateend();
+            double calc=order.getCalc();double calcnds=order.getCalcnds();String comm=order.getComm();
+            
+            Order orderlistarray=new Order(id,ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm);
             orderlistFile.addAll(Arrays.asList(orderlistarray));
          }
 		

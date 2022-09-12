@@ -10,12 +10,11 @@ public class Order {
 	private String dateend;
 	private double calc;
 	private double calcnds;
-	private String comm;	
-    private String fileYesNo;
+	private String comm;
 
 	public Order() {}
 	
-	public Order(int id,int ordernumber,String bsnumber,String datestart,String dateend,double calc,double calcnds,String comm,String fileYesNo) {
+	public Order(int id,int ordernumber,String bsnumber,String datestart,String dateend,double calc,double calcnds,String comm) {
 		this.id=id;
 		this.ordernumber=ordernumber;
 		this.bsnumber=bsnumber;
@@ -24,7 +23,6 @@ public class Order {
 		this.calc=calc;
 		this.calcnds=calcnds;
 		this.comm=comm;
-		this.fileYesNo=fileYesNo;
 	}
 
 	public int  getId() {
@@ -84,13 +82,5 @@ public class Order {
  
     public void setComm(String comm) {
     	this.comm=comm;
-}
-    public String getFileYesNo() {
-        return fileYesNo;
-    }
- 
-    public void setFileYesNo(String fileYesNo) {
-    	this.fileYesNo=fileYesNo;
-}
-    
+}    
 }
