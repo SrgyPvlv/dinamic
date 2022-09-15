@@ -78,9 +78,9 @@
            <td th:text="${order.dateEnd} ">Дата окончания</td><td th:text="${order.calc} ">Стоимость без НДС</td><td th:text="${order.calcNds} ">Стоимость с НДС</td>
            <td th:text="${order.comm} " class="col7">Комментарий</td>
            <td>
-           <form th:action="@{/fileDownload}" method="get" style="display:inline;">
+           <form th:action="@{/showOrderPage}" method="get" target="_blank" style="display:inline;">
                  <input type="hidden" name="id" th:value="${order.id}">
-                 <input type="submit" value="Скачать Заказ"/> <i th:text="${order.fileYesNo}=='Есть'?'&#10004':'&#10008'" th:class="${order.fileYesNo}=='Есть'?'green':'red'"></i>
+                 <input type="submit" value="Страница Заказа"/>
                </form>           
         </tr>          
     </table>

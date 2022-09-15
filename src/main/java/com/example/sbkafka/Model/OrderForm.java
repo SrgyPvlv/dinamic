@@ -39,59 +39,59 @@ public class OrderForm {
 	private String comm;
 	
 	@Column
-	private double jeepPrice;
+	private Double jeepprice;
 	
 	@Column
-	private int jeepYesNo;
+	private Integer jeepyesno;
 	
 	@Column
-	private double jeepOnePrice;
+	private Double jeeponeprice;
 	
 	@Column
-	private double orderOutGoPrice;
+	private Double orderoutgoprice;
 	
 	@Column
-	private double orderCalcHPrice;
+	private Double ordercalchprice;
 	
 	@Column
-	private double orderDiffTime;
+	private Double orderdifftime;
 	
 	@Column
-	private double timeHoursPrice;
+	private Double timehoursprice;
 	
 	@Column
-	private String owenerType;
+	private String owenertype;
 	
 	@Column
-	private int dguType;
+	private Integer dgutype;
 	
 	@Column
-	private String workType;
+	private String worktype;
 	
 	@Column
-	private double orderCalcDPrice;
+	private Double ordercalcdprice;
 	
 	@Column
-	private double orderDiffDay;
+	private Double orderdiffday;
 	
 	@Column
-	private double timeDayPrice;
+	private Double timedayprice;
 	
 	@Column
-	private double orderTransport;
+	private Double ordertransport;
 	
 	@Column
-	private String orderDistance;
+	private String orderdistance;
 	
 	@Column
-	private double orderKmPrice;
+	private Double orderkmprice;
 	
 	@Column
-	private double orderNds;
+	private Double ordernds;
 	
 	public OrderForm(int ordernumber,String bsnumber,String datestart,String dateend,double calc,double calcnds,String comm,
-			double jeepPrice,int jeepYesNo,double jeepOnePrice,double orderOutGoPrice,double orderCalcHPrice,
-			double orderDiffTime,double timeHoursPrice,String owenerType,int dguType,String workType,double orderCalcDPrice,
-			double orderDiffDay,double timeDayPrice,double orderTransport,String orderDistance,double orderKmPrice,double orderNds) {}
+			double jeepprice,int jeepyesno,double jeeponeprice,double orderoutgoprice,double ordercalchprice,
+			double orderdifftime,double timehoursprice,String owenertype,int dgutype,String worktype,double ordercalcdprice,
+			double orderdiffday,double timedayprice,double ordertransport,String orderdistance,double orderkmprice,double ordernds) {}
 	
 }

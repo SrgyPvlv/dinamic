@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.sbkafka.Model.Order;
 import com.example.sbkafka.Model.OrderForm;
+import com.example.sbkafka.Service.BsListService;
 import com.example.sbkafka.Service.OrderFormService;
 import com.example.sbkafka.Service.PriceService;
 
@@ -31,6 +32,9 @@ public class BdController {
 	
 	@Autowired
 	private PriceService priceService;
+	
+	@Autowired
+	private BsListService bsListService;
 	
 	@GetMapping("/bdShow") //получение инфо из бд заказов
 	public String bdShow(@RequestParam(value="str",defaultValue = "0") int str,@RequestParam(value="numstr",defaultValue = "20") int numstr,Model model){
@@ -302,5 +306,17 @@ for(OrderForm order:orderlist) {
 	    orderformservice.deleteAll();
 		
 		return "redirect:/admin/bdEdit";
+	}
+	
+	@GetMapping("/showOrderPage") // показать страницу Заказа
+	public String showOrderPage(@RequestParam("id") int id, Model model) {
+	
+	OrderForm order=orderformservice.getById(id);
+	String bsNumber=order.getBsnumber();
+	String bsAddress=bsListService.findBsAddress(bsNumber);
+	model.addAttribute("order", order);
+	model.addAttribute("bsAddress", bsAddress);
+	   
+	   return "orderPage";
 	}
 }
