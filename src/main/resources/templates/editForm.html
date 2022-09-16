@@ -17,27 +17,27 @@
  <h3> Форма редактирования информации о Заказе</h3>
  <fieldset style="border-color:#FFEBCD;text-align: center">
   <form id="orderedit" th:action="@{/orderEdit}" method="post">
-        <input type="hidden" name="id2" th:value="${order.id}" />
+        <input type="hidden" name="id" th:value="${order.getId}" />
         <label>№ Заказа</label><br>
-        <input type="text" name="ordernumber2" th:value="${order.orderNumber}" style="text-align: center" />
+        <input type="text" name="orderNumber" th:value="${order.getOrdernumber}" style="text-align: center" />
         <br><br>
         <label>№ БС</label><br>
-        <input type="text" name="bsnumber2" th:value="${order.bsNumber}" style="text-align: center" />
+        <input type="text" name="bsNumber" th:value="${order.getBsnumber}" style="text-align: center" />
         <br><br>
         <label>Дата начала</label><br>
-        <input type="text" name="start2" th:value="${order.dateStart}" style="text-align: center" />
+        <input type="text" name="dateStart" th:value="${order.getDatestart}" style="text-align: center" />
         <br><br>
         <label>Дата окончания</label><br>
-        <input type="text" name="end2" th:value="${order.dateEnd}" style="text-align: center" />
+        <input type="text" name="dateEnd" th:value="${order.getDateend}" style="text-align: center" />
         <br><br>
         <label>Стоимость без НДС</label><br>
-        <input type="text" name="ordercalc2" th:value="${order.calc}" style="text-align: center" />
+        <input type="text" name="calc" th:value="${order.getCalc}" style="text-align: center" />
         <br><br>
         <label>Стоимость с НДС</label><br>
-        <input type="text" name="ordercalcnds2" th:value="${order.calcNds}" style="text-align: center" />
+        <input type="text" name="calcNds" th:value="${order.getCalcnds}" style="text-align: center" />
         <br><br>
         <label>Комментарий</label><br>
-        <input type="text" name="comm2" th:value="${order.comm}" style="text-align: center; width:250px;" />
+        <input type="text" name="comm" th:value="${order.getComm}" style="text-align: center; width:250px;" />
         <br><br>
 	    <input type="submit" value="Сохранить" autofocus style="width: 100px; height: 40px; background-color: #98FB98;">
  </form>

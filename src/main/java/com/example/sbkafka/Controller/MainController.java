@@ -79,8 +79,8 @@ public class MainController {
     	    	    	
     	model.addAttribute("orderNumber", orderNumber);
     	model.addAttribute("bsNumber", bsNumber);
-    	model.addAttribute("timeStart", dateStart);
-    	model.addAttribute("timeEnd", dateEnd);
+    	model.addAttribute("dateStart", dateStart);
+    	model.addAttribute("dateEnd", dateEnd);
     	model.addAttribute("orderDistance", orderDistance);
     	model.addAttribute("orderTransport", transPrice1);
     	model.addAttribute("orderDiffTime", diffTime);
@@ -620,11 +620,11 @@ public Double calcOrderDays(int dguType,String workType,double jeep,double tHour
 	
 	return orderPriceDays;
 }
-@PostMapping("/recordOrder")
-public String recordOrder(@RequestParam("ordernumber1") int ordernumber,@RequestParam("bsnumber1") String bsnumber,
-		@RequestParam("start1") String datestart,@RequestParam("end1") String dateend,
-		@RequestParam("ordercalc1") double calc,@RequestParam("ordercalcnds1") double calcnds,
-		@RequestParam("comm") String comm,
+@PostMapping("/recordOrder") //запись заявки и расчетов в БД
+public String recordOrder(@RequestParam("orderNumber") int orderNumber,@RequestParam("bsNumber") String bsNumber,
+		@RequestParam("dateStart") String dateStart,@RequestParam("dateEnd") String dateEnd,
+		@RequestParam("orderCalc") double orderCalc,@RequestParam("orderCalcNds") double orderCalcNds,
+		@RequestParam("orderComment") String orderComment,
 		@RequestParam("jeepPrice") double jeepPrice,@RequestParam("jeepYesNo") int jeepYesNo,
 		@RequestParam("jeepOnePrice") double jeepOnePrice,@RequestParam("orderOutGoPrice") double orderOutGoPrice,
 		@RequestParam("orderCalcHPrice") double orderCalcHPrice,@RequestParam("orderDiffTime") double orderDiffTime,
@@ -635,7 +635,7 @@ public String recordOrder(@RequestParam("ordernumber1") int ordernumber,@Request
 		@RequestParam("orderDistance") String orderDistance,@RequestParam("orderKmPrice") double orderKmPrice,
 		@RequestParam("orderNds") double orderNds,Model model) {
 
-OrderForm orderForm=new OrderForm(ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm,jeepPrice,jeepYesNo,jeepOnePrice,
+OrderForm orderForm=new OrderForm(orderNumber,bsNumber,dateStart,dateEnd,orderCalc,orderCalcNds,orderComment,jeepPrice,jeepYesNo,jeepOnePrice,
 		orderOutGoPrice,orderCalcHPrice,orderDiffTime,timeHoursPrice,owenerType,dguType,workType,orderCalcDPrice,
 		orderDiffDay,timeDayPrice,orderTransport,orderDistance,orderKmPrice,orderNds);
 

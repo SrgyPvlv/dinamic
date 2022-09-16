@@ -87,8 +87,8 @@
             <tr><td>№ Заказа</td><td th:text="${orderNumber}" colspan="4"></td></tr>
             <tr><td>Наименование Объекта </td><td th:text="${bsNumber}" colspan="4"></td></tr>
             <tr><td>Адрес Объекта </td><td th:text="${bsAddress}" colspan="4"></td></tr>
-            <tr><td>Начальный срок выполнения Работ</td><td th:text="${timeStart}" colspan="4"></td></tr>
-            <tr><td>Конечный срок выполнения Работ</td><td th:text="${timeEnd}" colspan="4"></td></tr>
+            <tr><td>Начальный срок выполнения Работ</td><td th:text="${dateStart}" colspan="4"></td></tr>
+            <tr><td>Конечный срок выполнения Работ</td><td th:text="${dateEnd}" colspan="4"></td></tr>
             <tr><td>Общая стоимость Работ</td><td th:text="${orderCalcNds}" colspan="4"></td></tr>
             <tr><td colspan="5" style="border:none">
 <tr>
@@ -120,18 +120,18 @@
 <tr><td colspan="5" style="border:none"></td></tr>
 <tr><td colspan="5" style="border:none">
 <p><label for="comm" style="font-weight:bold;color:#8B0000;">Комментарий(замечания) к Заказу: </label>
-    <textarea form ="orderform" name="comm" id="comm" cols="70" rows="4" wrap="soft"
+    <textarea form ="orderform" name="orderComment" id="comm" cols="70" rows="4" wrap="soft"
      th:value="${orderComment}" placeholder="Если при проверке Заказа выявлены неточности и расхождения...Укажите их в этом поле."></textarea>
 </td></tr>
 <tr><td colspan="5" style="border:none"></td></tr>
 <tr><td colspan="5" style="background:#98FB98">
     <form id="orderform" th:action="@{/recordOrder}" method="post">
-        <input type="hidden" name="ordernumber1" th:value="${orderNumber}" />
-        <input type="hidden" name="bsnumber1" th:value="${bsNumber}" />
-        <input type="hidden" name="start1" th:value="${timeStart}" />
-        <input type="hidden" name="end1" th:value="${timeEnd}" />
-        <input type="hidden" name="ordercalc1" th:value="${orderCalc}" />
-        <input type="hidden" name="ordercalcnds1" th:value="${orderCalcNds}" />
+        <input type="hidden" name="orderNumber" th:value="${orderNumber}" />
+        <input type="hidden" name="bsNumber" th:value="${bsNumber}" />
+        <input type="hidden" name="dateStart" th:value="${dateStart}" />
+        <input type="hidden" name="dateEnd" th:value="${dateEnd}" />
+        <input type="hidden" name="orderCalc" th:value="${orderCalc}" />
+        <input type="hidden" name="orderCalcNds" th:value="${orderCalcNds}" />
         
         <input type="hidden" name="jeepPrice" th:value="${jeepPrice}" />
         <input type="hidden" name="jeepYesNo" th:value="${jeepYesNo}" />

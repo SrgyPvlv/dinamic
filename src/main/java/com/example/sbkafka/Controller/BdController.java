@@ -121,21 +121,21 @@ public class BdController {
 	}
 	
 	@PostMapping("/orderEdit") // редактирование заказа
-	public String orderEdit(@RequestParam("id2") int id, @RequestParam("ordernumber2") int ordernumber,@RequestParam("bsnumber2") String bsnumber,
-	@RequestParam("start2") String datestart,@RequestParam("end2") String dateend,
-	@RequestParam("ordercalc2") double calc,@RequestParam("ordercalcnds2") double calcnds,
-	@RequestParam("comm2") String comm,
-	@RequestParam("jeepPrice") double jeepPrice,@RequestParam("jeepYesNo") int jeepYesNo,
-	@RequestParam("jeepOnePrice") double jeepOnePrice,@RequestParam("orderOutGoPrice") double orderOutGoPrice,
-	@RequestParam("orderCalcHPrice") double orderCalcHPrice,@RequestParam("orderDiffTime") double orderDiffTime,
-	@RequestParam("timeHoursPrice") double timeHoursPrice,@RequestParam("owenerType") String owenerType,
-	@RequestParam("dguType") int dguType,@RequestParam("workType") String workType,
-	@RequestParam("orderCalcDPrice") double orderCalcDPrice,@RequestParam("orderDiffDay") double orderDiffDay,
-	@RequestParam("timeDayPrice") double timeDayPrice,@RequestParam("orderTransport") double orderTransport,
-	@RequestParam("orderDistance") String orderDistance,@RequestParam("orderKmPrice") double orderKmPrice,
-	@RequestParam("orderNds") double orderNds) {
+	public String orderEdit(@RequestParam("id") int id, @RequestParam("orderNumber") int orderNumber,@RequestParam("bsNumber") String bsNumber,
+	@RequestParam("dateStart") String dateStart,@RequestParam("dateEnd") String dateEnd,
+	@RequestParam("calc") double calc,@RequestParam("calcNds") double calcNds,
+	@RequestParam("comm") String comm,
+	@RequestParam(name="jeepPrice",required=false) Double jeepPrice,@RequestParam(name="jeepYesNo",required=false) Integer jeepYesNo,
+	@RequestParam(name="jeepOnePrice",required=false) Double jeepOnePrice,@RequestParam(name="orderOutGoPrice",required=false) Double orderOutGoPrice,
+	@RequestParam(name="orderCalcHPrice",required=false) Double orderCalcHPrice,@RequestParam(name="orderDiffTime",required=false) Double orderDiffTime,
+	@RequestParam(name="timeHoursPrice",required=false) Double timeHoursPrice,@RequestParam(name="owenerType",required=false) String owenerType,
+	@RequestParam(name="dguType",required=false) Integer dguType,@RequestParam(name="workType",required=false) String workType,
+	@RequestParam(name="orderCalcDPrice",required=false) Double orderCalcDPrice,@RequestParam(name="orderDiffDay",required=false) Double orderDiffDay,
+	@RequestParam(name="timeDayPrice",required=false) Double timeDayPrice,@RequestParam(name="orderTransport",required=false) Double orderTransport,
+	@RequestParam(name="orderDistance",required=false) String orderDistance,@RequestParam(name="orderKmPrice",required=false) Double orderKmPrice,
+	@RequestParam(name="orderNds",required=false) Double orderNds) {
 	
-	orderformservice.editOrderForm(id, ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm,jeepPrice,jeepYesNo,jeepOnePrice,
+	orderformservice.editOrderForm(id, orderNumber,bsNumber,dateStart,dateEnd,calc,calcNds,comm,jeepPrice,jeepYesNo,jeepOnePrice,
 			orderOutGoPrice,orderCalcHPrice,orderDiffTime,timeHoursPrice,owenerType,dguType,workType,orderCalcDPrice,
 			orderDiffDay,timeDayPrice,orderTransport,orderDistance,orderKmPrice,orderNds);
 	   
