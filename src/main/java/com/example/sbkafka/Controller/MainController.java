@@ -20,7 +20,7 @@ import com.example.sbkafka.Service.PriceService;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
-//расчет заказа (сметный расчет)
+//расчет заказа (сметный расчет), запись заказа в БД
 
 @Controller
 @SessionScope
@@ -48,7 +48,7 @@ public class MainController {
         return "index";
     }
 
-	@PostMapping("/calcOrder")
+	@PostMapping("/calcOrder") //расчет заказа (сметный расчет)
     public String saveOrder(@RequestParam(value="ordernumber") int orderNumber, @RequestParam(value="bsnumber") String bsNumber,//
     		@RequestParam(value="start") String timeStart,@RequestParam(value="end") String timeEnd,//
     		@RequestParam(value="distance") String orderDistance,//
@@ -625,16 +625,16 @@ public String recordOrder(@RequestParam("orderNumber") int orderNumber,@RequestP
 		@RequestParam("dateStart") String dateStart,@RequestParam("dateEnd") String dateEnd,
 		@RequestParam("orderCalc") double orderCalc,@RequestParam("orderCalcNds") double orderCalcNds,
 		@RequestParam("orderComment") String orderComment,
-		@RequestParam("jeepPrice") double jeepPrice,@RequestParam("jeepYesNo") int jeepYesNo,
-		@RequestParam("jeepOnePrice") double jeepOnePrice,@RequestParam("orderOutGoPrice") double orderOutGoPrice,
-		@RequestParam("orderCalcHPrice") double orderCalcHPrice,@RequestParam("orderDiffTime") double orderDiffTime,
-		@RequestParam("timeHoursPrice") double timeHoursPrice,@RequestParam("owenerType") String owenerType,
-		@RequestParam("dguType") int dguType,@RequestParam("workType") String workType,
-		@RequestParam("orderCalcDPrice") double orderCalcDPrice,@RequestParam("orderDiffDay") double orderDiffDay,
-		@RequestParam("timeDayPrice") double timeDayPrice,@RequestParam("orderTransport") double orderTransport,
-		@RequestParam("orderDistance") String orderDistance,@RequestParam("orderKmPrice") double orderKmPrice,
-		@RequestParam("orderNds") double orderNds,Model model) {
-
+		@RequestParam("jeepPrice") Double jeepPrice,@RequestParam("jeepYesNo") Integer jeepYesNo,
+		@RequestParam("jeepOnePrice") Double jeepOnePrice,@RequestParam("orderOutGoPrice") Double orderOutGoPrice,
+		@RequestParam("orderCalcHPrice") Double orderCalcHPrice,@RequestParam("orderDiffTime") Double orderDiffTime,
+		@RequestParam("timeHoursPrice") Double timeHoursPrice,@RequestParam("owenerType") String owenerType,
+		@RequestParam("dguType") Integer dguType,@RequestParam("workType") String workType,
+		@RequestParam("orderCalcDPrice") Double orderCalcDPrice,@RequestParam("orderDiffDay") Double orderDiffDay,
+		@RequestParam("timeDayPrice") Double timeDayPrice,@RequestParam("orderTransport") Double orderTransport,
+		@RequestParam("orderDistance") String orderDistance,@RequestParam("orderKmPrice") Double orderKmPrice,
+		@RequestParam("orderNds") Double orderNds,Model model) {
+	
 OrderForm orderForm=new OrderForm(orderNumber,bsNumber,dateStart,dateEnd,orderCalc,orderCalcNds,orderComment,jeepPrice,jeepYesNo,jeepOnePrice,
 		orderOutGoPrice,orderCalcHPrice,orderDiffTime,timeHoursPrice,owenerType,dguType,workType,orderCalcDPrice,
 		orderDiffDay,timeDayPrice,orderTransport,orderDistance,orderKmPrice,orderNds);

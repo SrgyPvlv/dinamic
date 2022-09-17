@@ -111,7 +111,7 @@ public class BdController {
 		return "orderBdEdit";
 	}
 	
-	@GetMapping("/bdEdit") // переход на форму редактирования заказа
+	@GetMapping("admin/bdEditForm") // переход на форму редактирования заказа
 	public String edit(@RequestParam("id") int id, Model model) {
 	
 	OrderForm order=orderformservice.getById(id);
@@ -120,20 +120,20 @@ public class BdController {
 	   return "editForm";
 	}
 	
-	@PostMapping("/orderEdit") // редактирование заказа
+	@PostMapping("admin/orderEdit") // редактирование заказа
 	public String orderEdit(@RequestParam("id") int id, @RequestParam("orderNumber") int orderNumber,@RequestParam("bsNumber") String bsNumber,
 	@RequestParam("dateStart") String dateStart,@RequestParam("dateEnd") String dateEnd,
 	@RequestParam("calc") double calc,@RequestParam("calcNds") double calcNds,
 	@RequestParam("comm") String comm,
-	@RequestParam(name="jeepPrice",required=false) Double jeepPrice,@RequestParam(name="jeepYesNo",required=false) Integer jeepYesNo,
-	@RequestParam(name="jeepOnePrice",required=false) Double jeepOnePrice,@RequestParam(name="orderOutGoPrice",required=false) Double orderOutGoPrice,
-	@RequestParam(name="orderCalcHPrice",required=false) Double orderCalcHPrice,@RequestParam(name="orderDiffTime",required=false) Double orderDiffTime,
-	@RequestParam(name="timeHoursPrice",required=false) Double timeHoursPrice,@RequestParam(name="owenerType",required=false) String owenerType,
-	@RequestParam(name="dguType",required=false) Integer dguType,@RequestParam(name="workType",required=false) String workType,
-	@RequestParam(name="orderCalcDPrice",required=false) Double orderCalcDPrice,@RequestParam(name="orderDiffDay",required=false) Double orderDiffDay,
-	@RequestParam(name="timeDayPrice",required=false) Double timeDayPrice,@RequestParam(name="orderTransport",required=false) Double orderTransport,
-	@RequestParam(name="orderDistance",required=false) String orderDistance,@RequestParam(name="orderKmPrice",required=false) Double orderKmPrice,
-	@RequestParam(name="orderNds",required=false) Double orderNds) {
+	@RequestParam(name="jeepPrice",required=false,defaultValue="0") Double jeepPrice,@RequestParam(name="jeepYesNo",required=false,defaultValue="0") Integer jeepYesNo,
+	@RequestParam(name="jeepOnePrice",required=false,defaultValue="0") Double jeepOnePrice,@RequestParam(name="orderOutGoPrice",required=false,defaultValue="0") Double orderOutGoPrice,
+	@RequestParam(name="orderCalcHPrice",required=false,defaultValue="0") Double orderCalcHPrice,@RequestParam(name="orderDiffTime",required=false,defaultValue="0") Double orderDiffTime,
+	@RequestParam(name="timeHoursPrice",required=false,defaultValue="0") Double timeHoursPrice,@RequestParam(name="owenerType",required=false,defaultValue="null") String owenerType,
+	@RequestParam(name="dguType",required=false,defaultValue="0") Integer dguType,@RequestParam(name="workType",required=false,defaultValue="null") String workType,
+	@RequestParam(name="orderCalcDPrice",required=false,defaultValue="0") Double orderCalcDPrice,@RequestParam(name="orderDiffDay",required=false,defaultValue="0") Double orderDiffDay,
+	@RequestParam(name="timeDayPrice",required=false,defaultValue="0") Double timeDayPrice,@RequestParam(name="orderTransport",required=false,defaultValue="0") Double orderTransport,
+	@RequestParam(name="orderDistance",required=false,defaultValue="null") String orderDistance,@RequestParam(name="orderKmPrice",required=false,defaultValue="0") Double orderKmPrice,
+	@RequestParam(name="orderNds",required=false,defaultValue="0") Double orderNds) {
 	
 	orderformservice.editOrderForm(id, orderNumber,bsNumber,dateStart,dateEnd,calc,calcNds,comm,jeepPrice,jeepYesNo,jeepOnePrice,
 			orderOutGoPrice,orderCalcHPrice,orderDiffTime,timeHoursPrice,owenerType,dguType,workType,orderCalcDPrice,
@@ -142,7 +142,7 @@ public class BdController {
 	   return "okEdit";
 	}
 	
-	@PostMapping("/bdDelete") // удаление заказа
+	@PostMapping("admin/bdDelete") // удаление заказа
 	public String delete(@RequestParam("id") int id,Model model) {
 	
 	orderformservice.deleteById(id);

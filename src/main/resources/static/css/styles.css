@@ -280,8 +280,11 @@ input#bsnumber:valid+i:after{
     padding-left: 5px;
 }
 
-.act th{
+.act th,.table_orderPage th{
 	background: #FFFFFF;
+}
+.table_orderPage{
+	width:1000px;
 }
 
 .btn{
@@ -307,4 +310,11 @@ input#bsnumber:valid+i:after{
 }
 .th_table{
 	font-weight:bold;
+}
+.main_orderPage{
+	display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    margin-bottom:30px;	
 }

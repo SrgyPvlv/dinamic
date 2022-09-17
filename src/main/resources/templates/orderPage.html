@@ -7,12 +7,10 @@
   <title>Расчет Заказа</title>
  </head>
  <body>
- 
- <div th:replace="header :: header"></div>
- 
+  
 <div class="main_orderPage">
-<table class="act">
- <caption align="top"><h3>Результаты расчета</h3></caption>
+<table class="table_orderPage">
+ <caption align="top"><h3>Данные по Заказу</h3></caption>
             <tr><td>№ Заказа</td><td th:text="${order.getOrdernumber}" colspan="4"></td></tr>
             <tr><td>Наименование Объекта </td><td th:text="${order.getBsnumber}" colspan="4"></td></tr>
             <tr><td>Адрес Объекта </td><td th:text="${bsAddress}" colspan="4"></td></tr>
@@ -48,7 +46,7 @@
 <tr><td colspan="4" style="text-align:right">Итого с НДС 20%, руб.</td><td th:text="${order.getCalcnds}"></td></tr>
 <tr><td colspan="5" style="border:none"></td></tr>
 <tr><td colspan="5" style="border:none">
-<p><label for="comm" style="font-weight:bold;color:#8B0000;">Комментарий(замечания) к Заказу: </label>
+<label for="comm" style="font-weight:bold;color:#8B0000;">Комментарий(замечания) к Заказу: </label>
     <textarea form ="orderform" name="comm" id="comm" cols="70" rows="4" wrap="soft"
      th:value="${order.getComm}" placeholder="Неточности и расхождения выявленные при проверке Заказа."></textarea>
 </td></tr>

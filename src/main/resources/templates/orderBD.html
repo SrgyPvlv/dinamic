@@ -74,12 +74,12 @@
         </tr>
          
         <tr th:each="order : ${orderlist}">
-           <td th:text="${order.orderNumber} ">№ Заказа</td><td th:text="${order.bsNumber} ">№ БС</td><td th:text="${order.dateStart} ">Дата начала</td> 
-           <td th:text="${order.dateEnd} ">Дата окончания</td><td th:text="${order.calc} ">Стоимость без НДС</td><td th:text="${order.calcNds} ">Стоимость с НДС</td>
-           <td th:text="${order.comm} " class="col7">Комментарий</td>
+           <td th:text="${order.getOrderNumber} ">№ Заказа</td><td th:text="${order.getBsNumber} ">№ БС</td><td th:text="${order.getDateStart} ">Дата начала</td> 
+           <td th:text="${order.getDateEnd} ">Дата окончания</td><td th:text="${order.getCalc} ">Стоимость без НДС</td><td th:text="${order.getCalcNds} ">Стоимость с НДС</td>
+           <td th:text="${order.getComm} " class="col7">Комментарий</td>
            <td>
            <form th:action="@{/showOrderPage}" method="get" target="_blank" style="display:inline;">
-                 <input type="hidden" name="id" th:value="${order.id}">
+                 <input type="hidden" name="id" th:value="${order.getId}">
                  <input type="submit" value="Страница Заказа"/>
                </form>           
         </tr>          

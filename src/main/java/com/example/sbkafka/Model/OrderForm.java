@@ -92,6 +92,31 @@ public class OrderForm {
 	public OrderForm(int ordernumber,String bsnumber,String datestart,String dateend,double calc,double calcnds,String comm,
 			double jeepprice,int jeepyesno,double jeeponeprice,double orderoutgoprice,double ordercalchprice,
 			double orderdifftime,double timehoursprice,String owenertype,int dgutype,String worktype,double ordercalcdprice,
-			double orderdiffday,double timedayprice,double ordertransport,String orderdistance,double orderkmprice,double ordernds) {}
-	
+			double orderdiffday,double timedayprice,double ordertransport,String orderdistance,double orderkmprice,double ordernds) {
+		
+		this.ordernumber=ordernumber;
+		this.bsnumber=bsnumber;
+		this.datestart=datestart;
+		this.dateend=dateend;
+		this.calc=calc;
+		this.calcnds=calcnds;
+		this.comm=comm;
+		this.jeepprice=jeepprice;
+		this.jeepyesno=jeepyesno;
+		this.jeeponeprice=jeeponeprice;
+		this.orderoutgoprice=orderoutgoprice;
+		this.ordercalchprice=ordercalchprice;
+		this.orderdifftime=orderdifftime;
+		this.timehoursprice=timehoursprice;
+		this.owenertype=owenertype;
+		this.dgutype=dgutype;
+		this.worktype=worktype;
+		this.ordercalcdprice=ordercalcdprice;
+		this.orderdiffday=orderdiffday;
+		this.timedayprice=timedayprice;
+		this.ordertransport=ordertransport;
+		this.orderdistance=orderdistance;
+		this.orderkmprice=orderkmprice;
+		this.ordernds=ordernds;		
+	}	
 }
