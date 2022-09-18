@@ -47,13 +47,17 @@
            <td th:text="${order.getDateend} ">Дата окончания</td><td th:text="${order.getCalc} ">Стоимость без НДС</td><td th:text="${order.getCalcnds} ">Стоимость с НДС</td>
            <td th:text="${order.getComm} " class="col7">Комментарий</td>
            <td class="col8" style="text-align:left;">
-               <form th:action="@{admin/bdEditForm}" method="get" style="display:inline;">
+               <form th:action="@{/bdEditForm}" method="get" style="display:inline;">
                  <input type="hidden" name="id" th:value="${order.getId}">
                  <input type="submit" value="Редактировать" style="background:#98FB98;">
-               </form> | 
-               <form th:action="@{admin/bdDelete}" method="post" style="display:inline;">
+               </form> &nbsp|&nbsp 
+               <form th:action="@{/bdDelete}" method="post" style="display:inline;">
                  <input type="hidden" name="id" th:value="${order.getId}">
                  <input type="submit" value="Удалить" style="background:#FF0000; color:white;">
+               </form> &nbsp|&nbsp 
+               <form th:action="@{/showOrderPage}" method="get" target="_blank" style="display:inline;">
+                 <input type="hidden" name="id" th:value="${order.getId}">
+                 <input type="submit" value="Страница Заказа"/>
                </form>
            </td> 
         </tr>

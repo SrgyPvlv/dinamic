@@ -45,11 +45,7 @@
 <tr><td colspan="4" style="text-align:right">НДС 20%, руб.</td><td th:text="${order.getOrdernds}"></td></tr>
 <tr><td colspan="4" style="text-align:right">Итого с НДС 20%, руб.</td><td th:text="${order.getCalcnds}"></td></tr>
 <tr><td colspan="5" style="border:none"></td></tr>
-<tr><td colspan="5" style="border:none">
-<label for="comm" style="font-weight:bold;color:#8B0000;">Комментарий(замечания) к Заказу: </label>
-    <textarea form ="orderform" name="comm" id="comm" cols="70" rows="4" wrap="soft"
-     th:value="${order.getComm}" placeholder="Неточности и расхождения выявленные при проверке Заказа."></textarea>
-</td></tr>
+<tr><td>Комментарий(замечания) к Заказу: </td><td colspan="4" th:text="${order.getComm}"></td></tr>
 </table>
 </div>
 

@@ -47,36 +47,12 @@ public class OrderFormService {
 		orderformrepository.deleteAll();
 	}
 	
-	public void editOrderForm(int id,int ordernumber,String bsnumber,String datestart,String dateend,double calc,double calcnds,String comm,
-			double jeepPrice,int jeepYesNo,double jeepOnePrice,double orderOutGoPrice,double orderCalcHPrice,
-			double orderDiffTime,double timeHoursPrice,String owenerType,int dguType,String workType,double orderCalcDPrice,
-			double orderDiffDay,double timeDayPrice,double orderTransport,String orderDistance,double orderKmPrice,double orderNds) {
+	public void editOrderForm(int id,int ordernumber,String bsnumber,String comm) {
 		OrderForm edited=orderformrepository.getById(id);
 		edited.setOrdernumber(ordernumber);
 		edited.setBsnumber(bsnumber);
-		edited.setDatestart(datestart);
-		edited.setDateend(dateend);
-		edited.setCalc(calc);
-		edited.setCalcnds(calcnds);
 		edited.setComm(comm);
-		edited.setJeepprice(jeepPrice);
-		edited.setJeepyesno(jeepYesNo);
-		edited.setJeeponeprice(jeepOnePrice);
-		edited.setOrderoutgoprice(orderOutGoPrice);
-		edited.setOrdercalchprice(orderCalcHPrice);
-		edited.setOrderdifftime(orderDiffTime);
-		edited.setTimehoursprice(timeHoursPrice);
-		edited.setOwenertype(owenerType);
-		edited.setDgutype(dguType);
-		edited.setWorktype(workType);
-		edited.setOrdercalcdprice(orderCalcDPrice);
-		edited.setOrderdiffday(orderDiffDay);
-		edited.setTimedayprice(timeDayPrice);
-		edited.setOrdertransport(orderTransport);
-		edited.setOrderdistance(orderDistance);
-		edited.setOrderkmprice(orderKmPrice);
-		edited.setOrdernds(orderNds);
-		
+				
 		orderformrepository.saveAndFlush(edited);
 	}
 	

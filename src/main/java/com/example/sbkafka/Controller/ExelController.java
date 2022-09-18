@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.example.sbkafka.MyDbConnection;
 
-//сохранение базы заказов в exel
+//сохранение базы заказов в exel/csv
 
 @Controller
 public class ExelController {
@@ -41,7 +41,7 @@ public class ExelController {
 	      String username = MyDbConnection.username;
 	      String password = MyDbConnection.password;
 	      Connection conn = null;
-	      String myQuery="(select o.ordernumber,o.bsnumber,b.bsaddress,o.datestart,o.dateend,o.calc,o.calcnds,o.comm from orderform as o join bslist as b on o.bsnumber=b.bsnumber order by ordernumber)";
+	      String myQuery="(select o.ordernumber,o.bsnumber,b.bsaddress,o.datestart,o.dateend,o.calc,o.calcnds,o.comm from orderform as o left join bslist as b on o.bsnumber=b.bsnumber order by ordernumber)";
 	      InputStreamResource file;
 	      
 	      try {  

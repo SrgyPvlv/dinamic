@@ -16,25 +16,13 @@
  <div>
  <h3> Форма редактирования информации о Заказе</h3>
  <fieldset style="border-color:#FFEBCD;text-align: center">
-  <form id="orderedit" th:action="@{admin/orderEdit}" method="post">
+  <form id="orderedit" th:action="@{/orderEdit}" method="post">
         <input type="hidden" name="id" th:value="${order.getId}" />
         <label>№ Заказа</label><br>
         <input type="text" name="orderNumber" th:value="${order.getOrdernumber}" style="text-align: center" />
         <br><br>
         <label>№ БС</label><br>
         <input type="text" name="bsNumber" th:value="${order.getBsnumber}" style="text-align: center" />
-        <br><br>
-        <label>Дата начала</label><br>
-        <input type="text" name="dateStart" th:value="${order.getDatestart}" style="text-align: center" readonly/>
-        <br><br>
-        <label>Дата окончания</label><br>
-        <input type="text" name="dateEnd" th:value="${order.getDateend}" style="text-align: center" readonly/>
-        <br><br>
-        <label>Стоимость без НДС</label><br>
-        <input type="text" name="calc" th:value="${order.getCalc}" style="text-align: center" readonly/>
-        <br><br>
-        <label>Стоимость с НДС</label><br>
-        <input type="text" name="calcNds" th:value="${order.getCalcnds}" style="text-align: center" readonly/>
         <br><br>
         <label>Комментарий</label><br>
         <input type="text" name="comm" th:value="${order.getComm}" style="text-align: center; width:250px;" />
