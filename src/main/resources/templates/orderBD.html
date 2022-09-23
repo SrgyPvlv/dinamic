@@ -48,7 +48,9 @@
        <form th:action="@{/findByBsName}" th:method="get" >
        <label>Поиск по № БС</label> &nbsp&nbsp
        <input type="text" name="bsNumberSearch" placeholder="Код '78-' указывать необязательно" style="width:220px" required>
-       <input type="submit" value="Найти" >  
+       <input type="submit" value="Найти" > &nbsp&nbsp | &nbsp&nbsp
+       <span th:text="'Найдено записей: '+${orderListSize}" style="color:#8B4513"></span> &nbsp&nbsp&nbsp
+       <span th:text="'На сумму (без НДС): '+${orderListSumm}+' руб.'" style="color:#8B4513"></span>  
    </form>            
 </div>
 <br><br>
@@ -61,12 +63,14 @@
 <input type="number" size="5" name="numstr" id="numstr" step="5" min="10" th:value="${numstr}" style="width:45px;height:20px;font-size:16px;text-align:center;">
 <input type="submit" value="Применить" style="height:25px;font-size:16px;">
 </form>
+<br><br>
 
  <table class="ordertable" border="1">
- <caption align="top"><h3>Список Заказов &nbsp&nbsp&nbsp&nbsp
+ <caption align="top"><h3 style="display:inline;">Список Заказов &nbsp&nbsp&nbsp&nbsp
 <form th:action="@{/copyToCsv}" method="get" style="display:inline;">
-<input type="submit" value="Импорт в CSV файл"> 
-</form></h3>
+<input type="submit" value="Импорт в CSV файл">
+</form>
+<br><br>
 </caption>
         <tr>
           <th>№ Заказа</th> <th>№ БС</th> <th>Дата начала</th> 

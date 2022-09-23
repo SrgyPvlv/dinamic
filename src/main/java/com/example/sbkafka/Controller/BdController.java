@@ -1,6 +1,8 @@
 package com.example.sbkafka.Controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -77,6 +79,9 @@ public class BdController {
 		int countdfs=orderformservice.countDfs();//кол-во заказов ДФС
 		double sumdfs=orderformservice.sumDfs(); String sumdfsdF=dF.format(sumdfs);//затраты на заказы ДФС
 		
+		double orderListSumm = 0;
+		int orderListSize=0;
+		
 		model.addAttribute("orderlist", orderlistFile);
 		model.addAttribute("sumordersdF", sumordersdF);
 		model.addAttribute("countoforders", countoforders);
@@ -91,7 +96,8 @@ public class BdController {
 		model.addAttribute("sumdfsdF", sumdfsdF);
 		model.addAttribute("str", this.str);
 		model.addAttribute("numstr", this.numstr);
-		
+		model.addAttribute("orderListSize", orderListSize);
+		model.addAttribute("orderListSumm", orderListSumm);		
 		
 		return "orderBD";
 		
@@ -147,6 +153,7 @@ public class BdController {
 		
 		ArrayList<Order> orderlistFile=new ArrayList<Order>();
 		List<OrderForm> orderlist=orderformservice.findByOrderNumber(orderNumberSearch);
+		double orderListSumm = 0;
 		
 for(OrderForm order:orderlist) {
 			
@@ -181,6 +188,13 @@ for(OrderForm order:orderlist) {
 		int countdfs=orderformservice.countDfs();//кол-во заказов ДФС
 		double sumdfs=orderformservice.sumDfs(); String sumdfsdF=dF.format(sumdfs);//затраты на заказы ДФС
 		
+		int orderListSize=orderlist.size();
+		if(orderlist.isEmpty()) {orderListSumm=0.00;} else {
+        	orderListSumm=orderlist.stream().map(OrderForm::getCalc).reduce((x,y)->x+y).get().doubleValue();
+        	BigDecimal bd = new BigDecimal(orderListSumm).setScale(2, RoundingMode.HALF_UP);
+        	orderListSumm = bd.doubleValue();
+        }
+		
 		model.addAttribute("orderlist", orderlistFile);
 		model.addAttribute("sumordersdF", sumordersdF);
 		model.addAttribute("countoforders", countoforders);
@@ -195,6 +209,8 @@ for(OrderForm order:orderlist) {
 		model.addAttribute("sumdfsdF", sumdfsdF);
 		model.addAttribute("str", this.str);
 		model.addAttribute("numstr", this.numstr);
+		model.addAttribute("orderListSize", orderListSize);
+		model.addAttribute("orderListSumm", orderListSumm);
 		
 		
 		return "orderBD";
@@ -204,6 +220,7 @@ for(OrderForm order:orderlist) {
 	public String findByName(@RequestParam("bsNumberSearch") String bsNumberSearch, Model model)throws IOException{
 		ArrayList<Order> orderlistFile=new ArrayList<Order>();
 		List<OrderForm> orderlist=orderformservice.findByBsName(bsNumberSearch);
+		double orderListSumm = 0;
 		
 for(OrderForm order:orderlist) {
 			
@@ -238,6 +255,13 @@ for(OrderForm order:orderlist) {
 		int countdfs=orderformservice.countDfs();//кол-во заказов ДФС
 		double sumdfs=orderformservice.sumDfs(); String sumdfsdF=dF.format(sumdfs);//затраты на заказы ДФС
 		
+		int orderListSize=orderlist.size();
+		if(orderlist.isEmpty()) {orderListSumm=0.00;} else {
+        	orderListSumm=orderlist.stream().map(OrderForm::getCalc).reduce((x,y)->x+y).get().doubleValue();
+        	BigDecimal bd = new BigDecimal(orderListSumm).setScale(2, RoundingMode.HALF_UP);
+        	orderListSumm = bd.doubleValue();
+        }
+		
 		model.addAttribute("orderlist", orderlistFile);
 		model.addAttribute("sumordersdF", sumordersdF);
 		model.addAttribute("countoforders", countoforders);
@@ -252,7 +276,8 @@ for(OrderForm order:orderlist) {
 		model.addAttribute("sumdfsdF", sumdfsdF);
 		model.addAttribute("str", this.str);
 		model.addAttribute("numstr", this.numstr);
-		
+		model.addAttribute("orderListSize", orderListSize);
+		model.addAttribute("orderListSumm", orderListSumm);
 		
 		return "orderBD";
 	}
