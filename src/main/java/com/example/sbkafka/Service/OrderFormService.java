@@ -61,38 +61,45 @@ public class OrderFormService {
 	    return countorders;
 	}
 
-	public double sumOfOrders() {
-		double sumorders=orderformrepository.sumOfOrders();
-		return sumorders;
+	public Double sumOfOrders() {
+		Double sumorders=orderformrepository.sumOfOrders();
+		if (sumorders!=null) {return sumorders;}
+		else {return Double.valueOf(0.00);}
 	}
 	
-	public double minOfOrder() {
-		double minorder=orderformrepository.minOfOrder();
-		return minorder;
+	public Double minOfOrder() {
+		Double minorder=orderformrepository.minOfOrder();
+		if (minorder!=null) {return minorder;}
+		else {return Double.valueOf(0.00);}
 	}
-	public double maxOfOrder() {
-		double maxorder=orderformrepository.maxOfOrder();
-		return maxorder;
+	
+	public Double maxOfOrder() {
+		Double maxorder=orderformrepository.maxOfOrder();
+		if (maxorder!=null) {return maxorder;}
+		else {return Double.valueOf(0.00);}
 	}
-	public double avgOfOrder() {
-		double avgorder=orderformrepository.avgOfOrder();
-		return avgorder;
+	public Double avgOfOrder() {
+		Double avgorder=orderformrepository.avgOfOrder();
+		if (avgorder!=null) {return avgorder;}
+		else {return Double.valueOf(0.00);}
 	}
 	public int countOfFalseOut(double f1,double f2,double f3,double f4,double f5,double f6) {	
 	    int countfalse=orderformrepository.countOfFalseOut(f1, f2, f3, f4, f5, f6);
 	    return countfalse;
 	}
-	public double sumOfFalseOut(double f1,double f2,double f3,double f4,double f5,double f6) {
-		double sumfalse=orderformrepository.sumOfFalseOut(f1, f2, f3, f4, f5, f6);
-		return sumfalse;
+	public Double sumOfFalseOut(double f1,double f2,double f3,double f4,double f5,double f6) {
+		Double sumfalse=orderformrepository.sumOfFalseOut(f1, f2, f3, f4, f5, f6);
+		if (sumfalse!=null) {return sumfalse;}
+		else {return Double.valueOf(0.00);}
 	}
 	public int countDfs() {	
 	    int countdfs=orderformrepository.countDfs();
 	    return countdfs;
 	}
-	public double sumDfs() {
-		double sumdfs=orderformrepository.sumDfs();
-		return sumdfs;
+	public Double sumDfs() {
+		Double sumdfs=orderformrepository.sumDfs();
+		if (sumdfs!=null) {return sumdfs;}
+		else {return Double.valueOf(0.00);}
 	}
 	public List<OrderForm> findByOrderNumber(int ordernum){
 		return orderformrepository.findByOrderNumber(ordernum);

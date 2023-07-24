@@ -57,11 +57,11 @@ public class BdController {
          }
 		
 		DecimalFormat dF = new DecimalFormat( "###,###.00" );
-		    
-		double sumorders=orderformservice.sumOfOrders(); String sumordersdF=dF.format(sumorders);//сумма заказов
+		
+		Double sumorders=orderformservice.sumOfOrders(); String sumordersdF=dF.format(sumorders.doubleValue());//сумма заказов
 		int countoforders=orderformservice.countOfOrders();//кол-во заказов
 		double orderslimit=priceService.getById(46).getPricesValue(); String orderslimitdF=dF.format(orderslimit);//лимит по деньгам
-		double free=orderslimit-sumorders; String freedF=dF.format(free);//остаток денег
+		double free=orderslimit-(sumorders.doubleValue()); String freedF=dF.format(free);//остаток денег
 		
 		//получение цен (6 шт.)ложных вызовов из таблицы price
 		double f1=priceService.getById(38).getPricesValue();
@@ -71,9 +71,9 @@ public class BdController {
 		double f5=priceService.getById(42).getPricesValue();
 		double f6=priceService.getById(43).getPricesValue();
 		
-		double minorder=orderformservice.minOfOrder(); String minorderdF=dF.format(minorder);//минимальный заказ
-		double maxorder=orderformservice.maxOfOrder(); String maxorderdF=dF.format(maxorder);//максимальный заказ
-		double avgorder=orderformservice.avgOfOrder(); String avgorderdF=dF.format(avgorder);//средняя сумма заказа
+		Double minorder=orderformservice.minOfOrder(); String minorderdF=dF.format(minorder.doubleValue());//минимальный заказ
+		Double maxorder=orderformservice.maxOfOrder(); String maxorderdF=dF.format(maxorder.doubleValue());//максимальный заказ
+		Double avgorder=orderformservice.avgOfOrder(); String avgorderdF=dF.format(avgorder.doubleValue());//средняя сумма заказа
 		int countfalse=orderformservice.countOfFalseOut(f1, f2, f3, f4, f5, f6);//кол-во ложных выездов до КАД
 		double sumfalse=orderformservice.sumOfFalseOut(f1, f2, f3, f4, f5, f6); String sumfalsedF=dF.format(sumfalse);//затраты на ложные выезды до КАД
 		int countdfs=orderformservice.countDfs();//кол-во заказов ДФС
