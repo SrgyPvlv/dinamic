@@ -56,7 +56,7 @@ public class BdController {
             orderlistFile.addAll(Arrays.asList(orderlistarray));
          }
 		
-		DecimalFormat dF = new DecimalFormat( "###,###.00" );
+		DecimalFormat dF = new DecimalFormat( "###,#00.00" );
 		
 		Double sumorders=orderformservice.sumOfOrders(); String sumordersdF=dF.format(sumorders.doubleValue());//сумма заказов
 		int countoforders=orderformservice.countOfOrders();//кол-во заказов
