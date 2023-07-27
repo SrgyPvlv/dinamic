@@ -123,7 +123,7 @@ public class BdController {
 	OrderForm order=orderformservice.getById(id);
 	model.addAttribute("order", order);
 	   
-	   return "editForm";
+	   return "editForm2";
 	}
 	
 	@PostMapping("/orderEdit") // редактирование заказа
