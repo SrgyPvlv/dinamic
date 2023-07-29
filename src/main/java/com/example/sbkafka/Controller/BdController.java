@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -121,16 +123,35 @@ public class BdController {
 	public String edit(@RequestParam("id") int id, Model model) {
 	
 	OrderForm order=orderformservice.getById(id);
+	DateTimeFormatter formatter=DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+	LocalDateTime start=LocalDateTime.parse(order.getDatestart(),formatter);
+	LocalDateTime end=LocalDateTime.parse(order.getDateend(),formatter);
+	
 	model.addAttribute("order", order);
+	model.addAttribute("start", start);
+	model.addAttribute("end", end);
 	   
 	   return "editForm2";
 	}
 	
 	@PostMapping("/orderEdit") // редактирование заказа
-	public String orderEdit(@RequestParam("id") int id, @RequestParam("orderNumber") int orderNumber,
-			@RequestParam("bsNumber") String bsNumber,@RequestParam("comm") String comm) {
+	public String orderEdit(@RequestParam("id") int id, @RequestParam("orderNumber") int orderNumber,@RequestParam("bsNumber") String bsNumber,
+			@RequestParam("dateStart") String dateStart,@RequestParam("dateEnd") String dateEnd,
+			@RequestParam("orderCalc") double orderCalc,@RequestParam("orderCalcNds") double orderCalcNds,
+			@RequestParam("orderComment") String orderComment,
+			@RequestParam("jeepPrice") Double jeepPrice,@RequestParam("jeepYesNo") Integer jeepYesNo,
+			@RequestParam("jeepOnePrice") Double jeepOnePrice,@RequestParam("orderOutGoPrice") Double orderOutGoPrice,
+			@RequestParam("orderCalcHPrice") Double orderCalcHPrice,@RequestParam("orderDiffTime") Double orderDiffTime,
+			@RequestParam("timeHoursPrice") Double timeHoursPrice,@RequestParam("owenerType") String owenerType,
+			@RequestParam("dguType") Integer dguType,@RequestParam("workType") String workType,
+			@RequestParam("orderCalcDPrice") Double orderCalcDPrice,@RequestParam("orderDiffDay") Double orderDiffDay,
+			@RequestParam("timeDayPrice") Double timeDayPrice,@RequestParam("orderTransport") Double orderTransport,
+			@RequestParam("orderDistance") String orderDistance,@RequestParam("orderKmPrice") Double orderKmPrice,
+			@RequestParam("orderNds") Double orderNds) {
 	
-	orderformservice.editOrderForm(id, orderNumber,bsNumber,comm);
+	orderformservice.editOrderForm(id,orderNumber,bsNumber,dateStart,dateEnd,orderCalc,orderCalcNds,orderComment,jeepPrice,jeepYesNo,jeepOnePrice,
+			orderOutGoPrice,orderCalcHPrice,orderDiffTime,timeHoursPrice,owenerType,dguType,workType,orderCalcDPrice,
+			orderDiffDay,timeDayPrice,orderTransport,orderDistance,orderKmPrice,orderNds);
 	   
 	   return "okEdit";
 	}

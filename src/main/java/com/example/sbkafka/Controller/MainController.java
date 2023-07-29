@@ -48,11 +48,12 @@ public class MainController {
     }
 
 	@PostMapping("/calcOrder") //расчет заказа (сметный расчет)
-    public String saveOrder(@RequestParam(value="ordernumber") int orderNumber, @RequestParam(value="bsnumber") String bsNumber,//
+    public String saveOrder(@RequestParam(name="id",required=false,defaultValue="-10") int id, @RequestParam(value="ordernumber") int orderNumber, @RequestParam(value="bsnumber") String bsNumber,//
     		@RequestParam(value="start") String timeStart,@RequestParam(value="end") String timeEnd,//
     		@RequestParam(value="distance") String orderDistance,//
     		@RequestParam(value="dgutype") int dguType,@RequestParam(value="jeep") int jeepYesNo,//
-    		@RequestParam(value="worktype") String workType,@RequestParam(value="owener") String owenerType,Model model) throws ParseException {
+    		@RequestParam(value="worktype") String workType,@RequestParam(value="owener") String owenerType,
+    		@RequestParam(value="comment",required=false) String comment,Model model) throws ParseException {
 		
 		double TRANSPORT_PRICE = priceService.getById(44).getPricesValue();
 		double JEEP_PRICE = priceService.getById(45).getPricesValue();
@@ -75,7 +76,8 @@ public class MainController {
     	String dateEnd=formatter.format(t2);
     	
     	String bsAddress=bsListService.findBsAddress(bsNumber);
-    	    	    	
+    	
+    	model.addAttribute("id", id);
     	model.addAttribute("orderNumber", orderNumber);
     	model.addAttribute("bsNumber", bsNumber);
     	model.addAttribute("dateStart", dateStart);
@@ -100,7 +102,8 @@ public class MainController {
     	model.addAttribute("workType", workType);
     	model.addAttribute("owenerType", owenerType);
     	model.addAttribute("bsAddress", bsAddress);
-        return "index";
+    	model.addAttribute("orderComment", comment);
+        if (id==-10) {return "index";} else {return "editForm3";}
         }
 public Double calcTransport(String orderdistance,double km) {
 		
