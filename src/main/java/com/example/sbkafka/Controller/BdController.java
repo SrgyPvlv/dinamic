@@ -131,7 +131,7 @@ public class BdController {
 	model.addAttribute("start", start);
 	model.addAttribute("end", end);
 	   
-	   return "editForm2";
+	   return "editForm";
 	}
 	
 	@PostMapping("/orderEdit") // редактирование заказа

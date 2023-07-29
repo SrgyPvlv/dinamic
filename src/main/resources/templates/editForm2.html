@@ -11,69 +11,6 @@
 <div th:replace="header :: header"></div>
  
  <br><br>
- <div class="left">
- 
- <div>
- <h3> Форма редактирования информации о Заказе</h3>
- <fieldset style="border-color:#FFEBCD;text-align: center">
-  <form id="orderedit" th:action="@{/calcOrder}" method="post">
-   <input type="hidden" name="id" th:value="${order.getId}">
-   <fieldset name="order">       
-   <legend> № Заказа и БС </legend>
-   <p><label for="ordernumber">№ Заказа: </label>
-      <input type="number" name="ordernumber" min="1" style="width:250px;" th:value="${order.getOrdernumber}" required></p>
-   <p><label for="bsnumber">№ Базовой стации: </label>
-      <input type="text" name="bsnumber" id="bsnumber" placeholder="78-12345 (5-значный) " pattern="78-\d{5}" title="Номер БС должен быть 5-значным." th:value="${order.getBsnumber}" required><i></i></p>
-   </fieldset>
-   <fieldset name="order_1">
-   <legend> Тип работ </legend>
-    <p><input name="worktype" type="radio" value="emergency" th:checked="${order.getWorktype}=='emergency'"> Аварийное (не более 3-х суток)</p>
-    <p><input name="worktype" type="radio" value="plan" th:checked="${order.getWorktype}=='plan'"> Плановое (продолжение Аварийного, начиная с 4-ых суток)</p>
-    <p><input name="worktype" type="radio" value="false" th:checked="${order.getWorktype}=='false'"> Ложный выезд</p>
-    <p><input name="worktype" type="radio" value="planinitial" th:checked="${order.getWorktype}=='planinitial'"> Плановое</p>
-    </fieldset>	
-   <fieldset name="order">
-   <legend> Мощность ДГУ </legend>
-    <p><input name="dgutype" type="radio" value="3" th:checked="${order.getDgutype}==3"> 3.5 кВт </p>
-    <p><input name="dgutype" type="radio" value="8" th:checked="${order.getDgutype}==8"> 8 кВт</p>
-    <p><input name="dgutype" type="radio" value="16" th:checked="${order.getDgutype}==16"> 16 кВт</p>
-    </fieldset>	
-   <fieldset name="order">
-   <legend> Чей ДГУ используется? </legend>
-    <p><input name="owener" type="radio" value="po" th:checked="${order.getOwenertype}=='po'"> Подрядчика </p>
-    <p><input name="owener" type="radio" value="mts" th:checked="${order.getOwenertype}=='mts'"> Заказчика </p>
-    </fieldset>	
-   <fieldset name="order">
-   <legend> Использование техники повышенной проходимости (ГАЗ-66,ЗИЛ-131,Урал и т.д.) </legend>
-    <p><input name="jeep" type="radio" value="1" th:checked="${order.getJeepyesno}==1"> Да </p>
-    <p><input name="jeep" type="radio" value="0" th:checked="${order.getJeepyesno}==0"> Нет </p>
-    </fieldset>	
-   <fieldset name="order">
-   <legend> Время работ </legend>
-   <p><label for="start">Начало : </label>
-      <input type="datetime-local" name="start" th:value="${start}" required></p>
-   <p><label for="end">Окончание : </label>
-      <input type="datetime-local" name="end" th:value="${end}" required></p>
-   </fieldset>
-   <fieldset name="order">
-   <legend>Расстояние до БС от КАД</legend>
-    <p style="color:#0000FF;font-size:18px;font-style:italic;">Оставляем "ноль", если БС внутри КАД или дизеление Плановое (продолжение Аварийного) !</p>
-	<p><label for="distance">Расстояние, км : </label>
-	<input type="number" size="7" name="distance" id="distance" step="0.01" min="0" value="0" th:value="${order.getOrderdistance}" required></p>
-    </fieldset>
-    <fieldset name="order">
-    <legend> Комментарий(замечания) к Заказу </legend>
-      <p><label for="ordernumber">Комментарий: </label>
-      <input type="text" name="comment" style="width:250px;" th:value="${order.getComm}"></p>
-   </fieldset>
-   <br>
-   <p><input type="submit" value="Рассчитать" style="width: 100px; height: 40px; background-color: #98FB98; margin-left:70px; margin-right:30px">
-      <input type="reset" value="Очистить" style="width: 100px; height: 40px; background-color: #FFC0CB;"></p>
- </form>
- </fieldset>
- </div>
- 
- </div>
  
  <div class="right">
 <table class="act">
@@ -120,6 +57,7 @@
 <tr><td colspan="5" style="border:none"></td></tr>
 <tr><td colspan="5" style="background:#98FB98">
     <form id="orderform" th:action="@{/orderEdit}" method="post">
+        <input type="hidden" name="id" th:value="${id}">
         <input type="hidden" name="orderNumber" th:value="${orderNumber}" />
         <input type="hidden" name="bsNumber" th:value="${bsNumber}" />
         <input type="hidden" name="dateStart" th:value="${dateStart}" />
