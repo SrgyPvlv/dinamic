@@ -138,7 +138,7 @@ public class BdController {
 	public String orderEdit(@RequestParam("id") int id, @RequestParam("orderNumber") int orderNumber,@RequestParam("bsNumber") String bsNumber,
 			@RequestParam("dateStart") String dateStart,@RequestParam("dateEnd") String dateEnd,
 			@RequestParam("orderCalc") double orderCalc,@RequestParam("orderCalcNds") double orderCalcNds,
-			@RequestParam("orderComment") String orderComment,
+			@RequestParam("comment") String orderComment,
 			@RequestParam("jeepPrice") Double jeepPrice,@RequestParam("jeepYesNo") Integer jeepYesNo,
 			@RequestParam("jeepOnePrice") Double jeepOnePrice,@RequestParam("orderOutGoPrice") Double orderOutGoPrice,
 			@RequestParam("orderCalcHPrice") Double orderCalcHPrice,@RequestParam("orderDiffTime") Double orderDiffTime,

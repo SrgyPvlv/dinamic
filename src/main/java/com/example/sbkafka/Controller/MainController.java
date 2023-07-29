@@ -103,7 +103,7 @@ public class MainController {
     	model.addAttribute("owenerType", owenerType);
     	model.addAttribute("bsAddress", bsAddress);
     	model.addAttribute("orderComment", comment);
-        if (id==-10) {return "index";} else {return "editForm2";}
+        if (id==-10) {return "index";} else {return "editFormFinal";}
         }
 public Double calcTransport(String orderdistance,double km) {
 		
