@@ -337,3 +337,6 @@ input#bsnumber:valid+i:after{
 	margin-right:15px;
 	text-align:right;	
 }
+.remark {
+	color: red;
+}

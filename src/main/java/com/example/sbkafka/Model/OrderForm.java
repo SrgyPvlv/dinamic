@@ -11,83 +11,83 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor 
 @Entity
 @Table(name="orderform")
-public class OrderForm {
+public class OrderForm { //страница Заказа со всеми параметрами
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@Column
-	private int ordernumber;
+	private int ordernumber;//номер заказа
 	
 	@Column
-	private String bsnumber;
+	private String bsnumber;//номер БС
 	
 	@Column
-	private String datestart;
+	private String datestart;//начало работ
 	
 	@Column
-	private String dateend;
+	private String dateend;//окончание работ
 	
 	@Column
-	private double calc;
+	private double calc;//стоимость без НДС
 	
 	@Column
-	private double calcnds;
+	private double calcnds;//стоимость с НДС
 	
 	@Column
-	private String comm;
+	private String comm;//комментарий к заказу
 	
 	@Column
-	private Double jeepprice;
+	private Double jeepprice;//стоимость в заказе за использование проходимых мащин
 	
 	@Column
-	private Integer jeepyesno;
+	private Integer jeepyesno;//определение факта использования проходимых машин
 	
 	@Column
-	private Double jeeponeprice;
+	private Double jeeponeprice;//стоимость в ТЦП за использование проходимых машин
 	
 	@Column
-	private Double orderoutgoprice;
+	private Double orderoutgoprice;//стоимость за выезд аварийной бригады с ДГУ
 	
 	@Column
-	private Double ordercalchprice;
+	private Double ordercalchprice;//стоимость работ (ед.изм.- часы)
 	
 	@Column
-	private Double orderdifftime;
+	private Double orderdifftime;//продолжительность работ (ед.изм.- часы)
 	
 	@Column
-	private Double timehoursprice;
+	private Double timehoursprice;//цена работ за 1 час
 	
 	@Column
-	private String owenertype;
+	private String owenertype;//владелец ДГУ
 	
 	@Column
-	private Integer dgutype;
+	private Integer dgutype;//тип(мощность) ДГУ
 	
 	@Column
-	private String worktype;
+	private String worktype;//тип работ(аварийные или плановые)
 	
 	@Column
-	private Double ordercalcdprice;
+	private Double ordercalcdprice;//стоимость работ (ед.изм.- сутки)
 	
 	@Column
-	private Double orderdiffday;
+	private Double orderdiffday;//продолжительность работ (ед.изм.- сутки)
 	
 	@Column
-	private Double timedayprice;
+	private Double timedayprice;//цена работ за 1 сутки
 	
 	@Column
-	private Double ordertransport;
+	private Double ordertransport;//стоимость транспортных расходов
 	
 	@Column
-	private String orderdistance;
+	private String orderdistance;//кол-во км
 	
 	@Column
-	private Double orderkmprice;
+	private Double orderkmprice;//цена транспортных расходов за 1 км
 	
 	@Column
-	private Double ordernds;
+	private Double ordernds;//стоимость работ с НДС
 	
 	public OrderForm(int ordernumber,String bsnumber,String datestart,String dateend,double calc,double calcnds,String comm,
 			double jeepprice,int jeepyesno,double jeeponeprice,double orderoutgoprice,double ordercalchprice,

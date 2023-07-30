@@ -134,7 +134,7 @@ public class BdController {
 	   return "editForm";
 	}
 	
-	@PostMapping("/orderEdit") // редактирование заказа
+	@PostMapping("/orderEdit") // редактирование заказа с сохранением в БД
 	public String orderEdit(@RequestParam("id") int id, @RequestParam("orderNumber") int orderNumber,@RequestParam("bsNumber") String bsNumber,
 			@RequestParam("dateStart") String dateStart,@RequestParam("dateEnd") String dateEnd,
 			@RequestParam("orderCalc") double orderCalc,@RequestParam("orderCalcNds") double orderCalcNds,

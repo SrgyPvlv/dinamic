@@ -1,16 +1,15 @@
 package com.example.sbkafka.Model;
 
-
-public class Order {
+public class Order {  //Заказ
 	
 	private int id;
-	private int ordernumber;
-	private String bsnumber;
-	private String datestart;
-	private String dateend;
-	private double calc;
-	private double calcnds;
-	private String comm;
+	private int ordernumber;//номер заказа
+	private String bsnumber;//номер БС
+	private String datestart;//дата начала работ
+	private String dateend;//дата окончания работ
+	private double calc;//стоимость без НДС
+	private double calcnds;//стоимость с НДС
+	private String comm;//комментарий
 
 	public Order() {}
 	
