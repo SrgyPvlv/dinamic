@@ -13,6 +13,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.example.sbkafka.Model.OrderForm;
 
+//Создание exel
 public class ExelHelper {
 	  public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 	  static String[] HEADERs = { "№ Заказа", "№ БС", "Дата начала", "Дата окончания", "Стоимость без НДС", "Стоимость с НДС", "Комментарий"};
