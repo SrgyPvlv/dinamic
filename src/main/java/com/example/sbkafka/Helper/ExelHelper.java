@@ -11,15 +11,15 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.example.sbkafka.Model.OrderForm;
+import com.example.sbkafka.Model.OrderForExel;
 
 //Создание exel
 public class ExelHelper {
 	  public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-	  static String[] HEADERs = { "№ Заказа", "№ БС", "Дата начала", "Дата окончания", "Стоимость без НДС", "Стоимость с НДС", "Комментарий"};
+	  static String[] HEADERs = { "№ Заказа", "№ БС", "Адрес БС", "Дата начала", "Дата окончания", "Стоимость без НДС", "Стоимость с НДС", "Комментарий"};
 	  static String SHEET = "Заказы";
 
-	  public static ByteArrayInputStream orderFormToExcel(List<OrderForm> orderlistFile) {
+	  public static ByteArrayInputStream orderFormToExcel(List<OrderForExel> orderlistFile) {
 
 	    try (Workbook workbook = new XSSFWorkbook(); ByteArrayOutputStream out = new ByteArrayOutputStream();) {
 	      Sheet sheet = workbook.createSheet(SHEET);
@@ -33,16 +33,17 @@ public class ExelHelper {
 	      }
 
 	      int rowIdx = 1;
-	      for (OrderForm order : orderlistFile) {
+	      for (OrderForExel order : orderlistFile) {
 	        Row row = sheet.createRow(rowIdx++);
 
 	        try {row.createCell(0).setCellValue(order.getOrdernumber());} catch(Exception ex) {row.createCell(0).setCellValue("");};
 	        try {row.createCell(1).setCellValue(order.getBsnumber());} catch(Exception ex) {row.createCell(1).setCellValue("");};
-	        try {row.createCell(2).setCellValue(order.getDatestart());} catch(Exception ex) {row.createCell(2).setCellValue("");};
-	        try {row.createCell(3).setCellValue(order.getDateend());} catch(Exception ex) {row.createCell(3).setCellValue("");};
-	        try {row.createCell(4).setCellValue(order.getCalc());} catch(Exception ex) {row.createCell(4).setCellValue("");};
-	        try {row.createCell(5).setCellValue(order.getCalcnds());} catch(Exception ex) {row.createCell(5).setCellValue("");};
-	        try {row.createCell(6).setCellValue(order.getComm());} catch(Exception ex) {row.createCell(6).setCellValue("");};
+	        try {row.createCell(2).setCellValue(order.getBsaddress());} catch(Exception ex) {row.createCell(2).setCellValue("");};
+	        try {row.createCell(3).setCellValue(order.getDatestart());} catch(Exception ex) {row.createCell(3).setCellValue("");};
+	        try {row.createCell(4).setCellValue(order.getDateend());} catch(Exception ex) {row.createCell(4).setCellValue("");};
+	        try {row.createCell(5).setCellValue(order.getCalc());} catch(Exception ex) {row.createCell(5).setCellValue("");};
+	        try {row.createCell(6).setCellValue(order.getCalcnds());} catch(Exception ex) {row.createCell(6).setCellValue("");};
+	        try {row.createCell(7).setCellValue(order.getComm());} catch(Exception ex) {row.createCell(7).setCellValue("");};
 	      }
 
 	      workbook.write(out);

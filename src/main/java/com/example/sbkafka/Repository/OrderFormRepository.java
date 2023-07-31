@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
 import com.example.sbkafka.Model.OrderForm;
 
 @Repository
@@ -47,5 +46,5 @@ public interface OrderFormRepository extends JpaRepository<OrderForm,Integer> {
 
 	@Query(value="select * from orderform where lower(bsnumber) like concat('%',:bsnum,'%') order by ordernumber",nativeQuery=true)//поиск по номеру БС
 	public List<OrderForm> findByBsName(@Param("bsnum") String bsnum);
-
+	
 }

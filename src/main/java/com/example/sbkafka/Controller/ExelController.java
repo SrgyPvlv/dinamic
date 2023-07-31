@@ -21,7 +21,7 @@ public class ExelController {
 	
 	@GetMapping("/copyToExel")
 	public ResponseEntity<Resource> getEmployeesFile(){
-		String filename = "dinamic_orders.xlsx";
+		String filename = "dgu_orders.xlsx";
 		InputStreamResource file = new InputStreamResource(exelService.ordersLoad());
 		
 		return ResponseEntity.ok()
