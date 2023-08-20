@@ -26,7 +26,8 @@ public class DefaultExelService implements ExelService {
 		List<OrderForExel> ordersforexel = new ArrayList<>();
 		for (OrderForm order: orders) {
 			String bn=order.getBsnumber();
-			String bsaddress=bsListRepository.findBsByNumber(bn).getBsAddress();
+			String bsaddress=null;
+			try{bsaddress=bsListRepository.findBsByNumber(bn).getBsAddress();}catch(Exception ex) {bsaddress="БС с данным номером не найдена. Обратитесь к администратору приложения.";};
 			ordersforexel.add(new OrderForExel(order.getOrdernumber(),order.getBsnumber(),order.getDatestart(),order.getDateend(),
 					order.getCalc(),order.getCalcnds(),order.getComm(),bsaddress));
 		}
