@@ -2,41 +2,98 @@ package com.example.sbkafka.Model;
 
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor 
 @Entity
 @Table(name="orderform")
-public class OrderForm {
+public class OrderForm { //страница Заказа со всеми параметрами
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@Column
-	private int ordernumber;
+	private int ordernumber;//номер заказа
 	
 	@Column
-	private String bsnumber;
+	private String bsnumber;//номер БС
 	
 	@Column
-	private String datestart;
+	private String datestart;//начало работ
 	
 	@Column
-	private String dateend;
+	private String dateend;//окончание работ
 	
 	@Column
-	private double calc;
+	private double calc;//стоимость без НДС
 	
 	@Column
-	private double calcnds;
+	private double calcnds;//стоимость с НДС
 	
 	@Column
-	private String comm;
+	private String comm;//комментарий к заказу
 	
-	@OneToOne(mappedBy = "orderform", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval=true)
-    private FileDB fileDB;
-
-	public OrderForm() {}
+	@Column
+	private Double jeepprice;//стоимость в заказе за использование проходимых мащин
 	
-	public OrderForm(int ordernumber,String bsnumber,String datestart,String dateend,double calc,double calcnds,String comm) {
+	@Column
+	private Integer jeepyesno;//определение факта использования проходимых машин
+	
+	@Column
+	private Double jeeponeprice;//стоимость в ТЦП за использование проходимых машин
+	
+	@Column
+	private Double orderoutgoprice;//стоимость за выезд аварийной бригады с ДГУ
+	
+	@Column
+	private Double ordercalchprice;//стоимость работ (ед.изм.- часы)
+	
+	@Column
+	private Double orderdifftime;//продолжительность работ (ед.изм.- часы)
+	
+	@Column
+	private Double timehoursprice;//цена работ за 1 час
+	
+	@Column
+	private String owenertype;//владелец ДГУ
+	
+	@Column
+	private Integer dgutype;//тип(мощность) ДГУ
+	
+	@Column
+	private String worktype;//тип работ(аварийные или плановые)
+	
+	@Column
+	private Double ordercalcdprice;//стоимость работ (ед.изм.- сутки)
+	
+	@Column
+	private Double orderdiffday;//продолжительность работ (ед.изм.- сутки)
+	
+	@Column
+	private Double timedayprice;//цена работ за 1 сутки
+	
+	@Column
+	private Double ordertransport;//стоимость транспортных расходов
+	
+	@Column
+	private String orderdistance;//кол-во км
+	
+	@Column
+	private Double orderkmprice;//цена транспортных расходов за 1 км
+	
+	@Column
+	private Double ordernds;//стоимость работ с НДС
+	
+	public OrderForm(int ordernumber,String bsnumber,String datestart,String dateend,double calc,double calcnds,String comm,
+			double jeepprice,int jeepyesno,double jeeponeprice,double orderoutgoprice,double ordercalchprice,
+			double orderdifftime,double timehoursprice,String owenertype,int dgutype,String worktype,double ordercalcdprice,
+			double orderdiffday,double timedayprice,double ordertransport,String orderdistance,double orderkmprice,double ordernds) {
+		
 		this.ordernumber=ordernumber;
 		this.bsnumber=bsnumber;
 		this.datestart=datestart;
@@ -44,76 +101,22 @@ public class OrderForm {
 		this.calc=calc;
 		this.calcnds=calcnds;
 		this.comm=comm;
-	}
-	
-	public int  getId() {
-		return id;
-	}
-
-	public int getOrderNumber() {
-        return ordernumber;
-    }
- 
-    public void setOrderNumber(int ordernumber) {
-    	this.ordernumber=ordernumber;
-}
-    
-    public String getBsNumber() {
-        return bsnumber;
-    }
- 
-    public void setBsNumber(String bsnumber) {
-    	this.bsnumber=bsnumber;
-}  
-    public String getDateStart() {
-        return datestart;
-    }
- 
-    public void setDateStart(String datestart) {
-    	this.datestart=datestart;
-}  
-    public String getDateEnd() {
-        return dateend;
-    }
- 
-    public void setDateEnd(String dateend) {
-    	this.dateend=dateend;   
-}
-    public double getCalc() {
-        return calc;
-    }
- 
-    public void setCalc(double calc) {
-    	this.calc=calc;
-}
-    public double getCalcNds() {
-        return calcnds;
-    }
- 
-    public void setCalcNds(double calcnds) {
-    	this.calcnds=calcnds;
-}
-    
-    public String getComm() {
-        return comm;
-    }
- 
-    public void setComm(String comm) {
-    	this.comm=comm;
-}
-    public FileDB getFileDB() {
-        return fileDB;
-    }
-
-    public void setFileDB(FileDB fileDB) {
-    	if(fileDB==null) {
-    		if(this.fileDB!=null) {this.fileDB.setOrderForm(null);}}
-    	
-    	else {fileDB.setOrderForm(this);}
-        this.fileDB = fileDB;}
-    
-    @Override
-    public String toString() {
-        return(ordernumber + " " + bsnumber + " " + datestart + " " + dateend + " " + calc+ " " + calcnds+ " "+comm+"\n");
-    }
+		this.jeepprice=jeepprice;
+		this.jeepyesno=jeepyesno;
+		this.jeeponeprice=jeeponeprice;
+		this.orderoutgoprice=orderoutgoprice;
+		this.ordercalchprice=ordercalchprice;
+		this.orderdifftime=orderdifftime;
+		this.timehoursprice=timehoursprice;
+		this.owenertype=owenertype;
+		this.dgutype=dgutype;
+		this.worktype=worktype;
+		this.ordercalcdprice=ordercalcdprice;
+		this.orderdiffday=orderdiffday;
+		this.timedayprice=timedayprice;
+		this.ordertransport=ordertransport;
+		this.orderdistance=orderdistance;
+		this.orderkmprice=orderkmprice;
+		this.ordernds=ordernds;		
+	}	
 }

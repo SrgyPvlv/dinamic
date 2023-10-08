@@ -35,4 +35,8 @@ public class UsersService {
 		usersrepository.deleteById(id);
 	}
 	
+	public Users findUsersByLogin(String login) { //получение пользователя по логину
+		return usersrepository.findByLogin(login);
+	}
+	
 }

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ <head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+  <link rel="shortcut icon" type="image/x-icon" th:href="@{/images/acdc.ico}">
+  <title>Расчет Заказа</title>
+ </head>
+ <body>
+  
+<div class="main_orderPage">
+<table class="table_orderPage">
+ <caption align="top"><h3>Данные по Заказу</h3></caption>
+            <tr><td>№ Заказа</td><td th:text="${order.getOrdernumber}" colspan="4"></td></tr>
+            <tr><td>Наименование Объекта </td><td th:text="${order.getBsnumber}" colspan="4"></td></tr>
+            <tr><td>Адрес Объекта </td><td th:text="${bsAddress}" colspan="4"></td></tr>
+            <tr><td>Начальный срок выполнения Работ</td><td th:text="${order.getDatestart}" colspan="4"></td></tr>
+            <tr><td>Конечный срок выполнения Работ</td><td th:text="${order.getDateend}" colspan="4"></td></tr>
+            <tr><td>Общая стоимость Работ</td><td th:text="${order.getCalcnds}" colspan="4"></td></tr>
+            <tr><td colspan="5" style="border:none">
+<tr>
+<td class="th_table">Перечень работ, услуг</td> <td class="th_table">Ед. изм.</td> <td class="th_table">Кол-во</td> 
+<td class="th_table">Цена за ед., руб. без НДС</td> <td class="th_table">Стоимость, руб. без НДС</td>
+</tr>
+<tr th:if="${order.getJeepprice}!=0">
+<td>Использование автомобильной техники повышенной проходимости (ГАЗ-66, ЗИЛ-131, Урал, Камаз и т.д.)</td> <td>выезд</td> <td th:text="${order.getJeepyesno}"></td> <td th:text="${order.getJeeponeprice}"></td> <td th:text="${order.getJeepprice}"></td>
+</tr>
+<tr th:if="${order.getOrderoutgoprice}!=0">
+<td>Выезд аварийной бригады / Компенсация ложного выезда аварийной бригады для обеспечения АЭС Объекта Заказчика</td> <td>выезд</td> <td th:text="${order.getOrderoutgoprice !=null ? '1' : ''}"></td> <td th:text="${order.getOrderoutgoprice}"> <td th:text="${order.getOrderoutgoprice}"></td>
+</tr>
+<tr th:if="${order.getOrdercalchprice}!=0">
+<td th:text="'Поддержание электроснабжения оборудования базовой станции (БС) от дизель-генераторной установки (ДГУ) '+${order.getOwenertype==null ? '?':(order.getOwenertype=='po'?'Исполнителя':'Заказчика')}+' '+${order.getDgutype==null? '?':(order.getDgutype==3?'3.5':order.getDgutype)}+' kW ('+${order.getWorktype==null?'?':(order.getWorktype=='emergency'?'Аварийное':'Плановое')}+')'"></td> 
+<td>час</td> <td th:text="${order.getOrderdifftime}"></td> <td th:text="${order.getTimehoursprice}"></td> <td th:text="${order.getOrdercalchprice}"></td>
+</tr>
+<tr th:if="${order.getOrdercalcdprice}!=0">
+<td th:text="'Поддержание электроснабжения оборудования базовой станции (БС) от дизель-генераторной установки (ДГУ) '+${order.getOwenertype==null ? '?':(order.getOwenertype=='po'?'Исполнителя':'Заказчика')}+' '+${order.getDgutype==null? '?':(order.getDgutype==3?'3.5':order.getDgutype)}+' kW ('+${order.getWorktype==null?'?':(order.getWorktype=='emergency'?'Аварийное':'Плановое')}+')'"></td> 
+<td>сутки</td> <td th:text="${order.getOrderdiffday}"></td> <td th:text="${order.getTimedayprice}"></td> <td th:text="${order.getOrdercalcdprice}"></td>
+</tr>
+<tr th:if="${order.getOrdertransport}!=0">
+<td th:text="'Транспортировка дизель-генераторной установки (ДГУ) '+${order.getOwenertype==null ? '?':(order.getOwenertype=='po'?'Исполнителя':'Заказчика')}+' для  базовой станции (БС) за  пределами КАД ('+${order.getDgutype==null? '?':(order.getDgutype==3?'3.5':order.getDgutype)}+' kW)'"></td> 
+<td>км</td> <td th:text="${order.getOrderdistance}"></td> <td th:text="${order.getOrderkmprice}"></td> <td th:text="${order.getOrdertransport}"></td>
+</tr>
+
+<tr><td colspan="4" style="text-align:right">Итого по Заказу без НДС 20%, руб.</td><td th:text="${order.getCalc}"></td></tr>
+<tr><td colspan="4" style="text-align:right">НДС 20%, руб.</td><td th:text="${order.getOrdernds}"></td></tr>
+<tr><td colspan="4" style="text-align:right">Итого с НДС 20%, руб.</td><td th:text="${order.getCalcnds}"></td></tr>
+<tr><td colspan="5" style="border:none"></td></tr>
+<tr><td>Комментарий(замечания) к Заказу: </td><td colspan="4" th:text="${order.getComm}"></td></tr>
+</table>
+</div>
+
+<div th:replace="footer :: footer"></div>
+
+</body>
+</html>

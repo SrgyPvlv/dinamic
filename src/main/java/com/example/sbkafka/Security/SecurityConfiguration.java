@@ -31,10 +31,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .csrf().disable()
         .authorizeRequests()
         .antMatchers("/superadmin/*").hasRole("SUPERADMIN")
-        .antMatchers("/admin","/admin/*","/bdDelete","/bdEdit", "/orderEdit", "/fileLoad","/fileDelete").hasAnyRole( "ADMIN", "SUPERADMIN")
-        .antMatchers("/recordOrder","/mailSend","/bdShow","/priceShow","/downloadexel","/fileDownload","/findByBsName","/findByOrderNumber").hasAnyRole("USER", "ADMIN", "SUPERADMIN")
-        .antMatchers("/calcOrder").hasAnyRole("USER", "CONTRACTOR", "ADMIN", "SUPERADMIN")
-        .antMatchers("/").hasAnyRole("USER", "CONTRACTOR", "ADMIN", "SUPERADMIN")
+        .antMatchers("/admin","/admin/*","/bdDelete","/bdEditForm","/bdEdit", "/orderEdit", "/fileLoad","/fileDelete").hasAnyRole( "ADMIN", "SUPERADMIN")
+        .antMatchers("/recordOrder","/mailSend").hasAnyRole("USER", "ADMIN", "SUPERADMIN")
+        .antMatchers("/bdShow","/downloadexel","/findByBsName","/findByOrderNumber","/showOrderPage").hasAnyRole("USER", "READER", "ADMIN", "SUPERADMIN")
+        .antMatchers("/calcOrder","/priceShow").hasAnyRole("USER", "CONTRACTOR", "READER", "ADMIN", "SUPERADMIN")
+        .antMatchers("/").hasAnyRole("USER", "CONTRACTOR", "READER", "ADMIN", "SUPERADMIN")
         .and().formLogin()
         .loginPage("/login")
         .defaultSuccessUrl("/")
@@ -42,7 +43,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .logout()
         .permitAll()
         .and()
-        .exceptionHandling().accessDeniedHandler(accessDeniedHandler);;     
+        .exceptionHandling().accessDeniedHandler(accessDeniedHandler)
+        .and().rememberMe().key("webservice").alwaysRemember(true)
+        .and()
+        .sessionManagement()
+        .maximumSessions(1)
+        .expiredUrl("/login?invalid-session=true");
         
    }
 	

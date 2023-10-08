@@ -15,8 +15,7 @@ public class BsListService {
 	BsListRepository bsListRepository;
 	
 	public String findBsAddress(String bsnumber) { //поиск адреса БС по номеру БС, для вставки в заявку (надо ввести точный номер)
-		String message="БС с данным номером не найдена. Обратитесь к администратору приложения. (Пока-что Вы можете "
-				+ "внести адрес самостоятельно непосредственно в word-файл заявки.)";
+		String message="БС с данным номером не найдена. Обратитесь к администратору приложения.";
 		BsList bs=bsListRepository.findBsByNumber(bsnumber);
 		
 		if (bs!=null) {

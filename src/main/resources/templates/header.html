@@ -6,11 +6,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div th:fragment="header" class="headercss">
-  
-<a th:href="@{/calcOrder}">Форма расчетов</a> &nbsp | &nbsp  
-<a th:href="@{/logout}">Выход</a>      
 
+<div th:fragment="header" class="headercss">
+<div id="header1" class="header1">  
+<a th:href="@{/calcOrder}">Форма расчетов</a> &nbsp | &nbsp  <a th:href="@{/logout}">Выход</a>      
 </div>
+<div id="header2" class="header2">
+<span th:text="'Пользователь: '+${userLogin} + ' | Роль: ' + ${userRole}" style="color:#800000;"></span>
+</div>
+</div>
+
 </body>
 </html>

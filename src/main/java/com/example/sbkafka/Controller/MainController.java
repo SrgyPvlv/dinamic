@@ -16,11 +16,10 @@ import com.example.sbkafka.Model.OrderForm;
 import com.example.sbkafka.Service.BsListService;
 import com.example.sbkafka.Service.OrderFormService;
 import com.example.sbkafka.Service.PriceService;
-
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
-//расчет заказа (сметный расчет)
+//расчет заказа (сметный расчет), запись заказа в БД
 
 @Controller
 @SessionScope
@@ -48,12 +47,13 @@ public class MainController {
         return "index";
     }
 
-	@PostMapping("/calcOrder")
-    public String saveOrder(@RequestParam(value="ordernumber") int orderNumber, @RequestParam(value="bsnumber") String bsNumber,//
+	@PostMapping("/calcOrder") //расчет заказа (сметный расчет)
+    public String saveOrder(@RequestParam(name="id",required=false,defaultValue="-10") int id, @RequestParam(value="ordernumber") int orderNumber, @RequestParam(value="bsnumber") String bsNumber,//
     		@RequestParam(value="start") String timeStart,@RequestParam(value="end") String timeEnd,//
     		@RequestParam(value="distance") String orderDistance,//
     		@RequestParam(value="dgutype") int dguType,@RequestParam(value="jeep") int jeepYesNo,//
-    		@RequestParam(value="worktype") String workType,@RequestParam(value="owener") String owenerType,Model model) throws ParseException {
+    		@RequestParam(value="worktype") String workType,@RequestParam(value="owener") String owenerType,
+    		@RequestParam(value="comment",required=false) String comment,Model model) throws ParseException {
 		
 		double TRANSPORT_PRICE = priceService.getById(44).getPricesValue();
 		double JEEP_PRICE = priceService.getById(45).getPricesValue();
@@ -76,11 +76,12 @@ public class MainController {
     	String dateEnd=formatter.format(t2);
     	
     	String bsAddress=bsListService.findBsAddress(bsNumber);
-    	    	    	
+    	
+    	model.addAttribute("id", id);
     	model.addAttribute("orderNumber", orderNumber);
     	model.addAttribute("bsNumber", bsNumber);
-    	model.addAttribute("timeStart", dateStart);
-    	model.addAttribute("timeEnd", dateEnd);
+    	model.addAttribute("dateStart", dateStart);
+    	model.addAttribute("dateEnd", dateEnd);
     	model.addAttribute("orderDistance", orderDistance);
     	model.addAttribute("orderTransport", transPrice1);
     	model.addAttribute("orderDiffTime", diffTime);
@@ -101,7 +102,8 @@ public class MainController {
     	model.addAttribute("workType", workType);
     	model.addAttribute("owenerType", owenerType);
     	model.addAttribute("bsAddress", bsAddress);
-        return "index";
+    	model.addAttribute("orderComment", comment);
+        if (id==-10) {return "index";} else {return "editFormFinal";}
         }
 public Double calcTransport(String orderdistance,double km) {
 		
@@ -620,13 +622,24 @@ public Double calcOrderDays(int dguType,String workType,double jeep,double tHour
 	
 	return orderPriceDays;
 }
-@PostMapping("/recordOrder")
-public String recordOrder(@RequestParam("ordernumber1") int ordernumber,@RequestParam("bsnumber1") String bsnumber,//
-		@RequestParam("start1") String datestart,@RequestParam("end1") String dateend,//
-		@RequestParam("ordercalc1") double calc,@RequestParam("ordercalcnds1") double calcnds,//
-		@RequestParam("comm") String comm,Model model) {
-
-OrderForm orderForm=new OrderForm(ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm);
+@PostMapping("/recordOrder") //запись заявки и расчетов в БД
+public String recordOrder(@RequestParam("orderNumber") int orderNumber,@RequestParam("bsNumber") String bsNumber,
+		@RequestParam("dateStart") String dateStart,@RequestParam("dateEnd") String dateEnd,
+		@RequestParam("orderCalc") double orderCalc,@RequestParam("orderCalcNds") double orderCalcNds,
+		@RequestParam("orderComment") String orderComment,
+		@RequestParam("jeepPrice") Double jeepPrice,@RequestParam("jeepYesNo") Integer jeepYesNo,
+		@RequestParam("jeepOnePrice") Double jeepOnePrice,@RequestParam("orderOutGoPrice") Double orderOutGoPrice,
+		@RequestParam("orderCalcHPrice") Double orderCalcHPrice,@RequestParam("orderDiffTime") Double orderDiffTime,
+		@RequestParam("timeHoursPrice") Double timeHoursPrice,@RequestParam("owenerType") String owenerType,
+		@RequestParam("dguType") Integer dguType,@RequestParam("workType") String workType,
+		@RequestParam("orderCalcDPrice") Double orderCalcDPrice,@RequestParam("orderDiffDay") Double orderDiffDay,
+		@RequestParam("timeDayPrice") Double timeDayPrice,@RequestParam("orderTransport") Double orderTransport,
+		@RequestParam("orderDistance") String orderDistance,@RequestParam("orderKmPrice") Double orderKmPrice,
+		@RequestParam("orderNds") Double orderNds,Model model) {
+	
+OrderForm orderForm=new OrderForm(orderNumber,bsNumber,dateStart,dateEnd,orderCalc,orderCalcNds,orderComment,jeepPrice,jeepYesNo,jeepOnePrice,
+		orderOutGoPrice,orderCalcHPrice,orderDiffTime,timeHoursPrice,owenerType,dguType,workType,orderCalcDPrice,
+		orderDiffDay,timeDayPrice,orderTransport,orderDistance,orderKmPrice,orderNds);
 
 orderformservice.saveOrderForm(orderForm);
 

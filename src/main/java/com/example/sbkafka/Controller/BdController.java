@@ -1,7 +1,11 @@
 package com.example.sbkafka.Controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -14,9 +18,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.sbkafka.Model.FileDB;
 import com.example.sbkafka.Model.Order;
 import com.example.sbkafka.Model.OrderForm;
+import com.example.sbkafka.Service.BsListService;
 import com.example.sbkafka.Service.OrderFormService;
 import com.example.sbkafka.Service.PriceService;
 
@@ -33,6 +37,9 @@ public class BdController {
 	@Autowired
 	private PriceService priceService;
 	
+	@Autowired
+	private BsListService bsListService;
+	
 	@GetMapping("/bdShow") //получение инфо из бд заказов
 	public String bdShow(@RequestParam(value="str",defaultValue = "0") int str,@RequestParam(value="numstr",defaultValue = "20") int numstr,Model model){
 
@@ -43,22 +50,20 @@ public class BdController {
 		
 		for(OrderForm order:orderlist) {
 			
-            int id=order.getId();int ordernumber=order.getOrderNumber();String bsnumber=order.getBsNumber();
-            String datestart=order.getDateStart();String dateend=order.getDateEnd();
-            double calc=order.getCalc();double calcnds=order.getCalcNds();String comm=order.getComm();
-            FileDB fileDB=order.getFileDB();
-            String fileYesNo;
-			if (fileDB==null){fileYesNo="Нет";}else {fileYesNo="Есть";}
-            Order orderlistarray=new Order(id,ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm,fileYesNo);
+            int id=order.getId();int ordernumber=order.getOrdernumber();String bsnumber=order.getBsnumber();
+            String datestart=order.getDatestart();String dateend=order.getDateend();
+            double calc=order.getCalc();double calcnds=order.getCalcnds();String comm=order.getComm();
+            
+            Order orderlistarray=new Order(id,ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm);
             orderlistFile.addAll(Arrays.asList(orderlistarray));
          }
 		
-		DecimalFormat dF = new DecimalFormat( "###,###.00" );
-		    
-		double sumorders=orderformservice.sumOfOrders(); String sumordersdF=dF.format(sumorders);//сумма заказов
+		DecimalFormat dF = new DecimalFormat( "###,#00.00" );
+		
+		Double sumorders=orderformservice.sumOfOrders(); String sumordersdF=dF.format(sumorders.doubleValue());//сумма заказов
 		int countoforders=orderformservice.countOfOrders();//кол-во заказов
 		double orderslimit=priceService.getById(46).getPricesValue(); String orderslimitdF=dF.format(orderslimit);//лимит по деньгам
-		double free=orderslimit-sumorders; String freedF=dF.format(free);//остаток денег
+		double free=orderslimit-(sumorders.doubleValue()); String freedF=dF.format(free);//остаток денег
 		
 		//получение цен (6 шт.)ложных вызовов из таблицы price
 		double f1=priceService.getById(38).getPricesValue();
@@ -68,13 +73,16 @@ public class BdController {
 		double f5=priceService.getById(42).getPricesValue();
 		double f6=priceService.getById(43).getPricesValue();
 		
-		double minorder=orderformservice.minOfOrder(); String minorderdF=dF.format(minorder);//минимальный заказ
-		double maxorder=orderformservice.maxOfOrder(); String maxorderdF=dF.format(maxorder);//максимальный заказ
-		double avgorder=orderformservice.avgOfOrder(); String avgorderdF=dF.format(avgorder);//средняя сумма заказа
+		Double minorder=orderformservice.minOfOrder(); String minorderdF=dF.format(minorder.doubleValue());//минимальный заказ
+		Double maxorder=orderformservice.maxOfOrder(); String maxorderdF=dF.format(maxorder.doubleValue());//максимальный заказ
+		Double avgorder=orderformservice.avgOfOrder(); String avgorderdF=dF.format(avgorder.doubleValue());//средняя сумма заказа
 		int countfalse=orderformservice.countOfFalseOut(f1, f2, f3, f4, f5, f6);//кол-во ложных выездов до КАД
 		double sumfalse=orderformservice.sumOfFalseOut(f1, f2, f3, f4, f5, f6); String sumfalsedF=dF.format(sumfalse);//затраты на ложные выезды до КАД
 		int countdfs=orderformservice.countDfs();//кол-во заказов ДФС
 		double sumdfs=orderformservice.sumDfs(); String sumdfsdF=dF.format(sumdfs);//затраты на заказы ДФС
+		
+		double orderListSumm = 0;
+		int orderListSize=0;
 		
 		model.addAttribute("orderlist", orderlistFile);
 		model.addAttribute("sumordersdF", sumordersdF);
@@ -90,7 +98,8 @@ public class BdController {
 		model.addAttribute("sumdfsdF", sumdfsdF);
 		model.addAttribute("str", this.str);
 		model.addAttribute("numstr", this.numstr);
-		
+		model.addAttribute("orderListSize", orderListSize);
+		model.addAttribute("orderListSumm", orderListSumm);		
 		
 		return "orderBD";
 		
@@ -110,22 +119,39 @@ public class BdController {
 		return "orderBdEdit";
 	}
 	
-	@GetMapping("/bdEdit") // переход на форму редактирования заказа
+	@GetMapping("/bdEditForm") // переход на форму редактирования заказа
 	public String edit(@RequestParam("id") int id, Model model) {
 	
 	OrderForm order=orderformservice.getById(id);
+	DateTimeFormatter formatter=DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+	LocalDateTime start=LocalDateTime.parse(order.getDatestart(),formatter);
+	LocalDateTime end=LocalDateTime.parse(order.getDateend(),formatter);
+	
 	model.addAttribute("order", order);
+	model.addAttribute("start", start);
+	model.addAttribute("end", end);
 	   
 	   return "editForm";
 	}
 	
-	@PostMapping("/orderEdit") // редактирование заказа
-	public String orderEdit(@RequestParam("id2") int id, @RequestParam("ordernumber2") int ordernumber,@RequestParam("bsnumber2") String bsnumber,//
-	@RequestParam("start2") String datestart,@RequestParam("end2") String dateend,//
-	@RequestParam("ordercalc2") double calc,@RequestParam("ordercalcnds2") double calcnds,//
-	@RequestParam("comm2") String comm) {
+	@PostMapping("/orderEdit") // редактирование заказа с сохранением в БД
+	public String orderEdit(@RequestParam("id") int id, @RequestParam("orderNumber") int orderNumber,@RequestParam("bsNumber") String bsNumber,
+			@RequestParam("dateStart") String dateStart,@RequestParam("dateEnd") String dateEnd,
+			@RequestParam("orderCalc") double orderCalc,@RequestParam("orderCalcNds") double orderCalcNds,
+			@RequestParam("comment") String orderComment,
+			@RequestParam("jeepPrice") Double jeepPrice,@RequestParam("jeepYesNo") Integer jeepYesNo,
+			@RequestParam("jeepOnePrice") Double jeepOnePrice,@RequestParam("orderOutGoPrice") Double orderOutGoPrice,
+			@RequestParam("orderCalcHPrice") Double orderCalcHPrice,@RequestParam("orderDiffTime") Double orderDiffTime,
+			@RequestParam("timeHoursPrice") Double timeHoursPrice,@RequestParam("owenerType") String owenerType,
+			@RequestParam("dguType") Integer dguType,@RequestParam("workType") String workType,
+			@RequestParam("orderCalcDPrice") Double orderCalcDPrice,@RequestParam("orderDiffDay") Double orderDiffDay,
+			@RequestParam("timeDayPrice") Double timeDayPrice,@RequestParam("orderTransport") Double orderTransport,
+			@RequestParam("orderDistance") String orderDistance,@RequestParam("orderKmPrice") Double orderKmPrice,
+			@RequestParam("orderNds") Double orderNds) {
 	
-	orderformservice.editOrderForm(id, ordernumber, bsnumber, datestart, dateend, calc, calcnds, comm);
+	orderformservice.editOrderForm(id,orderNumber,bsNumber,dateStart,dateEnd,orderCalc,orderCalcNds,orderComment,jeepPrice,jeepYesNo,jeepOnePrice,
+			orderOutGoPrice,orderCalcHPrice,orderDiffTime,timeHoursPrice,owenerType,dguType,workType,orderCalcDPrice,
+			orderDiffDay,timeDayPrice,orderTransport,orderDistance,orderKmPrice,orderNds);
 	   
 	   return "okEdit";
 	}
@@ -148,16 +174,15 @@ public class BdController {
 		
 		ArrayList<Order> orderlistFile=new ArrayList<Order>();
 		List<OrderForm> orderlist=orderformservice.findByOrderNumber(orderNumberSearch);
+		double orderListSumm = 0;
 		
 for(OrderForm order:orderlist) {
 			
-            int id=order.getId();int ordernumber=order.getOrderNumber();String bsnumber=order.getBsNumber();
-            String datestart=order.getDateStart();String dateend=order.getDateEnd();
-            double calc=order.getCalc();double calcnds=order.getCalcNds();String comm=order.getComm();
-            FileDB fileDB=order.getFileDB();
-            String fileYesNo;
-			if (fileDB==null){fileYesNo="Нет";}else {fileYesNo="Есть";}
-            Order orderlistarray=new Order(id,ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm,fileYesNo);
+            int id=order.getId();int ordernumber=order.getOrdernumber();String bsnumber=order.getBsnumber();
+            String datestart=order.getDatestart();String dateend=order.getDateend();
+            double calc=order.getCalc();double calcnds=order.getCalcnds();String comm=order.getComm();
+            
+            Order orderlistarray=new Order(id,ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm);
             orderlistFile.addAll(Arrays.asList(orderlistarray));
          }
 		
@@ -184,6 +209,13 @@ for(OrderForm order:orderlist) {
 		int countdfs=orderformservice.countDfs();//кол-во заказов ДФС
 		double sumdfs=orderformservice.sumDfs(); String sumdfsdF=dF.format(sumdfs);//затраты на заказы ДФС
 		
+		int orderListSize=orderlist.size();
+		if(orderlist.isEmpty()) {orderListSumm=0.00;} else {
+        	orderListSumm=orderlist.stream().map(OrderForm::getCalc).reduce((x,y)->x+y).get().doubleValue();
+        	BigDecimal bd = new BigDecimal(orderListSumm).setScale(2, RoundingMode.HALF_UP);
+        	orderListSumm = bd.doubleValue();
+        }
+		
 		model.addAttribute("orderlist", orderlistFile);
 		model.addAttribute("sumordersdF", sumordersdF);
 		model.addAttribute("countoforders", countoforders);
@@ -198,6 +230,8 @@ for(OrderForm order:orderlist) {
 		model.addAttribute("sumdfsdF", sumdfsdF);
 		model.addAttribute("str", this.str);
 		model.addAttribute("numstr", this.numstr);
+		model.addAttribute("orderListSize", orderListSize);
+		model.addAttribute("orderListSumm", orderListSumm);
 		
 		
 		return "orderBD";
@@ -207,16 +241,15 @@ for(OrderForm order:orderlist) {
 	public String findByName(@RequestParam("bsNumberSearch") String bsNumberSearch, Model model)throws IOException{
 		ArrayList<Order> orderlistFile=new ArrayList<Order>();
 		List<OrderForm> orderlist=orderformservice.findByBsName(bsNumberSearch);
+		double orderListSumm = 0;
 		
 for(OrderForm order:orderlist) {
 			
-            int id=order.getId();int ordernumber=order.getOrderNumber();String bsnumber=order.getBsNumber();
-            String datestart=order.getDateStart();String dateend=order.getDateEnd();
-            double calc=order.getCalc();double calcnds=order.getCalcNds();String comm=order.getComm();
-            FileDB fileDB=order.getFileDB();
-            String fileYesNo;
-			if (fileDB==null){fileYesNo="Нет";}else {fileYesNo="Есть";}
-            Order orderlistarray=new Order(id,ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm,fileYesNo);
+            int id=order.getId();int ordernumber=order.getOrdernumber();String bsnumber=order.getBsnumber();
+            String datestart=order.getDatestart();String dateend=order.getDateend();
+            double calc=order.getCalc();double calcnds=order.getCalcnds();String comm=order.getComm();
+            
+            Order orderlistarray=new Order(id,ordernumber,bsnumber,datestart,dateend,calc,calcnds,comm);
             orderlistFile.addAll(Arrays.asList(orderlistarray));
          }
 		
@@ -243,6 +276,13 @@ for(OrderForm order:orderlist) {
 		int countdfs=orderformservice.countDfs();//кол-во заказов ДФС
 		double sumdfs=orderformservice.sumDfs(); String sumdfsdF=dF.format(sumdfs);//затраты на заказы ДФС
 		
+		int orderListSize=orderlist.size();
+		if(orderlist.isEmpty()) {orderListSumm=0.00;} else {
+        	orderListSumm=orderlist.stream().map(OrderForm::getCalc).reduce((x,y)->x+y).get().doubleValue();
+        	BigDecimal bd = new BigDecimal(orderListSumm).setScale(2, RoundingMode.HALF_UP);
+        	orderListSumm = bd.doubleValue();
+        }
+		
 		model.addAttribute("orderlist", orderlistFile);
 		model.addAttribute("sumordersdF", sumordersdF);
 		model.addAttribute("countoforders", countoforders);
@@ -257,7 +297,8 @@ for(OrderForm order:orderlist) {
 		model.addAttribute("sumdfsdF", sumdfsdF);
 		model.addAttribute("str", this.str);
 		model.addAttribute("numstr", this.numstr);
-		
+		model.addAttribute("orderListSize", orderListSize);
+		model.addAttribute("orderListSumm", orderListSumm);
 		
 		return "orderBD";
 	}
@@ -298,5 +339,17 @@ for(OrderForm order:orderlist) {
 	    orderformservice.deleteAll();
 		
 		return "redirect:/admin/bdEdit";
+	}
+	
+	@GetMapping("/showOrderPage") // показать страницу Заказа
+	public String showOrderPage(@RequestParam("id") int id, Model model) {
+	
+	OrderForm order=orderformservice.getById(id);
+	String bsNumber=order.getBsnumber();
+	String bsAddress=bsListService.findBsAddress(bsNumber);
+	model.addAttribute("order", order);
+	model.addAttribute("bsAddress", bsAddress);
+	   
+	   return "orderPage";
 	}
 }
