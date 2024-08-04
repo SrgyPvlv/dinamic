@@ -29,8 +29,14 @@
 <tr th:if="${jeepPrice}!=0">
 <td>Использование автомобильной техники повышенной проходимости (ГАЗ-66, ЗИЛ-131, Урал, Камаз и т.д.)</td> <td>выезд</td> <td th:text="${jeepYesNo}"></td> <td th:text="${jeepOnePrice}"></td> <td th:text="${jeepPrice}"></td>
 </tr>
+<tr th:if="${rectifierPrice}!=0">
+<td>Замена выпрямителя</td> <td>объект</td> <td th:text="${rectifierYesNo}"></td> <td th:text="${rectifierOnePrice}"></td> <td th:text="${rectifierPrice}"></td>
+</tr>
 <tr th:if="${orderOutGoPrice}!=0">
 <td>Выезд аварийной бригады / Компенсация ложного выезда аварийной бригады для обеспечения АЭС Объекта Заказчика</td> <td>выезд</td> <td th:text="${orderOutGoPrice !=null ? '1' : ''}"></td> <td th:text="${orderOutGoPrice}"> <td th:text="${orderOutGoPrice}"></td>
+</tr>
+<tr th:if="${breakerPrice}!=0">
+<td>Включение автомата защиты</td> <td>объект</td> <td th:text="${breakerPrice !=null ? '1' : ''}"></td> <td th:text="${breakerPrice}"></td> <td th:text="${breakerPrice}"></td>
 </tr>
 <tr th:if="${orderCalcHPrice}!=0">
 <td th:text="'Поддержание электроснабжения оборудования базовой станции (БС) от дизель-генераторной установки (ДГУ) '+${owenerType==null ? '?':(owenerType=='po'?'Исполнителя':'Заказчика')}+' '+${dguType==null? '?':(dguType==3?'3.5':dguType)}+' kW ('+${workType==null?'?':(workType=='emergency'?'Аварийное':'Плановое')}+')'"></td> 
@@ -80,6 +86,10 @@
         <input type="hidden" name="orderDistance" th:value="${orderDistance}" />
         <input type="hidden" name="orderKmPrice" th:value="${orderKmPrice}" />
         <input type="hidden" name="orderNds" th:value="${orderNds}" />
+        <input type="hidden" name="rectifierPrice" th:value="${rectifierPrice}" />
+        <input type="hidden" name="rectifierYesNo" th:value="${rectifierYesNo}" />
+        <input type="hidden" name="rectifierOnePrice" th:value="${rectifierOnePrice}" />
+        <input type="hidden" name="breakerPrice" th:value="${breakerPrice}" />
 	    <input type="submit" value="Сохранить" style="background:#98FB98;border:none;width:500px">
      </form>
 </td></tr>

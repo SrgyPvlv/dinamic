@@ -89,10 +89,24 @@ public class OrderForm { //страница Заказа со всеми пар�
 	@Column
 	private Double ordernds;//стоимость работ с НДС
 	
+	@Column
+	private Double rectifierprice;//стоимость в заказе за замену выпрямителя
+	
+	@Column
+	private Integer rectifieryesno;//определение факта замены выпрямителя
+	
+	@Column
+	private Double rectifieroneprice;//стоимость в ТЦП за замену выпрямителя
+	
+	@Column
+	private Double breakerprice;//стоимость в заказе включения автомата
+	
 	public OrderForm(int ordernumber,String bsnumber,String datestart,String dateend,double calc,double calcnds,String comm,
 			double jeepprice,int jeepyesno,double jeeponeprice,double orderoutgoprice,double ordercalchprice,
 			double orderdifftime,double timehoursprice,String owenertype,int dgutype,String worktype,double ordercalcdprice,
-			double orderdiffday,double timedayprice,double ordertransport,String orderdistance,double orderkmprice,double ordernds) {
+			double orderdiffday,double timedayprice,double ordertransport,String orderdistance,double orderkmprice,double ordernds,
+			double rectifierprice,int rectifieryesno,double rectifieroneprice,
+			double breakerprice) {
 		
 		this.ordernumber=ordernumber;
 		this.bsnumber=bsnumber;
@@ -117,6 +131,10 @@ public class OrderForm { //страница Заказа со всеми пар�
 		this.ordertransport=ordertransport;
 		this.orderdistance=orderdistance;
 		this.orderkmprice=orderkmprice;
-		this.ordernds=ordernds;		
+		this.ordernds=ordernds;
+		this.rectifierprice=rectifierprice;
+		this.rectifieryesno=rectifieryesno;
+		this.rectifieroneprice=rectifieroneprice;
+		this.breakerprice=breakerprice;
 	}	
 }
