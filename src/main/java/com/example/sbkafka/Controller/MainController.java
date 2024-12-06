@@ -60,7 +60,8 @@ public class MainController {
 		double JEEP_PRICE = priceService.getById(45).getPricesValue();
 		double CIRCUIT_BREAKER_ON = priceService.getById(46).getPricesValue();
 		double RECTIFIER_REPLACEMENT = priceService.getById(47).getPricesValue();
-		Double kmPrice=TRANSPORT_PRICE,jeepPrice=JEEP_PRICE,breakerPrice=CIRCUIT_BREAKER_ON,rectifierPrice=RECTIFIER_REPLACEMENT;
+		Double kmPrice=TRANSPORT_PRICE,jeepPrice=JEEP_PRICE,rectifierPrice=RECTIFIER_REPLACEMENT;
+		Double breakerPrice=CIRCUIT_BREAKER_ON;
     	Double trans=calcTransport(orderDistance,kmPrice);
     	Double jeep=calcJeep(jeepYesNo,jeepPrice);
     	Double rectifier=calcRectifier(rectifierYesNo,rectifierPrice);
@@ -103,6 +104,7 @@ public class MainController {
     	model.addAttribute("rectifierPrice", rectifier1);
     	model.addAttribute("rectifierYesNo", rectifierYesNo);
     	model.addAttribute("rectifierOnePrice", rectifierPrice);
+    	model.addAttribute("breakerPrice", breakerPrice);
     	model.addAttribute("timeHoursPrice", timeHoursPrice);
     	model.addAttribute("timeDayPrice", timeDayPrice);
     	model.addAttribute("dguType", dguType);
@@ -217,9 +219,11 @@ public Double calcOrder(int dguType,String workType,double jeep,double rectifier
 	double DGU8_CLIENT_DEPARTURE_FALSE = priceService.getById(42).getPricesValue();
 	double DGU16_CLIENT_DEPARTURE_FALSE = priceService.getById(43).getPricesValue();
 	
+	double CIRCUIT_BREAKER_ON = priceService.getById(46).getPricesValue();
+	
 	int dguType1=dguType;
 	String workType1=workType,owener1=owener;
-	double tHours1=tHours,tDays1=tDays,orderPrice=0,outgo=0;
+	double tHours1=tHours,tDays1=tDays,orderPrice=0,outgo=0,breakerPrice=0;
 	jeep1=jeep;
 	rectifier1=rectifier;
 	transPrice1=transPrice;
@@ -272,9 +276,14 @@ public Double calcOrder(int dguType,String workType,double jeep,double rectifier
 		switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=0;outgo=DGU3_CONTRACTOR_DEPARTURE_FALSE;break;
                           case 8:timeHoursPrice=0;timeDayPrice=0;outgo=DGU8_CONTRACTOR_DEPARTURE_FALSE;break;
                           case 16:timeHoursPrice=0;timeDayPrice=0;outgo=DGU16_CONTRACTOR_DEPARTURE_FALSE;break;}}
+		
+	if (workType1.equals("breakeron")){
+			switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=0;outgo=DGU3_CONTRACTOR_DEPARTURE;breakerPrice=CIRCUIT_BREAKER_ON;break;
+	                          case 8:timeHoursPrice=0;timeDayPrice=0;outgo=DGU8_CONTRACTOR_DEPARTURE;breakerPrice=CIRCUIT_BREAKER_ON;break;
+	                          case 16:timeHoursPrice=0;timeDayPrice=0;outgo=DGU16_CONTRACTOR_DEPARTURE;breakerPrice=CIRCUIT_BREAKER_ON;break;}}
 	
 	outGoPrice=outgo;
-	orderPrice=timeHoursPrice*tHours1+timeDayPrice*tDays1+transPrice1+outgo+jeep1+rectifier1;
+	orderPrice=timeHoursPrice*tHours1+timeDayPrice*tDays1+transPrice1+outgo+jeep1+rectifier1+breakerPrice;
 	BigDecimal bd = new BigDecimal(orderPrice).setScale(2, RoundingMode.HALF_UP);
 	orderPrice = bd.doubleValue();}
 	
@@ -327,8 +336,13 @@ public Double calcOrder(int dguType,String workType,double jeep,double rectifier
 	                          case 8:timeHoursPrice=0;timeDayPrice=0;outgo=DGU8_CLIENT_DEPARTURE_FALSE;break;
 	                          case 16:timeHoursPrice=0;timeDayPrice=0;outgo=DGU16_CLIENT_DEPARTURE_FALSE;break;}}
 		
+		if (workType1.equals("breakeron")){
+			switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=0;outgo=DGU3_CONTRACTOR_DEPARTURE;breakerPrice=CIRCUIT_BREAKER_ON;break;
+	                          case 8:timeHoursPrice=0;timeDayPrice=0;outgo=DGU8_CONTRACTOR_DEPARTURE;breakerPrice=CIRCUIT_BREAKER_ON;break;
+	                          case 16:timeHoursPrice=0;timeDayPrice=0;outgo=DGU16_CONTRACTOR_DEPARTURE;breakerPrice=CIRCUIT_BREAKER_ON;break;}}
+		
 		outGoPrice=outgo;
-		orderPrice=timeHoursPrice*tHours1+timeDayPrice*tDays1+transPrice1+outgo+jeep1+rectifier1;
+		orderPrice=timeHoursPrice*tHours1+timeDayPrice*tDays1+transPrice1+outgo+jeep1+rectifier1+breakerPrice;
 		BigDecimal bd = new BigDecimal(orderPrice).setScale(2, RoundingMode.HALF_UP);
 		orderPrice = bd.doubleValue();
 		}
@@ -368,6 +382,7 @@ public Double calcOrderHours(int dguType,String workType,double jeep,double rect
 	double DGU8_CLIENT_DEPARTURE_FALSE = priceService.getById(42).getPricesValue();
 	double DGU16_CLIENT_DEPARTURE_FALSE = priceService.getById(43).getPricesValue();
 	
+		
 	int dguType1=dguType;
 	String workType1=workType,owener1=owener;
 	double tHours1=tHours,tDays1=tDays,orderPriceHours=0,outgo=0;
