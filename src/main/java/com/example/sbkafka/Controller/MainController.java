@@ -31,6 +31,7 @@ public class MainController {
 	double transPrice1;
 	double jeep1;
 	double rectifier1;
+	double breakerPrice1;
 	static String outputFileName;
 		
 	@Autowired
@@ -58,10 +59,8 @@ public class MainController {
 		
 		double TRANSPORT_PRICE = priceService.getById(44).getPricesValue();
 		double JEEP_PRICE = priceService.getById(45).getPricesValue();
-		double CIRCUIT_BREAKER_ON = priceService.getById(46).getPricesValue();
 		double RECTIFIER_REPLACEMENT = priceService.getById(47).getPricesValue();
 		Double kmPrice=TRANSPORT_PRICE,jeepPrice=JEEP_PRICE,rectifierPrice=RECTIFIER_REPLACEMENT;
-		Double breakerPrice=CIRCUIT_BREAKER_ON;
     	Double trans=calcTransport(orderDistance,kmPrice);
     	Double jeep=calcJeep(jeepYesNo,jeepPrice);
     	Double rectifier=calcRectifier(rectifierYesNo,rectifierPrice);
@@ -104,7 +103,7 @@ public class MainController {
     	model.addAttribute("rectifierPrice", rectifier1);
     	model.addAttribute("rectifierYesNo", rectifierYesNo);
     	model.addAttribute("rectifierOnePrice", rectifierPrice);
-    	model.addAttribute("breakerPrice", breakerPrice);
+    	model.addAttribute("breakerPrice", breakerPrice1);
     	model.addAttribute("timeHoursPrice", timeHoursPrice);
     	model.addAttribute("timeDayPrice", timeDayPrice);
     	model.addAttribute("dguType", dguType);
@@ -283,6 +282,7 @@ public Double calcOrder(int dguType,String workType,double jeep,double rectifier
 	                          case 16:timeHoursPrice=0;timeDayPrice=0;outgo=DGU16_CONTRACTOR_DEPARTURE;breakerPrice=CIRCUIT_BREAKER_ON;break;}}
 	
 	outGoPrice=outgo;
+	breakerPrice1=breakerPrice;
 	orderPrice=timeHoursPrice*tHours1+timeDayPrice*tDays1+transPrice1+outgo+jeep1+rectifier1+breakerPrice;
 	BigDecimal bd = new BigDecimal(orderPrice).setScale(2, RoundingMode.HALF_UP);
 	orderPrice = bd.doubleValue();}
@@ -342,6 +342,7 @@ public Double calcOrder(int dguType,String workType,double jeep,double rectifier
 	                          case 16:timeHoursPrice=0;timeDayPrice=0;outgo=DGU16_CONTRACTOR_DEPARTURE;breakerPrice=CIRCUIT_BREAKER_ON;break;}}
 		
 		outGoPrice=outgo;
+		breakerPrice1=breakerPrice;
 		orderPrice=timeHoursPrice*tHours1+timeDayPrice*tDays1+transPrice1+outgo+jeep1+rectifier1+breakerPrice;
 		BigDecimal bd = new BigDecimal(orderPrice).setScale(2, RoundingMode.HALF_UP);
 		orderPrice = bd.doubleValue();

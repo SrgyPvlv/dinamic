@@ -140,18 +140,22 @@ public class BdController {
 			@RequestParam("orderCalc") double orderCalc,@RequestParam("orderCalcNds") double orderCalcNds,
 			@RequestParam("comment") String orderComment,
 			@RequestParam("jeepPrice") Double jeepPrice,@RequestParam("jeepYesNo") Integer jeepYesNo,
-			@RequestParam("jeepOnePrice") Double jeepOnePrice,@RequestParam("orderOutGoPrice") Double orderOutGoPrice,
+			@RequestParam("jeepOnePrice") Double jeepOnePrice,
+			@RequestParam("rectifierPrice") Double rectifierPrice,@RequestParam("rectifierYesNo") Integer rectifierYesNo,
+			@RequestParam("rectifierOnePrice") Double rectifierOnePrice,
+			@RequestParam("orderOutGoPrice") Double orderOutGoPrice,
 			@RequestParam("orderCalcHPrice") Double orderCalcHPrice,@RequestParam("orderDiffTime") Double orderDiffTime,
 			@RequestParam("timeHoursPrice") Double timeHoursPrice,@RequestParam("owenerType") String owenerType,
 			@RequestParam("dguType") Integer dguType,@RequestParam("workType") String workType,
 			@RequestParam("orderCalcDPrice") Double orderCalcDPrice,@RequestParam("orderDiffDay") Double orderDiffDay,
 			@RequestParam("timeDayPrice") Double timeDayPrice,@RequestParam("orderTransport") Double orderTransport,
 			@RequestParam("orderDistance") String orderDistance,@RequestParam("orderKmPrice") Double orderKmPrice,
-			@RequestParam("orderNds") Double orderNds) {
+			@RequestParam("orderNds") Double orderNds,@RequestParam("breakerPrice") Double breakerPrice) {
 	
 	orderformservice.editOrderForm(id,orderNumber,bsNumber,dateStart,dateEnd,orderCalc,orderCalcNds,orderComment,jeepPrice,jeepYesNo,jeepOnePrice,
 			orderOutGoPrice,orderCalcHPrice,orderDiffTime,timeHoursPrice,owenerType,dguType,workType,orderCalcDPrice,
-			orderDiffDay,timeDayPrice,orderTransport,orderDistance,orderKmPrice,orderNds);
+			orderDiffDay,timeDayPrice,orderTransport,orderDistance,orderKmPrice,orderNds,
+			rectifierPrice,rectifierYesNo,rectifierOnePrice,breakerPrice);
 	   
 	   return "okEdit";
 	}
