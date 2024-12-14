@@ -30,6 +30,8 @@ public class MainController {
 	double timeDayPrice;
 	double transPrice1;
 	double jeep1;
+	double rectifier1;
+	double breakerPrice1;
 	static String outputFileName;
 		
 	@Autowired
@@ -51,20 +53,22 @@ public class MainController {
     public String saveOrder(@RequestParam(name="id",required=false,defaultValue="-10") int id, @RequestParam(value="ordernumber") int orderNumber, @RequestParam(value="bsnumber") String bsNumber,//
     		@RequestParam(value="start") String timeStart,@RequestParam(value="end") String timeEnd,//
     		@RequestParam(value="distance") String orderDistance,//
-    		@RequestParam(value="dgutype") int dguType,@RequestParam(value="jeep") int jeepYesNo,//
+    		@RequestParam(value="dgutype") int dguType,@RequestParam(value="jeep") int jeepYesNo,@RequestParam(value="rectifier") int rectifierYesNo,//
     		@RequestParam(value="worktype") String workType,@RequestParam(value="owener") String owenerType,
     		@RequestParam(value="comment",required=false) String comment,Model model) throws ParseException {
 		
 		double TRANSPORT_PRICE = priceService.getById(44).getPricesValue();
 		double JEEP_PRICE = priceService.getById(45).getPricesValue();
-		Double kmPrice=TRANSPORT_PRICE,jeepPrice=JEEP_PRICE;
+		double RECTIFIER_REPLACEMENT = priceService.getById(47).getPricesValue();
+		Double kmPrice=TRANSPORT_PRICE,jeepPrice=JEEP_PRICE,rectifierPrice=RECTIFIER_REPLACEMENT;
     	Double trans=calcTransport(orderDistance,kmPrice);
     	Double jeep=calcJeep(jeepYesNo,jeepPrice);
+    	Double rectifier=calcRectifier(rectifierYesNo,rectifierPrice);
     	Double diffTime=calcDiffTimeHours(timeStart,timeEnd);
     	Double diffDay=calcDiffTimeDay(timeStart, timeEnd);
-    	Double calcHPrice=calcOrderHours(dguType,workType,jeep,diffTime,diffDay,trans,owenerType);
-    	Double calcDPrice=calcOrderDays(dguType,workType,jeep,diffTime,diffDay,trans,owenerType);
-    	Double calc=calcOrder(dguType,workType,jeep,diffTime,diffDay,trans,owenerType);
+    	Double calcHPrice=calcOrderHours(dguType,workType,jeep,rectifier,diffTime,diffDay,trans,owenerType);
+    	Double calcDPrice=calcOrderDays(dguType,workType,jeep,rectifier,diffTime,diffDay,trans,owenerType);
+    	Double calc=calcOrder(dguType,workType,jeep,rectifier,diffTime,diffDay,trans,owenerType);
     	Double calcNds=calc*1.2;BigDecimal bd = new BigDecimal(calcNds).setScale(2, RoundingMode.HALF_UP);calcNds = bd.doubleValue();
     	Double nds=calc*0.2;BigDecimal bd1 = new BigDecimal(nds).setScale(2, RoundingMode.HALF_UP);nds = bd1.doubleValue();
     	
@@ -96,6 +100,10 @@ public class MainController {
     	model.addAttribute("jeepPrice", jeep1);
     	model.addAttribute("jeepYesNo", jeepYesNo);
     	model.addAttribute("jeepOnePrice", jeepPrice);
+    	model.addAttribute("rectifierPrice", rectifier1);
+    	model.addAttribute("rectifierYesNo", rectifierYesNo);
+    	model.addAttribute("rectifierOnePrice", rectifierPrice);
+    	model.addAttribute("breakerPrice", breakerPrice1);
     	model.addAttribute("timeHoursPrice", timeHoursPrice);
     	model.addAttribute("timeDayPrice", timeDayPrice);
     	model.addAttribute("dguType", dguType);
@@ -119,7 +127,13 @@ public Double calcJeep(int jeepYesNo,double jeepPrice) {
 		double jeep=jeepYesNo*jeepPrice;
 		
 		return jeep;
-	}	
+	}
+public Double calcRectifier(int rectifierYesNo,double rectifierPrice) {
+	
+	double rectifier=rectifierYesNo*rectifierPrice;
+	
+	return rectifier;
+}
 public Double calcDiffTimeHours(String timeStart, String timeEnd) {
 		
 		LocalDateTime t1=LocalDateTime.parse(timeStart);
@@ -146,7 +160,7 @@ public Double calcDiffTimeDay(String timeStart, String timeEnd) {
 	else {diffTimeDay=0.0;}
 	return diffTimeDay;	
 }
-public Double calcOrder(int dguType,String workType,double jeep,double tHours,double tDays,double transPrice,String owener) {
+public Double calcOrder(int dguType,String workType,double jeep,double rectifier,double tHours,double tDays,double transPrice,String owener) {
 	
 	double DGU3_CONTRACTOR_TIMEHOURES_WORKALARM = priceService.getById(2).getPricesValue();
 	double DGU8_CONTRACTOR_TIMEHOURES_WORKALARM = priceService.getById(3).getPricesValue();
@@ -204,10 +218,13 @@ public Double calcOrder(int dguType,String workType,double jeep,double tHours,do
 	double DGU8_CLIENT_DEPARTURE_FALSE = priceService.getById(42).getPricesValue();
 	double DGU16_CLIENT_DEPARTURE_FALSE = priceService.getById(43).getPricesValue();
 	
+	double CIRCUIT_BREAKER_ON = priceService.getById(46).getPricesValue();
+	
 	int dguType1=dguType;
 	String workType1=workType,owener1=owener;
-	double tHours1=tHours,tDays1=tDays,orderPrice=0,outgo=0;
+	double tHours1=tHours,tDays1=tDays,orderPrice=0,outgo=0,breakerPrice=0;
 	jeep1=jeep;
+	rectifier1=rectifier;
 	transPrice1=transPrice;
 	if(owener1.equals("po")) {
 	if (workType1.equals("emergency")){
@@ -220,7 +237,7 @@ public Double calcOrder(int dguType,String workType,double jeep,double tHours,do
 					                  case 8:timeHoursPrice=0;timeDayPrice=DGU8_CONTRACTOR_TIMEDAYS1_WORKALARM;outgo=DGU8_CONTRACTOR_DEPARTURE;break;
 					                  case 16:timeHoursPrice=0;timeDayPrice=DGU16_CONTRACTOR_TIMEDAYS1_WORKALARM;outgo=DGU16_CONTRACTOR_DEPARTURE;break;}}
 				if(tDays1>3) {
-					timeHoursPrice=0;timeDayPrice=0;outgo=0;transPrice1=0;jeep1=0;
+					timeHoursPrice=0;timeDayPrice=0;outgo=0;transPrice1=0;jeep1=0;rectifier1=0;
 					}
 	}
 	
@@ -258,9 +275,15 @@ public Double calcOrder(int dguType,String workType,double jeep,double tHours,do
 		switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=0;outgo=DGU3_CONTRACTOR_DEPARTURE_FALSE;break;
                           case 8:timeHoursPrice=0;timeDayPrice=0;outgo=DGU8_CONTRACTOR_DEPARTURE_FALSE;break;
                           case 16:timeHoursPrice=0;timeDayPrice=0;outgo=DGU16_CONTRACTOR_DEPARTURE_FALSE;break;}}
+		
+	if (workType1.equals("breakeron")){
+			switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=0;outgo=DGU3_CONTRACTOR_DEPARTURE;breakerPrice=CIRCUIT_BREAKER_ON;break;
+	                          case 8:timeHoursPrice=0;timeDayPrice=0;outgo=DGU8_CONTRACTOR_DEPARTURE;breakerPrice=CIRCUIT_BREAKER_ON;break;
+	                          case 16:timeHoursPrice=0;timeDayPrice=0;outgo=DGU16_CONTRACTOR_DEPARTURE;breakerPrice=CIRCUIT_BREAKER_ON;break;}}
 	
 	outGoPrice=outgo;
-	orderPrice=timeHoursPrice*tHours1+timeDayPrice*tDays1+transPrice1+outgo+jeep1;
+	breakerPrice1=breakerPrice;
+	orderPrice=timeHoursPrice*tHours1+timeDayPrice*tDays1+transPrice1+outgo+jeep1+rectifier1+breakerPrice;
 	BigDecimal bd = new BigDecimal(orderPrice).setScale(2, RoundingMode.HALF_UP);
 	orderPrice = bd.doubleValue();}
 	
@@ -275,7 +298,7 @@ public Double calcOrder(int dguType,String workType,double jeep,double tHours,do
 						                  case 8:timeHoursPrice=0;timeDayPrice=DGU8_CLIENT_TIMEDAYS1_WORKALARM;outgo=DGU8_CLIENT_DEPARTURE;break;
 						                  case 16:timeHoursPrice=0;timeDayPrice=DGU16_CLIENT_TIMEDAYS1_WORKALARM;outgo=DGU16_CLIENT_DEPARTURE;break;}}
 					if(tDays1>3) {
-						timeHoursPrice=0;timeDayPrice=0;outgo=0;transPrice1=0;jeep1=0;
+						timeHoursPrice=0;timeDayPrice=0;outgo=0;transPrice1=0;jeep1=0;rectifier1=0;
 						}
 		}
 		if (workType1.equals("plan")){
@@ -313,14 +336,20 @@ public Double calcOrder(int dguType,String workType,double jeep,double tHours,do
 	                          case 8:timeHoursPrice=0;timeDayPrice=0;outgo=DGU8_CLIENT_DEPARTURE_FALSE;break;
 	                          case 16:timeHoursPrice=0;timeDayPrice=0;outgo=DGU16_CLIENT_DEPARTURE_FALSE;break;}}
 		
+		if (workType1.equals("breakeron")){
+			switch(dguType1) {case 3:timeHoursPrice=0;timeDayPrice=0;outgo=DGU3_CONTRACTOR_DEPARTURE;breakerPrice=CIRCUIT_BREAKER_ON;break;
+	                          case 8:timeHoursPrice=0;timeDayPrice=0;outgo=DGU8_CONTRACTOR_DEPARTURE;breakerPrice=CIRCUIT_BREAKER_ON;break;
+	                          case 16:timeHoursPrice=0;timeDayPrice=0;outgo=DGU16_CONTRACTOR_DEPARTURE;breakerPrice=CIRCUIT_BREAKER_ON;break;}}
+		
 		outGoPrice=outgo;
-		orderPrice=timeHoursPrice*tHours1+timeDayPrice*tDays1+transPrice1+outgo+jeep1;
+		breakerPrice1=breakerPrice;
+		orderPrice=timeHoursPrice*tHours1+timeDayPrice*tDays1+transPrice1+outgo+jeep1+rectifier1+breakerPrice;
 		BigDecimal bd = new BigDecimal(orderPrice).setScale(2, RoundingMode.HALF_UP);
 		orderPrice = bd.doubleValue();
 		}
 	return orderPrice;
 }
-public Double calcOrderHours(int dguType,String workType,double jeep,double tHours,double tDays,double transPrice,String owener) {
+public Double calcOrderHours(int dguType,String workType,double jeep,double rectifier,double tHours,double tDays,double transPrice,String owener) {
 	
 	double DGU3_CONTRACTOR_TIMEHOURES_WORKALARM = priceService.getById(2).getPricesValue();
 	double DGU8_CONTRACTOR_TIMEHOURES_WORKALARM = priceService.getById(3).getPricesValue();
@@ -354,6 +383,7 @@ public Double calcOrderHours(int dguType,String workType,double jeep,double tHou
 	double DGU8_CLIENT_DEPARTURE_FALSE = priceService.getById(42).getPricesValue();
 	double DGU16_CLIENT_DEPARTURE_FALSE = priceService.getById(43).getPricesValue();
 	
+		
 	int dguType1=dguType;
 	String workType1=workType,owener1=owener;
 	double tHours1=tHours,tDays1=tDays,orderPriceHours=0,outgo=0;
@@ -466,7 +496,7 @@ public Double calcOrderHours(int dguType,String workType,double jeep,double tHou
 	orderPriceHours = bd.doubleValue();}
 	return orderPriceHours;
 }
-public Double calcOrderDays(int dguType,String workType,double jeep,double tHours,double tDays,double transPrice,String owener) {
+public Double calcOrderDays(int dguType,String workType,double jeep,double rectifier,double tHours,double tDays,double transPrice,String owener) {
 	
 	double DGU3_CONTRACTOR_TIMEDAYS1_WORKALARM = priceService.getById(14).getPricesValue();
 	double DGU8_CONTRACTOR_TIMEDAYS1_WORKALARM = priceService.getById(15).getPricesValue();
@@ -628,18 +658,22 @@ public String recordOrder(@RequestParam("orderNumber") int orderNumber,@RequestP
 		@RequestParam("orderCalc") double orderCalc,@RequestParam("orderCalcNds") double orderCalcNds,
 		@RequestParam("orderComment") String orderComment,
 		@RequestParam("jeepPrice") Double jeepPrice,@RequestParam("jeepYesNo") Integer jeepYesNo,
-		@RequestParam("jeepOnePrice") Double jeepOnePrice,@RequestParam("orderOutGoPrice") Double orderOutGoPrice,
+		@RequestParam("jeepOnePrice") Double jeepOnePrice,
+		@RequestParam("rectifierPrice") Double rectifierPrice,@RequestParam("rectifierYesNo") Integer rectifierYesNo,
+		@RequestParam("rectifierOnePrice") Double rectifierOnePrice,
+		@RequestParam("orderOutGoPrice") Double orderOutGoPrice,
 		@RequestParam("orderCalcHPrice") Double orderCalcHPrice,@RequestParam("orderDiffTime") Double orderDiffTime,
 		@RequestParam("timeHoursPrice") Double timeHoursPrice,@RequestParam("owenerType") String owenerType,
 		@RequestParam("dguType") Integer dguType,@RequestParam("workType") String workType,
 		@RequestParam("orderCalcDPrice") Double orderCalcDPrice,@RequestParam("orderDiffDay") Double orderDiffDay,
 		@RequestParam("timeDayPrice") Double timeDayPrice,@RequestParam("orderTransport") Double orderTransport,
 		@RequestParam("orderDistance") String orderDistance,@RequestParam("orderKmPrice") Double orderKmPrice,
-		@RequestParam("orderNds") Double orderNds,Model model) {
+		@RequestParam("orderNds") Double orderNds,@RequestParam("breakerPrice") Double breakerPrice,Model model) {
 	
 OrderForm orderForm=new OrderForm(orderNumber,bsNumber,dateStart,dateEnd,orderCalc,orderCalcNds,orderComment,jeepPrice,jeepYesNo,jeepOnePrice,
 		orderOutGoPrice,orderCalcHPrice,orderDiffTime,timeHoursPrice,owenerType,dguType,workType,orderCalcDPrice,
-		orderDiffDay,timeDayPrice,orderTransport,orderDistance,orderKmPrice,orderNds);
+		orderDiffDay,timeDayPrice,orderTransport,orderDistance,orderKmPrice,orderNds,
+		rectifierPrice,rectifierYesNo,rectifierOnePrice,breakerPrice);
 
 orderformservice.saveOrderForm(orderForm);
 
