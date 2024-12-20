@@ -105,13 +105,13 @@
 <td>Использование автомобильной техники повышенной проходимости (ГАЗ-66, ЗИЛ-131, Урал, Камаз и т.д.)</td> <td>выезд</td> <td th:text="${jeepYesNo}"></td> <td th:text="${jeepOnePrice}"></td> <td th:text="${jeepPrice}"></td>
 </tr>
 <tr th:if="${rectifierPrice}!=0">
-<td>Замена выпрямителя</td> <td>объект</td> <td th:text="${rectifierYesNo}"></td> <td th:text="${rectifierOnePrice}"></td> <td th:text="${rectifierPrice}"></td>
+<td>Замена блока выпрямителя ЭПУ</td> <td>объект</td> <td th:text="${rectifierYesNo}"></td> <td th:text="${rectifierOnePrice}"></td> <td th:text="${rectifierPrice}"></td>
 </tr>
 <tr th:if="${orderOutGoPrice}!=0">
 <td>Выезд аварийной бригады / Компенсация ложного выезда аварийной бригады для обеспечения АЭС Объекта Заказчика</td> <td>выезд</td> <td th:text="${orderOutGoPrice !=null ? '1' : ''}"></td> <td th:text="${orderOutGoPrice}"> <td th:text="${orderOutGoPrice}"></td>
 </tr>
 <tr th:if="${breakerPrice}!=0">
-<td>Включение автомата защиты</td> <td>объект</td> <td th:text="${breakerPrice !=null ? '1' : ''}"></td> <td th:text="${breakerPrice}"></td> <td th:text="${breakerPrice}"></td>
+<td>Включение автомата защиты ВЭС</td> <td>объект</td> <td th:text="${breakerPrice !=null ? '1' : ''}"></td> <td th:text="${breakerPrice}"></td> <td th:text="${breakerPrice}"></td>
 </tr>
 <tr th:if="${orderCalcHPrice}!=0">
 <td th:text="'Поддержание электроснабжения оборудования базовой станции (БС) от дизель-генераторной установки (ДГУ) '+${owenerType==null ? '?':(owenerType=='po'?'Исполнителя':'Заказчика')}+' '+${dguType==null? '?':(dguType==3?'3.5':dguType)}+' kW ('+${workType==null?'?':(workType=='emergency'?'Аварийное':'Плановое')}+')'"></td> 

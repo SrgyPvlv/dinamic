@@ -62,7 +62,7 @@ public class BdController {
 		
 		Double sumorders=orderformservice.sumOfOrders(); String sumordersdF=dF.format(sumorders.doubleValue());//сумма заказов
 		int countoforders=orderformservice.countOfOrders();//кол-во заказов
-		double orderslimit=priceService.getById(46).getPricesValue(); String orderslimitdF=dF.format(orderslimit);//лимит по деньгам
+		double orderslimit=priceService.getById(48).getPricesValue(); String orderslimitdF=dF.format(orderslimit);//лимит по деньгам
 		double free=orderslimit-(sumorders.doubleValue()); String freedF=dF.format(free);//остаток денег
 		
 		//получение цен (6 шт.)ложных вызовов из таблицы price
