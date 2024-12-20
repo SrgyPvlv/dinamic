@@ -52,7 +52,7 @@ public class OrderFormService {
 			Double orderOutGoPrice, Double orderCalcHPrice, Double orderDiffTime, Double timeHoursPrice, String owenerType,
 			Integer dguType, String workType, Double orderCalcDPrice,
 			Double orderDiffDay, Double timeDayPrice, Double orderTransport, String orderDistance, Double orderKmPrice,
-			Double orderNds) {
+			Double orderNds,Double rectifierPrice,Integer rectifierYesNo,Double rectifierOnePrice,Double breakerPrice) {
 		OrderForm edited=orderformrepository.getById(id);
 		edited.setOrdernumber(orderNumber);
 		edited.setBsnumber(bsNumber);
@@ -78,6 +78,10 @@ public class OrderFormService {
 		edited.setOrderdistance(orderDistance);
 		edited.setOrderkmprice(orderKmPrice);
 		edited.setOrdernds(orderNds);
+		edited.setRectifierprice(rectifierPrice);
+		edited.setRectifieryesno(rectifierYesNo);
+		edited.setRectifieroneprice(rectifierOnePrice);
+		edited.setBreakerprice(breakerPrice);
 				
 		orderformrepository.saveAndFlush(edited);
 	}
