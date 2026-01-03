@@ -69,8 +69,8 @@ public class MainController {
     	Double calcHPrice=calcOrderHours(dguType,workType,jeep,rectifier,diffTime,diffDay,trans,owenerType);
     	Double calcDPrice=calcOrderDays(dguType,workType,jeep,rectifier,diffTime,diffDay,trans,owenerType);
     	Double calc=calcOrder(dguType,workType,jeep,rectifier,diffTime,diffDay,trans,owenerType);
-    	Double calcNds=calc*1.2;BigDecimal bd = new BigDecimal(calcNds).setScale(2, RoundingMode.HALF_UP);calcNds = bd.doubleValue();
-    	Double nds=calc*0.2;BigDecimal bd1 = new BigDecimal(nds).setScale(2, RoundingMode.HALF_UP);nds = bd1.doubleValue();
+    	Double calcNds=calc*1.22;BigDecimal bd = new BigDecimal(calcNds).setScale(2, RoundingMode.HALF_UP);calcNds = bd.doubleValue();
+    	Double nds=calc*0.22;BigDecimal bd1 = new BigDecimal(nds).setScale(2, RoundingMode.HALF_UP);nds = bd1.doubleValue();
     	
     	
     	LocalDateTime t1=LocalDateTime.parse(timeStart);
