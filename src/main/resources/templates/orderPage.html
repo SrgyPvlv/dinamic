@@ -47,9 +47,9 @@
 <td>км</td> <td th:text="${order.getOrderdistance}"></td> <td th:text="${order.getOrderkmprice}"></td> <td th:text="${order.getOrdertransport}"></td>
 </tr>
 
-<tr><td colspan="4" style="text-align:right">Итого по Заказу без НДС 20%, руб.</td><td th:text="${order.getCalc}"></td></tr>
-<tr><td colspan="4" style="text-align:right">НДС 20%, руб.</td><td th:text="${order.getOrdernds}"></td></tr>
-<tr><td colspan="4" style="text-align:right">Итого с НДС 20%, руб.</td><td th:text="${order.getCalcnds}"></td></tr>
+<tr><td colspan="4" style="text-align:right">Итого по Заказу без НДС, руб.</td><td th:text="${order.getCalc}"></td></tr>
+<tr><td colspan="4" style="text-align:right">НДС, руб.</td><td th:text="${order.getOrdernds}"></td></tr>
+<tr><td colspan="4" style="text-align:right">Итого с НДС, руб.</td><td th:text="${order.getCalcnds}"></td></tr>
 <tr><td colspan="5" style="border:none"></td></tr>
 <tr><td>Комментарий(замечания) к Заказу: </td><td colspan="4" th:text="${order.getComm}"></td></tr>
 </table>
